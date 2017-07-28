@@ -9,6 +9,7 @@
 	</parent>
 	<artifactId>tsso-auth</artifactId>
 	<name>tsso-auth</name>
+	<packaging>war</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -54,4 +55,18 @@
 			<artifactId>spring-session-data-redis</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<finalName>tsso-auth-${version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- 生成完全可执行的jar -->
+					<executable>true</executable>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

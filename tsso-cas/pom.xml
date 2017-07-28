@@ -7,8 +7,11 @@
 		<artifactId>tsso</artifactId>
 		<version>0.0.1</version>
 	</parent>
+	
 	<artifactId>tsso-cas</artifactId>
 	<name>tsso-cas</name>
+	<packaging>war</packaging>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
