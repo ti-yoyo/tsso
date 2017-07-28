@@ -9,18 +9,19 @@
 	<packaging>pom</packaging>
 	<name>tsso</name>
 
-	<modules>
-		<module>tsso-shiro</module>
-		<module>tsso-cas</module>
-		<module>tsso-auth</module>
-	</modules>
-
+	<!-- spring-boot dependency -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.2.RELEASE</version>
 		<relativePath />
 	</parent>
+
+	<modules>
+		<module>tsso-auth</module>
+		<module>tsso-cas</module>
+		<module>tsso-shiro</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
