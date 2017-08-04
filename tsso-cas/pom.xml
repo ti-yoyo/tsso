@@ -11,15 +11,136 @@
 	<artifactId>tsso-cas</artifactId>
 	<name>tsso-cas</name>
 	<packaging>war</packaging>
-
+	
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cas.version>5.1.2</cas.version>
+		<springboot.version>1.5.3.RELEASE</springboot.version>
+		<postgresql.version>9.4-1204-jdbc42</postgresql.version>
+		<!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan 
+			to provide appserver -->
+		<app.server>-tomcat</app.server>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-webapp${app.server}</artifactId>
+			<version>${cas.version}</version>
+			<type>war</type>
+			<scope>runtime</scope>
 		</dependency>
+
+		<!--数据库认证相关 start -->
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-jdbc-drivers</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-jdbc</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			</dependency>
+		<!--数据库认证相关 end -->
+
+		<!-- cas rest ticket start -->
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-rest</artifactId>
+			<version>${cas.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-rest-services</artifactId>
+			<version>${cas.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- cas rest ticket end -->
+
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-oauth-webflow</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+
+		<!--服务注册 -->
+		<!-- <dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-json-service-registry</artifactId>
+			<version>${cas.version}</version>
+		</dependency> -->
+
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-jpa-ticket-registry</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-jpa-service-registry</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
+
 	</dependencies>
+	
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.rimerosolutions.maven.plugins</groupId>
+				<artifactId>wrapper-maven-plugin</artifactId>
+				<version>0.0.4</version>
+				<configuration>
+					<verifyDownload>true</verifyDownload>
+					<checksumAlgorithm>MD5</checksumAlgorithm>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${springboot.version}</version>
+				<configuration>
+					<mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
+					<addResources>true</addResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<warName>cas</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<recompressZippedFiles>false</recompressZippedFiles>
+					<archive>
+						<compress>false</compress>
+						<manifestFile>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF
+						</manifestFile>
+					</archive>
+					<overlays>
+						<overlay>
+							<groupId>org.apereo.cas</groupId>
+							<artifactId>cas-server-webapp${app.server}</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+			</plugin>
+		</plugins>
+		<finalName>cas</finalName>
+	</build>
 </project>
