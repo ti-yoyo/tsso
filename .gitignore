@@ -1,2 +1,12 @@
-/.settings/
-/.project
+.settings
+.project
+.classpath
+.tern-project
+.myumldata
+/target/
+*/.settings
+*/.project
+*/.classpath
+*/target/
+*/.tern-project
+*/.myumldata
