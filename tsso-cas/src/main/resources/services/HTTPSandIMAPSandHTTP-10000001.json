@@ -1,0 +1,12 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|imaps|http)://.*",
+  "name" : "HTTPS and IMAPS and HTTP",
+  "id" : 10000001,
+  "description" : "允许所有http，https，impas的协议访问",
+  "evaluationOrder" : 10000
+   "ignoreAttributes" : "true"
+   "attributeReleasePolicy" : {
+    "@class" : "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+  }
+}
