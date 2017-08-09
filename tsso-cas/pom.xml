@@ -5,13 +5,12 @@
 	<parent>
 		<groupId>com.tinet</groupId>
 		<artifactId>tsso</artifactId>
-		<version>0.0.1</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>tsso-cas</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
 
 	<build>
 		<plugins>
@@ -27,16 +26,24 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
 					<addResources>true</addResources>
+					<executable>true</executable>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>cas</warName>
+					<warName>tsso-cas-${version}</warName>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<recompressZippedFiles>false</recompressZippedFiles>
 					<archive>
@@ -57,7 +64,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>cas</finalName>
+		<finalName>tsso-cas-${version}</finalName>
 	</build>
 
 	<dependencies>
@@ -66,7 +73,6 @@
 			<artifactId>cas-server-webapp-tomcat</artifactId>
 			<version>${cas.version}</version>
 			<type>war</type>
-			<!-- <scope>provided</scope> -->
 		</dependency>
 
 		<!--数据库认证相关 start -->
@@ -100,19 +106,8 @@
 			<version>${cas.version}</version>
 		</dependency>
 		<!-- cas rest ticket end -->
-		<dependency>
-			<groupId>org.apereo.cas</groupId>
-			<artifactId>cas-server-support-oauth-webflow</artifactId>
-			<version>${cas.version}</version>
-		</dependency>
 
 		<!--服务注册 -->
-		<dependency>
-			<groupId>org.apereo.cas</groupId>
-			<artifactId>cas-server-support-json-service-registry</artifactId>
-			<version>${cas.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apereo.cas</groupId>
 			<artifactId>cas-server-support-jpa-ticket-registry</artifactId>
@@ -128,15 +123,13 @@
 
 	<properties>
 		<cas.version>5.1.2</cas.version>
-		<!-- <postgresql.version>9.4-1204-jdbc42</postgresql.version> -->
-		<!-- <springboot.version>1.5.3.RELEASE</springboot.version> -->
+		<springboot.version>1.5.3.RELEASE</springboot.version>
 		<!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan 
 			to provide appserver -->
 		<app.server>-tomcat</app.server>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<hibernate.version>5.2.10.Final</hibernate.version> 
 	</properties>
 
 	<repositories>
@@ -192,7 +185,6 @@
 						<configuration>
 							<pgpKeyServer>hkp://pool.sks-keyservers.net</pgpKeyServer>
 							<pgpKeysCachePath>${settings.localRepository}/pgpkeys-cache</pgpKeysCachePath>
-							<scope>test</scope>
 							<verifyPomFiles>true</verifyPomFiles>
 							<failNoSignature>false</failNoSignature>
 						</configuration>

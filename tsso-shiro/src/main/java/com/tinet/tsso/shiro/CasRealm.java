@@ -1,21 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 package com.tinet.tsso.shiro;
 
 import java.util.ArrayList;
@@ -84,10 +66,10 @@ public class CasRealm extends AuthorizingRealm {
 
 	public CasRealm() {
 		setAuthenticationTokenClass(CasToken.class);
-		// 不知道是否生效啊
-//		setCachingEnabled(true);
-//		setCacheManager(getCacheManager());
-//		setAuthorizationCachingEnabled(true);
+		// 不知道是否生效
+		// setCachingEnabled(true);
+		// setCacheManager(getCacheManager());
+		// setAuthorizationCachingEnabled(true);
 	}
 
 	@Override
@@ -105,11 +87,6 @@ public class CasRealm extends AuthorizingRealm {
 
 	protected TicketValidator createTicketValidator() {
 		String urlPrefix = getCasServerUrlPrefix();
-		// 新版本cas貌似没有该类
-		/*
-		 * if ("saml".equalsIgnoreCase(getValidationProtocol())) { return new
-		 * Saml11TicketValidator(urlPrefix); }
-		 */
 		return new Cas30ServiceTicketValidator(urlPrefix);
 	}
 
@@ -180,37 +157,33 @@ public class CasRealm extends AuthorizingRealm {
 	@SuppressWarnings("unchecked")
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-		logger.info("################## 权限验证  ##################");
 		// 获取用户信息
 		SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) principals;
 		List<Object> listPrincipals = principalCollection.asList();
 		Map<String, String> attributes = (Map<String, String>) listPrincipals.get(1);
 		// 创建 simple authorization info
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-		// add default roles
+		// 添加默认角色
 		addRoles(simpleAuthorizationInfo, split(defaultRoles));
-		// add default permissions
+		// 添加默认权限
 		addPermissions(simpleAuthorizationInfo, split(defaultPermissions));
-		// get roles from attributes
+		// 从逗号分隔的attribute里获取角色
 		List<String> attributeNames = split(roleAttributeNames);
 		for (String attributeName : attributeNames) {
 			String value = attributes.get(attributeName);
 			addRoles(simpleAuthorizationInfo, split(value));
 		}
-		// get permissions from attributes
+		// 从逗号分隔的attribute里获取权限
 		attributeNames = split(permissionAttributeNames);
 		for (String attributeName : attributeNames) {
 			String value = attributes.get(attributeName);
 			addPermissions(simpleAuthorizationInfo, split(value));
 		}
-		simpleAuthorizationInfo.addRole("admin");
-		simpleAuthorizationInfo.addStringPermission("all");
 		return simpleAuthorizationInfo;
 	}
 
 	/**
-	 * Split a string into a list of not empty and trimmed strings, delimiter is
-	 * a comma. 把逗号分隔的字符串转换成list
+	 * 把逗号分隔的字符串转换成list
 	 * 
 	 * @param s
 	 *            the input string
@@ -230,7 +203,7 @@ public class CasRealm extends AuthorizingRealm {
 	}
 
 	/**
-	 * Add roles to the simple authorization info. 添加角色
+	 * 添加角色
 	 * 
 	 * @param simpleAuthorizationInfo
 	 * @param roles
@@ -243,7 +216,7 @@ public class CasRealm extends AuthorizingRealm {
 	}
 
 	/**
-	 * Add permissions to the simple authorization info. 添加权限
+	 * 添加权限
 	 * 
 	 * @param simpleAuthorizationInfo
 	 * @param permissions
