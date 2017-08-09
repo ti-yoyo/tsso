@@ -1,6 +1,6 @@
 <div class="box" id="login">
     <div class="login-header">
-        <h2 th:text="#{cas.login.pagetitle}+'自定义的内容'"></h2>
+        <h2 th:text="天润融通统一登录中心"></h2>
         <span class="fa-stack fa-2x hidden-xs">
           <i class="fa fa-circle fa-stack-2x"></i>
           <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
@@ -18,8 +18,6 @@
         <section class="row">
             <label for="username" th:utext="#{screen.welcome.label.netid}"/>
             
- 			<p th:text="'可以自定义'"></p>
- 			
             <div th:if="${openIdLocalId}">
                 <strong>
                     <span th:utext="${openIdLocalId}"/>
@@ -95,11 +93,11 @@
         <p/>
     </form>
    
-    <div th:unless="${passwordManagementEnabled}">
+   <!--  <div th:unless="${passwordManagementEnabled}">
         <span class="fa fa-question-circle"></span>
         <span th:utext="#{screen.pm.button.forgotpwd}" />
         <p/>
-    </div>
+    </div> -->
     
     <script type="text/javascript" th:inline="javascript">
         var i = [[#{screen.welcome.button.loginwip}]]
@@ -109,5 +107,5 @@
             return true;
         });
     </script>
-    <div th:replace="fragments/loginsidebar"/>
+    <!-- <div th:replace="fragments/loginsidebar"/> -->
 </div>

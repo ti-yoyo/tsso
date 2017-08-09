@@ -12,13 +12,12 @@ public class CasToken implements RememberMeAuthenticationToken {
 
 	private static final long serialVersionUID = -2336605762747974275L;
 
-	// the service ticket returned by the CAS server
+	// CAS server 返回的Ticket
 	private String ticket = null;
 
-	// the user identifier
 	private String userId = null;
 
-	// is the user in a remember me mode ?
+	// 用户是否在remember me 模式下
 	private boolean isRememberMe = false;
 
 	public CasToken(String ticket) {
