@@ -12,61 +12,6 @@
 	<artifactId>tsso-cas</artifactId>
 	<packaging>war</packaging>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.rimerosolutions.maven.plugins</groupId>
-				<artifactId>wrapper-maven-plugin</artifactId>
-				<version>0.0.4</version>
-				<configuration>
-					<verifyDownload>true</verifyDownload>
-					<checksumAlgorithm>MD5</checksumAlgorithm>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
-					<addResources>true</addResources>
-					<executable>true</executable>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<warName>tsso-cas-${version}</warName>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<recompressZippedFiles>false</recompressZippedFiles>
-					<archive>
-						<compress>false</compress>
-						<manifestFile>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF
-						</manifestFile>
-					</archive>
-					<overlays>
-						<overlay>
-							<groupId>org.apereo.cas</groupId>
-							<artifactId>cas-server-webapp${app.server}</artifactId>
-						</overlay>
-					</overlays>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-		</plugins>
-		<finalName>tsso-cas-${version}</finalName>
-	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apereo.cas</groupId>
@@ -131,6 +76,61 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.rimerosolutions.maven.plugins</groupId>
+				<artifactId>wrapper-maven-plugin</artifactId>
+				<version>0.0.4</version>
+				<configuration>
+					<verifyDownload>true</verifyDownload>
+					<checksumAlgorithm>MD5</checksumAlgorithm>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>org.springframework.boot.loader.WarLauncher</mainClass>
+					<addResources>true</addResources>
+					<executable>true</executable>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>tsso-cas-${version}</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<recompressZippedFiles>false</recompressZippedFiles>
+					<archive>
+						<compress>false</compress>
+						<manifestFile>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF
+						</manifestFile>
+					</archive>
+					<overlays>
+						<overlay>
+							<groupId>org.apereo.cas</groupId>
+							<artifactId>cas-server-webapp${app.server}</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<finalName>tsso-cas-${version}</finalName>
+	</build>
 
 	<repositories>
 		<repository>
