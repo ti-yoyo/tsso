@@ -1,6 +1,7 @@
 package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Integer id;
@@ -20,6 +21,10 @@ public class User {
     private Integer status;
 
     private Date createTime;
+    
+    private String departmentName;//部门名
+    
+    private List<Role> roleList;//用户拥有的角色列表
 
     public Integer getId() {
         return id;
@@ -92,4 +97,23 @@ public class User {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+    
+	
+    
 }
