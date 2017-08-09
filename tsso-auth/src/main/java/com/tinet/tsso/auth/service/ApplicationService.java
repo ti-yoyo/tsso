@@ -10,9 +10,6 @@ import com.tinet.tsso.auth.util.Page;
 
 public interface ApplicationService extends BaseService<Application, Integer>{
 
-	/**
-	 * @return
-	 */
-	Page getAll();
+	Page<Application> getAll();
 
 }

@@ -20,6 +20,10 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 	@Autowired
 	private ApplicationMapper applicationMapper;
 
+	
+	/**
+	 * 查询应用的分页信息
+	 */
 	@Override
 	public Page<Application> getAll() {
 
