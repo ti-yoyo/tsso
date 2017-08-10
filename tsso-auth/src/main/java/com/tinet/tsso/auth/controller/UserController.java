@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Role;
@@ -36,7 +35,7 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
-	private RoleService RoleService;
+	private RoleService roleService;
 
 	/**
 	 * 用户的查询包含用户的角色信息等
@@ -71,7 +70,7 @@ public class UserController {
 	}
 
 	/**
-	 * 修改用户的权限信息
+	 * 修改用户的角色信息
 	 * 
 	 * @param userId
 	 *            用户id
@@ -86,18 +85,7 @@ public class UserController {
 		if (userId == null) {
 			new ResponseModel.Builder().error("用户Id不能为空").build();
 		}
-		// 删除所有的权限
-		RoleService.deleteRoleByUserId(userId);
-
-		// 添加指定权限
-		userService.addRoles(userId, roleIdList);
-
-		// 要返回的全新权限信息
-		List<Role> roleList = new ArrayList<Role>();
-		for (int i = 0; i < roleIdList.size(); i++) {
-			Role role = RoleService.get(roleIdList.get(i));
-			roleList.add(role);
-		}
+		List<Role> roleList = userService.updataUserRoleList(userId,roleIdList);
 
 		return new ResponseModel.Builder().result(roleList).msg("角色更新成功").build();
 
@@ -110,13 +98,19 @@ public class UserController {
 	@DeleteMapping("/{id}")
 	public ResponseModel deleteUser(@PathVariable Integer id){
 		//删除该用户拥有的角色
-		RoleService.deleteRoleByUserId(id);
+		roleService.deleteRoleByUserId(id);
 		//删除用户
 		userService.delete(id);
 		
 		return new ResponseModel.Builder().msg("删除成功").build();
 	}
 	
+	/**
+	 * 更新用户信息
+	 * @param id
+	 * @param user
+	 * @return
+	 */
 	@PutMapping("/{id}")
 	public ResponseModel updateUser(@PathVariable Integer id ,User user){
 		
@@ -128,7 +122,11 @@ public class UserController {
 		
 		return this.getOneUserByUserId(id);
 	}
-	
+	/**
+	 * 获取指定id的详细信息
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/{id}")
 	public ResponseModel getOneUserByUserId(@PathVariable Integer id){
 		//查询该角色完整信息

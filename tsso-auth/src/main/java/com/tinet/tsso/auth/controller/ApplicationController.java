@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.druid.sql.visitor.functions.Now;
 import com.tinet.tsso.auth.entity.Application;
 import com.tinet.tsso.auth.service.ApplicationService;
 import com.tinet.tsso.auth.util.Page;
@@ -53,7 +52,7 @@ public class ApplicationController {
 	public ResponseModel searchAll(){
 		
 		//查询全量应用及其个数
-		Page page=applicationService.getAll();
+		Page<Application> page=applicationService.getAll();
 		
 		return new ResponseModel.Builder().result(page).msg("查询成功").build();
 	}

@@ -1,9 +1,11 @@
 package com.tinet.tsso.auth.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tinet.tsso.auth.dao.RoleMapper;
 import com.tinet.tsso.auth.dao.UserMapper;
@@ -64,6 +66,25 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	private void addRole(UserParam param) {
 		userMapper.addRole(param);
 		
+	}
+
+	@Override
+	@Transactional
+	public List<Role> updataUserRoleList(Integer userId, List<Integer> roleIdList) {
+	
+		roleMapper.deleteByUserId(userId);;// 删除所有的角色
+
+		List<Role> roleList = new ArrayList<Role>();
+		for (int i = 0; i < roleIdList.size(); i++) {
+			UserParam param =new UserParam();
+			param.setId(userId);
+			param.setRoleId(roleIdList.get(i)); 
+			userMapper.addRole(param); //添加角色
+			
+			Role role = roleMapper.selectByPrimaryKey(roleIdList.get(i));//查询角色信息
+			roleList.add(role);
+		}
+		return roleList;
 	}
 
 }

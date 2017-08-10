@@ -12,6 +12,8 @@ public class Role {
     private Integer status;
 
     private Date createTime;
+    
+    private Integer userCount;//角色的用户数量
 
     public Integer getId() {
         return id;
@@ -52,4 +54,13 @@ public class Role {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	public Integer getUserCount() {
+		return userCount;
+	}
+
+	public void setUserCount(Integer userCount) {
+		this.userCount = userCount;
+	}
+    
 }

@@ -28,4 +28,10 @@ public interface UserMapper extends BaseMapper<User, Integer>{
 	 */
 	void addRole(UserParam params);
 
+	/**
+	 * @param roleId 统计指定角色的用户数量
+	 * @return
+	 */
+	Integer selectCountUserByRoleId(Integer roleId);
+
 }
