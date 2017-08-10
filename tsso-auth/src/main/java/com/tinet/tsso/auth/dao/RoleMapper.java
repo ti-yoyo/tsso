@@ -1,17 +1,27 @@
 package com.tinet.tsso.auth.dao;
 
-import com.tinet.tsso.auth.entity.Role;
+import java.util.List;
 
-public interface RoleMapper {
-    int deleteByPrimaryKey(Integer id);
+import com.tinet.tsso.auth.entity.Role;
+import com.tinet.tsso.auth.entity.User;
+
+public interface RoleMapper extends BaseMapper<Role, Integer>{
 
     int insert(Role record);
 
-    int insertSelective(Role record);
 
     Role selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Role record);
 
-    int updateByPrimaryKey(Role record);
+/**
+ * 
+ * @param u 通过用户的id查询角色信息
+ * @return
+ */
+	List<Role> getRoleByUser(User u);
+
+	/**
+	 * @param userId 删除指定用户的全部角色
+	 */
+	void deleteByUserId(Integer userId);
 }
