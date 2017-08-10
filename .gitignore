@@ -10,3 +10,6 @@
 */target/
 */.tern-project
 */.myumldata
+tsso-cas/overlays/
+.idea/
+*.iml
