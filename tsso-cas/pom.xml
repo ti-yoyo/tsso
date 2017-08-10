@@ -64,6 +64,13 @@
 			<artifactId>cas-server-support-jpa-service-registry</artifactId>
 			<version>${cas.version}</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+		
 	</dependencies>
 
 	<properties>
