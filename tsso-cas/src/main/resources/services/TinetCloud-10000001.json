@@ -1,9 +1,9 @@
 {
   "@class" : "org.apereo.cas.services.RegexRegisteredService",
   "serviceId" : "^(https|http)://\\w+\\.tinetcloud.com.*",
-  "name" : "HTTPS and IMAPS and HTTP",
+  "name" : "TinetCloud",
   "id" : 10000001,
-  "description" : "允许所有http，https的协议，同时包含tinetcloud.com的service登录",
+  "description" : "HTTPS and HTTP 协议的 tinetcloud.com域名的所有应用可以登录",
   "evaluationOrder" : 10000
    "ignoreAttributes" : "true"
    "attributeReleasePolicy" : {
