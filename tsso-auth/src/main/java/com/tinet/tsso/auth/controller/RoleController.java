@@ -68,9 +68,12 @@ public class RoleController {
 
 	/**
 	 * 为角色添加用户
+	 * 
 	 * @param roleId
+	 *            角色id
 	 * @param userId
-	 * @return
+	 *            用户id
+	 * @return 用户的详细信息
 	 */
 	@PostMapping("/user")
 	public ResponseModel addUserForRole(Integer roleId, Integer userId) {
@@ -93,7 +96,7 @@ public class RoleController {
 	 * 按照Id查询单个角色
 	 * 
 	 * @param roleId
-	 * @return
+	 * @return 查询单个角色
 	 */
 	@GetMapping("/{roleId}")
 	public ResponseModel searchOneByRoleId(@PathVariable Integer roleId) {
@@ -121,7 +124,7 @@ public class RoleController {
 		if (!userCount.equals(0)) {
 			return new ResponseModel.Builder().error("删除失败,该角色被用户使用中").status(HttpStatus.FORBIDDEN).build();
 		}
-		
+
 		roleService.deletePermissionByRoleId(roleId);
 		roleService.delete(roleId);
 
@@ -139,7 +142,8 @@ public class RoleController {
 	 * @return
 	 */
 	@PutMapping("/permission/{id}")
-	public ResponseModel updatePermissionForRole(@PathVariable("id") Integer roleId,@RequestBody List<Integer> permissionIdList) {
+	public ResponseModel updatePermissionForRole(@PathVariable("id") Integer roleId,
+			@RequestBody List<Integer> permissionIdList) {
 
 		List<Permission> permissionList = roleService.updatePermissionList(roleId, permissionIdList);
 

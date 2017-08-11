@@ -40,7 +40,7 @@ public class UserController {
 	private RoleService roleService;
 
 	/**
-	 * 用户的查询包含用户的角色信息等
+	 * 用户查询：包含用户的角色信息等
 	 * 
 	 * @param params
 	 * @return

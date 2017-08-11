@@ -43,7 +43,7 @@ public class PermissionController {
 	private RoleService roleService;
 
 	/**
-	 * 按条件查询Permission
+	 * 按条件查询权限
 	 * 
 	 * @return
 	 */
