@@ -1,0 +1,12 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|http)://.*tinetcloud\\.com.*",
+  "name" : "TinetCloud",
+  "id" : 666,
+  "description" : "HTTPS and HTTP 协议的 tinetcloud.com域名的所有应用可以登录",
+  "evaluationOrder" : 666
+   "ignoreAttributes" : "true"
+   "attributeReleasePolicy" : {
+    "@class" : "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+  }
+}
