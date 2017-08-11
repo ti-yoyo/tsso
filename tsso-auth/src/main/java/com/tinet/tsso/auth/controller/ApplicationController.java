@@ -12,7 +12,7 @@ import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
- * 应用Controller类
+ * 应用Controller
  * 
  * @date 2017-08-08
  * @author lizy

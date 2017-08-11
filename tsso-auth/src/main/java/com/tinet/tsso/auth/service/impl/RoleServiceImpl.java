@@ -47,7 +47,6 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	 * 查询角色信息
 	 */
 	@Override
-	@Transactional
 	public Page<Role> selectRoleByParams(RoleParam roleParam) {
 		if (roleParam.getStart() == null) {
 			roleParam.setStart(0);
@@ -74,7 +73,6 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	 * 为角色添加用户
 	 */
 	@Override
-	@Transactional
 	public void addUser(Integer roleId, Integer userId) {
 		RoleParam roleParam = new RoleParam();
 		roleParam.setId(roleId);
@@ -86,10 +84,9 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	}
 
 	/**
-	 * 判断一个角色id的用户数量
+	 * 查询一个角色id的用户数量
 	 */
 	@Override
-	@Transactional
 	public Integer selectUserCount(Integer roleId) {
 
 		RoleParam roleParam = new RoleParam();

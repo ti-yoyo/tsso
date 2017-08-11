@@ -74,6 +74,7 @@ public class PermissionController {
 	 * 查询指定权限的所属用户及角色
 	 * 
 	 * @param id
+	 *            要查询的权限id
 	 * @return
 	 */
 	@GetMapping("/role_user/{id}")
@@ -105,7 +106,7 @@ public class PermissionController {
 		if (roleList.size() != 0) {
 			return new ResponseModel(HttpStatus.FORBIDDEN, "该权限被角色使用中不能删除");
 		}
-		
+
 		permissionService.delete(id);
 
 		return new ResponseModel.Builder().msg("删除成功").build();

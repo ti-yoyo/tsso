@@ -132,7 +132,9 @@ public class UserController {
 	 * 更新用户信息
 	 * 
 	 * @param id
+	 *            要更新用户的id
 	 * @param user
+	 *            要更新的用户信息
 	 * @return
 	 */
 	@PutMapping("/{id}")
@@ -148,7 +150,7 @@ public class UserController {
 	}
 
 	/**
-	 * 获取指定id的详细信息
+	 * 获取指定id的用户的详细信息
 	 * 
 	 * @param id
 	 * @return
@@ -167,20 +169,19 @@ public class UserController {
 	}
 
 	/**
-	 * 对密码进行加密
+	 * 对明文密码进行加密
 	 * 
 	 * @param user
 	 */
 	private User dealPassword(User user) {
+
 		// 创建用户加密的对象
 		PasswordHash passwordHash = new PasswordHash();
 		passwordHash.setAlgorithmName("SHA-256");
 		passwordHash.setHashIterations(6);
-
 		// 截取uuid的最后10位作为密码的盐
 		String uuidString = UUID.randomUUID().toString();
 		String salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
-
 		// 密码进行加密
 		String encodePassword = passwordHash.toHex(user.getPassword() == null ? "" : user.getPassword(), salt);
 

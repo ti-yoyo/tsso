@@ -23,6 +23,10 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService deaprtmentService;
 
+	/**
+	 * 查询所有的部门
+	 * @return
+	 */
 	@GetMapping
 	public ResponseModel searchAll() {
 

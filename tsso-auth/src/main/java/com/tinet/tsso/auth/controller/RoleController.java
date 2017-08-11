@@ -108,7 +108,7 @@ public class RoleController {
 	}
 
 	/**
-	 * 删除角色的全部权限并删除角色
+	 * 删除角色的全部权限关联并删除角色
 	 * 
 	 * @param roleId
 	 * @return
@@ -119,7 +119,7 @@ public class RoleController {
 		Integer userCount = roleService.selectUserCount(roleId);
 
 		if (!userCount.equals(0)) {
-			return new ResponseModel.Builder().error("删除失败,该角色被用户所用在使用中").status(HttpStatus.BAD_REQUEST).build();
+			return new ResponseModel.Builder().error("删除失败,该角色被用户使用中").status(HttpStatus.FORBIDDEN).build();
 		}
 		
 		roleService.deletePermissionByRoleId(roleId);

@@ -28,6 +28,9 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	@Autowired
 	private RoleMapper roleMapper;
 
+	/**
+	 * 按照参数查询用户
+	 */
 	@Override
 	public Page<User> selectByParams(UserParam params) {
 
@@ -51,11 +54,15 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		return new Page<User>(totalSize, userList);
 	}
 
+	/**
+	 * 为用户批量添加角色
+	 */
 	@Override
+	@Transactional
 	public void addRoles(Integer userId, List<Integer> roleIdList) {
 		if (roleIdList.size() != 0) {
 			for (int i = 0; i < roleIdList.size(); i++) {
-				UserParam param =new UserParam();
+				UserParam param = new UserParam();
 				param.setId(userId);
 				param.setRoleId(roleIdList.get(i));
 				addRole(param);
@@ -63,25 +70,37 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		}
 	}
 
+	/**
+	 * 添加单个角色
+	 * 
+	 * @param param
+	 */
 	private void addRole(UserParam param) {
 		userMapper.addRole(param);
-		
 	}
 
+	/**
+	 * @param userId
+	 *            用户id
+	 * @param roleIdList
+	 *            角色的id列表
+	 * @return 返回角色的详细信息
+	 */
 	@Override
 	@Transactional
 	public List<Role> updataUserRoleList(Integer userId, List<Integer> roleIdList) {
-	
-		roleMapper.deleteByUserId(userId);;// 删除所有的角色
+
+		roleMapper.deleteByUserId(userId);
+		;// 删除所有的角色
 
 		List<Role> roleList = new ArrayList<Role>();
 		for (int i = 0; i < roleIdList.size(); i++) {
-			UserParam param =new UserParam();
+			UserParam param = new UserParam();
 			param.setId(userId);
-			param.setRoleId(roleIdList.get(i)); 
-			userMapper.addRole(param); //添加角色
-			
-			Role role = roleMapper.selectByPrimaryKey(roleIdList.get(i));//查询角色信息
+			param.setRoleId(roleIdList.get(i));
+			userMapper.addRole(param); // 添加角色
+
+			Role role = roleMapper.selectByPrimaryKey(roleIdList.get(i));// 查询角色信息
 			roleList.add(role);
 		}
 		return roleList;
@@ -92,7 +111,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 */
 	@Override
 	public List<User> selectByPermissionId(Integer permissionId) {
-		List<User> userList= userMapper.selectByPermissionId(permissionId);
+		List<User> userList = userMapper.selectByPermissionId(permissionId);
 		return userList;
 	}
 
