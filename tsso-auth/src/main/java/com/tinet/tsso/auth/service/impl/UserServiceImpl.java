@@ -87,4 +87,13 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		return roleList;
 	}
 
+	/**
+	 * 查询指定权限额用户列表
+	 */
+	@Override
+	public List<User> selectByPermissionId(Integer permissionId) {
+		List<User> userList= userMapper.selectByPermissionId(permissionId);
+		return userList;
+	}
+
 }

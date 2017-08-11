@@ -35,6 +35,12 @@ public interface UserService extends BaseService<User, Integer> {
 	 */
 	List<Role> updataUserRoleList(Integer userId, List<Integer> roleIdList);
 
+	/**
+	 * @param id
+	 * @return
+	 */
+	List<User> selectByPermissionId(Integer permissionId);
+
 
 
 

@@ -1,17 +1,30 @@
 package com.tinet.tsso.auth.dao;
 
-import com.tinet.tsso.auth.entity.Permission;
+import java.util.List;
 
-public interface PermissionMapper {
-    int deleteByPrimaryKey(Integer id);
+import com.tinet.tsso.auth.entity.Permission;
+import com.tinet.tsso.auth.model.PermissionParam;
+
+public interface PermissionMapper extends BaseMapper<Permission, Integer>{
 
     int insert(Permission record);
 
-    int insertSelective(Permission record);
 
     Permission selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Permission record);
 
-    int updateByPrimaryKey(Permission record);
+
+	/**
+	 * 按照参数查询结果总数
+	 * @param permissionParam
+	 * @return
+	 */
+	Integer selectCountByParam(PermissionParam permissionParam);
+
+	/**
+	 * 按照参数查询分页信息
+	 * @param permissionParam
+	 * @return
+	 */
+	List<Permission> selectByParam(PermissionParam permissionParam);
 }

@@ -9,8 +9,21 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, key, name, application_id, create_time
+    permission.id, key, name, application_id,permission.create_time
   </sql>
+  
+  <sql id="byParams">
+		<if test="id != null">
+			and department.id = #{id, jdbcType=INTEGER}
+		</if>
+		<if test=" key != null ">
+			and key LIKE CONCAT('%', #{key,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="applicationId != null">
+			and application_id = #{applicationId, jdbcType=INTEGER}
+		</if>
+  </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -27,7 +40,7 @@
     values (#{id,jdbcType=INTEGER}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{applicationId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.tinet.tsso.auth.entity.Permission" >
+  <insert id="insertSelective" parameterType="com.tinet.tsso.auth.entity.Permission" useGeneratedKeys="true" keyProperty="id">
     insert into permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -90,4 +103,37 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectCountByParam" parameterType="com.tinet.tsso.auth.model.PermissionParam"
+		resultType="java.lang.Integer">
+		select count(*)
+		from "permission"
+		<if test="roleId != null">
+			LEFT JOIN role_permission on "permission"."id" =role_permission.permission_id
+		</if>
+		where 1=1
+		<include refid="byParams" />
+		<if test="roleId != null">
+			and role_id = #{roleId,jdbcType=VARCHAR} 
+		</if>
+	</select>
+
+	<select id="selectByParam" parameterType="com.tinet.tsso.auth.model.PermissionParam"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from permission
+		<if test="roleId != null">
+			LEFT JOIN role_permission on "permission"."id" =role_permission.permission_id
+		</if>
+		where 1=1
+		<include refid="byParams" />
+		<if test="roleId != null">
+			and role_id = #{roleId,jdbcType=VARCHAR} 
+		</if>
+		<if test="start != null and limit != null">
+			offset #{start, jdbcType=INTEGER} limit #{limit,
+			jdbcType=INTEGER}
+		</if>
+	</select>
 </mapper>

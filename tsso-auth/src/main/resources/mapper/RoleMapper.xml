@@ -171,4 +171,14 @@
 	<insert id="addPermissionForRole" parameterType="com.tinet.tsso.auth.model.RoleParam">
 		insert into role_permission (role_id,permission_id) values (#{id,jdbcType=INTEGER},#{permissionId,jdbcType=INTEGER})
 	</insert>
+	
+	<select id="selectByPermissionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from "role"
+		where "role"."id" in (
+								select distinct (role_permission.role_id)
+								from role_permission
+								where role_permission.permission_id = #{permissionId,jdbcType=INTEGER} 
+							)
+	</select>
 </mapper>

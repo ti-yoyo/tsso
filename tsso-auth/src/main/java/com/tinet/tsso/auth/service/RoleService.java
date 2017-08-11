@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
+import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.RoleParam;
 import com.tinet.tsso.auth.util.Page;
 
@@ -62,5 +63,11 @@ public interface RoleService extends BaseService<Role, Integer> {
 	 * @return 权限列表
 	 */
 	List<Permission> updatePermissionList(Integer roleId, List<Integer> permissionIdList);
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	List<Role> selectByPermissionId(Integer permissionId);
 
 }

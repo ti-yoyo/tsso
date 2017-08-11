@@ -12,6 +12,7 @@ import com.tinet.tsso.auth.dao.RoleMapper;
 import com.tinet.tsso.auth.dao.UserMapper;
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
+import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.RoleParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.util.Page;
@@ -142,5 +143,14 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 		
 		return permissionList;
 		
+	}
+
+	/**
+	 * 按照权限Id查询用户
+	 */
+	@Override
+	public List<Role> selectByPermissionId(Integer permissionId) {
+		List<Role> roleList=roleMapper.selectByPermissionId(permissionId);
+		return roleList;
 	}
 }

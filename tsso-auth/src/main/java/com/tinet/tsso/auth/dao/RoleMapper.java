@@ -74,4 +74,11 @@ public interface RoleMapper extends BaseMapper<Role, Integer>{
 	 */
 	void addPermissionForRole(RoleParam roleParam);
 
+
+	/**
+	 * @param permissionId
+	 * @return
+	 */
+	List<Role> selectByPermissionId(Integer permissionId);
+
 }
