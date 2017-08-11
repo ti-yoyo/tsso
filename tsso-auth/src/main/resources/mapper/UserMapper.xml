@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tinet.tsso.auth.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.tinet.tsso.auth.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="password_salt" property="passwordSalt" jdbcType="VARCHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    "user".id, username, password, password_salt, full_name, department_id, email, status, "user".create_time
+  </sql>
+  <sql id="byParams">
+	<if test="id != null">
+		and "user".id = #{id, jdbcType=INTEGER}
+	</if>
+	<if test="username != null">
+		and username = #{username,jdbcType=VARCHAR}
+	</if>
+	<if test="fullName != null">
+		and full_name LIKE CONCAT('%', #{fullName,jdbcType=VARCHAR},'%')
+	</if>
+	<if test="roleId != null">
+		and "user".id IN (
+		select user_role.user_id
+		from "role",user_role
+		where role_id= user_role.role_id
+		and "role".id= #(roleId, jdbcType=INTEGER)
+		)
+	</if>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" /> , department.name as department_name
+    from "user" left join department on "user".department_id = department.id
+    where "user".id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from "user"
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tinet.tsso.auth.entity.User" >
+    insert into user (id, username, password, 
+      password_salt, full_name, department_id, 
+      email, status, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{passwordSalt,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tinet.tsso.auth.entity.User" useGeneratedKeys="true" keyProperty="id">
+    insert into "user"
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="passwordSalt != null" >
+        password_salt,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordSalt != null" >
+        #{passwordSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tinet.tsso.auth.entity.User" >
+    update "user"
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordSalt != null" >
+        password_salt = #{passwordSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tinet.tsso.auth.entity.User" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      password_salt = #{passwordSalt,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+	<select id="selectCountByParams" parameterType="com.tinet.tsso.auth.model.UserParam"
+		resultType="java.lang.Integer">
+		select count(*)
+		from "user"
+		where 1=1
+		<include refid="byParams" />
+	</select>
+
+	<select id="selectByParams" parameterType="com.tinet.tsso.auth.model.UserParam"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" /> ,department.name as department_name
+		from "user"left join department on "user".department_id=department.id
+		where 1=1 
+		<include refid="byParams" />
+		<if test="start != null and limit != null and limit > 0">
+			offset #{start, jdbcType=INTEGER} limit #{limit,
+			jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<insert id="addRole" parameterType="com.tinet.tsso.auth.model.UserParam" >
+		insert into user_role( user_id,role_id) values (#{id,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER})
+	</insert>
+</mapper>
