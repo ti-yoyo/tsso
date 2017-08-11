@@ -121,6 +121,7 @@ public class RoleController {
 		if (!userCount.equals(0)) {
 			return new ResponseModel.Builder().error("删除失败,该角色被用户所用在使用中").status(HttpStatus.BAD_REQUEST).build();
 		}
+		
 		roleService.deletePermissionByRoleId(roleId);
 		roleService.delete(roleId);
 

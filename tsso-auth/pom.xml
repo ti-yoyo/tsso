@@ -74,7 +74,19 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.6</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
 
+		<!-- 集成tsso-auth的工具包 -->
+		<dependency>
+			<groupId>com.tinet</groupId>
+			<artifactId>tsso-shiro</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

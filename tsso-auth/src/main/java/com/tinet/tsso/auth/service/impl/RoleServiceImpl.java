@@ -80,7 +80,7 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 		roleParam.setId(roleId);
 		roleParam.setUserId(userId);
 
-		if (roleMapper.selectUserRoleByUserIdAndRoleId(roleParam).equals(0)) {// 当指定的用户橘色关联不存在时才进行插入
+		if (roleMapper.selectUserRoleByUserIdAndRoleId(roleParam).equals(0)) {// 当指定的用户角色关联不存在时才进行插入
 			roleMapper.addUser(roleParam);
 		}
 	}
