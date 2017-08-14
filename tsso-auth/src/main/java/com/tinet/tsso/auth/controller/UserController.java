@@ -1,5 +1,6 @@
 package com.tinet.tsso.auth.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,7 +75,7 @@ public class UserController {
 		if (user.getUsername() == null || user.getFullName() == null) {
 			new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("用户名和全名都不能为空").build();
 		}
-
+		user.setCreateTime(new Date());
 		// 对user密码进行加密处理
 		user = dealPassword(user);
 
@@ -101,7 +102,7 @@ public class UserController {
 	 *            角色列表
 	 * @return
 	 */
-	@PutMapping("/role/{userId}")
+	@PutMapping("/{userId}/role/")
 	public ResponseModel updateUserRole(@PathVariable Integer userId, @RequestBody List<Integer> roleIdList) {
 
 		if (userId == null) {

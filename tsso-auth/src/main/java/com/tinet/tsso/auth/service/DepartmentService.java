@@ -11,6 +11,7 @@ import com.tinet.tsso.auth.util.Page;
 public interface DepartmentService extends BaseService<Department, Integer>{
 
 	/**
+	 * 部门信息的全量查询
 	 * @return
 	 */
 	Page<Department> searchAll();

@@ -12,6 +12,8 @@ import com.tinet.tsso.auth.util.Page;
 public interface PermissionService extends BaseService<Permission, Integer>{
 
 	/**
+	 * 通过权限参数查询权限信息
+	 * 
 	 * @param permissionParam
 	 * @return
 	 */

@@ -1,5 +1,8 @@
 package com.tinet.tsso.auth.controller;
 
+import java.util.Date;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Application;
+import com.tinet.tsso.auth.model.ApplicationParam;
 import com.tinet.tsso.auth.service.ApplicationService;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;
@@ -32,13 +36,14 @@ public class ApplicationController {
 	 * @return 包含状态信息以及添加应用的 id
 	 */
 	@PostMapping
-	public ResponseModel add(Application application) {
-		// 添加应用
-		applicationService.create(application);
-
-		// 按照应用查询应用信息并返回
-		application = applicationService.get(application.getId());
-
+	public ResponseModel add(ApplicationParam applicationParam) {
+		
+		Application application=new Application();
+		BeanUtils.copyProperties(applicationParam, application);
+		
+		//添加应用
+		application=applicationService.addApplication(application);
+		
 		return new ResponseModel.Builder().result(application).msg("添加成功").build();
 	}
 

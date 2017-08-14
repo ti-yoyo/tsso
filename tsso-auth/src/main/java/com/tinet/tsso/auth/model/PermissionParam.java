@@ -67,6 +67,4 @@ public class PermissionParam {
 	public void setLimit(Integer limit) {
 		this.limit = limit;
 	}
-	
-	
 }

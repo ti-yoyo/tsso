@@ -1,5 +1,6 @@
 package com.tinet.tsso.auth.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,7 @@ public class PermissionController {
 	@PostMapping
 	public ResponseModel addPermission(Permission permission) {
 
+		permission.setCreateTime(new Date());
 		permissionService.create(permission);
 		permission = permissionService.get(permission.getId());
 
@@ -71,26 +73,33 @@ public class PermissionController {
 	}
 
 	/**
-	 * 查询指定权限的所属用户及角色
+	 * 查询指定权限的所属用户
 	 * 
 	 * @param id
 	 *            要查询的权限id
 	 * @return
 	 */
-	@GetMapping("/role_user/{id}")
-	public ResponseModel searchRoleAndUserByPermissionId(@PathVariable Integer id) {
+	@GetMapping("/{id}/user")
+	public ResponseModel searchUserByPermissionId(@PathVariable Integer id) {
 
 		// 查询拥有某个权限的用户
 		List<User> userList = userService.selectByPermissionId(id);
 
+		return new ResponseModel.Builder().result(userList).msg("查询成功").build();
+	}
+
+	/**
+	 * 查询指定权限的所属用户
+	 * 
+	 * @param id
+	 *            要查询的权限id
+	 * @return
+	 */
+	@GetMapping("/{id}/role")
+	public ResponseModel searchRoleByPermissionId(@PathVariable Integer id) {
 		// 查询拥有某个权限的角色
 		List<Role> roleList = roleService.selectByPermissionId(id);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userList", userList);
-		map.put("roleList", roleList);
-
-		return new ResponseModel.Builder().result(map).msg("查询成功").build();
+		return new ResponseModel.Builder().result(roleList).msg("查询成功").build();
 	}
 
 	/**

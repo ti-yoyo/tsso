@@ -1,5 +1,6 @@
 package com.tinet.tsso.auth.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,8 @@ public class RoleController {
 	 */
 	@PostMapping
 	public ResponseModel addRole(Role role) {
+		
+		role.setCreateTime(new Date());
 		// 添加角色
 		roleService.create(role);
 		return this.searchOneByRoleId(role.getId());
@@ -141,7 +144,7 @@ public class RoleController {
 	 *            权限id列表
 	 * @return
 	 */
-	@PutMapping("/permission/{id}")
+	@PutMapping("/{id}/permission/")
 	public ResponseModel updatePermissionForRole(@PathVariable("id") Integer roleId,
 			@RequestBody List<Integer> permissionIdList) {
 

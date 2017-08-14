@@ -36,7 +36,7 @@ public class UserParam {
 	
 	private Integer roleId;//角色id
 	
-	private List<Role> roleList;
+	private List<Role> roleList; //用户所有拥有的角色列表
 	
 	public Integer getStart() {
 		return start;

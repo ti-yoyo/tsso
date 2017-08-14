@@ -36,6 +36,7 @@ public interface UserService extends BaseService<User, Integer> {
 	List<Role> updataUserRoleList(Integer userId, List<Integer> roleIdList);
 
 	/**
+	 * 通过权限id查询用户信息
 	 * @param id
 	 * @return
 	 */
