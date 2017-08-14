@@ -107,8 +107,8 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	@Transactional
 	public List<Role> updataUserRoleList(Integer userId, List<Integer> roleIdList) {
 
+		// 删除所有的角色
 		roleMapper.deleteByUserId(userId);
-		;// 删除所有的角色
 
 		List<Role> roleList = new ArrayList<Role>();
 		for (int i = 0; i < roleIdList.size(); i++) {
@@ -137,6 +137,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 */
 	@Override
 	public User addUser(User user) {
+		user = dealPassword(user);
 		userMapper.insertSelective(user);
 		user = userMapper.selectByPrimaryKey(user.getId());
 

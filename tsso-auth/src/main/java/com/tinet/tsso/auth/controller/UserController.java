@@ -2,7 +2,6 @@ package com.tinet.tsso.auth.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.Page;
-import com.tinet.tsso.auth.util.PasswordHash;
 import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
