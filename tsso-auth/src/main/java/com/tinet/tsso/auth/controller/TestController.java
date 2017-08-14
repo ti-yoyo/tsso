@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Test;
-import com.tinet.tsso.auth.model.TestParam;
+import com.tinet.tsso.auth.param.TestParam;
 import com.tinet.tsso.auth.service.TestService;
 
 /**

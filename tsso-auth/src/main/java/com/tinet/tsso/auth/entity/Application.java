@@ -2,54 +2,60 @@ package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
 
+/**
+ * 应用的实体类
+ * 
+ * @date 2017-08-14
+ * @author lizy
+ */
 public class Application {
-    private Integer id;
+	private Integer id;//应用的id
 
-    private String key;
+	private String key;//应用标识
 
-    private String name;
+	private String name;//应用名
 
-    private Integer status;
+	private Integer status;//应用状态
 
-    private Date createTime;
+	private Date createTime;//应用的创建时间
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getKey() {
-        return key;
-    }
+	public String getKey() {
+		return key;
+	}
 
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
-    }
+	public void setKey(String key) {
+		this.key = key == null ? null : key.trim();
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 }

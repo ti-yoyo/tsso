@@ -10,11 +10,13 @@
 		<result column="full_name" property="fullName" jdbcType="VARCHAR" />
 		<result column="department_id" property="departmentId"
 			jdbcType="INTEGER" />
-		<result column="department_name" property="departmentName"
-			jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<association property="department" javaType="com.tinet.tsso.auth.entity.Department">   
+            <id property="id" column="department_id"/>
+            <result property="name" column="deparment_name"/>
+        </association>
 	</resultMap>
 	<sql id="Base_Column_List">
 		"user".id, username, password, password_salt, full_name,
@@ -185,7 +187,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<select id="selectCountByParams" parameterType="com.tinet.tsso.auth.model.UserParam"
+	<select id="selectCountByParams" parameterType="com.tinet.tsso.auth.param.UserParam"
 		resultType="java.lang.Integer">
 		select count(*)
 		from "user"
@@ -193,7 +195,7 @@
 		<include refid="byParams" />
 	</select>
 
-	<select id="selectByParams" parameterType="com.tinet.tsso.auth.model.UserParam"
+	<select id="selectByParams" parameterType="com.tinet.tsso.auth.param.UserParam"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -208,7 +210,7 @@
 		</if>
 	</select>
 
-	<insert id="addRole" parameterType="com.tinet.tsso.auth.model.UserParam">
+	<insert id="addRole" parameterType="com.tinet.tsso.auth.param.UserParam">
 		insert into user_role(
 		user_id,role_id) values
 		(#{id,jdbcType=INTEGER},#{roleId,jdbcType=INTEGER})

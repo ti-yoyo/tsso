@@ -3,6 +3,7 @@ package com.tinet.tsso.auth.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +13,14 @@ import com.tinet.tsso.auth.dao.RoleMapper;
 import com.tinet.tsso.auth.dao.UserMapper;
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
-import com.tinet.tsso.auth.model.RoleParam;
+import com.tinet.tsso.auth.model.RoleModel;
+import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.util.Page;
 
 /**
+ * 角色Service的实现类
+ * 
  * @date 2017-08-09
  * @author lizy
  */
@@ -28,7 +32,7 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Autowired
 	private PermissionMapper permissionMapper;
 
@@ -45,7 +49,7 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	 * 查询角色信息
 	 */
 	@Override
-	public Page<Role> selectRoleByParams(RoleParam roleParam) {
+	public Page<RoleModel> selectRoleByParams(RoleParam roleParam) {
 		if (roleParam.getStart() == null) {
 			roleParam.setStart(0);
 		}
@@ -55,16 +59,22 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 
 		Integer totalSize = roleMapper.selectCountByParams(roleParam);
 
-		List<Role> pageData = roleMapper.selectByParams(roleParam);
+		List<Role> roleList = roleMapper.selectByParams(roleParam);
+
+		List<RoleModel> pageData = new ArrayList<RoleModel>();
 
 		// 统计每个角色的用户数
-		for (int i = 0; i < pageData.size(); i++) {
-			Integer roleId = pageData.get(i).getId();
+		for (int i = 0; i < roleList.size(); i++) {
+
+			RoleModel roleModel = new RoleModel();
+			Integer roleId = roleList.get(i).getId();
+			BeanUtils.copyProperties(roleList.get(i), roleModel);
 			Integer userCount = userMapper.selectCountUserByRoleId(roleId);
-			pageData.get(i).setUserCount(userCount);
+			roleModel.setUserCount(userCount);
+			pageData.add(roleModel);
 		}
 
-		return new Page<Role>(totalSize, pageData);
+		return new Page<RoleModel>(totalSize, pageData);
 	}
 
 	/**
@@ -91,7 +101,7 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 		roleParam.setId(roleId);
 
 		Integer userCount = userMapper.selectCountUserByRoleId(roleId);
-		
+
 		return userCount;
 	}
 
@@ -110,34 +120,34 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	@Override
 	@Transactional
 	public void addPermission(Integer roleId, List<Integer> permissionIdList) {
-	
+
 		for (int i = 0; i < permissionIdList.size(); i++) {
-			RoleParam param=new RoleParam();
+			RoleParam param = new RoleParam();
 			roleMapper.addPermissionForRole(param);
 		}
-		
+
 	}
 
 	@Override
 	@Transactional
 	public List<Permission> updatePermissionList(Integer roleId, List<Integer> permissionIdList) {
-		
+
 		roleMapper.deletePermissionByRoleId(roleId);
-		
-		List<Permission> permissionList=new ArrayList<>();
+
+		List<Permission> permissionList = new ArrayList<>();
 		for (int i = 0; i < permissionIdList.size(); i++) {
-			RoleParam param=new RoleParam();
+			RoleParam param = new RoleParam();
 			param.setId(roleId);
 			Integer permissionId = permissionIdList.get(i);
 			param.setPermissionId(permissionId);
-			
-			roleMapper.addPermissionForRole(param);//添加权限
-			
-			permissionList.add(permissionMapper.selectByPrimaryKey(permissionId));//获取该权限的详细信息
+
+			roleMapper.addPermissionForRole(param);// 添加权限
+
+			permissionList.add(permissionMapper.selectByPrimaryKey(permissionId));// 获取该权限的详细信息
 		}
-		
+
 		return permissionList;
-		
+
 	}
 
 	/**
@@ -145,7 +155,7 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	 */
 	@Override
 	public List<Role> selectByPermissionId(Integer permissionId) {
-		List<Role> roleList=roleMapper.selectByPermissionId(permissionId);
+		List<Role> roleList = roleMapper.selectByPermissionId(permissionId);
 		return roleList;
 	}
 }

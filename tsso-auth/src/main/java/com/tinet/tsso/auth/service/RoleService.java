@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
-import com.tinet.tsso.auth.model.RoleParam;
+import com.tinet.tsso.auth.model.RoleModel;
+import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.util.Page;
 
 /**
+ * 角色的Service
+ * 
  * @date 2017-08-09
  * @author lizy
  */
@@ -26,7 +29,7 @@ public interface RoleService extends BaseService<Role, Integer> {
 	 * @param roleParam
 	 * @return
 	 */
-	Page<Role> selectRoleByParams(RoleParam roleParam);
+	Page<RoleModel> selectRoleByParams(RoleParam roleParam);
 
 	/**
 	 * 为角色添加用户

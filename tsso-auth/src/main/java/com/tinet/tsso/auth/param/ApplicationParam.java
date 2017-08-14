@@ -1,7 +1,7 @@
-package com.tinet.tsso.auth.model;
+package com.tinet.tsso.auth.param;
 
 /**
- * 应用Application的model
+ * 应用Application的请求参数
  * @date 2017-08-11
  * @author lizy
  */

@@ -1,6 +1,7 @@
-package com.tinet.tsso.auth.model;
+package com.tinet.tsso.auth.param;
 
 /**
+ * 角色的请求参数
  * @date 2017-08-09
  * @author lizy
  */
@@ -14,6 +15,8 @@ public class RoleParam {
 	private Integer limit;//分页大小
 	
 	private String name;//角色名
+	
+	private String key;//角色的标识
 	
 	private Integer userId;//用户id
 	
@@ -65,6 +68,14 @@ public class RoleParam {
 
 	public void setPermissionId(Integer permissionId) {
 		this.permissionId = permissionId;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 	
 }

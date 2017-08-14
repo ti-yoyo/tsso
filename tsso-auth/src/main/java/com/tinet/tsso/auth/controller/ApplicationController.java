@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Application;
-import com.tinet.tsso.auth.model.ApplicationParam;
+import com.tinet.tsso.auth.param.ApplicationParam;
 import com.tinet.tsso.auth.service.ApplicationService;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;

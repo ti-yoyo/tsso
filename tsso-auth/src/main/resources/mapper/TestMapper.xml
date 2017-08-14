@@ -81,7 +81,7 @@
 		card = #{card,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<select id="search" resultMap="BaseResultMap" parameterType="com.tinet.tsso.auth.model.TestParam">
+	<select id="search" resultMap="BaseResultMap" parameterType="com.tinet.tsso.auth.param.TestParam">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM test

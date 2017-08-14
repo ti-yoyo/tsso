@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.PermissionParam;
+import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.service.PermissionService;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
@@ -63,12 +64,10 @@ public class PermissionController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseModel addPermission(Permission permission) {
-
-		permission.setCreateTime(new Date());
-		permissionService.create(permission);
-		permission = permissionService.get(permission.getId());
-
+	public ResponseModel addPermission(PermissionParam permissionParam) {
+		
+		Permission permission  = permissionService.addPermission(permissionParam);
+		
 		return new ResponseModel.Builder().msg("添加成功").result(permission).build();
 	}
 

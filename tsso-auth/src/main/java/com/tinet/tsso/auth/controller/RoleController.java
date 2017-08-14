@@ -3,6 +3,7 @@ package com.tinet.tsso.auth.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
-import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.RoleParam;
-import com.tinet.tsso.auth.model.UserParam;
+import com.tinet.tsso.auth.model.RoleModel;
+import com.tinet.tsso.auth.model.UserModel;
+import com.tinet.tsso.auth.param.RoleParam;
+import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.Page;
@@ -49,7 +51,7 @@ public class RoleController {
 	@GetMapping
 	public ResponseModel searchRoleByParams(RoleParam roleParam) {
 
-		Page<Role> page = roleService.selectRoleByParams(roleParam);
+		Page<RoleModel> page = roleService.selectRoleByParams(roleParam);
 
 		return new ResponseModel.Builder().result(page).msg("查询成功").build();
 	}
@@ -61,7 +63,10 @@ public class RoleController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseModel addRole(Role role) {
+	public ResponseModel addRole(RoleParam roleParam) {
+		
+		Role role = new Role();
+		BeanUtils.copyProperties(roleParam, role);
 		
 		role.setCreateTime(new Date());
 		// 添加角色
@@ -86,7 +91,7 @@ public class RoleController {
 		// 查询指定id的用户
 		UserParam param = new UserParam();
 		param.setId(userId);
-		Page<User> page = userService.selectByParams(param);
+		Page<UserModel> page = userService.selectByParams(param);
 
 		if (page.getPageData() == null) {
 			return new ResponseModel.Builder().error("该用户不存在").build();
@@ -107,7 +112,7 @@ public class RoleController {
 		RoleParam roleParam = new RoleParam();
 		roleParam.setId(roleId);
 
-		Page<Role> page = roleService.selectRoleByParams(roleParam);
+		Page<RoleModel> page = roleService.selectRoleByParams(roleParam);
 
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).msg("查询成功").build();
 

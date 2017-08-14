@@ -2,7 +2,9 @@ package com.tinet.tsso.auth.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,11 +13,15 @@ import com.tinet.tsso.auth.dao.RoleMapper;
 import com.tinet.tsso.auth.dao.UserMapper;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.UserParam;
+import com.tinet.tsso.auth.model.UserModel;
+import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.Page;
+import com.tinet.tsso.auth.util.PasswordHash;
 
 /**
+ * 用户Service的实现类
+ * 
  * @date 2017-08-09
  * @author lizy
  */
@@ -32,7 +38,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 按照参数查询用户
 	 */
 	@Override
-	public Page<User> selectByParams(UserParam params) {
+	public Page<UserModel> selectByParams(UserParam params) {
 
 		if (params.getLimit() == null) {
 			params.setLimit(10);
@@ -46,12 +52,23 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		// 符合条件的User列表
 		List<User> userList = userMapper.selectByParams(params);
 
+		List<UserModel> pageData = new ArrayList<UserModel>();
+
 		// 符合条件的角色查询
 		for (int i = 0; i < userList.size(); i++) {
+			UserModel userModel = new UserModel();
+			BeanUtils.copyProperties(userList.get(i), userModel);
+
+			if (userList.get(i).getDepartment() != null) {
+				userModel.setDepartmentName(userList.get(i).getDepartment().getName());
+			}
+
 			List<Role> roleList = roleMapper.getRoleByUser(userList.get(i));
-			userList.get(i).setRoleList(roleList);
+			userModel.setRoleList(roleList);
+
+			pageData.add(userModel);
 		}
-		return new Page<User>(totalSize, userList);
+		return new Page<UserModel>(totalSize, pageData);
 	}
 
 	/**
@@ -113,6 +130,39 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	public List<User> selectByPermissionId(Integer permissionId) {
 		List<User> userList = userMapper.selectByPermissionId(permissionId);
 		return userList;
+	}
+
+	/**
+	 * 添加用户
+	 */
+	@Override
+	public User addUser(User user) {
+		userMapper.insertSelective(user);
+		user = userMapper.selectByPrimaryKey(user.getId());
+
+		return user;
+	}
+
+	/**
+	 * 对明文密码进行加密
+	 * 
+	 * @param user
+	 */
+	private User dealPassword(User user) {
+
+		// 创建用户加密的对象
+		PasswordHash passwordHash = new PasswordHash();
+		passwordHash.setAlgorithmName("SHA-256");
+		passwordHash.setHashIterations(6);
+		// 截取uuid的最后10位作为密码的盐
+		String uuidString = UUID.randomUUID().toString();
+		String salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
+		// 密码进行加密
+		String encodePassword = passwordHash.toHex(user.getPassword() == null ? "" : user.getPassword(), salt);
+
+		user.setPassword(encodePassword);
+		user.setPasswordSalt(salt);
+		return user;
 	}
 
 }

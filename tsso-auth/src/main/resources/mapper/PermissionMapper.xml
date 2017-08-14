@@ -104,7 +104,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="selectCountByParam" parameterType="com.tinet.tsso.auth.model.PermissionParam"
+  <select id="selectCountByParam" parameterType="com.tinet.tsso.auth.param.PermissionParam"
 		resultType="java.lang.Integer">
 		select count(*)
 		from "permission"
@@ -118,7 +118,7 @@
 		</if>
 	</select>
 
-	<select id="selectByParam" parameterType="com.tinet.tsso.auth.model.PermissionParam"
+	<select id="selectByParam" parameterType="com.tinet.tsso.auth.param.PermissionParam"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

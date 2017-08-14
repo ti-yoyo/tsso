@@ -1,8 +1,8 @@
-package com.tinet.tsso.auth.entity;
+package com.tinet.tsso.auth.model;
 
 import java.util.Date;
 
-public class Role {
+public class RoleModel {
     private Integer id;//角色id
 
     private String key;//角色标识
@@ -13,6 +13,8 @@ public class Role {
 
     private Date createTime;//角色的创建时间
     
+    private Integer userCount;//角色的用户数量
+
     public Integer getId() {
         return id;
     }
@@ -52,5 +54,13 @@ public class Role {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	public Integer getUserCount() {
+		return userCount;
+	}
+
+	public void setUserCount(Integer userCount) {
+		this.userCount = userCount;
+	}
     
 }

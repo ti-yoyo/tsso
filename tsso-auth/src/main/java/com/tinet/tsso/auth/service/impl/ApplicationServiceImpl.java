@@ -12,6 +12,8 @@ import com.tinet.tsso.auth.service.ApplicationService;
 import com.tinet.tsso.auth.util.Page;
 
 /**
+ * 应用的Serice的实现类
+ * 
  * @date 2017-08-08
  * @author lizy
  */
@@ -21,7 +23,6 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 	@Autowired
 	private ApplicationMapper applicationMapper;
 
-	
 	/**
 	 * 查询应用的分页信息
 	 */
@@ -35,13 +36,12 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 		return new Page<Application>(totalSize, pageData);
 	}
 
-
 	/**
 	 * 添加应用
 	 */
 	@Override
 	public Application addApplication(Application application) {
-		
+
 		application.setCreateTime(new Date());
 		// 添加应用
 		applicationMapper.insertSelective(application);

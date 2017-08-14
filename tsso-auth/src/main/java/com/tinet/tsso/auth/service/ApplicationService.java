@@ -4,6 +4,7 @@ import com.tinet.tsso.auth.entity.Application;
 import com.tinet.tsso.auth.util.Page;
 
 /**
+ * 应用的Service
  * 
  * @date 2017-08-08
  * @author lizy
@@ -23,6 +24,5 @@ public interface ApplicationService extends BaseService<Application, Integer> {
 	 * @return
 	 */
 	Application addApplication(Application application);
-
 
 }

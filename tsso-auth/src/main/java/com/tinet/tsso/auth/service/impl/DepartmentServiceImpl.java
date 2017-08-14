@@ -11,6 +11,8 @@ import com.tinet.tsso.auth.service.DepartmentService;
 import com.tinet.tsso.auth.util.Page;
 
 /**
+ * 部门Service 的实现类
+ * 
  * @date 2017-08-09
  * @author lizy
  */
@@ -26,11 +28,11 @@ public class DepartmentServiceImpl extends BaseServiceImp<Department, Integer> i
 	 */
 	@Override
 	public Page<Department> searchAll() {
-		
+
 		Integer totalSize = departmentMapper.selectCount();
-		
+
 		List<Department> pageData = departmentMapper.selectAll();
-		
+
 		return new Page<Department>(totalSize, pageData);
 	}
 

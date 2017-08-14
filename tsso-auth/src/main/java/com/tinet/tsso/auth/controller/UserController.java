@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.UserParam;
+import com.tinet.tsso.auth.model.UserModel;
+import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.Page;
@@ -49,13 +51,12 @@ public class UserController {
 	@GetMapping
 	public ResponseModel searchByParams(UserParam params) {
 
-		Page<User> userPage = userService.selectByParams(params);
+		Page<UserModel> userPage = userService.selectByParams(params);
 
 		// 去除返回数据的用户密码和盐等敏感信息
-		List<User> userList = userPage.getPageData();
+		List<UserModel> userList = userPage.getPageData();
 		for (int i = 0; i < userList.size(); i++) {
 			userList.get(i).setPassword(null);
-			userList.get(i).setPasswordSalt(null);
 		}
 		userPage.setPageData(userList);
 
@@ -70,20 +71,17 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseModel addUser(User user) {
+	public ResponseModel addUser(UserParam userParam) {
 
+		User user =new User();
+		BeanUtils.copyProperties(userParam, user);
+		
 		if (user.getUsername() == null || user.getFullName() == null) {
 			new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("用户名和全名都不能为空").build();
 		}
 		user.setCreateTime(new Date());
-		// 对user密码进行加密处理
-		user = dealPassword(user);
-
-		// 创建用户
-		userService.create(user);
-
-		// 查询新添加的用户
-		user = userService.get(user.getId());
+		
+		user=userService.addUser(user);
 
 		// 去除密码和盐等敏感信息
 		user.setPassword(null);
@@ -161,7 +159,7 @@ public class UserController {
 		// 查询该角色完整信息
 		UserParam param = new UserParam();
 		param.setId(id);
-		Page<User> page = userService.selectByParams(param);
+		Page<UserModel> page = userService.selectByParams(param);
 
 		if (page.getPageData() == null) {
 			return new ResponseModel.Builder().error("该用户不存在").build();
@@ -169,26 +167,6 @@ public class UserController {
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}
 
-	/**
-	 * 对明文密码进行加密
-	 * 
-	 * @param user
-	 */
-	private User dealPassword(User user) {
-
-		// 创建用户加密的对象
-		PasswordHash passwordHash = new PasswordHash();
-		passwordHash.setAlgorithmName("SHA-256");
-		passwordHash.setHashIterations(6);
-		// 截取uuid的最后10位作为密码的盐
-		String uuidString = UUID.randomUUID().toString();
-		String salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
-		// 密码进行加密
-		String encodePassword = passwordHash.toHex(user.getPassword() == null ? "" : user.getPassword(), salt);
-
-		user.setPassword(encodePassword);
-		user.setPasswordSalt(salt);
-		return user;
-	}
+	
 
 }

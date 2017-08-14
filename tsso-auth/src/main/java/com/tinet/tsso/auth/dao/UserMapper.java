@@ -3,13 +3,15 @@ package com.tinet.tsso.auth.dao;
 import java.util.List;
 
 import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.UserParam;
+import com.tinet.tsso.auth.param.UserParam;
 
+/**
+ * 用户的Mapper
+ * 
+ * @date 2017-08-14
+ * @author lizy
+ */
 public interface UserMapper extends BaseMapper<User, Integer> {
-
-	int insert(User record);
-
-	User selectByPrimaryKey(Integer id);
 
 	/**
 	 * @param params
