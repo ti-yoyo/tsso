@@ -18,7 +18,7 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
  * @date 2017-07-28
  * @author wangll
  */
-//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 36000)
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 36000)
 public class SessionConfiguration {
 
 	private static final String SPRING_SESSION_URL_PATTERN = "/api/*";
