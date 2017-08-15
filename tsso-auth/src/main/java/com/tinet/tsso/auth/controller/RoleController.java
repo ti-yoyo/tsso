@@ -149,7 +149,7 @@ public class RoleController {
 	 *            权限id列表
 	 * @return
 	 */
-	@PutMapping("/{id}/permission/")
+	@PutMapping("/{id}/permission")
 	public ResponseModel updatePermissionForRole(@PathVariable("id") Integer roleId,
 			@RequestBody List<Integer> permissionIdList) {
 

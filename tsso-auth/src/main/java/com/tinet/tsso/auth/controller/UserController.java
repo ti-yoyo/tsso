@@ -159,8 +159,8 @@ public class UserController {
 		param.setId(id);
 		Page<UserModel> page = userService.selectByParams(param);
 
-		if (page.getPageData() == null) {
-			return new ResponseModel.Builder().error("该用户不存在").build();
+		for (int i = 0; i < page.getPageData().size(); i++) {
+			page.getPageData().get(i).setPassword(null);
 		}
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}

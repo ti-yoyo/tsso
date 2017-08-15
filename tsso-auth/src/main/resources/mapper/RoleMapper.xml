@@ -18,6 +18,9 @@
 		<if test="name != null">
 			and name LIKE CONCAT('%', #{name,jdbcType=VARCHAR},'%')
 		</if>
+		<if test="">
+		
+		</if>
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"

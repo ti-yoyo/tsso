@@ -14,8 +14,8 @@
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<association property="department" javaType="com.tinet.tsso.auth.entity.Department">   
-            <id property="id" column="department_id"/>
-            <result property="name" column="deparment_name"/>
+            <id column="department_id" property="id"/>
+            <result column="department_name" property="name" />
         </association>
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -25,10 +25,11 @@
 	</sql>
 	<sql id="byParams">
 		<if test="id != null">
-			and "user".id = #{id, jdbcType=INTEGER}
+			and "user".id =#{id, jdbcType=INTEGER}
 		</if>
 		<if test="username != null">
-			and username = #{username,jdbcType=VARCHAR}
+			and username LIKE CONCAT('%',
+			#{username,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="fullName != null">
 			and full_name LIKE CONCAT('%',
@@ -39,9 +40,8 @@
 			select user_role.user_id
 			from
 			"role",user_role
-			where role_id= user_role.role_id
-			and "role".id=
-			#(roleId, jdbcType=INTEGER)
+			where "role".id= user_role.role_id
+			and "role".id=#{roleId,jdbcType=INTEGER}
 			)
 		</if>
 	</sql>

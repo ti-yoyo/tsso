@@ -11,7 +11,7 @@ public class PermissionParam {
 	
 	private Integer id;//权限id
 	
-	private Integer key; //权限标识
+	private String key; //权限标识
 	
 	private String name;//权限名
 	
@@ -31,11 +31,13 @@ public class PermissionParam {
 		this.id = id;
 	}
 
-	public Integer getKey() {
+
+
+	public String getKey() {
 		return key;
 	}
 
-	public void setKey(Integer key) {
+	public void setKey(String key) {
 		this.key = key;
 	}
 
