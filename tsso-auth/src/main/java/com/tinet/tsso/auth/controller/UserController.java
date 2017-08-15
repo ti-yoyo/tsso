@@ -164,7 +164,4 @@ public class UserController {
 		}
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}
-
-	
-
 }
