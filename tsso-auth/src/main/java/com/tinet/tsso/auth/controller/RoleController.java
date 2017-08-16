@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.model.RoleModel;
 import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.RoleParam;
+import com.tinet.tsso.auth.param.UserAndRoleParam;
 import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
@@ -85,13 +87,13 @@ public class RoleController {
 	 * @return 用户的详细信息
 	 */
 	@PostMapping("/user")
-	public ResponseModel addUserForRole(Integer roleId, Integer userId) {
+	public ResponseModel addUserForRole(@RequestBody UserAndRoleParam userAndRole) {
 
-		roleService.addUser(roleId, userId);
+		roleService.addUser(userAndRole.getRoleId(), userAndRole.getUserId());
 
 		// 查询指定id的用户
 		UserParam param = new UserParam();
-		param.setId(userId);
+		param.setId(userAndRole.getUserId());
 		Page<UserModel> page = userService.selectByParams(param);
 
 		if (page.getPageData() == null) {

@@ -98,7 +98,7 @@ public class UserController {
 	 *            角色列表
 	 * @return
 	 */
-	@PutMapping("/{userId}/role/")
+	@PutMapping("/{userId}/role")
 	public ResponseModel updateUserRole(@PathVariable Integer userId, @RequestBody List<Integer> roleIdList) {
 
 		if (userId == null) {
@@ -135,7 +135,7 @@ public class UserController {
 	 * @return
 	 */
 	@PutMapping("/{id}")
-	public ResponseModel updateUser(@PathVariable Integer id, User user) {
+	public ResponseModel updateUser(@PathVariable Integer id, @RequestBody User user) {
 
 		if (id == null) {
 			return new ResponseModel.Builder().error("id不能为空").build();

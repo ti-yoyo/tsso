@@ -14,7 +14,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List" >
-    permission.id, key, name, application_id,permission.create_time
+    permission.id,permission.key,permission.name, application_id,permission.create_time
   </sql>
   
   <sql id="byParams">
@@ -31,9 +31,9 @@
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
-    from permission
-    where id = #{id,jdbcType=INTEGER}
+    <include refid="Base_Column_List" />,application.name as application_name,application.key as application_key
+    from permission left join application on permission.application_id= application.id
+    where permission.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from permission
@@ -126,7 +126,7 @@
 	<select id="selectByParam" parameterType="com.tinet.tsso.auth.param.PermissionParam"
 		resultMap="BaseResultMap">
 		select
-		<include refid="Base_Column_List" />
+		<include refid="Base_Column_List" />,application.name as application_name,application.key as application_key
 		from permission left join application on permission.application_id= application.id
 		<if test="roleId != null">
 			LEFT JOIN role_permission on "permission"."id" =role_permission.permission_id
