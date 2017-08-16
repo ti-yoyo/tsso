@@ -2,6 +2,7 @@ package com.tinet.tsso.auth.service;
 
 import com.tinet.tsso.auth.entity.Application;
 import com.tinet.tsso.auth.util.Page;
+import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
  * 应用的Service
@@ -24,5 +25,13 @@ public interface ApplicationService extends BaseService<Application, Integer> {
 	 * @return
 	 */
 	Application addApplication(Application application);
+
+	/**
+	 * 删除应用，如果应用被权限占用，就不删除
+	 * 
+	 * @param id
+	 * @return
+	 */
+	ResponseModel deleteApplicationById(Integer id);
 
 }
