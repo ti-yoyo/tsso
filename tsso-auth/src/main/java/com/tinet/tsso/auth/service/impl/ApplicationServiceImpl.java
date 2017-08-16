@@ -4,12 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.tinet.tsso.auth.dao.ApplicationMapper;
+import com.tinet.tsso.auth.dao.PermissionMapper;
 import com.tinet.tsso.auth.entity.Application;
+import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.service.ApplicationService;
 import com.tinet.tsso.auth.util.Page;
+import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
  * 应用的Serice的实现类
@@ -22,6 +26,9 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 
 	@Autowired
 	private ApplicationMapper applicationMapper;
+
+	@Autowired
+	private PermissionMapper permissionMapper;
 
 	/**
 	 * 查询应用的分页信息
@@ -48,5 +55,20 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 		// 按照应用查询应用信息并返回
 		application = applicationMapper.selectByPrimaryKey(application.getId());
 		return application;
+	}
+
+	/**
+	 * 删除应用 ，如果应用有权限在使用中，就不删除，否则删除
+	 */
+	@Override
+	public ResponseModel deleteApplicationById(Integer id) {
+		PermissionParam permissionParams = new PermissionParam();
+		permissionParams.setApplicationId(id);
+		Integer permissionNum = permissionMapper.selectCountByParam(permissionParams);
+		if (permissionNum != 0) {
+			return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("删除失败，应用正在被权限使用中").build();
+		}
+		applicationMapper.deleteByPrimaryKey(id);
+		return new ResponseModel.Builder().msg("删除成功").build();
 	}
 }

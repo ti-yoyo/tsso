@@ -18,8 +18,12 @@
 		<if test="name != null">
 			and name LIKE CONCAT('%', #{name,jdbcType=VARCHAR},'%')
 		</if>
-		<if test="">
-		
+		<if test="userId != null">
+			and id IN (
+				select distinct(role_id)
+				from user_role
+				where user_id = = #{userId, jdbcType=INTEGER}
+			)
 		</if>
 	</sql>
 
