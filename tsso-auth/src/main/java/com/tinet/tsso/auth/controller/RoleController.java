@@ -63,7 +63,7 @@ public class RoleController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseModel addRole(RoleParam roleParam) {
+	public ResponseModel addRole(@RequestBody RoleParam roleParam) {
 		
 		Role role = new Role();
 		BeanUtils.copyProperties(roleParam, role);

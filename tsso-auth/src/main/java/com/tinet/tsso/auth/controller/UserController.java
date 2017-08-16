@@ -69,7 +69,7 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseModel addUser(UserParam userParam) {
+	public ResponseModel addUser(@RequestBody UserParam userParam) {
 
 		User user =new User();
 		BeanUtils.copyProperties(userParam, user);
