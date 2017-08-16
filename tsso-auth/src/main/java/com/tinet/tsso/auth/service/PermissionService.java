@@ -1,6 +1,7 @@
 package com.tinet.tsso.auth.service;
 
 import com.tinet.tsso.auth.entity.Permission;
+import com.tinet.tsso.auth.model.PermissionModel;
 import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.util.Page;
 
@@ -19,7 +20,7 @@ public interface PermissionService extends BaseService<Permission, Integer>{
 	 * @param permissionParam
 	 * @return
 	 */
-	Page<Permission> selectByparam(PermissionParam permissionParam);
+	Page<PermissionModel> selectByparam(PermissionParam permissionParam);
 
 	/**
 	 *添加应用

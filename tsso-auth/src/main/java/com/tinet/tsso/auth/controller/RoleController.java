@@ -71,6 +71,7 @@ public class RoleController {
 		role.setCreateTime(new Date());
 		// 添加角色
 		roleService.create(role);
+		
 		return this.searchOneByRoleId(role.getId());
 	}
 

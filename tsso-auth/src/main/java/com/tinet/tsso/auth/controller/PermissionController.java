@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
+import com.tinet.tsso.auth.model.PermissionModel;
 import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.service.PermissionService;
 import com.tinet.tsso.auth.service.RoleService;
@@ -48,8 +49,8 @@ public class PermissionController {
 	@GetMapping
 	public ResponseModel searchPermissionByParams(PermissionParam permissionParam) {
 
-		Page<Permission> page = permissionService.selectByparam(permissionParam);
-
+		Page<PermissionModel> page = permissionService.selectByparam(permissionParam);
+		
 		return new ResponseModel.Builder().page(page).msg("查询成功").build();
 	}
 

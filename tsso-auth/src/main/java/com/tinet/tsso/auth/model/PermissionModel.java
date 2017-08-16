@@ -1,14 +1,8 @@
-package com.tinet.tsso.auth.entity;
+package com.tinet.tsso.auth.model;
 
 import java.util.Date;
 
-/**
- * 权限类
- * 
- * @date 2017-08-14
- * @author lizy
- */
-public class Permission {
+public class PermissionModel {
 	private Integer id;// 权限id
 
 	private String key;// 权限标识
@@ -19,7 +13,9 @@ public class Permission {
 
 	private Date createTime;// 创建时间
 	
-	private Application application;
+	private String applicationKey;
+	
+	private String applicationName;
 
 	public Integer getId() {
 		return id;
@@ -34,7 +30,7 @@ public class Permission {
 	}
 
 	public void setKey(String key) {
-		this.key = key == null ? null : key.trim();
+		this.key = key;
 	}
 
 	public String getName() {
@@ -42,7 +38,7 @@ public class Permission {
 	}
 
 	public void setName(String name) {
-		this.name = name == null ? null : name.trim();
+		this.name = name;
 	}
 
 	public Integer getApplicationId() {
@@ -61,12 +57,19 @@ public class Permission {
 		this.createTime = createTime;
 	}
 
-	public Application getApplication() {
-		return application;
+	public String getApplicationKey() {
+		return applicationKey;
 	}
 
-	public void setApplication(Application application) {
-		this.application = application;
+	public void setApplicationKey(String applicationKey) {
+		this.applicationKey = applicationKey;
 	}
-	
+
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
 }
