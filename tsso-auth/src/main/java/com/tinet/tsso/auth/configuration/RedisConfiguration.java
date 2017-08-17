@@ -7,7 +7,8 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
 import redis.clients.jedis.JedisPoolConfig;
 /**
@@ -30,6 +31,8 @@ public class RedisConfiguration {
 	@Value("${spring.redis.pool.min-idle}")
 	private int minIdle;
 
+
+	
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
 		JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
@@ -48,17 +51,20 @@ public class RedisConfiguration {
 	@Bean
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-
-		StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-		redisTemplate.setHashKeySerializer(stringRedisSerializer);
-		redisTemplate.setKeySerializer(stringRedisSerializer);
+		JdkSerializationRedisSerializer jdkSerializationRedisSerializer = new JdkSerializationRedisSerializer();
+		//StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+		redisTemplate.setHashKeySerializer(jdkSerializationRedisSerializer);
+		redisTemplate.setKeySerializer(jdkSerializationRedisSerializer);
 
 		// 采用Json序列化
 		GenericJackson2JsonRedisSerializer jsonRedisSerializer = new GenericJackson2JsonRedisSerializer();
-		redisTemplate.setHashValueSerializer(jsonRedisSerializer);
-		redisTemplate.setValueSerializer(jsonRedisSerializer);
+		redisTemplate.setHashValueSerializer(jdkSerializationRedisSerializer);
+		redisTemplate.setValueSerializer(jdkSerializationRedisSerializer);
 
 		redisTemplate.setConnectionFactory(connectionFactory);
 		return redisTemplate;
 	}
+	
+	
+	
 }
