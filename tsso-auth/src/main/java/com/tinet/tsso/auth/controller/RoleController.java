@@ -99,7 +99,8 @@ public class RoleController {
 		if (page.getPageData() == null) {
 			return new ResponseModel.Builder().error("该用户不存在").build();
 		}
-
+		//去除密码等敏感信息
+		page.getPageData().get(0).setPassword(null);
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}
 

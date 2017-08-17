@@ -1,8 +1,12 @@
 package com.tinet.tsso.auth.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -154,6 +158,7 @@ public class UserController {
 	 */
 	@GetMapping("/{id}")
 	public ResponseModel getOneUserByUserId(@PathVariable Integer id) {
+		
 		// 查询该角色完整信息
 		UserParam param = new UserParam();
 		param.setId(id);
@@ -164,4 +169,14 @@ public class UserController {
 		}
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}
+	
+	@GetMapping("/user_info")
+	public ResponseModel selectRoles() {
+		Subject subject= SecurityUtils.getSubject();
+		List<HashMap> principals = subject.getPrincipals().asList();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", principals.get(0));
+		return new ResponseModel.Builder().result(map).build();
+	}
+	
 }
