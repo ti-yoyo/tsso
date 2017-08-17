@@ -3,7 +3,7 @@ package com.tinet.tsso.auth.service;
 import java.util.List;
 
 import com.tinet.tsso.auth.entity.Test;
-import com.tinet.tsso.auth.model.TestParam;
+import com.tinet.tsso.auth.param.TestParam;
 
 /**
  * 

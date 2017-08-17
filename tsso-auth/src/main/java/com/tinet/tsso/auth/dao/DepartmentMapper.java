@@ -4,24 +4,18 @@ import java.util.List;
 
 import com.tinet.tsso.auth.entity.Department;
 
+/**
+ * 部门的Mapper
+ * 
+ * @date 2017-08-14
+ * @author lizy
+ */
 public interface DepartmentMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Department record);
-
-    int insertSelective(Department record);
-
-    Department selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Department record);
-
-    int updateByPrimaryKey(Department record);
-
-
-    /**
-     * 
-     * @return 所有部门的数量
-     */
+	/**
+	 * 
+	 * @return 所有部门的数量
+	 */
 	Integer selectCount();
 
 	/**

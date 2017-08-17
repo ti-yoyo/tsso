@@ -18,6 +18,13 @@
 		<if test="name != null">
 			and name LIKE CONCAT('%', #{name,jdbcType=VARCHAR},'%')
 		</if>
+		<if test="userId != null">
+			and id IN (
+				select distinct(role_id)
+				from user_role
+				where user_id = = #{userId, jdbcType=INTEGER}
+			)
+		</if>
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -129,7 +136,7 @@
 		where user_id=#{userId,jdbcType=INTEGER}
 	</delete>
 
-	<select id="selectCountByParams" parameterType="com.tinet.tsso.auth.model.RoleParam"
+	<select id="selectCountByParams" parameterType="com.tinet.tsso.auth.param.RoleParam"
 		resultType="java.lang.Integer">
 		select count(*)
 		from "role"
@@ -137,7 +144,7 @@
 		<include refid="byParams" />
 	</select>
 
-	<select id="selectByParams" parameterType="com.tinet.tsso.auth.model.RoleParam"
+	<select id="selectByParams" parameterType="com.tinet.tsso.auth.param.RoleParam"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -150,7 +157,7 @@
 		</if>
 	</select>
 
-	<select id="selectUserRoleByUserIdAndRoleId" parameterType="com.tinet.tsso.auth.model.RoleParam"
+	<select id="selectUserRoleByUserIdAndRoleId" parameterType="com.tinet.tsso.auth.param.RoleParam"
 		resultType="java.lang.Integer">
 		select count(*)
 		from user_role
@@ -168,7 +175,7 @@
 		delete from role_permission
 		where role_id = #{roleId,jdbcType=INTEGER}
 	</delete>
-	<insert id="addPermissionForRole" parameterType="com.tinet.tsso.auth.model.RoleParam">
+	<insert id="addPermissionForRole" parameterType="com.tinet.tsso.auth.param.RoleParam">
 		insert into role_permission (role_id,permission_id) values (#{id,jdbcType=INTEGER},#{permissionId,jdbcType=INTEGER})
 	</insert>
 	

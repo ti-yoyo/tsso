@@ -1,6 +1,7 @@
-package com.tinet.tsso.auth.model;
+package com.tinet.tsso.auth.param;
 
 /**
+ * 权限的请求参数
  * @date 2017-08-10
  * @author lizy
  */
@@ -10,7 +11,9 @@ public class PermissionParam {
 	
 	private Integer id;//权限id
 	
-	private Integer key; //权限标识
+	private String key; //权限标识
+	
+	private String name;//权限名
 	
 	private Integer applicationId;//应用id;
 	
@@ -28,11 +31,13 @@ public class PermissionParam {
 		this.id = id;
 	}
 
-	public Integer getKey() {
+
+
+	public String getKey() {
 		return key;
 	}
 
-	public void setKey(Integer key) {
+	public void setKey(String key) {
 		this.key = key;
 	}
 
@@ -67,6 +72,13 @@ public class PermissionParam {
 	public void setLimit(Integer limit) {
 		this.limit = limit;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }

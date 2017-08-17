@@ -1,30 +1,22 @@
-package com.tinet.tsso.auth.model;
-
-import java.util.Date;
-import java.util.List;
-
-import com.tinet.tsso.auth.entity.Role;
+package com.tinet.tsso.auth.param;
 
 /**
+ * 对于用户请求的参数
  * @date 2017-08-09
  * @author lizy
  */
 
 public class UserParam {
 	
-	private Integer id;
+	private Integer id;//用户id
 
-    private String password;
+    private String password;//用户密码
 
-    private String passwordSalt;
+    private Integer departmentId;//部门id
 
-    private Integer departmentId;
+    private String email;//邮箱
 
-    private String email;
-
-    private Integer status;
-
-    private Date createTime;
+    private Integer status;//状态
 
 	private Integer start;//分页的起始位置
 	
@@ -35,8 +27,6 @@ public class UserParam {
 	private String fullName;//全名
 	
 	private Integer roleId;//角色id
-	
-	private List<Role> roleList;
 	
 	public Integer getStart() {
 		return start;
@@ -94,13 +84,6 @@ public class UserParam {
 		this.password = password;
 	}
 
-	public String getPasswordSalt() {
-		return passwordSalt;
-	}
-
-	public void setPasswordSalt(String passwordSalt) {
-		this.passwordSalt = passwordSalt;
-	}
 
 	public Integer getDepartmentId() {
 		return departmentId;
@@ -126,22 +109,5 @@ public class UserParam {
 		this.status = status;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public List<Role> getRoleList() {
-		return roleList;
-	}
-
-	public void setRoleList(List<Role> roleList) {
-		this.roleList = roleList;
-	}
-	
-	
 	
 }

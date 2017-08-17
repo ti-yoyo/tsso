@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.tinet.tsso.auth.dao.TestMapper;
 import com.tinet.tsso.auth.entity.Test;
-import com.tinet.tsso.auth.model.TestParam;
+import com.tinet.tsso.auth.param.TestParam;
 import com.tinet.tsso.auth.service.TestService;
 
 /**

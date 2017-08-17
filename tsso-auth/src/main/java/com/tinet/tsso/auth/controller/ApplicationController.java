@@ -1,13 +1,19 @@
 package com.tinet.tsso.auth.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Application;
+import com.tinet.tsso.auth.param.ApplicationParam;
 import com.tinet.tsso.auth.service.ApplicationService;
+import com.tinet.tsso.auth.service.PermissionService;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;
 
@@ -32,12 +38,13 @@ public class ApplicationController {
 	 * @return 包含状态信息以及添加应用的 id
 	 */
 	@PostMapping
-	public ResponseModel add(Application application) {
-		// 添加应用
-		applicationService.create(application);
+	public ResponseModel add(@RequestBody ApplicationParam applicationParam) {
 
-		// 按照应用查询应用信息并返回
-		application = applicationService.get(application.getId());
+		Application application = new Application();
+		BeanUtils.copyProperties(applicationParam, application);
+
+		// 添加应用
+		application = applicationService.addApplication(application);
 
 		return new ResponseModel.Builder().result(application).msg("添加成功").build();
 	}
@@ -56,4 +63,11 @@ public class ApplicationController {
 		return new ResponseModel.Builder().result(page).msg("查询成功").build();
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseModel deleteApplication(@PathVariable Integer id) {
+
+		ResponseModel responseModel = applicationService.deleteApplicationById(id);
+
+		return responseModel;
+	}
 }

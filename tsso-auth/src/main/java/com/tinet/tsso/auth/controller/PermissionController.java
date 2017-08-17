@@ -1,22 +1,23 @@
 package com.tinet.tsso.auth.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.PermissionParam;
+import com.tinet.tsso.auth.model.PermissionModel;
+import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.service.PermissionService;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
@@ -50,8 +51,8 @@ public class PermissionController {
 	@GetMapping
 	public ResponseModel searchPermissionByParams(PermissionParam permissionParam) {
 
-		Page<Permission> page = permissionService.selectByparam(permissionParam);
-
+		Page<PermissionModel> page = permissionService.selectByparam(permissionParam);
+		
 		return new ResponseModel.Builder().page(page).msg("查询成功").build();
 	}
 
@@ -62,35 +63,49 @@ public class PermissionController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseModel addPermission(Permission permission) {
-
-		permissionService.create(permission);
-		permission = permissionService.get(permission.getId());
-
-		return new ResponseModel.Builder().msg("添加成功").result(permission).build();
+	public ResponseModel addPermission(@RequestBody PermissionParam permissionParam) {
+		
+		Permission permission  = permissionService.addPermission(permissionParam);
+		
+		PermissionModel permissionModel = new PermissionModel();
+		BeanUtils.copyProperties(permission, permissionModel);
+		if (permission.getApplication() != null) {
+			permissionModel.setApplicationId(permission.getApplication().getId());
+			permissionModel.setApplicationKey(permission.getApplication().getKey());
+			permissionModel.setApplicationName(permission.getApplication().getName());
+		}
+		
+		return new ResponseModel.Builder().msg("添加成功").result(permissionModel).build();
 	}
 
 	/**
-	 * 查询指定权限的所属用户及角色
+	 * 查询指定权限的所属用户
 	 * 
 	 * @param id
 	 *            要查询的权限id
 	 * @return
 	 */
-	@GetMapping("/role_user/{id}")
-	public ResponseModel searchRoleAndUserByPermissionId(@PathVariable Integer id) {
+	@GetMapping("/{id}/user")
+	public ResponseModel searchUserByPermissionId(@PathVariable Integer id) {
 
 		// 查询拥有某个权限的用户
 		List<User> userList = userService.selectByPermissionId(id);
 
+		return new ResponseModel.Builder().result(userList).msg("查询成功").build();
+	}
+
+	/**
+	 * 查询指定权限的所属用户
+	 * 
+	 * @param id
+	 *            要查询的权限id
+	 * @return
+	 */
+	@GetMapping("/{id}/role")
+	public ResponseModel searchRoleByPermissionId(@PathVariable Integer id) {
 		// 查询拥有某个权限的角色
 		List<Role> roleList = roleService.selectByPermissionId(id);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userList", userList);
-		map.put("roleList", roleList);
-
-		return new ResponseModel.Builder().result(map).msg("查询成功").build();
+		return new ResponseModel.Builder().result(roleList).msg("查询成功").build();
 	}
 
 	/**

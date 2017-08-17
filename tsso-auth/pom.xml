@@ -98,7 +98,15 @@
 				<configuration>
 					<!-- 生成完全可执行的jar -->
 					<executable>true</executable>
+					<mainClass>com.tinet.tsso.auth.ApplicationStarter</mainClass>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
