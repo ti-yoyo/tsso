@@ -7,6 +7,7 @@ import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.model.RoleModel;
 import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.util.Page;
+import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
  * 角色的Service
@@ -81,5 +82,13 @@ public interface RoleService extends BaseService<Role, Integer> {
 	 * @return
 	 */
 	List<Role> selectByPermissionId(Integer permissionId);
+
+	/**
+	 * 新建角色
+	 * 
+	 * @param role
+	 * @return
+	 */
+	ResponseModel createRole(Role role);
 
 }

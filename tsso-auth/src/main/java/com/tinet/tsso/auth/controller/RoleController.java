@@ -71,10 +71,8 @@ public class RoleController {
 		BeanUtils.copyProperties(roleParam, role);
 		
 		role.setCreateTime(new Date());
-		// 添加角色
-		roleService.create(role);
 		
-		return this.searchOneByRoleId(role.getId());
+		return roleService.createRole(role);
 	}
 
 	/**

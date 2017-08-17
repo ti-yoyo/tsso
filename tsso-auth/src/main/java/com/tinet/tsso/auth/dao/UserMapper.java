@@ -49,4 +49,11 @@ public interface UserMapper extends BaseMapper<User, Integer> {
 	 */
 	List<User> selectByPermissionId(Integer permissionId);
 
+	/**
+	 * 查询指定用户名的数量
+	 * @param username
+	 * @return
+	 */
+	Integer selectCountByUserName(String username);
+
 }

@@ -44,9 +44,9 @@ public class ApplicationController {
 		BeanUtils.copyProperties(applicationParam, application);
 
 		// 添加应用
-		application = applicationService.addApplication(application);
 
-		return new ResponseModel.Builder().result(application).msg("添加成功").build();
+		//return new ResponseModel.Builder().result(application).msg("添加成功").build();
+		return applicationService.addApplication(application);
 	}
 
 	/**

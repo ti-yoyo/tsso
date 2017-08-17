@@ -2,7 +2,6 @@ package com.tinet.tsso.auth.controller;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
-import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.PermissionModel;
+import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.service.PermissionService;
 import com.tinet.tsso.auth.service.RoleService;
@@ -65,17 +63,7 @@ public class PermissionController {
 	@PostMapping
 	public ResponseModel addPermission(@RequestBody PermissionParam permissionParam) {
 		
-		Permission permission  = permissionService.addPermission(permissionParam);
-		
-		PermissionModel permissionModel = new PermissionModel();
-		BeanUtils.copyProperties(permission, permissionModel);
-		if (permission.getApplication() != null) {
-			permissionModel.setApplicationId(permission.getApplication().getId());
-			permissionModel.setApplicationKey(permission.getApplication().getKey());
-			permissionModel.setApplicationName(permission.getApplication().getName());
-		}
-		
-		return new ResponseModel.Builder().msg("添加成功").result(permissionModel).build();
+		return permissionService.addPermission(permissionParam);
 	}
 
 	/**
@@ -89,8 +77,8 @@ public class PermissionController {
 	public ResponseModel searchUserByPermissionId(@PathVariable Integer id) {
 
 		// 查询拥有某个权限的用户
-		List<User> userList = userService.selectByPermissionId(id);
-
+		List<UserModel> userList = userService.selectByPermissionId(id);
+		
 		return new ResponseModel.Builder().result(userList).msg("查询成功").build();
 	}
 

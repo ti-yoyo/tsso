@@ -21,6 +21,8 @@ public class RoleParam {
 	private Integer userId;//用户id
 	
 	private Integer permissionId;//权限id
+	
+	private Integer status;//角色状态
 
 	public Integer getStart() {
 		return start;
@@ -77,5 +79,12 @@ public class RoleParam {
 	public void setKey(String key) {
 		this.key = key;
 	}
-	
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

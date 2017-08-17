@@ -24,7 +24,7 @@ public interface ApplicationService extends BaseService<Application, Integer> {
 	 * @param application
 	 * @return
 	 */
-	Application addApplication(Application application);
+	ResponseModel addApplication(Application application);
 
 	/**
 	 * 删除应用，如果应用被权限占用，就不删除

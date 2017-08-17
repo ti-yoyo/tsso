@@ -1,11 +1,13 @@
 package com.tinet.tsso.auth.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +20,7 @@ import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.PasswordHash;
+import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
  * 用户Service的实现类
@@ -127,21 +130,53 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 查询指定权限额用户列表
 	 */
 	@Override
-	public List<User> selectByPermissionId(Integer permissionId) {
+	public List<UserModel> selectByPermissionId(Integer permissionId) {
 		List<User> userList = userMapper.selectByPermissionId(permissionId);
-		return userList;
+
+		List<UserModel> userModelList = new ArrayList<UserModel>();
+
+		for (int i = 0; i < userList.size(); i++) {
+			User user = userList.get(i);
+			UserModel userModel =new UserModel();
+			BeanUtils.copyProperties(user, userModel);
+			
+			userModel.setDepartmentId(user.getDepartmentId());
+			userModel.setDepartmentName(user.getDepartment().getName());
+			
+			userModelList.add(userModel);
+		}
+		return userModelList;
 	}
 
 	/**
 	 * 添加用户
 	 */
 	@Override
-	public User addUser(User user) {
+	public ResponseModel addUser(User user) {
+		/**
+		 * 用户的账号和全名不能为空
+		 */
+		if (user.getUsername() == null || user.getFullName() == null) {
+			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("用户名和全名都不能为空").build();
+		}
+		user.setCreateTime(new Date());
+
+		Integer userCount = userMapper.selectCountByUserName(user.getUsername());
+		if (!userCount.equals(0)) {
+			return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("用户名已经被使用").build();
+		}
+
 		user = dealPassword(user);
+
 		userMapper.insertSelective(user);
+
 		user = userMapper.selectByPrimaryKey(user.getId());
 
-		return user;
+		// 去除密码和盐等敏感信息
+		user.setPassword(null);
+		user.setPasswordSalt(null);
+
+		return new ResponseModel.Builder().result(user).msg("添加成功").build();
 	}
 
 	/**

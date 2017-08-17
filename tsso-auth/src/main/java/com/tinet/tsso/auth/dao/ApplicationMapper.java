@@ -29,4 +29,11 @@ public interface ApplicationMapper extends BaseMapper<Application, Integer> {
 	 */
 	List<Application> selectAll();
 
+	/**
+	 * 统计key使用数量，用于保证key 唯一
+	 * @param key
+	 * @return
+	 */
+	Integer selectCountByApplicationKey(String key);
+
 }

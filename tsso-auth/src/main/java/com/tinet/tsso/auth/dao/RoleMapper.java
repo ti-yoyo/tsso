@@ -80,4 +80,11 @@ public interface RoleMapper extends BaseMapper<Role, Integer> {
 	 */
 	List<Role> selectByPermissionId(Integer permissionId);
 
+	/**
+	 * 根据权限的标识查询
+	 * @param key
+	 * @return
+	 */
+	Integer selectCountByRoleKey(String key);
+
 }

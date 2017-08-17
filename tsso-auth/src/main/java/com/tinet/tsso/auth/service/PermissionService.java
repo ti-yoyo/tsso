@@ -4,6 +4,7 @@ import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.model.PermissionModel;
 import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.util.Page;
+import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
  * 权限的Service
@@ -27,6 +28,6 @@ public interface PermissionService extends BaseService<Permission, Integer>{
 	 * @param permissionParam
 	 * @return
 	 */
-	Permission addPermission(PermissionParam permissionParam);
+	ResponseModel addPermission(PermissionParam permissionParam);
 
 }

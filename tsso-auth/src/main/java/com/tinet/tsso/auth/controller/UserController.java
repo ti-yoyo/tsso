@@ -74,23 +74,10 @@ public class UserController {
 	 */
 	@PostMapping
 	public ResponseModel addUser(@RequestBody UserParam userParam) {
-
+		
 		User user =new User();
 		BeanUtils.copyProperties(userParam, user);
-		
-		if (user.getUsername() == null || user.getFullName() == null) {
-			new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("用户名和全名都不能为空").build();
-		}
-		user.setCreateTime(new Date());
-		
-		user=userService.addUser(user);
-
-		// 去除密码和盐等敏感信息
-		user.setPassword(null);
-		user.setPasswordSalt(null);
-
-		return new ResponseModel.Builder().result(user).msg("添加成功").build();
-
+		return userService.addUser(user);
 	}
 
 	/**

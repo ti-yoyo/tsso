@@ -102,4 +102,9 @@
 		from application
 	</select>
   
+  	<select id="selectCountByApplicationKey" parameterType="java.lang.String" resultType= "java.lang.Integer">
+		select count(*)
+		from "application"
+		where key = #{key,jdbcType=VARCHAR}
+	</select>
 </mapper>

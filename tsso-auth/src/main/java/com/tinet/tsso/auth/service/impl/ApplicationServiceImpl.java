@@ -47,14 +47,24 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 	 * 添加应用
 	 */
 	@Override
-	public Application addApplication(Application application) {
+	public ResponseModel addApplication(Application application) {
+
+		if (application.getKey() == null || application.getName() == null || application.getStatus() == null) {
+			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("应用标识、应用名、应用状态均不能为空").build();
+		}
+		Integer applicationCount = applicationMapper.selectCountByApplicationKey(application.getKey());
+		
+		if(!applicationCount.equals(0)) {
+			return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该角色标识已经被使用").build();
+		}
 
 		application.setCreateTime(new Date());
 		// 添加应用
 		applicationMapper.insertSelective(application);
 		// 按照应用查询应用信息并返回
 		application = applicationMapper.selectByPrimaryKey(application.getId());
-		return application;
+		
+		return new ResponseModel.Builder().result(application).msg("添加成功").build();
 	}
 
 	/**

@@ -141,4 +141,9 @@
 			jdbcType=INTEGER}
 		</if>
 	</select>
+	<select id="selectByPermissionKey" parameterType="java.lang.String" resultType= "java.lang.Integer">
+		select count(*)
+		from "permission"
+		where key = #{key,jdbcType=VARCHAR}
+	</select>
 </mapper>

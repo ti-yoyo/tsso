@@ -227,8 +227,9 @@
 	</select>
 	<select id="selectByPermissionId" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />
-		from "user"
+		select <include refid="Base_Column_List" />,department.name as department_name
+		from "user" left join department
+		on "user".department_id = department.id
 		where "user"."id" IN
 							(
 								select DISTINCT(user_role.user_id)
@@ -237,5 +238,11 @@
 								where role_permission.permission_id= #{permissionId,jdbcType=INTEGER}
 							)
 		
+	</select>
+	
+	<select id="selectCountByUserName" parameterType="java.lang.String" resultType= "java.lang.Integer">
+		select count(*)
+		from "user"
+		where username = #{username,jdbcType=VARCHAR}
 	</select>
 </mapper>

@@ -7,6 +7,7 @@ import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.util.Page;
+import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
  * 用户的Service
@@ -45,7 +46,7 @@ public interface UserService extends BaseService<User, Integer> {
 	 * @param id
 	 * @return
 	 */
-	List<User> selectByPermissionId(Integer permissionId);
+	List<UserModel> selectByPermissionId(Integer permissionId);
 
 	/**
 	 * 添加用户
@@ -53,6 +54,6 @@ public interface UserService extends BaseService<User, Integer> {
 	 * @param user
 	 * @return 
 	 */
-	User addUser(User user);
+	ResponseModel addUser(User user);
 
 }

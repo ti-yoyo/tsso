@@ -28,4 +28,11 @@ public interface PermissionMapper extends BaseMapper<Permission, Integer> {
 	 * @return
 	 */
 	List<Permission> selectByParam(PermissionParam permissionParam);
+
+	/**
+	 * 查询该权限标识的数量
+	 * @param key
+	 * @return
+	 */
+	Integer selectByPermissionKey(String key);
 }

@@ -188,4 +188,11 @@
 								where role_permission.permission_id = #{permissionId,jdbcType=INTEGER} 
 							)
 	</select>
+	
+	<select id="selectCountByRoleKey" parameterType="java.lang.String" resultType= "java.lang.Integer">
+		select count(*)
+		from "role"
+		where key = #{key,jdbcType=VARCHAR}
+	</select>
+	
 </mapper>

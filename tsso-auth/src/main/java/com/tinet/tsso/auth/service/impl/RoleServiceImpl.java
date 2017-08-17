@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import com.tinet.tsso.auth.model.RoleModel;
 import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.util.Page;
+import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
  * 角色Service的实现类
@@ -157,5 +159,18 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	public List<Role> selectByPermissionId(Integer permissionId) {
 		List<Role> roleList = roleMapper.selectByPermissionId(permissionId);
 		return roleList;
+	}
+
+	@Override
+	public ResponseModel createRole(Role role) {
+		Integer roleCount = roleMapper.selectCountByRoleKey(role.getKey());
+		if (roleCount != 0) {
+			return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该角色标识已经被使用").build();
+		}
+		roleMapper.insertSelective(role);
+		RoleParam roleParam = new RoleParam();
+		roleParam.setId(role.getId());
+		
+		return new ResponseModel.Builder().result(selectRoleByParams(roleParam).getPageData().get(0)).msg("添加成功").build();
 	}
 }
