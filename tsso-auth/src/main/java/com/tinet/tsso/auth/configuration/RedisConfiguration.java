@@ -8,7 +8,6 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
 
 import redis.clients.jedis.JedisPoolConfig;
 /**
@@ -57,7 +56,6 @@ public class RedisConfiguration {
 		redisTemplate.setKeySerializer(jdkSerializationRedisSerializer);
 
 		// 采用Json序列化
-		GenericJackson2JsonRedisSerializer jsonRedisSerializer = new GenericJackson2JsonRedisSerializer();
 		redisTemplate.setHashValueSerializer(jdkSerializationRedisSerializer);
 		redisTemplate.setValueSerializer(jdkSerializationRedisSerializer);
 
