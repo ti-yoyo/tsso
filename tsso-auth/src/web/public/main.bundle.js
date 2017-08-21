@@ -404,6 +404,7 @@ var HeaderComponent = (function () {
         //   }).catch(error =>{
         //     this.swalService.hint('error','退出登录失败，请重试！');
         //   })
+        __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].remove('user');
         window.location.href = "http://tsso.tinetcloud.com/logout";
         this.router.navigate(['/signin']);
     };
@@ -664,10 +665,6 @@ ConstantService.navTabs = [
             { name: '用户管理', link: '/index/tsso-auth/user', md_icon: 'group_add', choosed: false },
             { name: '角色管理', link: '/index/tsso-auth/role', md_icon: 'assignment_ind', choosed: false },
             { name: '权限管理', link: '/index/tsso-auth/auth', md_icon: 'verified_user', choosed: false },
-            { name: '日志管理', link: '/index/tsso-auth/log_manage', md_icon: 'chrome_reader_mode', choosed: false },
-            //{name:'操作日志',link:'/index/tsso-auth/log_manage',md_icon:'chrome_reader_mode',choosed:false},
-            //{name:'登录日志',link:'/index/tsso-auth/login_log',md_icon:'assignment',choosed:false},
-            { name: '系统设置', link: '/index/tsso-auth/system_set', md_icon: 'settings', choosed: false },
         ]
     }
 ];
@@ -1284,7 +1281,7 @@ var AppManageService = (function () {
         var path = '/api/application';
         var appObservable = __WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         appObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '该应用添加失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
@@ -1303,7 +1300,7 @@ var AppManageService = (function () {
         var path = '/api/application/' + id;
         var appObservable = __WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
         appObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '该应用删除失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
@@ -1829,7 +1826,7 @@ var AuthManageService = (function () {
         var path = '/api/permission';
         var authObservable = __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         authObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '权限新增失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
@@ -1848,7 +1845,7 @@ var AuthManageService = (function () {
         var path = '/api/permission/' + id;
         var authObservable = __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
         authObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '该权限删除失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
@@ -2052,7 +2049,7 @@ LookRoleUserDialog = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'look-form',
         template: "\n    <div class=\"main-form\">\n      <md-icon class=\"close\" (click)=\"dialogRef.close('close')\">close</md-icon>\n      <div class=\"content\" style=\"margin-top:10px;\">\n         <h1>\u62E5\u6709\u201C{{data.name}}({{data.key}})\u201D\u6743\u9650\u7684\u89D2\u8272</h1>\n         <ul>\n           <li *ngFor=\"let item of authRoleList\">\n             <span *ngIf=\"item && item.id\">{{item.name}}({{item.key}})</span>\n           </li>\n         </ul>\n      </div>\n      <div class=\"content\" style=\"margin-top:20px;margin-bottom:10px;\">\n         <h1>\u62E5\u6709\u201C{{data.name}}({{data.key}})\u201D\u6743\u9650\u7684\u7528\u6237</h1>\n         <ul>\n           <li  *ngFor=\"let item of authUserList\">\n             <span  *ngIf=\"item && item.id\">\n             <em *ngIf=\"item.departmentName\">{{item?.departmentName}}-</em>{{item.fullName}}<em *ngIf=\"item.username\">({{item.username}})</em>\n             </span>\n           </li>\n         </ul>\n      </div>\n    </div>\n  ",
-        styles: ["\n    .main-form{\n      position:relative;\n    }\n    .close{\n      position:absolute;\n      right:-10px;\n      top:-20px;\n    }\n    .content h1{\n      font-size:20px;\n      font-weight:700;\n      margin-bottom:10px;\n    }\n    .content ul{\n      list-style:none;\n      padding:0;\n      margin:0;\n    }\n    .content ul li{\n      height:25px;\n      line-height:25px;\n      font-size:13px;\n    }\n    .content ul li em{\n      font-style:normal;\n      font-weight:500;\n    }\n  "]
+        styles: ["\n    .main-form{\n      position:relative;\n    }\n    .close{\n      position:absolute;\n      right:-18px;\n      top:-28px;\n    }\n    .content h1{\n      font-size:20px;\n      font-weight:700;\n      margin-bottom:10px;\n    }\n    .content ul{\n      list-style:none;\n      padding:0;\n      margin:0;\n    }\n    .content ul li{\n      height:25px;\n      line-height:25px;\n      font-size:13px;\n    }\n    .content ul li em{\n      font-style:normal;\n      font-weight:500;\n    }\n  "]
     }),
     __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MD_DIALOG_DATA */])),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialogRef */]) === "function" && _a || Object, Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__auth_manage_service__["a" /* AuthManageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__auth_manage_service__["a" /* AuthManageService */]) === "function" && _b || Object])
@@ -2760,7 +2757,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/role-manage/dialogs/add-member.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"member\">\r\n  <div class=\"add-member\">\r\n    <md-icon class=\"close\" (click)=\"dialogRef.close('cancel')\">close</md-icon>\r\n    <md-icon class=\"add-icon\">group</md-icon>\r\n    <span class=\"add-span\">Add members to {{data.currentRole?.name}}</span>\r\n    <div class=\"input-contain\">\r\n      <md-icon class=\"input-icon\">person</md-icon>\r\n      <input class=\"member-input\" type=\"text\" name=\"member\" #member=\"ngModel\" [(ngModel)]=\"addUser.username\" (click)=\"changChoose()\"/>\r\n    </div>\r\n    <div *ngIf=\"choose\" style=\"position:fixed;top:50%;z-index:1\">\r\n      <div class=\"user-content\">\r\n        <ul>\r\n          <li *ngFor=\"let item of allUsers\" (click)=\"chooseUser(item)\">\r\n            <!--<img  [src]=\"item.headImg\" />-->\r\n            <div class=\"instruct\">\r\n              <span class=\"user-name\" [style.color]=\"item.roleStatus==1 ? '#888':'#333'\">{{item.username}}</span>\r\n              <span class=\"join\" *ngIf=\"item.roleStatus == 1\">Already a member of this team</span>\r\n              <span class=\"unjoin\" *ngIf=\"item.roleStatus == 0\">Not a member of this team</span>\r\n            </div>\r\n            <md-icon *ngIf=\"item.roleStatus == 0\" class=\"add-user\">add</md-icon>\r\n            <md-icon *ngIf=\"item.roleStatus == 1\" class=\"add-user\" style=\"color:#ddd\">check</md-icon>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <button md-button class=\"sure\" (click)=\"addMember()\">确定</button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"member\">\r\n  <div class=\"add-member\">\r\n    <md-icon class=\"close\" (click)=\"dialogRef.close('cancel')\">close</md-icon>\r\n    <md-icon class=\"add-icon\">group</md-icon>\r\n    <span class=\"add-span\">Add members to {{data.currentRole?.name}}</span>\r\n    <div class=\"input-contain\">\r\n      <md-icon class=\"input-icon\">person</md-icon>\r\n      <input class=\"member-input\" type=\"text\" name=\"member\" #member=\"ngModel\" [(ngModel)]=\"addUser.username\" (click)=\"changChoose()\"/>\r\n    </div>\r\n    <div *ngIf=\"choose\" style=\"position:fixed;top:50%;z-index:1\">\r\n      <div class=\"user-content\">\r\n        <ul>\r\n          <li *ngFor=\"let item of allUsers\" (click)=\"chooseUser(item)\">\r\n            <!--<img  [src]=\"item.headImg\" />-->\r\n            <div class=\"instruct\">\r\n              <span class=\"user-name\" [style.color]=\"item.roleStatus==1 ? '#888':'#333'\">{{item.username}}</span>\r\n              <span class=\"join\" *ngIf=\"item.roleStatus == 1\">Already a member of this role</span>\r\n              <span class=\"unjoin\" *ngIf=\"item.roleStatus == 0\">Not a member of this role</span>\r\n            </div>\r\n            <md-icon *ngIf=\"item.roleStatus == 0\" class=\"add-user\">add</md-icon>\r\n            <md-icon *ngIf=\"item.roleStatus == 1\" class=\"add-user\" style=\"color:#ddd\">check</md-icon>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <button md-button class=\"sure\" (click)=\"addMember()\">确定</button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2965,6 +2962,7 @@ var RoleManageDialog = (function () {
 }());
 RoleManageDialog.roleConfig = {
     width: '600px',
+    height: 'calc(100% - (20px + 30px))',
     data: {}
 };
 RoleManageDialog = __decorate([
@@ -3076,7 +3074,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/role-manage/manage-user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>用户管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addUser()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">用户名:</div>\r\n        <input (keyup)=\"searchByName($event)\" placeholder=\"请输入用户名回车查询\" class=\"search-input\" name=\"fullName\" #fullName=\"ngModel\" [(ngModel)]=\"search.fullName\"/>\r\n        <md-icon class=\"search-bar\" (click)=\"getUserList()\">search</md-icon>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"back()\">返回</button>\r\n      </div>\r\n    </div>\r\n    <div class=\"content\">\r\n      <ul>\r\n        <li class=\"content-head\">\r\n          <div class=\"checkbox-item\">\r\n            <md-checkbox [(ngModel)]=\"checkAll\"\r\n                         [name]=\"'basic_checkbox'\"\r\n                         [color]=\"'primary'\"\r\n                         [checked]=\"allSelect()\"\r\n                         (change)=\"setAllSelect($event.checked)\"\r\n                         [indeterminate]=\"someSelect()\"\r\n                         [align]=\"'start'\">\r\n            </md-checkbox>\r\n          </div>\r\n          <md-icon class=\"md-person\">person</md-icon>\r\n          <span>{{roleUserList.length}}</span>\r\n          <div class=\"select-80px role-select\">\r\n            <md-select (change)=\"getUserList()\" style=\"float:right\" name=\"role\" #role=\"ngModel\" [(ngModel)]=\"search.roleId\" class=\"catalog-select\">\r\n              <md-option *ngFor=\"let item of allRoles\" [value]=\"item.id\">\r\n                <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n              </md-option>\r\n            </md-select>\r\n          </div>\r\n        </li>\r\n        <li *ngFor=\"let item of roleUserList\" class=\"user-list\">\r\n          <div class=\"checkbox-item\">\r\n            <md-checkbox name=\"cb\" value=\"basic_checkbox\"\r\n                         [color]=\"'primary'\"\r\n                         [(ngModel)]=\"item.selected\"\r\n                         (change)=\"selectOneItem(item,$event.checked)\">\r\n            </md-checkbox>\r\n          </div>\r\n          <div class=\"user-info\">\r\n            <!--<img style=\"margin-right:10px;\" [src]=\"item.headImg\" />-->\r\n            <span style=\"margin-right:10px;\">{{item.username}}</span>\r\n            <span style=\"margin-right:10px;\">{{item.fullName}}</span>\r\n          </div>\r\n\r\n\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>用户管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addUser()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">用户名:</div>\r\n        <input (keyup)=\"searchByName($event)\" placeholder=\"请输入用户名回车查询\" class=\"search-input\" name=\"fullName\" #fullName=\"ngModel\" [(ngModel)]=\"search.fullName\"/>\r\n        <md-icon class=\"search-bar\" (click)=\"getUserList()\">search</md-icon>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"back()\">返回</button>\r\n      </div>\r\n    </div>\r\n    <div class=\"content\">\r\n      <ul>\r\n        <li class=\"content-head\">\r\n          <!--<div class=\"checkbox-item\">-->\r\n            <!--<md-checkbox [(ngModel)]=\"checkAll\"-->\r\n                         <!--[name]=\"'basic_checkbox'\"-->\r\n                         <!--[color]=\"'primary'\"-->\r\n                         <!--[checked]=\"allSelect()\"-->\r\n                         <!--(change)=\"setAllSelect($event.checked)\"-->\r\n                         <!--[indeterminate]=\"someSelect()\"-->\r\n                         <!--[align]=\"'start'\">-->\r\n            <!--</md-checkbox>-->\r\n          <!--</div>-->\r\n          <md-icon class=\"md-person\">person</md-icon>\r\n          <span>{{roleUserList.length}}</span>\r\n          <div class=\"select-80px role-select\">\r\n            <md-select (change)=\"getUserList()\" style=\"float:right\" name=\"role\" #role=\"ngModel\" [(ngModel)]=\"search.roleId\" class=\"catalog-select\">\r\n              <md-option *ngFor=\"let item of allRoles\" [value]=\"item.id\">\r\n                <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n              </md-option>\r\n            </md-select>\r\n          </div>\r\n        </li>\r\n        <li *ngFor=\"let item of roleUserList\" class=\"user-list\">\r\n          <!--<div class=\"checkbox-item\">-->\r\n            <!--<md-checkbox name=\"cb\" value=\"basic_checkbox\"-->\r\n                         <!--[color]=\"'primary'\"-->\r\n                         <!--[(ngModel)]=\"item.selected\"-->\r\n                         <!--(change)=\"selectOneItem(item,$event.checked)\">-->\r\n            <!--</md-checkbox>-->\r\n          <!--</div>-->\r\n          <div class=\"user-info\">\r\n            <!--<img style=\"margin-right:10px;\" [src]=\"item.headImg\" />-->\r\n            <span style=\"margin-right:10px;\">{{item.username}}</span>\r\n            <span style=\"margin-right:10px;\">{{item.fullName}}</span>\r\n          </div>\r\n\r\n\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3583,11 +3581,10 @@ RoleManageModule = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mobx_angular__ = __webpack_require__("../../../../mobx-angular/dist/mobx-angular.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_sweetalert2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoleManageService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3607,92 +3604,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var RoleManageService = (function () {
-    function RoleManageService(connectionService) {
+    function RoleManageService(connectionService, swal) {
         this.connectionService = connectionService;
+        this.swal = swal;
         //被查询的角色列表
         this.roleList = [];
-        this.allRoles = [
-            { id: 1, key: "crm-administor", name: "CRM管理员", status: 0, createTime: 1501771466594, userCount: 10 },
-            { id: 2, key: "crm-administor", name: "后端管理员", status: 0, createTime: 1501771466595, userCount: 10 },
-            { id: 3, key: "crm-administor", name: "数据库操作员", status: 0, createTime: 1501771466595, userCount: 10 },
-            { id: 4, key: "crm-administor", name: "前端开发者", status: 0, createTime: 1501771466595, userCount: 10 },
-        ];
+        this.allRoles = [];
         //角色拥有的用户列表
-        this.roleUserList = [
-            { id: 1, username: 'liwww', fullName: 'Ti-net-liwww', headImg: '../../images/head.png' },
-            { id: 2, username: '王某某', fullName: 'Ti-net-liwww', headImg: '../../images/head.png' },
-            { id: 3, username: '杨洋', fullName: 'Ti-net-liwww', headImg: '../../images/head.png' },
-            { id: 4, username: '林丽丽', fullName: 'Ti-net-liwww', headImg: '../../images/head.png' },
-            { id: 5, username: '高晓波', fullName: 'Ti-net-liwww', headImg: '../../images/head.png' },
-        ];
+        this.roleUserList = [];
         //所有用户列表
-        this.allUsers = [
-            { id: 1, username: 'liwww', status: 1, headImg: '../../images/head.png' },
-            { id: 2, username: '王某某', status: 0, headImg: '../../images/head.png' },
-            { id: 7, username: '高晓波', status: 0, headImg: '../../images/head.png' },
-            { id: 8, username: '啦啦啦', status: 0, headImg: '../../images/head.png' },
-            { id: 9, username: '高晓波', status: 0, headImg: '../../images/head.png' },
-            { id: 3, username: '杨洋', status: 0, headImg: '../../images/head.png' },
-            { id: 4, username: '林丽丽', status: 0, headImg: '../../images/head.png' },
-            { id: 5, username: '刘亦菲', status: 0, headImg: '../../images/head.png' },
-            { id: 6, username: '马东', status: 0, headImg: '../../images/head.png' },
-            { id: 10, username: '杨幂', status: 0, headImg: '../../images/head.png' },
-            { id: 11, username: '啦啦啦', status: 0, headImg: '../../images/head.png' },
-            { id: 12, username: '花花', status: 0, headImg: '../../images/head.png' },
-        ];
-        this.roleAuthList = [
-            { id: 1, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 2, "name": "营帐用户编辑", "key": "boss:custom:edit", "applicationId": 1, "applicationKey": "风险控制中心", "applicationName": "RMS", "createTime": 1501646137649, "status": 1 },
-            { id: 3, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 4, "name": "营帐用户编辑", "key": "boss:custom:edit", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 5, "name": "营帐用户编辑", "key": "boss:custom:edit", "applicationId": 1, "applicationKey": "风险控制中心", "applicationName": "RMS", "createTime": 1501646137649, "status": 0 },
-            { id: 6, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "风险控制中心", "applicationName": "RMS", "createTime": 1501646137649, "status": 0 },
-            { id: 7, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-        ];
-        this.authList = [
-            { id: 1, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 2, "name": "营帐用户编辑", "key": "boss:custom:edit", "applicationId": 1, "applicationKey": "风险控制中心", "applicationName": "RMS", "createTime": 1501646137649, "status": 1 },
-            { id: 3, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 4, "name": "营帐用户编辑", "key": "boss:custom:edit", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 5, "name": "营帐用户编辑", "key": "boss:custom:edit", "applicationId": 1, "applicationKey": "风险控制中心", "applicationName": "RMS", "createTime": 1501646137649, "status": 0 },
-            { id: 6, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "风险控制中心", "applicationName": "RMS", "createTime": 1501646137649, "status": 0 },
-            { id: 7, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 8, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 9, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 10, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 11, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 12, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-            { id: 13, "name": "营帐用户查看", "key": "boss:custom:view", "applicationId": 1, "applicationKey": "大平台营帐", "applicationName": "BOSS", "createTime": 1501646137649, "status": 0 },
-        ];
+        this.allUsers = [];
+        this.roleAuthList = [];
+        this.authList = [];
         this.authTypeList = [];
         this.groupValue = [];
         this.permissionIdList = [];
     }
-    /**
-     *@desc 警告提示
-     * @param type - 提示框类型
-     * @param title - 提示内容
-     */
-    RoleManageService.prototype.hint = function (type, title) {
-        if (type == 'success') {
-            __WEBPACK_IMPORTED_MODULE_2_sweetalert2___default()({
-                type: type,
-                title: title,
-                showConfirmButton: true,
-                confirmButtonText: '确定',
-                timer: 3000
-            }).catch(function (timeout) { });
-        }
-        else {
-            __WEBPACK_IMPORTED_MODULE_2_sweetalert2___default()({
-                type: type,
-                title: title,
-                showConfirmButton: true,
-                confirmButtonText: '确定',
-                timer: 300000
-            }).catch(function (timeout) { });
-        }
-    };
     /*------------------------------角色的增删查------------------------------------------*/
     /**
      * @desc 查询所有角色
@@ -3703,8 +3630,6 @@ var RoleManageService = (function () {
         var path = '/api/role';
         var param = { start: 0, limit: 999999 };
         this.connectionService.get(path, { params: param }).then(function (res) {
-            if (res.data.status === 401) {
-            }
             _this.allRoles.length = 0;
             _this.allRoles.push.apply(_this.allRoles, res.data.result.pageData);
         }).catch(function (error) { console.log(error); });
@@ -3716,14 +3641,10 @@ var RoleManageService = (function () {
     RoleManageService.prototype.retriveRoleList = function (params) {
         var _this = this;
         var path = '/api/role';
-        var roleObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
+        var roleObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
         roleObservable.subscribe(function (res) {
-            if (res.data.status === 401) {
-            }
-            else {
-                _this.roleList.length = 0;
-                _this.roleList.push.apply(_this.roleList, res.data.result.pageData);
-            }
+            _this.roleList.length = 0;
+            _this.roleList.push.apply(_this.roleList, res.data.result.pageData);
         }, function (error) {
             console.log(error);
         });
@@ -3736,16 +3657,14 @@ var RoleManageService = (function () {
     RoleManageService.prototype.createRole = function (params) {
         var _this = this;
         var path = '/api/role';
-        var roleObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
+        var roleObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         roleObservable.subscribe(function (res) {
-            if (res.data.status === 401) {
-            }
-            else if (res.data.status === 403) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '角色新增失败，请稍后重试！';
-                _this.hint('error', message);
+                _this.swal.hint('error', message);
             }
         }, function (error) {
-            _this.hint('error', '角色新增失败，请重试！');
+            _this.swal.hint('error', '角色新增失败，请重试！');
         });
         return roleObservable;
     };
@@ -3757,17 +3676,15 @@ var RoleManageService = (function () {
     RoleManageService.prototype.removeRole = function (id, index) {
         var _this = this;
         var path = '/api/role/' + id;
-        var roleObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
+        var roleObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
         roleObservable.subscribe(function (res) {
-            if (res.data.status === 401) {
-            }
-            else if (res.data.status === 403) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '该角色删除失败，请稍后重试！';
-                _this.hint('error', message);
+                _this.swal.hint('error', message);
             }
         }, function (error) {
             var message = '该角色删除失败，请稍后重试！';
-            _this.hint('error', message);
+            _this.swal.hint('error', message);
         });
         return roleObservable;
     };
@@ -3800,14 +3717,14 @@ var RoleManageService = (function () {
     RoleManageService.prototype.addMember = function (params) {
         var _this = this;
         var path = '/api/role/user';
-        var memberObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
+        var memberObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         memberObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '该应用添加失败，请稍后重试！';
-                _this.hint('error', message);
+                _this.swal.hint('error', message);
             }
         }, function (error) {
-            _this.hint('error', '该应用添加失败，请重试！');
+            _this.swal.hint('error', '该应用添加失败，请重试！');
         });
         return memberObservable;
     };
@@ -3832,7 +3749,7 @@ var RoleManageService = (function () {
     RoleManageService.prototype.retriveRoleAuth = function (params) {
         var _this = this;
         var path = '/api/permission/';
-        var roleAuthObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
+        var roleAuthObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
         roleAuthObservable.subscribe(function (page) {
             _this.roleAuthList.length = 0;
             _this.roleAuthList.push.apply(_this.roleAuthList, page.data.result.pageData);
@@ -3865,13 +3782,13 @@ var RoleManageService = (function () {
         var _this = this;
         var path = '/api/role/' + id + '/permission';
         this.connectionService.put(path, authArray).then(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '角色权限修改失败，请稍后重试！';
-                _this.hint('error', message);
+                _this.swal.hint('error', message);
             }
         }).catch(function (error) {
             var message = '角色权限修改失败，请稍后重试！';
-            _this.hint('error', message);
+            _this.swal.hint('error', message);
         });
     };
     return RoleManageService;
@@ -3914,10 +3831,10 @@ __decorate([
 ], RoleManageService.prototype, "permissionIdList", void 0);
 RoleManageService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object])
 ], RoleManageService);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=role-manage.service.js.map
 
 /***/ }),
@@ -4116,6 +4033,7 @@ var UserFormDialog = (function () {
                 }
             });
         }
+        console.log(data);
         this.dialogRef.close();
     };
     UserFormDialog.prototype.verifyResult = function () {
@@ -4359,13 +4277,12 @@ var UserListComponent = (function () {
      * @param item - 被编辑的用户
      */
     UserListComponent.prototype.editUser = function (item, index) {
-        //let formConfig = UserFormDialog.formConfig;
-        //formConfig.data = Object.assign({},this.service.userDetail);
         var _this = this;
         this.service.getUserDetail(item.id).subscribe(function (res) {
             var formConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_user_form_dialog__["a" /* UserFormDialog */].formConfig;
             formConfig.data = Object.assign({}, res.data.result);
             formConfig.data.departmentList = _this.departmentList;
+            formConfig.data.getUserList = _this.getUserList;
             formConfig.data.index = index;
             console.log(formConfig.data);
             _this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_user_form_dialog__["a" /* UserFormDialog */], formConfig);
@@ -4713,7 +4630,7 @@ var UserManageService = (function () {
         var path = '/api/user';
         var userObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         userObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '用户新增失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
@@ -4733,7 +4650,7 @@ var UserManageService = (function () {
         var path = '/api/user/' + id;
         var userObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
         userObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '用户修改失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
@@ -4752,7 +4669,7 @@ var UserManageService = (function () {
         var path = '/api/user/' + id;
         var userObservable = __WEBPACK_IMPORTED_MODULE_4_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
         userObservable.subscribe(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '该用户删除失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
@@ -4786,7 +4703,7 @@ var UserManageService = (function () {
         var _this = this;
         var path = '/api/user/' + id + '/role';
         this.connectionService.put(path, roleArray).then(function (res) {
-            if (res.data.status === 403 || res.data.status != 200) {
+            if (res.data.status != 200) {
                 var message = res.data.error || '用户角色修改失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
