@@ -167,9 +167,9 @@ public class TssoConfig {
 		filterChainDefinitionMap.put("/api/password/change_password", "anon");
 
 		// 所有url都需要验证
-		filterChainDefinitionMap.put("/**", "authc");
+		filterChainDefinitionMap.put("/api/**", "authc");
 		//
-		filterChainDefinitionMap.put("/**", "roles[auth_admin]");
+		filterChainDefinitionMap.put("/api/**", "roles[auth_admin]");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
