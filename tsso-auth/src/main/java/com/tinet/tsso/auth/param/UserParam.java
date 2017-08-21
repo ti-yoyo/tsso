@@ -2,32 +2,33 @@ package com.tinet.tsso.auth.param;
 
 /**
  * 对于用户请求的参数
+ * 
  * @date 2017-08-09
  * @author lizy
  */
 
 public class UserParam {
-	
-	private Integer id;//用户id
 
-    private String password;//用户密码
+	private Integer id;// 用户id
 
-    private Integer departmentId;//部门id
+	private String password;// 用户密码
 
-    private String email;//邮箱
+	private Integer departmentId;// 部门id
 
-    private Integer status;//状态
+	private String email;// 邮箱
 
-	private Integer start;//分页的起始位置
-	
-	private Integer limit;//分页大小
-	
-	private String username;//账号
-	
-	private String fullName;//全名
-	
-	private Integer roleId;//角色id
-	
+	private Integer status;// 状态
+
+	private Integer start;// 分页的起始位置
+
+	private Integer limit;// 分页大小
+
+	private String username;// 账号
+
+	private String fullName;// 全名
+
+	private Integer roleId;// 角色id
+
 	public Integer getStart() {
 		return start;
 	}
@@ -84,7 +85,6 @@ public class UserParam {
 		this.password = password;
 	}
 
-
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -109,5 +109,4 @@ public class UserParam {
 		this.status = status;
 	}
 
-	
 }

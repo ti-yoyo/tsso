@@ -137,12 +137,12 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 
 		for (int i = 0; i < userList.size(); i++) {
 			User user = userList.get(i);
-			UserModel userModel =new UserModel();
+			UserModel userModel = new UserModel();
 			BeanUtils.copyProperties(user, userModel);
-			
+
 			userModel.setDepartmentId(user.getDepartmentId());
 			userModel.setDepartmentName(user.getDepartment().getName());
-			
+
 			userModelList.add(userModel);
 		}
 		return userModelList;
@@ -166,7 +166,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("用户名已经被使用").build();
 		}
 
-		user = dealPassword(user);
+		user = dealPassword(user, null);
 
 		userMapper.insertSelective(user);
 
@@ -184,20 +184,47 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 
 	 * @param user
 	 */
-	private User dealPassword(User user) {
+	private User dealPassword(User user, String uuidString) {
 
 		// 创建用户加密的对象
 		PasswordHash passwordHash = new PasswordHash();
 		passwordHash.setAlgorithmName("SHA-256");
 		passwordHash.setHashIterations(6);
 		// 截取uuid的最后10位作为密码的盐
-		String uuidString = UUID.randomUUID().toString();
+		if (uuidString == null) {
+			uuidString = UUID.randomUUID().toString();
+		}
 		String salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
 		// 密码进行加密
 		String encodePassword = passwordHash.toHex(user.getPassword() == null ? "" : user.getPassword(), salt);
 
 		user.setPassword(encodePassword);
 		user.setPasswordSalt(salt);
+		return user;
+	}
+
+	/**
+	 * 按照用户名查询用户
+	 */
+	@Override
+	public User selectByUserName(String username) {
+		List<User> userList = userMapper.selectByUsername(username);
+		if (userList == null || userList.size() == 0) {
+			return null;
+		}
+		return userList.get(0);
+	}
+
+	/**
+	 * 更新用户密码通过用户名
+	 */
+	@Override
+	public User updatePasswordByUsername(User user) {
+		
+		user =dealPassword(user,user.getPasswordSalt());
+		
+		userMapper.updatePasswordByUsername(user);
+		
 		return user;
 	}
 

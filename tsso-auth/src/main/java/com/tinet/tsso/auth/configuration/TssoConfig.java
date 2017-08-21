@@ -123,7 +123,7 @@ public class TssoConfig {
 		casFilter.setName("casFilter");
 		// 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo
 		casFilter.setFailureUrl(loginUrl);// 我们选择认证失败后再打开登录页面
-		casFilter.setSuccessUrl("/api/user666");
+		casFilter.setSuccessUrl("/api/user");
 
 		return casFilter;
 	}
@@ -145,8 +145,8 @@ public class TssoConfig {
 		shiroFilterFactoryBean.setLoginUrl(loginUrl);
 
 		// 登录成功后要跳转的连接
-		shiroFilterFactoryBean.setSuccessUrl("/api/user777");
-		
+		shiroFilterFactoryBean.setSuccessUrl("/api/user");
+
 		// 添加casFilter到shiroFilter中
 		Map<String, Filter> filters = new HashMap<>();
 		filters.put("casFilter", casFilter);
@@ -159,6 +159,13 @@ public class TssoConfig {
 		filterChainDefinitionMap.put(casFilterUrlPattern, "casFilter");
 		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
+
+
+		 // 修改密码的链接不需要权限控制
+		
+		filterChainDefinitionMap.put("/api/password/forget_password", "anon");
+		filterChainDefinitionMap.put("/api/password/change_password", "anon");
+
 		// 所有url都需要验证
 		filterChainDefinitionMap.put("/**", "authc");
 		//
@@ -233,13 +240,14 @@ public class TssoConfig {
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
 		return authorizationAttributeSourceAdvisor;
 	}
-	
+
 	/**
 	 * spring mvc处理全局异常的类，这里捕获shiro注解产生的未授权异常，跳转到403页面
+	 * 
 	 * @return
 	 */
 	@Bean
-	public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+	public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
 		SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
 		Properties properties = new Properties();
 		properties.put("org.apache.shiro.authz.AuthorizationException", "/403");

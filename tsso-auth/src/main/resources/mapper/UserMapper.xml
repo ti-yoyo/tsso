@@ -245,4 +245,16 @@
 		from "user"
 		where username = #{username,jdbcType=VARCHAR}
 	</select>
+	
+	<select id="selectByUsername" parameterType="java.lang.String" resultMap= "BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from "user"
+		where username = #{username,jdbcType=VARCHAR}
+	</select>
+	<update id="updatePasswordByUsername" parameterType ="com.tinet.tsso.auth.entity.User">
+		update "user"
+		set password = #{password,jdbcType=VARCHAR}
+		where username = #{username,jdbcType=VARCHAR}
+	</update>
+	
 </mapper>
