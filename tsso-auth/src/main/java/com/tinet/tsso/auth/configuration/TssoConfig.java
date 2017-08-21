@@ -70,7 +70,6 @@ public class TssoConfig {
 		FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
 
 		filterRegistration.setFilter(new SingleSignOutFilter());
-
 		filterRegistration.addUrlPatterns("/logout");
 		filterRegistration.addInitParameter("casServerUrlPrefix", casServerUrlPrefix);
 		filterRegistration.addInitParameter("serverName", shiroServerUrlPrefix);
@@ -159,15 +158,17 @@ public class TssoConfig {
 		filterChainDefinitionMap.put(casFilterUrlPattern, "casFilter");
 		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
-
-
+		filterChainDefinitionMap.put("/login", "anon");
 		 // 修改密码的链接不需要权限控制
 		
 		filterChainDefinitionMap.put("/api/password/forget_password", "anon");
 		filterChainDefinitionMap.put("/api/password/change_password", "anon");
+		filterChainDefinitionMap.put("/password_find", "anon");
+		filterChainDefinitionMap.put("/password_modify", "anon");
 
 		// 所有url都需要验证
-		filterChainDefinitionMap.put("/api/**", "authc");
+		filterChainDefinitionMap.put("/*", "authc");
+		filterChainDefinitionMap.put("/index/**", "authc");
 		//
 		filterChainDefinitionMap.put("/api/**", "roles[auth_admin]");
 

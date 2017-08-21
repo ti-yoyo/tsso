@@ -22,7 +22,7 @@
 			and department.id = #{id, jdbcType=INTEGER}
 		</if>
 		<if test=" key != null ">
-			and key LIKE CONCAT('%', #{key,jdbcType=VARCHAR},'%')
+			and permission.key LIKE CONCAT('%', #{key,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="applicationId != null">
 			and application_id = #{applicationId, jdbcType=INTEGER}

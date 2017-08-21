@@ -96,6 +96,9 @@ public class PasswordController {
 		} else if (!passwordParam.getPassword().equals(passwordParam.getRepassword())) {
 			return new ResponseModel.Builder().error("密码和确认密码不同").status(HttpStatus.FORBIDDEN).build();
 		}
+		if(username == null) {
+			return new ResponseModel.Builder().error("用户名不能为空").status(HttpStatus.FORBIDDEN).build();
+		}
 		// 获取key和生成key的时间
 		ForgetPasswordModel forgetPassWord = userModelMap.get(username);
 
@@ -136,10 +139,10 @@ public class PasswordController {
 		//邮件格式为：
 		//您重置密码的链接为：http://auth.tinetcloud.com/api/password/password_modify?username=lizy&key=7c3668d8-6ad4-4230-9d2a-634d5a79ae61
 		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append("您重置密码的链接为：").append("<a href=\"").append(changePasswordAddress).append("/password_modify")
+		stringBuffer.append("您好,").append(username).append("先生/女士：").append("</br>").append("您申请了密码重置。请访问此链接，输入您的新密码：：</br>").append("<a href=\"").append(changePasswordAddress).append("/password_modify")
 				.append("?username=").append(username).append("&key=").append(key).append("\">")
 				.append(changePasswordAddress).append("/password_modify").append("?username=").append(username)
-				.append("&key=").append(key).append("</a>");
+				.append("&key=").append(key).append("</a>").append("</br>");
 
 		return stringBuffer.toString();
 	}
@@ -159,7 +162,7 @@ public class PasswordController {
 				messageHelper = new MimeMessageHelper(mailMessage, true, "UTF-8");
 				messageHelper.setFrom(mailFrom);
 				messageHelper.setTo(mailTo);
-				messageHelper.setSubject("找回密码邮件");
+				messageHelper.setSubject("TSSO天润单点登录系统密码重置链接");
 				messageHelper.setText(mailContent, true);
 			} catch (Exception e) {
 				logger.error("messageHelper构建异常", e);

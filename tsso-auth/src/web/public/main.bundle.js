@@ -338,7 +338,7 @@ CoreModule = __decorate([
 /***/ "../../../../../src/app/core/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO单点登录</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -392,21 +392,8 @@ var HeaderComponent = (function () {
         this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
     }
     HeaderComponent.prototype.exit = function () {
-        //   let path = '/api/logout';
-        //   this.connectionService.post(path).then(res => {
-        //     if(res.data.status === 200){
-        //       // LocalStorage.remove('');
-        //       this.swalService.hint('success','退出登录成功！');
-        //       // LocalStorage.remove('user');
-        //       this.connectionService.logout();
-        //       this.router.navigate(['/signin']);
-        //     }
-        //   }).catch(error =>{
-        //     this.swalService.hint('error','退出登录失败，请重试！');
-        //   })
         __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].remove('user');
-        window.location.href = "http://tsso.tinetcloud.com/logout";
-        this.router.navigate(['/signin']);
+        window.location.href = "/logout";
     };
     return HeaderComponent;
 }());
@@ -2569,7 +2556,7 @@ PasswordManageModule = __decorate([
 /***/ "../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">TSSO单点登录</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"modify(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <md-input-container class=\"sign-input\">\r\n            <md-icon mdPrefix>perm_identity</md-icon>\r\n            <input mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"用户名\"\r\n                   name=\"username\"\r\n                   [(ngModel)]=\"user.username\"\r\n                   #username=\"ngModel\"\r\n                   required\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              用户名为必填项\r\n            </div>\r\n          </div>\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"password\"\r\n                   [(ngModel)]=\"user.password\"\r\n                   #password=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少有8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>verified_user</md-icon>\r\n            <input class=\"code-input\" mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"确认密码\"\r\n                   required\r\n                   name=\"repassword\"\r\n                   #repassword=\"ngModel\"\r\n                   [(ngModel)]=\"user.repassword\"\r\n                   type=\"password\"\r\n                   (blur)=\"againBlured = true\"\r\n                   (focus)=\"againBlured = false\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"(repassword.dirty || repassword.touched) && againBlured&& !repassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            修改密码\r\n          </button>\r\n          <!--<a class=\"forget\" href=\"#\">忘记密码？</a>-->\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">TSSO用户中心</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"modify(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"password\"\r\n                   [(ngModel)]=\"user.password\"\r\n                   #password=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少有8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>verified_user</md-icon>\r\n            <input class=\"code-input\" mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"确认密码\"\r\n                   required\r\n                   name=\"repassword\"\r\n                   #repassword=\"ngModel\"\r\n                   [(ngModel)]=\"user.repassword\"\r\n                   type=\"password\"\r\n                   (blur)=\"againBlured = true\"\r\n                   (focus)=\"againBlured = false\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"(repassword.dirty || repassword.touched) && againBlured&& !repassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            修改密码\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2622,7 +2609,18 @@ var PasswordModifyComponent = (function () {
     }
     PasswordModifyComponent.prototype.modify = function (form) {
         var _this = this;
-        this.service.modifyPass(form).subscribe(function (res) {
+        var find = window.location.href;
+        console.log(find);
+        var key = this.getUrlParam(find, 'key');
+        var username = this.getUrlParam(find, 'username');
+        var user = {};
+        if (key && key.length > 0) {
+            user.key = key;
+        }
+        if (username && username.length > 0) {
+            user.username = username;
+        }
+        this.service.modifyPass(user, form).subscribe(function (res) {
             if (res.status == 200) {
                 _this.swal.hint('success', '密码修改成功，现在跳转至登录页面！');
                 window.location.href = "http://tsso.tinetcloud.com/login";
@@ -2638,6 +2636,50 @@ var PasswordModifyComponent = (function () {
     };
     PasswordModifyComponent.prototype.verifyResult = function () {
         return this.user.password && this.user.repassword && this.user.password == this.user.repassword;
+    };
+    PasswordModifyComponent.prototype.getUrlParam = function (sUrl, sKey) {
+        var param = sUrl.split('#')[0].split('?')[1];
+        if (param) {
+            if (sKey) {
+                var strs = param.split('&');
+                var arrs = new Array(); //如果存在多个同名参数，则返回数组
+                for (var i = 0, len = strs.length; i < len; i++) {
+                    var tmp = strs[i].split('=');
+                    if (tmp[0] == sKey) {
+                        arrs.push(tmp[1]);
+                    }
+                }
+                if (arrs.length == 1) {
+                    return arrs[0];
+                }
+                else if (arrs.length == 0) {
+                    return "";
+                }
+                else {
+                    return arrs;
+                }
+            }
+            else {
+                if (param == undefined || param == "") {
+                    return {};
+                }
+                else {
+                    var strs = param.split('&');
+                    var arrObj = new Object();
+                    for (var i = 0, len = strs.length; i < len; i++) {
+                        var tmp = strs[i].split('=');
+                        if (!(tmp[0] in arrObj)) {
+                            arrObj[tmp[0]] = [];
+                        }
+                        arrObj[tmp[0]].push(tmp[1]);
+                    }
+                    return arrObj;
+                }
+            }
+        }
+        else {
+            return '';
+        }
     };
     return PasswordModifyComponent;
 }());
@@ -2737,8 +2779,8 @@ var PasswordService = (function () {
         var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         return passObservable;
     };
-    PasswordService.prototype.modifyPass = function (params) {
-        var path = '/api/password/change_password';
+    PasswordService.prototype.modifyPass = function (user, params) {
+        var path = '/api/password/change_password?username=' + user.username + '&key=' + user.key;
         var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
         return passObservable;
     };
@@ -3964,7 +4006,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".userform {\n  overflow: hidden;\n}\n.userform .header-title {\n  font-size: 18px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  margin-top: 30px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
+exports.push([module.i, ".userform {\n  overflow: auto;\n  max-height: calc(50%) !important;\n}\n.userform .header-title {\n  font-size: 18px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  margin-top: 30px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
 
 // exports
 

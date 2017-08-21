@@ -184,17 +184,18 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 
 	 * @param user
 	 */
-	private User dealPassword(User user, String uuidString) {
+	private User dealPassword(User user, String salt) {
 
 		// 创建用户加密的对象
 		PasswordHash passwordHash = new PasswordHash();
 		passwordHash.setAlgorithmName("SHA-256");
 		passwordHash.setHashIterations(6);
 		// 截取uuid的最后10位作为密码的盐
-		if (uuidString == null) {
-			uuidString = UUID.randomUUID().toString();
+		if (salt == null) {
+			String uuidString = UUID.randomUUID().toString();
+			salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
 		}
-		String salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
+		
 		// 密码进行加密
 		String encodePassword = passwordHash.toHex(user.getPassword() == null ? "" : user.getPassword(), salt);
 
