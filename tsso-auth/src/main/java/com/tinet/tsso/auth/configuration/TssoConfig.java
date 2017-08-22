@@ -32,7 +32,7 @@ import com.tinet.tsso.shiro.CasSubjectFactory;
  * @author 李政
  * @date 2017年8月3日
  */
-//@Configuration
+@Configuration
 public class TssoConfig {
 
 	// CasServerUrlPrefix
@@ -70,7 +70,6 @@ public class TssoConfig {
 		FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
 
 		filterRegistration.setFilter(new SingleSignOutFilter());
-
 		filterRegistration.addUrlPatterns("/logout");
 		filterRegistration.addInitParameter("casServerUrlPrefix", casServerUrlPrefix);
 		filterRegistration.addInitParameter("serverName", shiroServerUrlPrefix);
@@ -123,7 +122,7 @@ public class TssoConfig {
 		casFilter.setName("casFilter");
 		// 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo
 		casFilter.setFailureUrl(loginUrl);// 我们选择认证失败后再打开登录页面
-		casFilter.setSuccessUrl("/api/user666");
+		casFilter.setSuccessUrl("/index.html");
 
 		return casFilter;
 	}
@@ -145,8 +144,8 @@ public class TssoConfig {
 		shiroFilterFactoryBean.setLoginUrl(loginUrl);
 
 		// 登录成功后要跳转的连接
-		shiroFilterFactoryBean.setSuccessUrl("/api/user777");
-		
+		shiroFilterFactoryBean.setSuccessUrl("/index.html");
+
 		// 添加casFilter到shiroFilter中
 		Map<String, Filter> filters = new HashMap<>();
 		filters.put("casFilter", casFilter);
@@ -159,10 +158,19 @@ public class TssoConfig {
 		filterChainDefinitionMap.put(casFilterUrlPattern, "casFilter");
 		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
+		filterChainDefinitionMap.put("/login", "anon");
+		// 修改密码的链接不需要权限控制
+
+		filterChainDefinitionMap.put("/api/password/forget_password", "anon");
+		filterChainDefinitionMap.put("/api/password/change_password", "anon");
+		filterChainDefinitionMap.put("/password_find", "anon");
+		filterChainDefinitionMap.put("/password_modify", "anon");
+
 		// 所有url都需要验证
-		filterChainDefinitionMap.put("/**", "authc");
+		filterChainDefinitionMap.put("/", "authc");
+		filterChainDefinitionMap.put("/index/**", "authc");
 		//
-		filterChainDefinitionMap.put("/**", "roles[auth_admin]");
+		filterChainDefinitionMap.put("/api/**", "roles[auth_admin]");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
@@ -233,16 +241,18 @@ public class TssoConfig {
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
 		return authorizationAttributeSourceAdvisor;
 	}
-	
+
 	/**
 	 * spring mvc处理全局异常的类，这里捕获shiro注解产生的未授权异常，跳转到403页面
+	 * 
 	 * @return
 	 */
 	@Bean
-	public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+	public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
 		SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
 		Properties properties = new Properties();
-		properties.put("org.apache.shiro.authz.AuthorizationException", "/403");
+		//properties.put("org.apache.shiro.authz.AuthorizationException", "/403");
+		properties.put("org.apache.shiro.authz.AuthorizationException", "redirect:http//www.baidu.com");
 		simpleMappingExceptionResolver.setExceptionMappings(properties);
 		return simpleMappingExceptionResolver;
 	}

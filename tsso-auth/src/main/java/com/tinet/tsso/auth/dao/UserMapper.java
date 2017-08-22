@@ -51,9 +51,25 @@ public interface UserMapper extends BaseMapper<User, Integer> {
 
 	/**
 	 * 查询指定用户名的数量
+	 * 
 	 * @param username
 	 * @return
 	 */
 	Integer selectCountByUserName(String username);
+
+	/**
+	 * 完整查询指定用户名的User
+	 * 
+	 * @param username
+	 * @return
+	 */
+	List<User> selectByUsername(String username);
+
+	/**
+	 * 根据用户名更新密码
+	 * 
+	 * @param user
+	 */
+	void updatePasswordByUsername(User user);
 
 }

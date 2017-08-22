@@ -22,7 +22,7 @@
 			and department.id = #{id, jdbcType=INTEGER}
 		</if>
 		<if test=" key != null ">
-			and key LIKE CONCAT('%', #{key,jdbcType=VARCHAR},'%')
+			and permission.key LIKE CONCAT('%', #{key,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="applicationId != null">
 			and application_id = #{applicationId, jdbcType=INTEGER}
@@ -136,10 +136,12 @@
 		<if test="roleId != null">
 			and role_id = #{roleId,jdbcType=VARCHAR} 
 		</if>
+		order by permission.create_time desc
 		<if test="start != null and limit != null">
 			offset #{start, jdbcType=INTEGER} limit #{limit,
 			jdbcType=INTEGER}
 		</if>
+		
 	</select>
 	<select id="selectByPermissionKey" parameterType="java.lang.String" resultType= "java.lang.Integer">
 		select count(*)

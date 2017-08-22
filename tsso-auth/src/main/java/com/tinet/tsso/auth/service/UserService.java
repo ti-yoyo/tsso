@@ -52,8 +52,24 @@ public interface UserService extends BaseService<User, Integer> {
 	 * 添加用户
 	 * 
 	 * @param user
-	 * @return 
+	 * @return
 	 */
 	ResponseModel addUser(User user);
+
+	/**
+	 * 按照用户名查询用户
+	 * 
+	 * @param username
+	 * @return
+	 */
+	User selectByUserName(String username);
+
+	/**
+	 * 按照用户名更新密码
+	 * 
+	 * @param user
+	 * @return
+	 */
+	User updatePasswordByUsername(User user);
 
 }

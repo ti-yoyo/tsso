@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.session.web.http.SessionRepositoryFilter;
@@ -18,7 +17,7 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
  * @date 2017-07-28
  * @author wangll
  */
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 36000)
+//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 36000)
 public class SessionConfiguration {
 
 	private static final String SPRING_SESSION_URL_PATTERN = "/*";
