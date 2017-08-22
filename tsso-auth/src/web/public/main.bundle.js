@@ -2432,8 +2432,9 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordFindComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2450,10 +2451,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var PasswordFindComponent = (function () {
-    function PasswordFindComponent(service, swal) {
+    function PasswordFindComponent(service, swal, router) {
         this.service = service;
         this.swal = swal;
+        this.router = router;
         this.account = '';
         this.send = false;
         this.countdown = 60;
@@ -2477,7 +2480,7 @@ var PasswordFindComponent = (function () {
         });
     };
     PasswordFindComponent.prototype.cancel = function () {
-        window.location.href = "http://tsso.tinetcloud.com/login";
+        this.router.navigate(['/index']);
     };
     PasswordFindComponent.prototype.sendAuthCodeInterval = function () {
         var _this = this;
@@ -2503,10 +2506,10 @@ PasswordFindComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login-manage/password-manage/password-find/password-find.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login-manage/password-manage/password-find/password-find.component.less")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], PasswordFindComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=password-find.component.js.map
 
 /***/ }),
