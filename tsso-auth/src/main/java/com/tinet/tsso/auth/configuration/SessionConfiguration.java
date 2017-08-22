@@ -3,10 +3,9 @@ package com.tinet.tsso.auth.configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.session.web.http.SessionRepositoryFilter;
@@ -18,10 +17,10 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
  * @date 2017-07-28
  * @author wangll
  */
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 36000)
+//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 36000)
 public class SessionConfiguration {
 
-	private static final String SPRING_SESSION_URL_PATTERN = "/api/*";
+	private static final String SPRING_SESSION_URL_PATTERN = "/*";
 
 	@Value("${spring.session.cookie.name}")
 	private String cookieName;
@@ -51,7 +50,7 @@ public class SessionConfiguration {
 
 	@Bean("springSessionDefaultRedisSerializer")
 	public RedisSerializer<Object> redisSerializer() {
-		return new GenericJackson2JsonRedisSerializer();
+		return new JdkSerializationRedisSerializer();
 	}
 
 	@Bean

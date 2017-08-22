@@ -60,6 +60,7 @@
                 </span>
             </div>
         </section>
+
         <section class="row check">
             <p th:if="${rememberMeAuthenticationEnabled}">
                 <input type="checkbox" name="rememberMe" id="rememberMe" value="true" tabindex="5"  />
@@ -70,6 +71,10 @@
         <section class="row" th:if="${recaptchaSiteKey}">
             <div class="g-recaptcha" th:attr="data-sitekey=${recaptchaSiteKey}"/>
         </section>
+
+        <div align="right">
+            <a th:href="@{http://auth.tinetcloud.com:8888/password_find}">忘记密码</a>
+        </div>
 
         <section class="row btn-row">
             <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>

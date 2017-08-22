@@ -3,16 +3,16 @@ package com.tinet.tsso.auth.entity;
 import java.util.Date;
 
 public class Role {
-    private Integer id;
+    private Integer id;//角色id
 
-    private String key;
+    private String key;//角色标识
 
-    private String name;
+    private String name;//角色名
 
-    private Integer status;
+    private Integer status;//角色状态
 
-    private Date createTime;
-
+    private Date createTime;//角色的创建时间
+    
     public Integer getId() {
         return id;
     }
@@ -52,4 +52,5 @@ public class Role {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    
 }

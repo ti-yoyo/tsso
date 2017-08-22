@@ -1,111 +1,199 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tinet.tsso.auth.dao.RoleMapper" >
-  <resultMap id="BaseResultMap" type="com.tinet.tsso.auth.entity.Role" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="key" property="key" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, key, name, status, create_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from role
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from role
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.tinet.tsso.auth.entity.Role" >
-    insert into role (id, key, name, 
-      status, create_time)
-    values (#{id,jdbcType=INTEGER}, #{key,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.tinet.tsso.auth.entity.Role" >
-    insert into role
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="key != null" >
-        key,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="key != null" >
-        #{key,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tinet.tsso.auth.entity.Role" >
-    update role
-    <set >
-      <if test="key != null" >
-        key = #{key,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tinet.tsso.auth.entity.Role" >
-    update role
-    set key = #{key,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="getRoleByUser" parameterType="com.tinet.tsso.auth.entity.User" resultMap="BaseResultMap">
-  	select 
-  	 <include refid="Base_Column_List" />
-  	from role
-  	where 1=1
-  	<if test="id != null">
-  		and role.id IN (
-  		 select distinct("role".id)
-  		 from "user",user_role
-  		 where "user".id=user_role.user_id
-  		 and "user".id=#{id,jdbcType=INTEGER} 
-  		)
-  	</if>
-  </select>
-  <delete id="deleteByUserId" parameterType="java.lang.Integer">
-  	delete from user_role
-  	where user_id=#{userId,jdbcType=INTEGER}
-  </delete>
+<mapper namespace="com.tinet.tsso.auth.dao.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.tinet.tsso.auth.entity.Role">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="key" property="key" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, key, name, status, create_time
+	</sql>
+	<sql id="byParams">
+		<if test="id != null">
+			and "role".id = #{id, jdbcType=INTEGER}
+		</if>
+		<if test="name != null">
+			and name LIKE CONCAT('%', #{name,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="userId != null">
+			and id IN (
+				select distinct(role_id)
+				from user_role
+				where user_id = = #{userId, jdbcType=INTEGER}
+			)
+		</if>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from role
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from role
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.tinet.tsso.auth.entity.Role">
+		insert into role (id, key,
+		name,
+		status, create_time)
+		values (#{id,jdbcType=INTEGER},
+		#{key,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.tinet.tsso.auth.entity.Role"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="key != null">
+				key,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="key != null">
+				#{key,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.tinet.tsso.auth.entity.Role">
+		update role
+		<set>
+			<if test="key != null">
+				key = #{key,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.tinet.tsso.auth.entity.Role">
+		update role
+		set key
+		= #{key,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		status =
+		#{status,jdbcType=INTEGER},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="getRoleByUser" parameterType="com.tinet.tsso.auth.entity.User"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role
+		where 1=1
+		<if test="id != null">
+			and role.id IN (
+			select distinct(user_role.role_id)
+			from
+			"user",user_role
+			where "user".id=user_role.user_id
+			and
+			"user".id=#{id,jdbcType=INTEGER}
+			)
+		</if>
+	</select>
+	<delete id="deleteByUserId" parameterType="java.lang.Integer">
+		delete from user_role
+		where user_id=#{userId,jdbcType=INTEGER}
+	</delete>
+
+	<select id="selectCountByParams" parameterType="com.tinet.tsso.auth.param.RoleParam"
+		resultType="java.lang.Integer">
+		select count(*)
+		from "role"
+		where 1=1
+		<include refid="byParams" />
+	</select>
+
+	<select id="selectByParams" parameterType="com.tinet.tsso.auth.param.RoleParam"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from "role"
+		where 1=1
+		<include refid="byParams" />
+		order by "role".create_time desc
+		<if test="start != null and limit != null">
+			offset #{start, jdbcType=INTEGER} limit #{limit,
+			jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="selectUserRoleByUserIdAndRoleId" parameterType="com.tinet.tsso.auth.param.RoleParam"
+		resultType="java.lang.Integer">
+		select count(*)
+		from user_role
+		where 1=1
+		and user_id =
+		#{userId, jdbcType=INTEGER} and role_id = #{id, jdbcType=INTEGER}
+	</select>
+
+	<insert id="addUser">
+		insert into user_role( user_id,role_id) values
+		(#{userId,jdbcType=INTEGER},#{id,jdbcType=INTEGER})
+	</insert>
+
+	<delete id="deletePermissionByRoleId" parameterType="java.lang.Integer">
+		delete from role_permission
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</delete>
+	<insert id="addPermissionForRole" parameterType="com.tinet.tsso.auth.param.RoleParam">
+		insert into role_permission (role_id,permission_id) values (#{id,jdbcType=INTEGER},#{permissionId,jdbcType=INTEGER})
+	</insert>
+	
+	<select id="selectByPermissionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from "role"
+		where "role"."id" in (
+								select distinct (role_permission.role_id)
+								from role_permission
+								where role_permission.permission_id = #{permissionId,jdbcType=INTEGER} 
+							)
+	</select>
+	
+	<select id="selectCountByRoleKey" parameterType="java.lang.String" resultType= "java.lang.Integer">
+		select count(*)
+		from "role"
+		where key = #{key,jdbcType=VARCHAR}
+	</select>
+	
 </mapper>

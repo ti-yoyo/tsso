@@ -1,13 +1,17 @@
 package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
-
+/**
+ * 部门实体类
+ * @date 2017-08-14
+ * @author lizy
+ */
 public class Department {
-    private Integer id;
+    private Integer id;//部门的id
 
-    private String name;
+    private String name;//部门名
 
-    private Date createTime;
+    private Date createTime;//部门的创建时间
 
     public Integer getId() {
         return id;

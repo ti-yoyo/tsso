@@ -1,9 +1,14 @@
 package com.tinet.tsso.auth.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.UserParam;
+import com.tinet.tsso.auth.model.UserModel;
+import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.Page;
@@ -36,10 +41,10 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
-	private RoleService RoleService;
+	private RoleService roleService;
 
 	/**
-	 * 用户的查询包含用户的角色信息等
+	 * 用户查询：包含用户的角色信息等
 	 * 
 	 * @param params
 	 * @return
@@ -47,7 +52,14 @@ public class UserController {
 	@GetMapping
 	public ResponseModel searchByParams(UserParam params) {
 
-		Page<User> userPage = userService.selectByParams(params);
+		Page<UserModel> userPage = userService.selectByParams(params);
+
+		// 去除返回数据的用户密码和盐等敏感信息
+		List<UserModel> userList = userPage.getPageData();
+		for (int i = 0; i < userList.size(); i++) {
+			userList.get(i).setPassword(null);
+		}
+		userPage.setPageData(userList);
 
 		return new ResponseModel.Builder().page(userPage).msg("查询成功").build();
 
@@ -60,18 +72,15 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping
-	public ResponseModel addUser(User user) {
+	public ResponseModel addUser(@RequestBody UserParam userParam) {
 
-		userService.create(user);
-
-		user = userService.get(user.getId());
-
-		return new ResponseModel.Builder().result(user).msg("添加成功").build();
-
+		User user = new User();
+		BeanUtils.copyProperties(userParam, user);
+		return userService.addUser(user);
 	}
 
 	/**
-	 * 修改用户的权限信息
+	 * 修改用户的角色信息
 	 * 
 	 * @param userId
 	 *            用户id
@@ -79,67 +88,98 @@ public class UserController {
 	 *            角色列表
 	 * @return
 	 */
-	@PutMapping("/role/{userId}")
-	public ResponseModel updateUserRole(@PathVariable Integer userId,@RequestBody List<Integer> roleIdList) {
+	@PutMapping("/{userId}/role")
+	public ResponseModel updateUserRole(@PathVariable Integer userId, @RequestBody List<Integer> roleIdList) {
 
-		
 		if (userId == null) {
 			new ResponseModel.Builder().error("用户Id不能为空").build();
 		}
-		// 删除所有的权限
-		RoleService.deleteRoleByUserId(userId);
-
-		// 添加指定权限
-		userService.addRoles(userId, roleIdList);
-
-		// 要返回的全新权限信息
-		List<Role> roleList = new ArrayList<Role>();
-		for (int i = 0; i < roleIdList.size(); i++) {
-			Role role = RoleService.get(roleIdList.get(i));
-			roleList.add(role);
-		}
+		List<Role> roleList = userService.updataUserRoleList(userId, roleIdList);
 
 		return new ResponseModel.Builder().result(roleList).msg("角色更新成功").build();
 
 	}
-	
+
 	/**
 	 * 删除用户
+	 * 
 	 * @return
 	 */
 	@DeleteMapping("/{id}")
-	public ResponseModel deleteUser(@PathVariable Integer id){
-		//删除该用户拥有的角色
-		RoleService.deleteRoleByUserId(id);
-		//删除用户
-		userService.delete(id);
+	public ResponseModel deleteUser(@PathVariable Integer id) {
+		// 防止用户自杀
+		Subject subject = SecurityUtils.getSubject();
+		List<Object> principals = subject.getPrincipals().asList();
 		
+		User u = userService.selectByUserName(principals.get(0).toString());
+		if (u == null || (u.getId() == id)) {
+			return new ResponseModel.Builder().error("您不能删除自己").status(HttpStatus.BAD_REQUEST).build();
+		}
+		// 删除该用户拥有的角色
+		roleService.deleteRoleByUserId(id);
+		// 删除用户
+		userService.delete(id);
+
 		return new ResponseModel.Builder().msg("删除成功").build();
 	}
-	
+
+	/**
+	 * 更新用户信息
+	 * 
+	 * @param id
+	 *            要更新用户的id
+	 * @param user
+	 *            要更新的用户信息
+	 * @return
+	 */
 	@PutMapping("/{id}")
-	public ResponseModel updateUser(@PathVariable Integer id ,User user){
-		
-		if(id == null ){
+	public ResponseModel updateUser(@PathVariable Integer id, @RequestBody User user) {
+
+		if (id == null) {
 			return new ResponseModel.Builder().error("id不能为空").build();
 		}
+
+		// 防止用户自杀
+		Subject subject = SecurityUtils.getSubject();
+		List<Object> principals = subject.getPrincipals().asList();
+		User u = userService.selectByUserName(principals.get(0).toString());
+		if (u == null || (u.getId() == id && user.getStatus() != 1)) {
+			return new ResponseModel.Builder().error("您不能将自己停用").status(HttpStatus.BAD_REQUEST).build();
+		}
+
 		user.setId(id);
 		userService.update(user);
-		
+
 		return this.getOneUserByUserId(id);
 	}
-	
+
+	/**
+	 * 获取指定id的用户的详细信息
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/{id}")
-	public ResponseModel getOneUserByUserId(@PathVariable Integer id){
-		//查询该角色完整信息
-		UserParam param=new UserParam();
+	public ResponseModel getOneUserByUserId(@PathVariable Integer id) {
+
+		// 查询该角色完整信息
+		UserParam param = new UserParam();
 		param.setId(id);
-		Page<User> page= userService.selectByParams(param);
-		
-		if(page.getPageData() == null){
-			return new ResponseModel.Builder().error("该用户不存在").build();
+		Page<UserModel> page = userService.selectByParams(param);
+
+		for (int i = 0; i < page.getPageData().size(); i++) {
+			page.getPageData().get(i).setPassword(null);
 		}
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
+	}
+
+	@GetMapping("/user_info")
+	public ResponseModel selectRoles() {
+		Subject subject = SecurityUtils.getSubject();
+		List<Object> principals = subject.getPrincipals().asList();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("username", principals.get(0));
+		return new ResponseModel.Builder().result(map).build();
 	}
 
 }

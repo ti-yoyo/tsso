@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.tinet</groupId>
 		<artifactId>tsso</artifactId>
-		<version>1.0.0</version>
+		<version>2.0.0</version>
 	</parent>
 	<artifactId>tsso-auth</artifactId>
 	<name>tsso-auth</name>
@@ -74,11 +74,55 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.6</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
 
+		<!-- 集成tsso-auth的工具包 -->
+		<dependency>
+			<groupId>com.tinet</groupId>
+			<artifactId>tsso-shiro</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		
+		<!-- 邮件 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<finalName>tsso-auth-${version}</finalName>
+		<resources>
+			<resource>
+				<directory>src\web</directory>
+				<includes>
+					<include>public/**</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src\main\resources</directory>
+				<includes>
+					<include>**/application*.yml</include>
+					<include>**/application*.yaml</include>
+					<include>**/application*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src\main\resources</directory>
+				<excludes>
+					<exclude>**/application*.yml</exclude>
+					<exclude>**/application*.yaml</exclude>
+					<exclude>**/application*.properties</exclude>
+				</excludes>
+			</resource>
+			
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -86,7 +130,15 @@
 				<configuration>
 					<!-- 生成完全可执行的jar -->
 					<executable>true</executable>
+					<mainClass>com.tinet.tsso.auth.ApplicationStarter</mainClass>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

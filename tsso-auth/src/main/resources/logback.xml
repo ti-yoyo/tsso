@@ -24,8 +24,13 @@
 		</rollingPolicy>
 	</appender>
 
-	<root level="INFO">
+
+	<logger name="com.tinet.tsso.auth" level="debug">
 		<appender-ref ref="Console" />
-		<appender-ref ref="FILE" />
+	</logger>   
+	
+	<root level="ERROR">
+		<appender-ref ref="Console" />
+		 <appender-ref ref="FILE" /> 
 	</root>
 </configuration>
