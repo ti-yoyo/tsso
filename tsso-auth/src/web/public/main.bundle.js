@@ -338,7 +338,7 @@ CoreModule = __decorate([
 /***/ "../../../../../src/app/core/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <!--<span class=\"username\" *ngIf=\"user && user.username\">{{user?.username}}</span>-->\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\" *ngIf=\"user && user.username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -385,25 +385,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HeaderComponent = (function () {
-    //private user = LocalStorage.get('user');
     function HeaderComponent(router, connectionService, swalService) {
         this.router = router;
         this.connectionService = connectionService;
         this.swalService = swalService;
+        this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
     }
-    //ngOnInit(){
-    //  if(!LocalStorage.get('user')){
-    //    this.getCurrentUser();
-    //  }
-    //}
+    HeaderComponent.prototype.ngOnInit = function () {
+        if (!__WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user')) {
+            this.getCurrentUser();
+        }
+    };
     HeaderComponent.prototype.exit = function () {
         __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].remove('user');
         var path = '/logout';
         this.connectionService.get(path).then(function (res) {
         }).catch(function (error) {
-            console.log(error);
+            //console.log(error)
         });
         window.location.reload();
+    };
+    /*
+     *@desc 获取当前用户信息
+     */
+    HeaderComponent.prototype.getCurrentUser = function () {
+        var _this = this;
+        var userPath = '/api/user/user_info';
+        this.connectionService.get(userPath)
+            .then(function (res) {
+            if (res.data.status == 200) {
+                __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
+                _this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
+            }
+        })
+            .catch(function (err) {
+        });
     };
     return HeaderComponent;
 }());
@@ -1085,7 +1101,7 @@ var AppManageComponent = (function () {
             if (res.data.result) {
                 _this.pageConfig.totalItems = res.data.result.totalSize;
             }
-        }, function (error) { console.log(error); });
+        }, function (error) { });
     };
     AppManageComponent.prototype.changeLimit = function (skip) {
         this.search.currentPage = 1;
@@ -1262,7 +1278,6 @@ var AppManageService = (function () {
             _this.appList.length = 0;
             _this.appList.push.apply(_this.appList, page.data.result.pageData);
         }, function (error) {
-            console.log(error);
         });
         return appsObservable;
     };
@@ -1323,7 +1338,7 @@ var _a, _b, _c;
 /***/ "../../../../../src/app/login-manage/app-manage/dialogs/app.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"appform\">\r\n  <form #app=\"ngForm\" id=\"app\">\r\n  <div class=\"header-title\">创建新应用</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            应用标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            应用标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            应用名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            应用名称识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">停用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveApp(data)\" [disabled]=\"!app.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"appform\">\r\n  <form #app=\"ngForm\" id=\"app\">\r\n  <div class=\"header-title\">创建新应用</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            应用标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            应用标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            应用名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            应用名称识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">停用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveApp(data)\" [disabled]=\"!app.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1580,7 +1595,6 @@ var AuthManageComponent = (function () {
         this.authList = [];
         this.getAuthList = function () {
             _this.search.start = _this.search.limit * (_this.search.currentPage - 1);
-            console.log(_this.search.start);
             __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('authParams', _this.search);
             if (_this.search.key) {
                 _this.search.key = _this.search.key.replace(/\s/g, "");
@@ -1600,7 +1614,6 @@ var AuthManageComponent = (function () {
                     _this.pageConfig.totalItems = res.data.result.totalSize;
                 }
             }, function (error) {
-                console.log(error);
             });
         };
         this.appList = this.service.appList;
@@ -1772,7 +1785,6 @@ var AuthManageService = (function () {
             _this.appList.length = 0;
             _this.appList.push.apply(_this.appList, res.data.result.pageData);
         }, function (error) {
-            console.log(error);
         });
     };
     /**
@@ -1938,7 +1950,6 @@ var AuthDialog = (function () {
     }
     AuthDialog.prototype.saveAuth = function (data) {
         var _this = this;
-        console.log(data);
         var params = Object.assign({}, data);
         delete params.getAuthList;
         this.service.createAuth(params).subscribe(function (res) {
@@ -2009,7 +2020,6 @@ var LookRoleUserDialog = (function () {
         this.data.status = 1;
     };
     LookRoleUserDialog.prototype.saveRole = function (data) {
-        console.log(data);
         this.dialogRef.close();
     };
     return LookRoleUserDialog;
@@ -2615,7 +2625,6 @@ var PasswordModifyComponent = (function () {
     PasswordModifyComponent.prototype.modify = function (form) {
         var _this = this;
         var find = window.location.href;
-        console.log(find);
         var key = this.getUrlParam(find, 'key');
         var username = this.getUrlParam(find, 'username');
         var user = {};
@@ -2901,9 +2910,7 @@ var AddMemberDialog = (function () {
      */
     AddMemberDialog.prototype.addMember = function () {
         var _this = this;
-        console.log(this.addUser);
         var params = { roleId: this.data.currentRole.id, userId: this.addUser.id };
-        console.log(params);
         this.service.addMember(params).subscribe(function (res) {
             if (res.data.status == 200) {
                 _this.data.getUserList();
@@ -3009,7 +3016,6 @@ var RoleManageDialog = (function () {
 }());
 RoleManageDialog.roleConfig = {
     width: '600px',
-    height: 'calc(100% - (20px + 30px))',
     data: {}
 };
 RoleManageDialog = __decorate([
@@ -3089,7 +3095,6 @@ var RoleDialog = (function () {
     };
     RoleDialog.prototype.saveRole = function (data) {
         var _this = this;
-        console.log(data);
         this.service.createRole(data).subscribe(function (res) {
             if (res.data.status == 200) {
                 _this.data.getRoleList();
@@ -3204,7 +3209,6 @@ var ManageUserComponent = (function () {
         this.service.reloadAllRoles();
         if (__WEBPACK_IMPORTED_MODULE_5__core_services_localstorage_service__["a" /* LocalStorage */].get('roleUser')) {
             this.search = __WEBPACK_IMPORTED_MODULE_5__core_services_localstorage_service__["a" /* LocalStorage */].get('roleUser');
-            console.log(this.search);
             this.getUserList();
         }
         else {
@@ -3405,7 +3409,7 @@ var _a, _b, _c;
 /***/ "../../../../../src/app/login-manage/role-manage/role-manage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>角色管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addRole()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">角色名称:</div>\r\n        <input placeholder=\"请输入角色名称\" class=\"search-input\" name=\"account\" #account=\"ngModel\" [(ngModel)]=\"search.name\"/>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"getRoleList()\">查询</button>\r\n      </div>\r\n    </div>\r\n    <role-list [getRoleList]=\"getRoleList\"  [offset]=\"search.start\"></role-list>\r\n    <div class=\"bottom-page\">\r\n      <div style=\"display:inline-block;\">\r\n        共 {{pageConfig.totalItems}} 条记录\r\n      </div>\r\n      <div style=\"float: right\">\r\n        <div class=\"skip\">\r\n          每页\r\n          <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n            {{search.limit}}\r\n          </button>\r\n\r\n          <md-menu #menu=\"mdMenu\">\r\n            <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                    [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n              {{skip}}\r\n            </button>\r\n          </md-menu>\r\n          条\r\n        </div>\r\n        <div class=\"pagination\">\r\n          <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                          [(page)]=\"search.currentPage\"\r\n                          [boundaryLinks]=\"true\"\r\n                          [directionLinks]=\"true\"\r\n                          [maxSize]=\"5\"\r\n                          [pageSize]=\"search.limit\"\r\n                          [ellipses]=\"false\"\r\n                          [size]=\"'sm'\"\r\n                          (pageChange)=\"getRoleList()\"></ngb-pagination>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>角色管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addRole()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">角色名称:</div>\r\n        <input placeholder=\"请输入角色名称\" class=\"search-input\" name=\"account\" (keyup)=\"searchByKey($event)\" #account=\"ngModel\" [(ngModel)]=\"search.name\"/>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"getRoleList()\">查询</button>\r\n      </div>\r\n    </div>\r\n    <role-list [getRoleList]=\"getRoleList\"  [offset]=\"search.start\"></role-list>\r\n    <div class=\"bottom-page\">\r\n      <div style=\"display:inline-block;\">\r\n        共 {{pageConfig.totalItems}} 条记录\r\n      </div>\r\n      <div style=\"float: right\">\r\n        <div class=\"skip\">\r\n          每页\r\n          <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n            {{search.limit}}\r\n          </button>\r\n\r\n          <md-menu #menu=\"mdMenu\">\r\n            <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                    [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n              {{skip}}\r\n            </button>\r\n          </md-menu>\r\n          条\r\n        </div>\r\n        <div class=\"pagination\">\r\n          <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                          [(page)]=\"search.currentPage\"\r\n                          [boundaryLinks]=\"true\"\r\n                          [directionLinks]=\"true\"\r\n                          [maxSize]=\"5\"\r\n                          [pageSize]=\"search.limit\"\r\n                          [ellipses]=\"false\"\r\n                          [size]=\"'sm'\"\r\n                          (pageChange)=\"getRoleList()\"></ngb-pagination>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3474,7 +3478,6 @@ var RoleManageComponent = (function () {
          */
         this.getRoleList = function () {
             _this.search.start = _this.search.limit * (_this.search.currentPage - 1);
-            console.log(_this.search.start);
             __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('roleParams', _this.search);
             var query = {};
             for (var i in _this.search) {
@@ -3491,7 +3494,6 @@ var RoleManageComponent = (function () {
                     _this.pageConfig.totalItems = res.data.result.totalSize;
                 }
             }, function (error) {
-                console.log(error);
             });
         };
     }
@@ -3524,6 +3526,16 @@ var RoleManageComponent = (function () {
         var roleConfig = __WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */].roleConfig;
         roleConfig.data.getRoleList = this.getRoleList;
         this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */], roleConfig);
+    };
+    /**
+     * @desc 选择关键词分类后查询该分类下的关键字
+     * @param group - 关键词分类的id
+     */
+    RoleManageComponent.prototype.searchByKey = function (event) {
+        var keyCode = event ? event.keyCode : event.which;
+        if (keyCode === 13) {
+            this.getRoleList();
+        }
     };
     return RoleManageComponent;
 }());
@@ -3679,7 +3691,7 @@ var RoleManageService = (function () {
         this.connectionService.get(path, { params: param }).then(function (res) {
             _this.allRoles.length = 0;
             _this.allRoles.push.apply(_this.allRoles, res.data.result.pageData);
-        }).catch(function (error) { console.log(error); });
+        }).catch(function (error) { });
     };
     /**
      * @desc 查询角色列表
@@ -3693,7 +3705,6 @@ var RoleManageService = (function () {
             _this.roleList.length = 0;
             _this.roleList.push.apply(_this.roleList, res.data.result.pageData);
         }, function (error) {
-            console.log(error);
         });
         return roleObservable;
     };
@@ -3747,7 +3758,7 @@ var RoleManageService = (function () {
         this.connectionService.get(path, { params: param }).then(function (res) {
             _this.allUsers.length = 0;
             _this.allUsers.push.apply(_this.allUsers, res.data.result.pageData);
-        }).catch(function (error) { console.log(error); });
+        }).catch(function (error) { });
     };
     /**
      * @desc 查询某角色拥有的用户列表
@@ -3802,7 +3813,6 @@ var RoleManageService = (function () {
             _this.roleAuthList.push.apply(_this.roleAuthList, page.data.result.pageData);
             _this.authList.forEach(function (item) {
                 var index = _this.roleAuthList.findIndex(function (role) { return role.id === item.id; });
-                console.log(index);
                 if (index > -1) {
                     item.selected = true;
                 }
@@ -4080,7 +4090,6 @@ var UserFormDialog = (function () {
                 }
             });
         }
-        console.log(data);
         this.dialogRef.close();
     };
     UserFormDialog.prototype.verifyResult = function () {
@@ -4174,11 +4183,9 @@ var UserRoleDialog = (function () {
         this.roleList.map(function (item) { item.choosed = false; });
         var array = this.roleList.filter(function (item) { return _this.userRoleList.findIndex(function (role) { return role.id === item.id; }) == -1; });
         this.usedRoleList = array.slice(0);
-        console.log('usedRole', this.usedRoleList);
         this.userRoleList.map(function (item) { item.choosed = true; });
     };
     UserRoleDialog.prototype.saveUser = function (data) {
-        console.log(data);
         this.dialogRef.close();
     };
     UserRoleDialog.prototype.chooseItem = function (item) {
@@ -4187,9 +4194,7 @@ var UserRoleDialog = (function () {
     UserRoleDialog.prototype.joinGroup = function () {
         var _this = this;
         var list = this.usedRoleList.filter(function (item) { return item.choosed == true; });
-        console.log(list);
         this.userRoleList.push.apply(this.userRoleList, list);
-        console.log(this.userRoleList);
         this.usedRoleList = this.usedRoleList.filter(function (item) { return item.choosed != true; });
         this.roleIdList.length = 0;
         this.userRoleList.forEach(function (item) {
@@ -4315,7 +4320,6 @@ var UserListComponent = (function () {
             var roleConfig = __WEBPACK_IMPORTED_MODULE_3__dialogs_user_role_dialog__["a" /* UserRoleDialog */].roleConfig;
             roleConfig.data = Object.assign({}, res.data.result);
             roleConfig.data.getUserList = _this.getUserList;
-            console.log(roleConfig.data);
             _this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_user_role_dialog__["a" /* UserRoleDialog */], roleConfig);
         });
     };
@@ -4331,7 +4335,6 @@ var UserListComponent = (function () {
             formConfig.data.departmentList = _this.departmentList;
             formConfig.data.getUserList = _this.getUserList;
             formConfig.data.index = index;
-            console.log(formConfig.data);
             _this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_user_form_dialog__["a" /* UserFormDialog */], formConfig);
         });
     };
@@ -4430,7 +4433,6 @@ var UserManageComponent = (function () {
         this.departmentList = [];
         this.getUserList = function () {
             _this.search.start = _this.search.limit * (_this.search.currentPage - 1);
-            console.log(_this.search.start);
             __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('userParams', _this.search);
             if (_this.search.username) {
                 _this.search.username = _this.search.username.replace(/\s/g, "");
@@ -4453,7 +4455,6 @@ var UserManageComponent = (function () {
                     _this.pageConfig.totalItems = res.data.result.totalSize;
                 }
             }, function (error) {
-                console.log(error);
             });
         };
         this.roleList = this.service.roleList;

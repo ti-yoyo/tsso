@@ -251,7 +251,8 @@ public class TssoConfig {
 	public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
 		SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
 		Properties properties = new Properties();
-		properties.put("org.apache.shiro.authz.AuthorizationException", "/403");
+		//properties.put("org.apache.shiro.authz.AuthorizationException", "/403");
+		properties.put("org.apache.shiro.authz.AuthorizationException", "redirect:http//www.baidu.com");
 		simpleMappingExceptionResolver.setExceptionMappings(properties);
 		return simpleMappingExceptionResolver;
 	}
