@@ -122,7 +122,7 @@ public class TssoConfig {
 		casFilter.setName("casFilter");
 		// 登录失败后跳转的URL，也就是 Shiro 执行 CasRealm 的 doGetAuthenticationInfo
 		casFilter.setFailureUrl(loginUrl);// 我们选择认证失败后再打开登录页面
-		casFilter.setSuccessUrl("/api/user");
+		casFilter.setSuccessUrl("/index.html");
 
 		return casFilter;
 	}
@@ -144,7 +144,7 @@ public class TssoConfig {
 		shiroFilterFactoryBean.setLoginUrl(loginUrl);
 
 		// 登录成功后要跳转的连接
-		shiroFilterFactoryBean.setSuccessUrl("/api/user");
+		shiroFilterFactoryBean.setSuccessUrl("/index.html");
 
 		// 添加casFilter到shiroFilter中
 		Map<String, Filter> filters = new HashMap<>();

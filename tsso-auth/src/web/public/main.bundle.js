@@ -338,7 +338,7 @@ CoreModule = __decorate([
 /***/ "../../../../../src/app/core/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\" *ngIf=\"user && user.username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <!--<span class=\"username\" *ngIf=\"user && user.username\">{{user?.username}}</span>-->\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -385,17 +385,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HeaderComponent = (function () {
+    //private user = LocalStorage.get('user');
     function HeaderComponent(router, connectionService, swalService) {
         this.router = router;
         this.connectionService = connectionService;
         this.swalService = swalService;
-        this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
     }
-    HeaderComponent.prototype.ngOnInit = function () {
-        if (!__WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user')) {
-            this.getCurrentUser();
-        }
-    };
+    //ngOnInit(){
+    //  if(!LocalStorage.get('user')){
+    //    this.getCurrentUser();
+    //  }
+    //}
     HeaderComponent.prototype.exit = function () {
         __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].remove('user');
         var path = '/logout';
@@ -404,23 +404,6 @@ var HeaderComponent = (function () {
             console.log(error);
         });
         window.location.reload();
-    };
-    /*
-     *@desc 获取当前用户信息
-     */
-    HeaderComponent.prototype.getCurrentUser = function () {
-        var _this = this;
-        var userPath = '/api/user/user_info';
-        this.connectionService.get(userPath)
-            .then(function (res) {
-            console.log(res);
-            if (res.data.status == 200) {
-                __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
-                _this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
-            }
-        })
-            .catch(function (err) {
-        });
     };
     return HeaderComponent;
 }());
