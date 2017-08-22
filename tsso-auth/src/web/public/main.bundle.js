@@ -418,11 +418,11 @@ var HeaderComponent = (function () {
                 _this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
             }
             else {
-                //window.location.reload();
+                window.location.reload();
             }
         })
             .catch(function (err) {
-            //window.location.reload();
+            window.location.reload();
         });
     };
     return HeaderComponent;
@@ -2611,6 +2611,8 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordModifyComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2624,6 +2626,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 /**
  * Created by kosei on 2017/8/1.
  */
+
 
 
 
@@ -2649,8 +2652,18 @@ var PasswordModifyComponent = (function () {
         }
         this.service.modifyPass(user, form).subscribe(function (res) {
             if (res.data.status == 200) {
-                _this.swal.hint('success', '密码修改成功，现在跳转至登录页面！');
-                _this.router.navigate(['/index']);
+                __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()({
+                    title: '密码修改成功，点击确定跳转至登录页面',
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: '确定',
+                }).then(function () {
+                    _this.router.navigate(['/index']);
+                }, function (dismiss) {
+                    // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                    if (dismiss === 'cancel') {
+                    }
+                });
             }
             else {
                 var msg = res.data.error || '密码修改失败，请稍后重试！';
