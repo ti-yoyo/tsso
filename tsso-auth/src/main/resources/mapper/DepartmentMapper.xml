@@ -78,6 +78,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from department
+		order by department.create_time desc
 	</select>
   
 </mapper>

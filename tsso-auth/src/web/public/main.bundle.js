@@ -417,8 +417,12 @@ var HeaderComponent = (function () {
                 __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
                 _this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
             }
+            else {
+                //window.location.reload();
+            }
         })
             .catch(function (err) {
+            //window.location.reload();
         });
     };
     return HeaderComponent;
@@ -1593,7 +1597,10 @@ var AuthManageComponent = (function () {
         };
         this.appList = [];
         this.authList = [];
-        this.getAuthList = function () {
+        this.getAuthList = function (start) {
+            if (start == 0) {
+                _this.search.currentPage = 1;
+            }
             _this.search.start = _this.search.limit * (_this.search.currentPage - 1);
             __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('authParams', _this.search);
             if (_this.search.key) {
@@ -1639,7 +1646,10 @@ var AuthManageComponent = (function () {
     };
     AuthManageComponent.prototype.addAuth = function () {
         var authConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_auth_dialog__["a" /* AuthDialog */].authConfig;
-        authConfig.data = { key: '', name: '', applicationId: this.appList[0].id, appList: this.appList, getAuthList: this.getAuthList };
+        authConfig.data = { key: '', name: '', appList: this.appList, getAuthList: this.getAuthList };
+        if (this.appList[0] && this.appList[0].id) {
+            authConfig.data.applicationId = this.appList[0].id;
+        }
         this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_auth_dialog__["a" /* AuthDialog */], authConfig);
     };
     /**
@@ -1954,7 +1964,7 @@ var AuthDialog = (function () {
         delete params.getAuthList;
         this.service.createAuth(params).subscribe(function (res) {
             if (res.data.status == 200) {
-                _this.data.getAuthList();
+                _this.data.getAuthList(0);
             }
         });
         this.dialogRef.close(data);
@@ -2571,7 +2581,7 @@ PasswordManageModule = __decorate([
 /***/ "../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">TSSO用户中心</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"modify(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"password\"\r\n                   [(ngModel)]=\"user.password\"\r\n                   #password=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少有8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>verified_user</md-icon>\r\n            <input class=\"code-input\" mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"确认密码\"\r\n                   required\r\n                   name=\"repassword\"\r\n                   #repassword=\"ngModel\"\r\n                   [(ngModel)]=\"user.repassword\"\r\n                   type=\"password\"\r\n                   (blur)=\"againBlured = true\"\r\n                   (focus)=\"againBlured = false\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"(repassword.dirty || repassword.touched) && againBlured&& !repassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            修改密码\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">TSSO用户中心</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"modify(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"password\"\r\n                   [(ngModel)]=\"user.password\"\r\n                   #password=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>verified_user</md-icon>\r\n            <input class=\"code-input\" mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"确认密码\"\r\n                   required\r\n                   name=\"repassword\"\r\n                   #repassword=\"ngModel\"\r\n                   [(ngModel)]=\"user.repassword\"\r\n                   type=\"password\"\r\n                   (blur)=\"againBlured = true\"\r\n                   (focus)=\"againBlured = false\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"(repassword.dirty || repassword.touched) && againBlured&& !repassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            修改密码\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2598,8 +2608,9 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordModifyComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2616,10 +2627,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var PasswordModifyComponent = (function () {
-    function PasswordModifyComponent(service, swal) {
+    function PasswordModifyComponent(service, swal, router) {
         this.service = service;
         this.swal = swal;
+        this.router = router;
         this.user = {};
     }
     PasswordModifyComponent.prototype.modify = function (form) {
@@ -2637,7 +2650,7 @@ var PasswordModifyComponent = (function () {
         this.service.modifyPass(user, form).subscribe(function (res) {
             if (res.data.status == 200) {
                 _this.swal.hint('success', '密码修改成功，现在跳转至登录页面！');
-                window.location.href = "http://tsso.tinetcloud.com/login";
+                _this.router.navigate(['/index']);
             }
             else {
                 var msg = res.data.error || '密码修改失败，请稍后重试！';
@@ -2703,10 +2716,10 @@ PasswordModifyComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.less")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], PasswordModifyComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=password-modify.component.js.map
 
 /***/ }),
@@ -2813,7 +2826,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/role-manage/dialogs/add-member.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"member\">\r\n  <div class=\"add-member\">\r\n    <md-icon class=\"close\" (click)=\"dialogRef.close('cancel')\">close</md-icon>\r\n    <md-icon class=\"add-icon\">group</md-icon>\r\n    <span class=\"add-span\">Add members to {{data.currentRole?.name}}</span>\r\n    <div class=\"input-contain\">\r\n      <md-icon class=\"input-icon\">person</md-icon>\r\n      <input class=\"member-input\" type=\"text\" name=\"member\" #member=\"ngModel\" [(ngModel)]=\"addUser.username\" (click)=\"changChoose()\"/>\r\n    </div>\r\n    <div *ngIf=\"choose\" style=\"position:fixed;top:50%;z-index:1\">\r\n      <div class=\"user-content\">\r\n        <ul>\r\n          <li *ngFor=\"let item of allUsers\" (click)=\"chooseUser(item)\">\r\n            <!--<img  [src]=\"item.headImg\" />-->\r\n            <div class=\"instruct\">\r\n              <span class=\"user-name\" [style.color]=\"item.roleStatus==1 ? '#888':'#333'\">{{item.username}}</span>\r\n              <span class=\"join\" *ngIf=\"item.roleStatus == 1\">Already a member of this role</span>\r\n              <span class=\"unjoin\" *ngIf=\"item.roleStatus == 0\">Not a member of this role</span>\r\n            </div>\r\n            <md-icon *ngIf=\"item.roleStatus == 0\" class=\"add-user\">add</md-icon>\r\n            <md-icon *ngIf=\"item.roleStatus == 1\" class=\"add-user\" style=\"color:#ddd\">check</md-icon>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <button md-button class=\"sure\" (click)=\"addMember()\">确定</button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"member\">\r\n  <div class=\"add-member\">\r\n    <md-icon class=\"close\" (click)=\"dialogRef.close('cancel')\">close</md-icon>\r\n    <md-icon class=\"add-icon\">group</md-icon>\r\n    <span class=\"add-span\">Add members to {{data.currentRole?.name}}</span>\r\n    <div class=\"input-contain\">\r\n      <md-icon class=\"input-icon\">person</md-icon>\r\n      <input class=\"member-input\" type=\"text\" name=\"member\" #member=\"ngModel\" [(ngModel)]=\"addUser.username\" (keyup)=\"filterMember($event)\" (click)=\"changChoose()\"/>\r\n    </div>\r\n    <div *ngIf=\"choose\" style=\"position:fixed;top:50%;z-index:1\">\r\n      <div class=\"user-content\">\r\n        <ul>\r\n          <li *ngFor=\"let item of showUsers\" (click)=\"chooseUser(item)\">\r\n            <!--<img  [src]=\"item.headImg\" />-->\r\n            <div class=\"instruct\">\r\n              <span class=\"user-name\" [style.color]=\"item.roleStatus==1 ? '#888':'#333'\">{{item.username}}</span>\r\n              <span class=\"join\" *ngIf=\"item.roleStatus == 1\">Already a member of this role</span>\r\n              <span class=\"unjoin\" *ngIf=\"item.roleStatus == 0\">Not a member of this role</span>\r\n            </div>\r\n            <md-icon *ngIf=\"item.roleStatus == 0\" class=\"add-user\">add</md-icon>\r\n            <md-icon *ngIf=\"item.roleStatus == 1\" class=\"add-user\" style=\"color:#ddd\">check</md-icon>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <button md-button class=\"sure\" (click)=\"addMember()\">确定</button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2871,8 +2884,10 @@ var AddMemberDialog = (function () {
         this.allUsers = [];
         this.addUser = {};
         this.roleUserList = [];
+        this.showUsers = [];
         this.allUsers = this.service.allUsers;
         this.roleUserList = this.service.roleUserList;
+        this.showUsers.push.apply(this.showUsers, this.allUsers);
     }
     AddMemberDialog.prototype.ngOnInit = function () {
         var _this = this;
@@ -2917,6 +2932,14 @@ var AddMemberDialog = (function () {
             }
         });
         this.dialogRef.close('add');
+    };
+    /**
+     * @desc 通过输入框内容同时筛选出符合条件的用户
+     */
+    AddMemberDialog.prototype.filterMember = function (event) {
+        var _this = this;
+        this.choose = true;
+        this.showUsers = this.allUsers.filter(function (item) { return item.username.indexOf(_this.addUser.username) > -1; });
     };
     return AddMemberDialog;
 }());
@@ -3097,7 +3120,7 @@ var RoleDialog = (function () {
         var _this = this;
         this.service.createRole(data).subscribe(function (res) {
             if (res.data.status == 200) {
-                _this.data.getRoleList();
+                _this.data.getRoleList(0);
             }
         });
         this.dialogRef.close();
@@ -3476,7 +3499,10 @@ var RoleManageComponent = (function () {
         /**
          * @desc 查询角色列表
          */
-        this.getRoleList = function () {
+        this.getRoleList = function (start) {
+            if (start == 0) {
+                _this.search.currentPage = 1;
+            }
             _this.search.start = _this.search.limit * (_this.search.currentPage - 1);
             __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('roleParams', _this.search);
             var query = {};
@@ -4009,7 +4035,7 @@ SystemSetModule = __decorate([
 /***/ "../../../../../src/app/login-manage/user-manage/dialogs/user-form.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userform\">\r\n  <form #user=\"ngForm\" id=\"user\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新用户</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑用户</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>部门：\r\n          </label>\r\n          <md-select style=\"margin-left:10px;\" name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.departmentId\" class=\"depart-select catalog-select\">\r\n            <md-option *ngFor=\"let item of data.departmentList\" [value]=\"item.id\">\r\n              <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n            </md-option>\r\n          </md-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>账号：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"username\"\r\n                 #username=\"ngModel\"\r\n                 [(ngModel)]=\"data.username\"\r\n                 (blur)=\"userBlured = true\" (focus)=\"userBlured = false\"\r\n                 type=\"text\"\r\n                 placeholder=\"\"\r\n                 pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                 required>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              账号为必填项\r\n            </div>\r\n            <div *ngIf=\"(!username.errors.required && username.errors.pattern && userBlured)\" class=\"help alert alert-danger\">\r\n              账号至多50位\r\n            </div>\r\n          </div>\r\n\r\n          <!--<div *ngIf=\"!(username.pristine || username.valid || !username.touched)\" >-->\r\n            <!--<div class=\"help alert alert-danger\">-->\r\n              <!--账号为必填项-->\r\n            <!--</div>-->\r\n          <!--</div>-->\r\n          <!--<div class=\"help alert alert-danger\" *ngIf=\"data.username?.length > 50\">-->\r\n            <!--账号不能超过50字-->\r\n          <!--</div>-->\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div  *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>密码：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"password\"\r\n                 #password=\"ngModel\"\r\n                 [(ngModel)]=\"data.password\"\r\n                 placeholder=\"\"\r\n                 (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                 type=\"password\"\r\n                 pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n                 required>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少有8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>确认：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"verify\"\r\n                 #verify=\"ngModel\"\r\n                 [(ngModel)]=\"data.verify\"\r\n                 placeholder=\"\"\r\n                 type=\"password\"\r\n                 (blur)=\"againBlured = true\"\r\n                 (focus)=\"againBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"(verify.dirty || verify.touched) && againBlured&& !verify.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>全名：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"fullName\"\r\n                 #fullName=\"ngModel\"\r\n                 [(ngModel)]=\"data.fullName\"\r\n                 placeholder=\"\"\r\n                 required>\r\n          <div *ngIf=\"!(fullName.pristine || fullName.valid || !fullName.touched)\" >\r\n            <div class=\"help alert alert-danger\">\r\n              全名为必填项\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>邮件：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"email\"\r\n                 #email=\"ngModel\"\r\n                 [(ngModel)]=\"data.email\"\r\n                 placeholder=\"\"\r\n                 type=\"email\"\r\n                 pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                 (blur)=\"emailBlured = true\" (focus)=\"emailBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"email.errors && (email.dirty || email.touched)\">\r\n            <div *ngIf=\"email.errors.required\" class=\"help alert alert-danger\">\r\n              邮件为必填项\r\n            </div>\r\n            <div *ngIf=\"(!email.errors.required && email.errors.pattern && emailBlured)\" class=\"help alert alert-danger\">\r\n              邮箱格式错误，请重新输入\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>用户状态：\r\n          </label>\r\n          <md-radio-group style=\"margin-left:10px;\" name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n            <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n            <md-radio-button [color]=\"'primary'\" value=\"0\">停用</md-radio-button>\r\n          </md-radio-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n          </label>\r\n          <button *ngIf=\"data.id == ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid || !verifyResult()\">创建</button>\r\n          <button *ngIf=\"data.id != ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid\">修改</button>\r\n          <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"userform\">\r\n  <form #user=\"ngForm\" id=\"user\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新用户</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑用户</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>部门：\r\n          </label>\r\n          <md-select style=\"margin-left:10px;\" name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.departmentId\" class=\"depart-select catalog-select\">\r\n            <md-option *ngFor=\"let item of data.departmentList\" [value]=\"item.id\">\r\n              <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n            </md-option>\r\n          </md-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>账号：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"username\"\r\n                 #username=\"ngModel\"\r\n                 [(ngModel)]=\"data.username\"\r\n                 (blur)=\"userBlured = true\" (focus)=\"userBlured = false\"\r\n                 type=\"text\"\r\n                 placeholder=\"\"\r\n                 pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                 required>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              账号为必填项\r\n            </div>\r\n            <div *ngIf=\"(!username.errors.required && username.errors.pattern && userBlured)\" class=\"help alert alert-danger\">\r\n              账号至多50位\r\n            </div>\r\n          </div>\r\n\r\n          <!--<div *ngIf=\"!(username.pristine || username.valid || !username.touched)\" >-->\r\n            <!--<div class=\"help alert alert-danger\">-->\r\n              <!--账号为必填项-->\r\n            <!--</div>-->\r\n          <!--</div>-->\r\n          <!--<div class=\"help alert alert-danger\" *ngIf=\"data.username?.length > 50\">-->\r\n            <!--账号不能超过50字-->\r\n          <!--</div>-->\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div  *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>密码：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"password\"\r\n                 #password=\"ngModel\"\r\n                 [(ngModel)]=\"data.password\"\r\n                 placeholder=\"\"\r\n                 (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                 type=\"password\"\r\n                 pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n                 required>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>确认：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"verify\"\r\n                 #verify=\"ngModel\"\r\n                 [(ngModel)]=\"data.verify\"\r\n                 placeholder=\"\"\r\n                 type=\"password\"\r\n                 (blur)=\"againBlured = true\"\r\n                 (focus)=\"againBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"(verify.dirty || verify.touched) && againBlured&& !verify.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>全名：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"fullName\"\r\n                 #fullName=\"ngModel\"\r\n                 [(ngModel)]=\"data.fullName\"\r\n                 placeholder=\"\"\r\n                 required>\r\n          <div *ngIf=\"!(fullName.pristine || fullName.valid || !fullName.touched)\" >\r\n            <div class=\"help alert alert-danger\">\r\n              全名为必填项\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>邮件：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"email\"\r\n                 #email=\"ngModel\"\r\n                 [(ngModel)]=\"data.email\"\r\n                 placeholder=\"\"\r\n                 type=\"email\"\r\n                 pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                 (blur)=\"emailBlured = true\" (focus)=\"emailBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"email.errors && (email.dirty || email.touched)\">\r\n            <div *ngIf=\"email.errors.required\" class=\"help alert alert-danger\">\r\n              邮件为必填项\r\n            </div>\r\n            <div *ngIf=\"(!email.errors.required && email.errors.pattern && emailBlured)\" class=\"help alert alert-danger\">\r\n              邮箱格式错误，请重新输入\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>用户状态：\r\n          </label>\r\n          <md-radio-group style=\"margin-left:10px;\" name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n            <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n            <md-radio-button [color]=\"'primary'\" value=\"0\">停用</md-radio-button>\r\n          </md-radio-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n          </label>\r\n          <button *ngIf=\"data.id == ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid || !verifyResult()\">创建</button>\r\n          <button *ngIf=\"data.id != ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid\">修改</button>\r\n          <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -4072,7 +4098,7 @@ var UserFormDialog = (function () {
             delete params.verify;
             this.service.createUser(params).subscribe(function (res) {
                 if (res.data.status == 200) {
-                    _this.data.getUserList();
+                    _this.data.getUserList(0);
                 }
             });
         }
@@ -4431,7 +4457,10 @@ var UserManageComponent = (function () {
         };
         this.roleList = [];
         this.departmentList = [];
-        this.getUserList = function () {
+        this.getUserList = function (start) {
+            if (start == 0) {
+                _this.search.currentPage = 1;
+            }
             _this.search.start = _this.search.limit * (_this.search.currentPage - 1);
             __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('userParams', _this.search);
             if (_this.search.username) {

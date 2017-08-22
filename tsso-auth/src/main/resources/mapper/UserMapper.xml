@@ -204,6 +204,7 @@
 		"user".department_id=department.id
 		where 1=1
 		<include refid="byParams" />
+		order by "user".create_time DESC
 		<if test="start != null and limit != null and limit > 0">
 			offset #{start, jdbcType=INTEGER} limit #{limit,
 			jdbcType=INTEGER}
@@ -237,6 +238,7 @@
 								on role_permission.role_id =user_role.role_id
 								where role_permission.permission_id= #{permissionId,jdbcType=INTEGER}
 							)
+		order by "user".create_time desc
 		
 	</select>
 	

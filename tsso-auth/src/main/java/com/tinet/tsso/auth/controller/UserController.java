@@ -8,6 +8,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,8 +73,8 @@ public class UserController {
 	 */
 	@PostMapping
 	public ResponseModel addUser(@RequestBody UserParam userParam) {
-		
-		User user =new User();
+
+		User user = new User();
 		BeanUtils.copyProperties(userParam, user);
 		return userService.addUser(user);
 	}
@@ -106,6 +107,14 @@ public class UserController {
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseModel deleteUser(@PathVariable Integer id) {
+		// 防止用户自杀
+		Subject subject = SecurityUtils.getSubject();
+		List<Object> principals = subject.getPrincipals().asList();
+		
+		User u = userService.selectByUserName(principals.get(0).toString());
+		if (u == null || (u.getId() == id)) {
+			return new ResponseModel.Builder().error("您不能删除自己").status(HttpStatus.BAD_REQUEST).build();
+		}
 		// 删除该用户拥有的角色
 		roleService.deleteRoleByUserId(id);
 		// 删除用户
@@ -129,6 +138,15 @@ public class UserController {
 		if (id == null) {
 			return new ResponseModel.Builder().error("id不能为空").build();
 		}
+
+		// 防止用户自杀
+		Subject subject = SecurityUtils.getSubject();
+		List<Object> principals = subject.getPrincipals().asList();
+		User u = userService.selectByUserName(principals.get(0).toString());
+		if (u == null || (u.getId() == id && user.getStatus() != 1)) {
+			return new ResponseModel.Builder().error("您不能将自己停用").status(HttpStatus.BAD_REQUEST).build();
+		}
+
 		user.setId(id);
 		userService.update(user);
 
@@ -143,7 +161,7 @@ public class UserController {
 	 */
 	@GetMapping("/{id}")
 	public ResponseModel getOneUserByUserId(@PathVariable Integer id) {
-		
+
 		// 查询该角色完整信息
 		UserParam param = new UserParam();
 		param.setId(id);
@@ -154,14 +172,14 @@ public class UserController {
 		}
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}
-	
+
 	@GetMapping("/user_info")
 	public ResponseModel selectRoles() {
-		Subject subject= SecurityUtils.getSubject();
-		List<HashMap> principals = subject.getPrincipals().asList();
+		Subject subject = SecurityUtils.getSubject();
+		List<Object> principals = subject.getPrincipals().asList();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("username", principals.get(0));
 		return new ResponseModel.Builder().result(map).build();
 	}
-	
+
 }

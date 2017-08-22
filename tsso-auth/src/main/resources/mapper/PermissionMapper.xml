@@ -136,10 +136,12 @@
 		<if test="roleId != null">
 			and role_id = #{roleId,jdbcType=VARCHAR} 
 		</if>
+		order by permission.create_time desc
 		<if test="start != null and limit != null">
 			offset #{start, jdbcType=INTEGER} limit #{limit,
 			jdbcType=INTEGER}
 		</if>
+		
 	</select>
 	<select id="selectByPermissionKey" parameterType="java.lang.String" resultType= "java.lang.Integer">
 		select count(*)
