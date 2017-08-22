@@ -167,7 +167,7 @@ public class TssoConfig {
 		filterChainDefinitionMap.put("/password_modify", "anon");
 
 		// 所有url都需要验证
-		filterChainDefinitionMap.put("/*", "authc");
+		filterChainDefinitionMap.put("/", "authc");
 		filterChainDefinitionMap.put("/index/**", "authc");
 		//
 		filterChainDefinitionMap.put("/api/**", "roles[auth_admin]");
