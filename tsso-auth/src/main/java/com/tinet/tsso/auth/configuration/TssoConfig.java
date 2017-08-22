@@ -159,8 +159,8 @@ public class TssoConfig {
 		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 		filterChainDefinitionMap.put("/login", "anon");
-		 // 修改密码的链接不需要权限控制
-		
+		// 修改密码的链接不需要权限控制
+
 		filterChainDefinitionMap.put("/api/password/forget_password", "anon");
 		filterChainDefinitionMap.put("/api/password/change_password", "anon");
 		filterChainDefinitionMap.put("/password_find", "anon");

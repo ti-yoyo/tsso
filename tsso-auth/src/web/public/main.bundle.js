@@ -338,7 +338,7 @@ CoreModule = __decorate([
 /***/ "../../../../../src/app/core/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\" *ngIf=\"user && user.username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -391,9 +391,36 @@ var HeaderComponent = (function () {
         this.swalService = swalService;
         this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
     }
+    HeaderComponent.prototype.ngOnInit = function () {
+        if (!__WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user')) {
+            this.getCurrentUser();
+        }
+    };
     HeaderComponent.prototype.exit = function () {
         __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].remove('user');
-        window.location.href = "/logout";
+        var path = '/logout';
+        this.connectionService.get(path).then(function (res) {
+        }).catch(function (error) {
+            console.log(error);
+        });
+        window.location.reload();
+    };
+    /*
+     *@desc 获取当前用户信息
+     */
+    HeaderComponent.prototype.getCurrentUser = function () {
+        var _this = this;
+        var userPath = '/api/user/user_info';
+        this.connectionService.get(userPath)
+            .then(function (res) {
+            console.log(res);
+            if (res.data.status == 200) {
+                __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
+                _this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
+            }
+        })
+            .catch(function (err) {
+        });
     };
     return HeaderComponent;
 }());
@@ -817,7 +844,7 @@ SwalService = __decorate([
 /***/ "../../../../../src/app/core/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\n    <div class=\"sideNavBar\">\n        <div class=\"side-menu-container\">\n            <div class=\"side-inner\">\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\n                    <md-icon class=\"md-24\">menu</md-icon>\n                </div>\n                <div>\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\n                        <div class=\"sidebar-title\" (click)=\"openMenu(i)\">\n                            <md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">\n                                chevron_right\n                            </md-icon>\n                            <md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">\n                               expand_more\n                            </md-icon>\n                            <md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"\n                                     [mdTooltipPosition]=\"'right'\">\n                                chevron_right\n                            </md-icon>\n                            <md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"\n                                     [mdTooltipPosition]=\"'right'\">\n                                expand_more\n                            </md-icon>\n                            <span>{{navTab.title}}</span>\n                        </div>\n                        <ul *ngIf=\"navTab.open\">\n                            <li *ngFor=\"let item of navTab.children\">\n                                <a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\n                                    <div>\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\n                                    </div>\n                                    <span class=\"menu-title\">\n                                        {{item.name}}\n                                    </span>\n                                </a>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\n    <div class=\"sideNavBar\">\n        <div class=\"side-menu-container\">\n            <div class=\"side-inner\">\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\n                    <md-icon class=\"md-24\">menu</md-icon>\n                </div>\n                <div>\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\n                        <!--<div class=\"sidebar-title\" (click)=\"openMenu(i)\">-->\n                            <!--<md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">-->\n                                <!--chevron_right-->\n                            <!--</md-icon>-->\n                            <!--<md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">-->\n                               <!--expand_more-->\n                            <!--</md-icon>-->\n                            <!--<md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\n                                <!--chevron_right-->\n                            <!--</md-icon>-->\n                            <!--<md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\n                                <!--expand_more-->\n                            <!--</md-icon>-->\n                            <!--<span>{{navTab.title}}</span>-->\n                        <!--</div>-->\n                        <ul>\n                            <li *ngFor=\"let item of navTab.children\">\n                                <a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\n                                    <div>\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\n                                    </div>\n                                    <span class=\"menu-title\">\n                                        {{item.name}}\n                                    </span>\n                                </a>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -1049,7 +1076,6 @@ var AppManageComponent = (function () {
         this.appList = this.service.appList;
     }
     AppManageComponent.prototype.ngOnInit = function () {
-        this.service.getCurrentUser();
         if (__WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].get('appParams')) {
             this.search = __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].get('appParams');
             this.getAppList();
@@ -1216,10 +1242,9 @@ AppManageModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mobx_angular__ = __webpack_require__("../../../../mobx-angular/dist/mobx-angular.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppManageService; });
 /**
  * Created by kosei on 2017/8/7.
@@ -1239,7 +1264,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var AppManageService = (function () {
     function AppManageService(connectionService, router, swal) {
         this.connectionService = connectionService;
@@ -1250,7 +1274,7 @@ var AppManageService = (function () {
     AppManageService.prototype.reloadApp = function (params) {
         var _this = this;
         var path = '/api/application';
-        var appsObservable = __WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
+        var appsObservable = __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
         appsObservable.subscribe(function (page) {
             _this.appList.length = 0;
             _this.appList.push.apply(_this.appList, page.data.result.pageData);
@@ -1266,7 +1290,7 @@ var AppManageService = (function () {
     AppManageService.prototype.createApp = function (params) {
         var _this = this;
         var path = '/api/application';
-        var appObservable = __WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
+        var appObservable = __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         appObservable.subscribe(function (res) {
             if (res.data.status != 200) {
                 var message = res.data.error || '该应用添加失败，请稍后重试！';
@@ -1285,7 +1309,7 @@ var AppManageService = (function () {
     AppManageService.prototype.removeApp = function (id, index) {
         var _this = this;
         var path = '/api/application/' + id;
-        var appObservable = __WEBPACK_IMPORTED_MODULE_6_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
+        var appObservable = __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
         appObservable.subscribe(function (res) {
             if (res.data.status != 200) {
                 var message = res.data.error || '该应用删除失败，请稍后重试！';
@@ -1297,27 +1321,6 @@ var AppManageService = (function () {
         });
         return appObservable;
     };
-    /*
-     *@desc 获取当前用户信息
-     */
-    AppManageService.prototype.getCurrentUser = function () {
-        var _this = this;
-        var userPath = '/api/user/user_info';
-        this.connectionService.get(userPath)
-            .then(function (res) {
-            console.log(res);
-            if (res.data.status === 200) {
-                __WEBPACK_IMPORTED_MODULE_4__core_services_localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
-            }
-            else {
-                __WEBPACK_IMPORTED_MODULE_4__core_services_localstorage_service__["a" /* LocalStorage */].remove('user');
-                _this.router.navigate(['/signin']);
-            }
-        })
-            .catch(function (err) {
-            //console.log(err);
-        });
-    };
     return AppManageService;
 }());
 __decorate([
@@ -1326,7 +1329,7 @@ __decorate([
 ], AppManageService.prototype, "appList", void 0);
 AppManageService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__["a" /* SwalService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__["a" /* SwalService */]) === "function" && _c || Object])
 ], AppManageService);
 
 var _a, _b, _c;
@@ -1956,7 +1959,7 @@ var AuthDialog = (function () {
         var params = Object.assign({}, data);
         delete params.getAuthList;
         this.service.createAuth(params).subscribe(function (res) {
-            if (res.status == 200) {
+            if (res.data.status == 200) {
                 _this.data.getAuthList();
             }
         });
@@ -2399,7 +2402,7 @@ LoginManageModule = __decorate([
 /***/ "../../../../../src/app/login-manage/password-manage/password-find/password-find.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">无法登录？</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #modify=\"ngForm\" id=\"modify\">\r\n          <md-input-container class=\"sign-input\">\r\n            <md-icon mdPrefix>perm_identity</md-icon>\r\n            <input mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"用户名\"\r\n                   name=\"username\"\r\n                   [(ngModel)]=\"account\"\r\n                   #username=\"ngModel\"\r\n                   required\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              用户名为必填项\r\n            </div>\r\n          </div>\r\n          <button md-button (click)=\"sendClick()\"  [disabled]=\"!modify.form.valid\" class=\"login-button\">\r\n            发送给我\r\n          </button>\r\n          <button md-button (click)=\"cancel()\" class=\"cancel-button\">\r\n            取消\r\n          </button>\r\n        </form>\r\n        <div class=\"modify-bottom\" *ngIf=\"send==true\">\r\n          <span class=\"bottom-title\">重置密码链接已经成功发送</span>\r\n          <div class=\"result-content\">\r\n            新的密码已经生成并发送给你。\r\n            你可以使用新的密码登录，通过配置页面修改密码。\r\n            如果没有收到邮件，请联系管理员。\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">无法登录？</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #modify=\"ngForm\" id=\"modify\">\r\n          <md-input-container class=\"sign-input\">\r\n            <md-icon mdPrefix>perm_identity</md-icon>\r\n            <input mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"用户名\"\r\n                   name=\"username\"\r\n                   [(ngModel)]=\"account\"\r\n                   #username=\"ngModel\"\r\n                   required\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              用户名为必填项\r\n            </div>\r\n          </div>\r\n          <button md-button (click)=\"sendClick()\"  [disabled]=\"!modify.form.valid||sendMessage.disabled\" class=\"login-button\">\r\n            {{sendMessage.message}}\r\n          </button>\r\n          <button md-button (click)=\"cancel()\" class=\"cancel-button\">\r\n            取消\r\n          </button>\r\n        </form>\r\n        <div class=\"modify-bottom\" *ngIf=\"send==true\">\r\n          <span class=\"bottom-title\">重置密码链接已经成功发送</span>\r\n          <div class=\"result-content\">\r\n            密码修改链接已成功发送到你的邮箱，\r\n            你可以点击链接进入配置页面修改密码。\r\n            如果没有收到邮件，请联系管理员。\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2450,6 +2453,8 @@ var PasswordFindComponent = (function () {
         this.swal = swal;
         this.account = '';
         this.send = false;
+        this.countdown = 60;
+        this.sendMessage = { message: '发送给我', disabled: false };
     }
     PasswordFindComponent.prototype.sendClick = function () {
         var _this = this;
@@ -2457,6 +2462,7 @@ var PasswordFindComponent = (function () {
         this.service.findPass(params).subscribe(function (res) {
             if (res.data.status == 200) {
                 _this.send = true;
+                _this.sendAuthCodeInterval();
             }
             else {
                 var msg = res.data.error || '密码找回失败，请稍后重试！';
@@ -2469,6 +2475,22 @@ var PasswordFindComponent = (function () {
     };
     PasswordFindComponent.prototype.cancel = function () {
         window.location.href = "http://tsso.tinetcloud.com/login";
+    };
+    PasswordFindComponent.prototype.sendAuthCodeInterval = function () {
+        var _this = this;
+        this.timer = setInterval(function () {
+            if (_this.countdown == 0) {
+                _this.sendMessage.message = '发送给我';
+                _this.countdown = 60;
+                clearInterval(_this.timer);
+                _this.sendMessage.disabled = false;
+            }
+            else {
+                _this.countdown--;
+                _this.sendMessage.message = "重新发送 (" + _this.countdown + ")";
+                _this.sendMessage.disabled = true;
+            }
+        }, 1000);
     };
     return PasswordFindComponent;
 }());
@@ -2621,7 +2643,7 @@ var PasswordModifyComponent = (function () {
             user.username = username;
         }
         this.service.modifyPass(user, form).subscribe(function (res) {
-            if (res.status == 200) {
+            if (res.data.status == 200) {
                 _this.swal.hint('success', '密码修改成功，现在跳转至登录页面！');
                 window.location.href = "http://tsso.tinetcloud.com/login";
             }
