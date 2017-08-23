@@ -170,7 +170,28 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 		roleMapper.insertSelective(role);
 		RoleParam roleParam = new RoleParam();
 		roleParam.setId(role.getId());
-		
-		return new ResponseModel.Builder().result(selectRoleByParams(roleParam).getPageData().get(0)).msg("添加成功").build();
+
+		return new ResponseModel.Builder().result(selectRoleByParams(roleParam).getPageData().get(0)).msg("添加成功")
+				.build();
+	}
+
+	/**
+	 * 唯一性校验，并更新角色
+	 */
+	@Override
+	public ResponseModel updateRole(Role role) {
+
+		if (role.getKey() != null) {
+			Integer roleCount = roleMapper.selectCountByRoleKey(role.getKey());
+			if (roleCount != 0) {
+				return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该角色标识已经被使用").build();
+			}
+		}
+		roleMapper.updateByPrimaryKeySelective(role);
+		RoleParam roleParam = new RoleParam();
+		roleParam.setId(role.getId());
+
+		return new ResponseModel.Builder().result(selectRoleByParams(roleParam).getPageData().get(0)).msg("更新成功")
+				.build();
 	}
 }

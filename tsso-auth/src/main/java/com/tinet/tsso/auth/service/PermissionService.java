@@ -13,7 +13,7 @@ import com.tinet.tsso.auth.util.ResponseModel;
  * @author lizy
  */
 
-public interface PermissionService extends BaseService<Permission, Integer>{
+public interface PermissionService extends BaseService<Permission, Integer> {
 
 	/**
 	 * 通过权限参数查询权限信息
@@ -24,10 +24,19 @@ public interface PermissionService extends BaseService<Permission, Integer>{
 	Page<PermissionModel> selectByparam(PermissionParam permissionParam);
 
 	/**
-	 *添加应用
+	 * 添加应用
+	 * 
 	 * @param permissionParam
 	 * @return
 	 */
 	ResponseModel addPermission(PermissionParam permissionParam);
+
+	/**
+	 * 更新权限
+	 * 
+	 * @param permission
+	 * @return
+	 */
+	ResponseModel updatePermission(Permission permission);
 
 }

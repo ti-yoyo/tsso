@@ -91,4 +91,12 @@ public interface RoleService extends BaseService<Role, Integer> {
 	 */
 	ResponseModel createRole(Role role);
 
+	/**
+	 * 更新角色
+	 * 
+	 * @param role
+	 * @return
+	 */
+	ResponseModel updateRole(Role role);
+
 }

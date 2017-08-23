@@ -139,10 +139,10 @@ public class PasswordController {
 		//邮件格式为：
 		//您重置密码的链接为：http://auth.tinetcloud.com/api/password/password_modify?username=lizy&key=7c3668d8-6ad4-4230-9d2a-634d5a79ae61
 		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append("您好,").append(username).append("先生/女士：").append("</br>").append("您申请了密码重置。请访问此链接，输入您的新密码(该链接有效时长为10分钟)：</br>").append("<a href=\"").append(changePasswordAddress).append("/password_modify")
+		stringBuffer.append("您好,").append(username).append("先生/女士：").append("<br/>").append("您申请了密码重置。请访问此链接，输入您的新密码(该链接有效时长为10分钟)：<br/>").append("<a href=\"").append(changePasswordAddress).append("/password_modify")
 				.append("?username=").append(username).append("&key=").append(key).append("\">")
 				.append(changePasswordAddress).append("/password_modify").append("?username=").append(username)
-				.append("&key=").append(key).append("</a>").append("</br>");
+				.append("&key=").append(key).append("</a>").append("<br/>");
 
 		return stringBuffer.toString();
 	}

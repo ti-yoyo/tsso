@@ -65,12 +65,12 @@ public class RoleController {
 	 */
 	@PostMapping
 	public ResponseModel addRole(@RequestBody RoleParam roleParam) {
-		
+
 		Role role = new Role();
 		BeanUtils.copyProperties(roleParam, role);
-		
+
 		role.setCreateTime(new Date());
-		
+
 		return roleService.createRole(role);
 	}
 
@@ -96,7 +96,7 @@ public class RoleController {
 		if (page.getPageData() == null) {
 			return new ResponseModel.Builder().error("该用户不存在").build();
 		}
-		//去除密码等敏感信息
+		// 去除密码等敏感信息
 		page.getPageData().get(0).setPassword(null);
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}
@@ -157,6 +157,22 @@ public class RoleController {
 		List<Permission> permissionList = roleService.updatePermissionList(roleId, permissionIdList);
 
 		return new ResponseModel.Builder().msg("更新成功").result(permissionList).build();
+	}
+
+	/**
+	 * 更新角色
+	 * 
+	 * @param id
+	 * @param roleParam
+	 * @return
+	 */
+	@PutMapping("/{id}")
+	public ResponseModel updateRole(@PathVariable("id") Integer id, @RequestBody RoleParam roleParam) {
+		Role role = new Role();
+		BeanUtils.copyProperties(roleParam, role);
+		role.setId(id);
+
+		return roleService.updateRole(role);
 	}
 
 }

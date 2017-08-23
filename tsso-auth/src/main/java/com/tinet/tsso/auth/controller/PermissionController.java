@@ -2,16 +2,19 @@ package com.tinet.tsso.auth.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.model.PermissionModel;
 import com.tinet.tsso.auth.model.UserModel;
@@ -50,7 +53,7 @@ public class PermissionController {
 	public ResponseModel searchPermissionByParams(PermissionParam permissionParam) {
 
 		Page<PermissionModel> page = permissionService.selectByparam(permissionParam);
-		
+
 		return new ResponseModel.Builder().page(page).msg("查询成功").build();
 	}
 
@@ -62,7 +65,7 @@ public class PermissionController {
 	 */
 	@PostMapping
 	public ResponseModel addPermission(@RequestBody PermissionParam permissionParam) {
-		
+
 		return permissionService.addPermission(permissionParam);
 	}
 
@@ -78,7 +81,7 @@ public class PermissionController {
 
 		// 查询拥有某个权限的用户
 		List<UserModel> userList = userService.selectByPermissionId(id);
-		
+
 		return new ResponseModel.Builder().result(userList).msg("查询成功").build();
 	}
 
@@ -113,6 +116,22 @@ public class PermissionController {
 		permissionService.delete(id);
 
 		return new ResponseModel.Builder().msg("删除成功").build();
+	}
+
+	/**
+	 * 权限的更新
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@PutMapping("/{id}")
+	public ResponseModel updatePermission(@PathVariable Integer id, @RequestBody PermissionParam permissionParam) {
+		Permission permission = new Permission();
+
+		BeanUtils.copyProperties(permissionParam, permission);
+		permission.setId(id);
+		
+		return permissionService.updatePermission(permission);
 	}
 
 }

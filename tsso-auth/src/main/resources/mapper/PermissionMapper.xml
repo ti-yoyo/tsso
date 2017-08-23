@@ -136,7 +136,7 @@
 		<if test="roleId != null">
 			and role_id = #{roleId,jdbcType=VARCHAR} 
 		</if>
-		order by permission.create_time desc
+		order by permission.application_id,permission.key desc
 		<if test="start != null and limit != null">
 			offset #{start, jdbcType=INTEGER} limit #{limit,
 			jdbcType=INTEGER}
