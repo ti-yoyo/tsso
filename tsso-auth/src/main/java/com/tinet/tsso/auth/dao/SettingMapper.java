@@ -1,17 +1,18 @@
 package com.tinet.tsso.auth.dao;
 
+import java.util.List;
+
 import com.tinet.tsso.auth.entity.Setting;
 
 public interface SettingMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Setting record);
+	/**
+	 * @return
+	 */
+	List<Setting> selectAll();
 
-    int insertSelective(Setting record);
-
-    Setting selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Setting record);
-
-    int updateByPrimaryKey(Setting record);
+	/**
+	 * @param setting
+	 */
+	void updateValueBykey(Setting setting);
 }
