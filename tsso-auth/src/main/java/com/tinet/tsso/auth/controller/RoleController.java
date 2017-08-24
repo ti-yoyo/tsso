@@ -101,12 +101,12 @@ public class RoleController {
 	public ResponseModel addUserForRole(@RequestBody UserAndRoleParam userAndRole) {
 
 		User user = userService.get(userAndRole.getUserId());
-
+		Role role =roleService.get(userAndRole.getRoleId());
 		
 
 		roleService.addUser(userAndRole.getRoleId(), userAndRole.getUserId());
 
-		logActionService.addLogAction("为角色添加用户", user.toString(), 1);
+		logActionService.addLogAction("为角色添加用户","角色:"+role.toString()+ "添加用户"+user.toString(), 1);
 		
 		// 查询指定id的用户
 		UserParam param = new UserParam();
@@ -210,7 +210,7 @@ public class RoleController {
 		BeanUtils.copyProperties(roleParam, role);
 		role.setId(id);
 		
-		logActionService.addLogAction("更新角色",tmpRole+"更新为"+ role.toString(), 1);
+		logActionService.addLogAction("更新角色",tmpRole+"更新为"+ roleService.get(id), 1);
 		return roleService.updateRole(role);
 	}
 

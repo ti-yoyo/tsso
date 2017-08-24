@@ -77,20 +77,19 @@ public class UserController {
 	 */
 	@PostMapping
 	public ResponseModel addUser(@RequestBody UserParam userParam) {
-		
 
 		User user = new User();
 		BeanUtils.copyProperties(userParam, user);
-		
-		if(userService.selectByUserName(user.getUsername()) != null) {
-			logActionService.addLogAction("添加用户",user.toString()+"的username已经被使用", 0);
-			
+
+		if (userService.selectByUserName(user.getUsername()) != null) {
+			logActionService.addLogAction("添加用户", user.toString() + "的username已经被使用", 0);
+
 			return new ResponseModel.Builder().error("该帐号已经存在").status(HttpStatus.BAD_REQUEST).build();
 		}
-		ResponseModel responseModel=userService.addUser(user);
-		
-		logActionService.addLogAction("添加用户",user.toString(), responseModel.get("status").equals(200) ? 1 : 0);
-		
+		ResponseModel responseModel = userService.addUser(user);
+
+		logActionService.addLogAction("添加用户", user.toString(), responseModel.get("status").equals(200) ? 1 : 0);
+
 		return responseModel;
 	}
 
@@ -109,15 +108,16 @@ public class UserController {
 		User user = userService.get(userId);
 		user.setPassword("****");
 		user.setPasswordSalt("****");
-		List<Role> roleOldList =roleService.selectRoleByUserId(userId);
-		
+		List<Role> roleOldList = roleService.selectRoleByUserId(userId);
+
 		if (userId == null) {
 			return new ResponseModel.Builder().error("用户Id不能为空").build();
 		}
 		List<Role> roleList = userService.updataUserRoleList(userId, roleIdList);
 
-		logActionService.addLogAction("更新用户角色","用户:"+user.toString()+"的角色由"+roleOldList.toString()+"更新为"+roleList, 1);
-		
+		logActionService.addLogAction("更新用户角色",
+				"用户:" + user.toString() + "的角色由" + roleOldList.toString() + "更新为" + roleList, 1);
+
 		return new ResponseModel.Builder().result(roleList).msg("角色更新成功").build();
 
 	}
@@ -137,14 +137,14 @@ public class UserController {
 		u.setPassword("****");
 		u.setPasswordSalt("****");
 		if (u == null || (u.getId() == id)) {
-			logActionService.addLogAction("删除用户","用户:"+u.toString()+"删除自己", 0);
+			logActionService.addLogAction("删除用户", "用户:" + u.toString() + "删除自己", 0);
 			return new ResponseModel.Builder().error("您不能删除自己").status(HttpStatus.BAD_REQUEST).build();
 		}
 		// 删除该用户拥有的角色
 		roleService.deleteRoleByUserId(id);
 		// 删除用户
 		userService.delete(id);
-		logActionService.addLogAction("删除用户",u.toString(), 1);
+		logActionService.addLogAction("删除用户", u.toString(), 1);
 		return new ResponseModel.Builder().msg("删除成功").build();
 	}
 
@@ -161,29 +161,21 @@ public class UserController {
 	public ResponseModel updateUser(@PathVariable Integer id, @RequestBody User user) {
 
 		
+		User oldUser = userService.get(id);
 		if (id == null) {
 			return new ResponseModel.Builder().error("id不能为空").build();
 		}
 
-		// 防止用户自杀
-		Subject subject = SecurityUtils.getSubject();
-		List<Object> principals = subject.getPrincipals().asList();
-		User u = userService.selectByUserName(principals.get(0).toString());
-		u.setPassword("****");
-		u.setPasswordSalt("****");
-		if (u == null || (u.getId() == id && user.getStatus() != 1)) {
-			logActionService.addLogAction("更新用户","用户:"+u.toString()+"停用自己", 0);
-			return new ResponseModel.Builder().error("您不能将自己停用").status(HttpStatus.BAD_REQUEST).build();
-		}
-
 		user.setId(id);
-		User logUser = new User();
-		BeanUtils.copyProperties(user, logUser);
 		ResponseModel responseModel=userService.updateUser(user);
 		
-		user.setPassword("****");
-		user.setPassword("****");
-		logActionService.addLogAction("更新用户","用户:"+u.toString()+"更新为"+user.toString(), responseModel.get("status").equals(200) ? 1 : 0);
+		User updateUser=userService.get(id);
+		
+		if(responseModel.get("status").equals(200)) {
+			logActionService.addLogAction("更新用户","用户:"+oldUser.toString()+"更新为"+updateUser.toString(),1);
+		}else {
+			logActionService.addLogAction("更新用户","用户:"+oldUser.toString()+"更新为"+user.toString(),0);
+		}
 		
 		return responseModel;
 	}

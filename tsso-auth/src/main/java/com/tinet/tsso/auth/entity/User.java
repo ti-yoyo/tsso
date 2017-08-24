@@ -109,4 +109,11 @@ public class User {
 		this.department = department;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt=" + passwordSalt
+				+ ", fullName=" + fullName + ", departmentId=" + departmentId + ", email=" + email + ", status="
+				+ status + ", createTime=" + createTime + "]";
+	}
+
 }

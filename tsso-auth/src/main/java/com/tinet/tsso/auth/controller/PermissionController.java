@@ -154,7 +154,7 @@ public class PermissionController {
 		BeanUtils.copyProperties(permissionParam, permission);
 		permission.setId(id);
 
-		logActionService.addLogAction("更新权限",tmpPermission.toString()+"更新为"+ permission.toString(), 1);
+		logActionService.addLogAction("更新权限",tmpPermission.toString()+"更新为"+ permissionService.get(id), 1);
 		
 		return permissionService.updatePermission(permission);
 	}

@@ -118,7 +118,7 @@ public class ApplicationController {
 		application.setId(id);
 		applicationService.update(application);
 
-		logActionService.addLogAction("更新应用", oldApplication.toString() + "更新为" + application.toString(), 1);
+		logActionService.addLogAction("更新应用", oldApplication.toString() + "更新为" +  applicationService.get(id), 1);
 
 		return new ResponseModel.Builder().msg("修改成功").result(applicationService.get(id)).build();
 

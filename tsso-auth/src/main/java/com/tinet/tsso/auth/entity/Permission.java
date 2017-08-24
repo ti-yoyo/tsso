@@ -68,5 +68,11 @@ public class Permission {
 	public void setApplication(Application application) {
 		this.application = application;
 	}
+
+	@Override
+	public String toString() {
+		return "Permission [id=" + id + ", key=" + key + ", name=" + name + ", applicationId=" + applicationId
+				+ ", createTime=" + createTime + "]";
+	}
 	
 }

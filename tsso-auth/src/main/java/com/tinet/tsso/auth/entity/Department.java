@@ -36,4 +36,6 @@ public class Department {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    
+    
 }

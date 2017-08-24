@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -234,22 +236,33 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 */
 	@Override
 	public ResponseModel updateUser(User user) {
-		if(user.getUsername()!=null) {
+		// 防止用户自杀
+		Subject subject = SecurityUtils.getSubject();
+		List<Object> principals = subject.getPrincipals().asList();
+		List<User> userList = userMapper.selectByUsername(principals.get(0).toString());
+		User u = userList.get(0);
+		if (u == null || (u.getId() == user.getId() && user.getStatus() != 1)) {
+			return new ResponseModel.Builder().error("您不能将自己停用").status(HttpStatus.BAD_REQUEST).build();
+		}
+		// username唯一性校验
+		if (user.getUsername() != null) {
 			User tmpUser = userMapper.selectByPrimaryKey(user.getId());
-			if(!tmpUser.getUsername().equals(user.getUsername())) {
+			if (!tmpUser.getUsername().equals(user.getUsername())) {
 				Integer userCount = userMapper.selectCountByUserName(user.getUsername());
 				if (!userCount.equals(0)) {
 					return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("用户名已经被使用").build();
 				}
 			}
-			
+
 		}
-		userMapper.updateByPrimaryKeySelective(user);
-		UserParam userParam=new UserParam();
-		userParam.setId(user.getId());
-		Page<UserModel> page=selectByParams(userParam);
-		page.getPageData().get(0).setPassword("****");
 		
+		userMapper.updateByPrimaryKeySelective(user);
+		
+		UserParam userParam = new UserParam();
+		userParam.setId(user.getId());
+		Page<UserModel> page = selectByParams(userParam);
+		page.getPageData().get(0).setPassword("****");
+
 		return new ResponseModel.Builder().msg("更新成功").result(page.getPageData().get(0)).build();
 	}
 
