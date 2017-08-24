@@ -1,5 +1,6 @@
 package com.tinet.tsso.auth.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -19,6 +20,7 @@ import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.model.PermissionModel;
 import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.PermissionParam;
+import com.tinet.tsso.auth.service.LogActionService;
 import com.tinet.tsso.auth.service.PermissionService;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
@@ -44,6 +46,9 @@ public class PermissionController {
 	@Autowired
 	private RoleService roleService;
 
+	@Autowired
+	private LogActionService logActionService;
+
 	/**
 	 * 按条件查询权限
 	 * 
@@ -65,8 +70,17 @@ public class PermissionController {
 	 */
 	@PostMapping
 	public ResponseModel addPermission(@RequestBody PermissionParam permissionParam) {
+		
+		Permission permission = new Permission();
+		BeanUtils.copyProperties(permissionParam, permission);
+		permission.setCreateTime(new Date());
 
-		return permissionService.addPermission(permissionParam);
+		ResponseModel responseModel = permissionService.addPermission(permission);
+
+		logActionService.addLogAction("添加权限" ,permission.toString(),
+				responseModel.get("status").equals(200) ? 1 : 0);
+
+		return responseModel;
 	}
 
 	/**
@@ -78,7 +92,6 @@ public class PermissionController {
 	 */
 	@GetMapping("/{id}/user")
 	public ResponseModel searchUserByPermissionId(@PathVariable Integer id) {
-
 		// 查询拥有某个权限的用户
 		List<UserModel> userList = userService.selectByPermissionId(id);
 
@@ -108,12 +121,19 @@ public class PermissionController {
 	@DeleteMapping("/{id}")
 	public ResponseModel deletePermission(@PathVariable Integer id) {
 
+		Permission permission = permissionService.get(id);
+
 		List<Role> roleList = roleService.selectByPermissionId(id);
 		if (roleList.size() != 0) {
+
+			logActionService.addLogAction("删除权限", permission.toString(), 0);
+
 			return new ResponseModel(HttpStatus.FORBIDDEN, "该权限被角色使用中不能删除");
 		}
 
 		permissionService.delete(id);
+
+		logActionService.addLogAction("删除权限", permission.toString(), 1);
 
 		return new ResponseModel.Builder().msg("删除成功").build();
 	}
@@ -126,10 +146,15 @@ public class PermissionController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseModel updatePermission(@PathVariable Integer id, @RequestBody PermissionParam permissionParam) {
+
+		Permission tmpPermission = permissionService.get(id);
+
 		Permission permission = new Permission();
 
 		BeanUtils.copyProperties(permissionParam, permission);
 		permission.setId(id);
+
+		logActionService.addLogAction("更新权限",tmpPermission.toString()+"更新为"+ permission.toString(), 1);
 		
 		return permissionService.updatePermission(permission);
 	}

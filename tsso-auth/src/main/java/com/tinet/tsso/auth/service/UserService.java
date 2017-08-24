@@ -72,4 +72,12 @@ public interface UserService extends BaseService<User, Integer> {
 	 */
 	User updatePasswordByUsername(User user);
 
+	/**
+	 * 更新用户
+	 * 
+	 * @param user
+	 * @return
+	 */
+	ResponseModel updateUser(User user);
+
 }

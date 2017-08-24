@@ -26,10 +26,10 @@ public interface PermissionService extends BaseService<Permission, Integer> {
 	/**
 	 * 添加应用
 	 * 
-	 * @param permissionParam
+	 * @param permission
 	 * @return
 	 */
-	ResponseModel addPermission(PermissionParam permissionParam);
+	ResponseModel addPermission(Permission permission);
 
 	/**
 	 * 更新权限

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
+import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.RoleModel;
 import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.util.Page;
@@ -98,5 +99,12 @@ public interface RoleService extends BaseService<Role, Integer> {
 	 * @return
 	 */
 	ResponseModel updateRole(Role role);
+	
+	/**
+	 * 根据用户id查询角色信息
+	 * @param userId
+	 * @return
+	 */
+	List<Role> selectRoleByUserId(Integer userId);
 
 }

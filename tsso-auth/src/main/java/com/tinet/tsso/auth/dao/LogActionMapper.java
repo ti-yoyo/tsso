@@ -2,16 +2,12 @@ package com.tinet.tsso.auth.dao;
 
 import com.tinet.tsso.auth.entity.LogAction;
 
-public interface LogActionMapper {
-    int deleteByPrimaryKey(Integer id);
+/**
+ * 操作日志的action接口
+ * 
+ * @date 2017-08-24
+ * @author lizy
+ */
+public interface LogActionMapper extends BaseMapper<LogAction, Integer> {
 
-    int insert(LogAction record);
-
-    int insertSelective(LogAction record);
-
-    LogAction selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(LogAction record);
-
-    int updateByPrimaryKey(LogAction record);
 }

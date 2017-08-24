@@ -14,6 +14,7 @@ import com.tinet.tsso.auth.dao.RoleMapper;
 import com.tinet.tsso.auth.dao.UserMapper;
 import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
+import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.RoleModel;
 import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.service.RoleService;
@@ -182,10 +183,17 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	public ResponseModel updateRole(Role role) {
 
 		if (role.getKey() != null) {
-			Integer roleCount = roleMapper.selectCountByRoleKey(role.getKey());
-			if (roleCount != 0) {
-				return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该角色标识已经被使用").build();
+			Role tmpRole = roleMapper.selectByPrimaryKey(role.getId());
+			if (!tmpRole.getKey().equals(role.getKey())) {// 如果key做出了更改
+				
+				RoleParam roleParam = new RoleParam();
+				roleParam.setKey(role.getKey());
+				Integer roleCount = roleMapper.selectCountByParams(roleParam);
+				if (roleCount != 0) {
+					return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该角色标识已经被使用").build();
+				}
 			}
+
 		}
 		roleMapper.updateByPrimaryKeySelective(role);
 		RoleParam roleParam = new RoleParam();
@@ -193,5 +201,16 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 
 		return new ResponseModel.Builder().result(selectRoleByParams(roleParam).getPageData().get(0)).msg("更新成功")
 				.build();
+	}
+
+	/**
+	 * 查询角色通过用户信息
+	 */
+	@Override
+	public List<Role> selectRoleByUserId(Integer userId) {
+		User user = new User();
+		user.setId(userId);
+		List<Role> roleList = roleMapper.getRoleByUser(user);
+		return roleList;
 	}
 }

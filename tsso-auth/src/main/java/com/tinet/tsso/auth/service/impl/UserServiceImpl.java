@@ -195,7 +195,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			String uuidString = UUID.randomUUID().toString();
 			salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
 		}
-		
+
 		// 密码进行加密
 		String encodePassword = passwordHash.toHex(user.getPassword() == null ? "" : user.getPassword(), salt);
 
@@ -221,12 +221,36 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 */
 	@Override
 	public User updatePasswordByUsername(User user) {
-		
-		user =dealPassword(user,user.getPasswordSalt());
-		
+
+		user = dealPassword(user, user.getPasswordSalt());
+
 		userMapper.updatePasswordByUsername(user);
-		
+
 		return user;
+	}
+
+	/**
+	 * 更新用户
+	 */
+	@Override
+	public ResponseModel updateUser(User user) {
+		if(user.getUsername()!=null) {
+			User tmpUser = userMapper.selectByPrimaryKey(user.getId());
+			if(!tmpUser.getUsername().equals(user.getUsername())) {
+				Integer userCount = userMapper.selectCountByUserName(user.getUsername());
+				if (!userCount.equals(0)) {
+					return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("用户名已经被使用").build();
+				}
+			}
+			
+		}
+		userMapper.updateByPrimaryKeySelective(user);
+		UserParam userParam=new UserParam();
+		userParam.setId(user.getId());
+		Page<UserModel> page=selectByParams(userParam);
+		page.getPageData().get(0).setPassword("****");
+		
+		return new ResponseModel.Builder().msg("更新成功").result(page.getPageData().get(0)).build();
 	}
 
 }

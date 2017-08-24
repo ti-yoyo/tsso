@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.tinet.tsso.auth.dao.ApplicationMapper;
+import com.tinet.tsso.auth.dao.LogActionMapper;
 import com.tinet.tsso.auth.dao.PermissionMapper;
 import com.tinet.tsso.auth.entity.Application;
+import com.tinet.tsso.auth.entity.LogAction;
 import com.tinet.tsso.auth.param.PermissionParam;
 import com.tinet.tsso.auth.service.ApplicationService;
 import com.tinet.tsso.auth.util.Page;
@@ -29,6 +31,9 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 
 	@Autowired
 	private PermissionMapper permissionMapper;
+	
+	@Autowired
+	private LogActionMapper LogActionMapper;
 
 	/**
 	 * 查询应用的分页信息
