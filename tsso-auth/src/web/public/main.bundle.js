@@ -704,7 +704,7 @@ var ConstantService = (function () {
     }
     return ConstantService;
 }());
-ConstantService.HOST = 'http://auth.tinetcloud.com:7777';
+ConstantService.HOST = 'http://auth-test.tinetcloud.com:7777';
 ConstantService.navTabs = [
     { title: "", icon: '', md_icon: '', link: '', open: false,
         children: [
@@ -1173,14 +1173,15 @@ var AppManageComponent = (function () {
     AppManageComponent.prototype.editApp = function (item, index) {
         var _this = this;
         var appConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_app_dialog__["a" /* AppDialog */].appConfig;
-        appConfig.data.id = item.id;
+        appConfig.data = Object.assign({}, item);
         this.appDialog = this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_app_dialog__["a" /* AppDialog */], appConfig);
         this.appDialog.afterClosed().subscribe(function (result) {
             if (result) {
                 if (result != 'cancel') {
-                    _this.service.editApp(item.id, result).subscribe(function (res) {
+                    var params = { key: result.key, name: result.name, status: result.status };
+                    _this.service.editApp(item.id, params).subscribe(function (res) {
                         if (res.data.status === 200) {
-                            _this.getAppList();
+                            _this.appList.splice(index, 1, res.data.result);
                         }
                     });
                 }
@@ -1471,7 +1472,9 @@ var AppDialog = (function () {
         this.data = data;
     }
     AppDialog.prototype.ngOnInit = function () {
-        this.data.status = 1;
+        if (this.data.id == '') {
+            this.data.status = 1;
+        }
     };
     AppDialog.prototype.saveApp = function (data) {
         //console.log(data);
@@ -2456,7 +2459,7 @@ var LoginLogComponent = (function () {
                 _this.pageConfig.totalItems = res.data.result.totalSize;
             }
         }, function (error) {
-            console.log(error);
+            //console.log(error);
         });
     };
     /**
@@ -2623,7 +2626,7 @@ var OperationLogComponent = (function () {
                 _this.pageConfig.totalItems = res.data.result.totalSize;
             }
         }, function (error) {
-            console.log(error);
+            //console.log(error);
         });
     };
     /**
@@ -3419,7 +3422,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/role-manage/dialogs/role.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userform\">\r\n  <form #role=\"ngForm\" id=\"role\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新角色</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑角色</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            角色标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            角色标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            角色名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            角色名称至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">禁用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveRole(data)\" [disabled]=\"!role.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"userform\">\r\n  <form #role=\"ngForm\" id=\"role\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新角色</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑角色</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            角色标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            角色标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            角色名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            角色名称至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">禁用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveRole(data)\" [disabled]=\"!role.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"closeDialog()\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -3472,18 +3475,21 @@ var RoleDialog = (function () {
         this.dialogRef = dialogRef;
         this.data = data;
         this.service = service;
+        this.roleList = this.service.roleList;
     }
     RoleDialog.prototype.ngOnInit = function () {
-        this.data.status = 1;
+        if (this.data.id == '') {
+            this.data.status = 1;
+        }
     };
     RoleDialog.prototype.saveRole = function (data) {
         var _this = this;
         var params = Object.assign({}, data);
-        delete params.id;
         if (data.id != '') {
-            this.service.editRole(data.id, params).subscribe(function (res) {
+            var dataParam = { key: params.key, name: params.name, status: parseInt(params.status) };
+            this.service.editRole(data.id, dataParam).subscribe(function (res) {
                 if (res.data.status == 200) {
-                    _this.data.getRoleList();
+                    _this.roleList.splice(data.index, 1, res.data.result);
                 }
             });
         }
@@ -3496,6 +3502,10 @@ var RoleDialog = (function () {
             });
         }
         this.dialogRef.close();
+    };
+    RoleDialog.prototype.closeDialog = function () {
+        this.data = { id: '' };
+        this.dialogRef.close('cancel');
     };
     return RoleDialog;
 }());
@@ -3764,8 +3774,9 @@ var RoleListComponent = (function () {
     };
     RoleListComponent.prototype.editRoleItem = function (item, index) {
         var roleConfig = __WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */].roleConfig;
-        roleConfig.data = item;
-        roleConfig.data.getRoleList = this.getRoleList;
+        roleConfig.data = { id: '' };
+        roleConfig.data = Object.assign({}, item);
+        roleConfig.data.index = index;
         this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */], roleConfig);
     };
     /**
@@ -3930,6 +3941,7 @@ var RoleManageComponent = (function () {
      */
     RoleManageComponent.prototype.addRole = function () {
         var roleConfig = __WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */].roleConfig;
+        roleConfig.data = { id: '' };
         roleConfig.data.getRoleList = this.getRoleList;
         this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */], roleConfig);
     };
@@ -4395,7 +4407,6 @@ var SystemSetComponent = (function () {
                 query[key] = 0;
             }
         }
-        console.log(query);
         this.service.editSystemEmail(query);
     };
     return SystemSetComponent;
@@ -4507,16 +4518,16 @@ var SystemSetService = (function () {
             if (res.data.status == 200) {
                 Object.assign(_this.systemEmail, res.data.result);
             }
-        }).catch(function (error) { console.log(error); });
+        }).catch(function (error) { });
     };
     SystemSetService.prototype.editSystemEmail = function (params) {
         var _this = this;
         var path = '/api/setting';
-        this.connectionService.post(path, params).then(function (res) {
+        this.connectionService.put(path, params).then(function (res) {
             if (res.data.status == 200) {
                 Object.assign(_this.systemEmail, res.data.result);
             }
-        }).catch(function (error) { console.log(error); });
+        }).catch(function (error) { });
     };
     return SystemSetService;
 }());
@@ -4541,7 +4552,7 @@ var _a;
 /***/ "../../../../../src/app/login-manage/user-manage/dialogs/user-form.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userform\">\r\n  <form #user=\"ngForm\" id=\"user\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新用户</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑用户</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>部门：\r\n          </label>\r\n          <md-select style=\"margin-left:10px;\" name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.departmentId\" class=\"depart-select catalog-select\">\r\n            <md-option *ngFor=\"let item of data.departmentList\" [value]=\"item.id\">\r\n              <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n            </md-option>\r\n          </md-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>帐号：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"username\"\r\n                 #username=\"ngModel\"\r\n                 [(ngModel)]=\"data.username\"\r\n                 (blur)=\"userBlured = true\" (focus)=\"userBlured = false\"\r\n                 type=\"text\"\r\n                 placeholder=\"\"\r\n                 pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                 required>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              帐号为必填项\r\n            </div>\r\n            <div *ngIf=\"(!username.errors.required && username.errors.pattern && userBlured)\" class=\"help alert alert-danger\">\r\n              帐号至多50位\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\" style=\"height:75px;\">\r\n        <div  *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>密码：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"password\"\r\n                 #password=\"ngModel\"\r\n                 [(ngModel)]=\"data.password\"\r\n                 placeholder=\"\"\r\n                 (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                 type=\"password\"\r\n                 pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n                 required>\r\n          <md-hint style=\"display:block;margin-left:155px;\" class=\"mt-1 c-5e5e5e\">*密码至少8位至多50位，且必须包含大小写字母和数字</md-hint>\r\n\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码格式不正确，请重新设置密码\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>确认：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"verify\"\r\n                 #verify=\"ngModel\"\r\n                 [(ngModel)]=\"data.verify\"\r\n                 placeholder=\"\"\r\n                 type=\"password\"\r\n                 (blur)=\"againBlured = true\"\r\n                 (focus)=\"againBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"(verify.dirty || verify.touched) && againBlured&& !verify.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>全名：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"fullName\"\r\n                 #fullName=\"ngModel\"\r\n                 [(ngModel)]=\"data.fullName\"\r\n                 placeholder=\"\"\r\n                 required>\r\n          <div *ngIf=\"!(fullName.pristine || fullName.valid || !fullName.touched)\" >\r\n            <div class=\"help alert alert-danger\">\r\n              全名为必填项\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>邮箱：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"email\"\r\n                 #email=\"ngModel\"\r\n                 [(ngModel)]=\"data.email\"\r\n                 placeholder=\"\"\r\n                 type=\"email\"\r\n                 pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                 (blur)=\"emailBlured = true\" (focus)=\"emailBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"email.errors && (email.dirty || email.touched)\">\r\n            <div *ngIf=\"email.errors.required\" class=\"help alert alert-danger\">\r\n              邮箱为必填项\r\n            </div>\r\n            <div *ngIf=\"(!email.errors.required && email.errors.pattern && emailBlured)\" class=\"help alert alert-danger\">\r\n              邮箱格式错误，请重新输入\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>状态：\r\n          </label>\r\n          <md-radio-group style=\"margin-left:10px;\" name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n            <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n            <md-radio-button [color]=\"'primary'\" value=\"0\">禁用</md-radio-button>\r\n          </md-radio-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\" style=\"margin-top: 0;\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n          </label>\r\n          <button *ngIf=\"data.id == ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid || !verifyResult()\">创建</button>\r\n          <button *ngIf=\"data.id != ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid\">修改</button>\r\n          <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"userform\">\r\n  <form #user=\"ngForm\" id=\"user\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新用户</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑用户</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>部门：\r\n          </label>\r\n          <md-select style=\"margin-left:10px;\" name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.departmentId\" class=\"depart-select catalog-select\">\r\n            <md-option *ngFor=\"let item of data.departmentList\" [value]=\"item.id\">\r\n              <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n            </md-option>\r\n          </md-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>帐号：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"username\"\r\n                 #username=\"ngModel\"\r\n                 [(ngModel)]=\"data.username\"\r\n                 (blur)=\"userBlured = true\" (focus)=\"userBlured = false\"\r\n                 type=\"text\"\r\n                 placeholder=\"\"\r\n                 pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                 required>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              帐号为必填项\r\n            </div>\r\n            <div *ngIf=\"(!username.errors.required && username.errors.pattern && userBlured)\" class=\"help alert alert-danger\">\r\n              帐号至多50位\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"data.id == ''\" class=\"info-block\" style=\"height:75px;\">\r\n        <div  *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>密码：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"password\"\r\n                 #password=\"ngModel\"\r\n                 [(ngModel)]=\"data.password\"\r\n                 placeholder=\"\"\r\n                 (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                 type=\"password\"\r\n                 pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n                 required>\r\n          <md-hint style=\"display:block;margin-left:155px;\" class=\"mt-1 c-5e5e5e\">*密码至少8位至多50位，且必须包含大小写字母和数字</md-hint>\r\n\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码格式不正确，请重新设置密码\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"data.id == ''\" class=\"info-block\">\r\n        <div *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>确认：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"verify\"\r\n                 #verify=\"ngModel\"\r\n                 [(ngModel)]=\"data.verify\"\r\n                 placeholder=\"\"\r\n                 type=\"password\"\r\n                 (blur)=\"againBlured = true\"\r\n                 (focus)=\"againBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"(verify.dirty || verify.touched) && againBlured&& !verify.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>全名：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"fullName\"\r\n                 #fullName=\"ngModel\"\r\n                 [(ngModel)]=\"data.fullName\"\r\n                 placeholder=\"\"\r\n                 required>\r\n          <div *ngIf=\"!(fullName.pristine || fullName.valid || !fullName.touched)\" >\r\n            <div class=\"help alert alert-danger\">\r\n              全名为必填项\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>邮箱：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"email\"\r\n                 #email=\"ngModel\"\r\n                 [(ngModel)]=\"data.email\"\r\n                 placeholder=\"\"\r\n                 type=\"email\"\r\n                 pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                 (blur)=\"emailBlured = true\" (focus)=\"emailBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"email.errors && (email.dirty || email.touched)\">\r\n            <div *ngIf=\"email.errors.required\" class=\"help alert alert-danger\">\r\n              邮箱为必填项\r\n            </div>\r\n            <div *ngIf=\"(!email.errors.required && email.errors.pattern && emailBlured)\" class=\"help alert alert-danger\">\r\n              邮箱格式错误，请重新输入\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>状态：\r\n          </label>\r\n          <md-radio-group style=\"margin-left:10px;\" name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n            <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n            <md-radio-button [color]=\"'primary'\" value=\"0\">禁用</md-radio-button>\r\n          </md-radio-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\" style=\"margin-top: 0;\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n          </label>\r\n          <button *ngIf=\"data.id == ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid || !verifyResult()\">创建</button>\r\n          <button *ngIf=\"data.id != ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid\">修改</button>\r\n          <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
