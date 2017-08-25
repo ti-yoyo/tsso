@@ -12,44 +12,66 @@ import com.tinet.tsso.auth.dao.LogActionMapper;
 import com.tinet.tsso.auth.dao.UserMapper;
 import com.tinet.tsso.auth.entity.LogAction;
 import com.tinet.tsso.auth.entity.User;
+import com.tinet.tsso.auth.param.LogActionParam;
 import com.tinet.tsso.auth.service.LogActionService;
+import com.tinet.tsso.auth.util.Page;
 
 /**
  * 插入日志的实现
- * 
- * @date 2017-08-24
+ *
  * @author lizy
+ * @date 2017-08-24
  */
 @Service
 public class LogActionServiceImpl extends BaseServiceImp<LogAction, Integer> implements LogActionService {
 
-	@Autowired
-	public LogActionMapper logActionMapper;
+    @Autowired
+    private LogActionMapper logActionMapper;
 
-	@Autowired
-	public UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
-	@Override
-	public void addLogAction(String operateDesc, String operateObject, Integer result) {
-		// 获取用户信息
-		Subject subject = SecurityUtils.getSubject();
-		List<Object> principals = subject.getPrincipals().asList();
+    @Override
+    public void addLogAction(String operateDesc, String operateObject, Integer result) {
+        // 获取用户信息
+        Subject subject = SecurityUtils.getSubject();
+        List<Object> principals = subject.getPrincipals().asList();
 
-		// 获取用户
-		List<User> userList = userMapper.selectByUsername(principals.get(0).toString());
-		User user = userList.get(0);
-		// 设置日志信息
-		LogAction logAction = new LogAction();
-		logAction.setUsername(principals.get(0).toString());
-		logAction.setUserId(user.getId());
-		logAction.setFullName(user.getFullName());
-		logAction.setOperateDesc(operateDesc);
-		logAction.setOperateObject(operateObject);
-		logAction.setResult(result);
-		logAction.setOperateTime(new Date());
-		// 插入日志
-		logActionMapper.insertSelective(logAction);
+        // 获取用户
+        List<User> userList = userMapper.selectByUsername(principals.get(0).toString());
+        User user = userList.get(0);
+        // 设置日志信息
+        LogAction logAction = new LogAction();
+        logAction.setUsername(principals.get(0).toString());
+        logAction.setUserId(user.getId());
+        logAction.setFullName(user.getFullName());
+        logAction.setOperateDesc(operateDesc);
+        logAction.setOperateObject(operateObject);
+        logAction.setResult(result);
+        logAction.setOperateTime(new Date());
+        // 插入日志
+        logActionMapper.insertSelective(logAction);
 
-	}
+    }
+
+    /**
+     * 查询日志的实现
+     *
+     * @param logActionParam 查询的参数
+     * @return
+     */
+    @Override
+    public Page<LogAction> selectByParam(LogActionParam logActionParam) {
+        if(logActionParam.getStart()==null){
+            logActionParam.setStart(0);
+        }
+        if(logActionParam.getLimit()==null){
+            logActionParam.setLimit(10);
+        }
+        List<LogAction> logActionList = logActionMapper.selectByParam(logActionParam);
+        Integer logActionCount= logActionMapper.selectCountByParam(logActionParam);
+
+        return new Page<LogAction>(logActionCount,logActionList);
+    }
 
 }

@@ -144,7 +144,7 @@ public class TssoConfig {
 		shiroFilterFactoryBean.setLoginUrl(loginUrl);
 
 		// 登录成功后要跳转的连接
-		shiroFilterFactoryBean.setSuccessUrl("/index.html");
+		//shiroFilterFactoryBean.setSuccessUrl("/index.html");
 
 		// 添加casFilter到shiroFilter中
 		Map<String, Filter> filters = new HashMap<>();

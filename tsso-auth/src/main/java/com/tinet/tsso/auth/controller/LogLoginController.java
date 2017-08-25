@@ -1,8 +1,8 @@
 package com.tinet.tsso.auth.controller;
 
-import com.tinet.tsso.auth.entity.LogAction;
-import com.tinet.tsso.auth.param.LogActionParam;
-import com.tinet.tsso.auth.service.LogActionService;
+import com.tinet.tsso.auth.entity.LogLogin;
+import com.tinet.tsso.auth.param.LogLoginParam;
+import com.tinet.tsso.auth.service.LogLoginService;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 操作日志的Action
+ * 登陆日志的Controller
  *
  * @author lizy
- * @date 2017-08-24
+ * @date 2017-08-25
  */
 @RestController
-@RequestMapping("/api/log_action")
-public class LogActionController {
+@RequestMapping("/api/log_login")
+public class LogLoginController {
 
     @Autowired
-    private LogActionService logActionService;
+    private LogLoginService logLoginService;
 
     /**
+     * 登陆日志的查询方法
      *
-     * 查询操作日志的方法
-     * @param logActionParam
+     * @param logLoginParam
      * @return
      */
     @GetMapping
-    public ResponseModel getLogAction(LogActionParam logActionParam) {
+    public ResponseModel getLogAction(LogLoginParam logLoginParam) {
 
-        Page<LogAction> page = logActionService.selectByParam(logActionParam);
+        Page<LogLogin> page = logLoginService.selectByParam(logLoginParam);
 
         return new ResponseModel.Builder().msg("查询成功").result(page).build();
     }

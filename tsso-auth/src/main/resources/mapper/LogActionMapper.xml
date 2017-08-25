@@ -14,6 +14,17 @@
   <sql id="Base_Column_List" >
     id, user_id, username, full_name, operate_desc, operate_object, result, operate_time
   </sql>
+  <sql id="byParams">
+    <if test="userName != null">
+      and username LIKE CONCAT('%', #{userName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="fullName != null">
+      and full_name LIKE CONCAT('%', #{fullName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and endTime != null">
+       and operate_time BETWEEN  #{startTime,jdbcType=TIMESTAMP}  AND  #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -125,4 +136,21 @@
       operate_time = #{operateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCountByParam" parameterType="com.tinet.tsso.auth.param.LogActionParam" resultType="java.lang.Integer">
+    SELECT count(*)
+    from log_action
+    where 1=1
+    <include refid="byParams"/>
+  </select>
+  <select id="selectByParam"  parameterType="com.tinet.tsso.auth.param.LogActionParam" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    from log_action
+    where 1=1
+    <include refid="byParams"/>
+    <if test="start != null and limit != null">
+      offset #{start, jdbcType=INTEGER} limit #{limit,
+			jdbcType=INTEGER}
+    </if>
+  </select>
 </mapper>
