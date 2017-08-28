@@ -12,7 +12,7 @@ public class PasswordChangeParam {
 
 	private String newPassword;//新密码
 
-	private String reNewPassword;//确认新密码
+	private String confirmPassword;//确认新密码
 
 	public String getPassword() {
 		return password;
@@ -30,12 +30,12 @@ public class PasswordChangeParam {
 		this.newPassword = newPassword;
 	}
 
-	public String getReNewPassword() {
-		return reNewPassword;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	public void setReNewPassword(String reNewPassword) {
-		this.reNewPassword = reNewPassword;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 	
 }

@@ -404,11 +404,11 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	public ResponseModel updateUserPassword(PasswordChangeParam passwordChangeParam, String username) {
 		// 参数都不能为空
 		if (username == null || passwordChangeParam.getPassword() == null
-				|| passwordChangeParam.getNewPassword() == null || passwordChangeParam.getReNewPassword() == null) {
+				|| passwordChangeParam.getNewPassword() == null || passwordChangeParam.getConfirmPassword() == null) {
 			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).build();
 		}
 		// 新密码和确认密码一致
-		if (!passwordChangeParam.getNewPassword().equals(passwordChangeParam.getReNewPassword())) {
+		if (!passwordChangeParam.getNewPassword().equals(passwordChangeParam.getConfirmPassword())) {
 			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("新密码和确认密码不一致！").build();
 		}
 

@@ -17,12 +17,7 @@ public class IndexController {
 		return "/index.html";
 	}
 
-	@RequestMapping(value = "/password_find")
-	public String passwordFind() {
-		return "/index.html";
-	}
-
-	@RequestMapping(value = "/password_modify")
+	@RequestMapping(value = "/password*")
 	public String passwordModify() {
 		return "/index.html";
 	}

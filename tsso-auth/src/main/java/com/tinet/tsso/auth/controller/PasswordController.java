@@ -35,7 +35,6 @@ import com.tinet.tsso.auth.util.ResponseModel;
 @RequestMapping("/api/password")
 public class PasswordController {
 
-
 	private static Map<String, UsernameAndUuidModel> userModelMap = new Hashtable<String, UsernameAndUuidModel>();
 
 	@Autowired
@@ -109,10 +108,16 @@ public class PasswordController {
 		return userService.setPassword(passwordParam, ResetPasswordTmp.getResetMap(), username, key, effictiveTime);
 	}
 
-	
+	/**
+	 * 修改密码
+	 * 
+	 * @param passwordChangeParam
+	 * @param username
+	 * @return
+	 */
 	@PutMapping("/change_password")
-	public ResponseModel changePassword(@RequestBody PasswordChangeParam passwordChangeParam,String username) {
-		
+	public ResponseModel changePassword(@RequestBody PasswordChangeParam passwordChangeParam, String username) {
+
 		return userService.updateUserPassword(passwordChangeParam, username);
 	}
 
@@ -130,9 +135,8 @@ public class PasswordController {
 		stringBuffer.append("您好,").append(username).append("先生/女士：").append("<br/>")
 				.append("您申请了密码重置。请访问此链接，输入您的新密码(该链接有效时长为10分钟)：<br/>").append("<a href=\"")
 				.append(changePasswordAddress).append("/password_reset").append("?username=").append(username)
-				.append("&key=").append(key).append("&changeKey=").append(1).append("\">").append(changePasswordAddress)
-				.append("/password_reset").append("?username=").append(username).append("&key=").append(key)
-				.append("&changeKey=").append(1).append("</a>").append("<br/>");
+				.append("&key=").append(key).append("\">").append(changePasswordAddress).append("/password_reset")
+				.append("?username=").append(username).append("&key=").append(key).append("</a>").append("<br/>");
 
 		return stringBuffer.toString();
 	}
