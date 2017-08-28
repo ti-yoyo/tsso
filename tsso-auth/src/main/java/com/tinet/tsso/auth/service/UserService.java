@@ -1,10 +1,13 @@
 package com.tinet.tsso.auth.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.UserModel;
+import com.tinet.tsso.auth.model.UsernameAndUuidModel;
+import com.tinet.tsso.auth.param.PasswordParam;
 import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;
@@ -54,7 +57,7 @@ public interface UserService extends BaseService<User, Integer> {
 	 * @param user
 	 * @return
 	 */
-	ResponseModel addUser(User user);
+	ResponseModel addUser(UserParam userParam);
 
 	/**
 	 * 按照用户名查询用户
@@ -79,5 +82,16 @@ public interface UserService extends BaseService<User, Integer> {
 	 * @return
 	 */
 	ResponseModel updateUser(User user);
+
+	/**
+	 * @param passwordParam
+	 * @param userModelMap
+	 * @param username
+	 * @param key
+	 * @param effictiveTime
+	 * @return
+	 */
+	ResponseModel modifyPassword(PasswordParam passwordParam, Map<String, UsernameAndUuidModel> userModelMap,
+			String username, String key, Integer effictiveTime);
 
 }

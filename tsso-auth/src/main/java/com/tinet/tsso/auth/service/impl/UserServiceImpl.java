@@ -3,13 +3,19 @@ package com.tinet.tsso.auth.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +24,14 @@ import com.tinet.tsso.auth.dao.UserMapper;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.UserModel;
+import com.tinet.tsso.auth.model.UsernameAndUuidModel;
+import com.tinet.tsso.auth.param.PasswordParam;
 import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.UserService;
+import com.tinet.tsso.auth.util.MailSenderUtil;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.PasswordHash;
+import com.tinet.tsso.auth.util.ResetPasswordTmp;
 import com.tinet.tsso.auth.util.ResponseModel;
 
 /**
@@ -33,11 +43,22 @@ import com.tinet.tsso.auth.util.ResponseModel;
 @Service
 public class UserServiceImpl extends BaseServiceImp<User, Integer> implements UserService {
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	private UserMapper userMapper;
 
 	@Autowired
 	private RoleMapper roleMapper;
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	@Value("${mail.from.address}")
+	private String mailFrom;
+
+	@Value("${tsso.cas.clientUrl}")
+	private String changePasswordAddress;
 
 	/**
 	 * 按照参数查询用户
@@ -154,23 +175,43 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 添加用户
 	 */
 	@Override
-	public ResponseModel addUser(User user) {
+	public ResponseModel addUser(UserParam userParam) {
+		User user = new User();
+		BeanUtils.copyProperties(userParam, user);
+		if (this.selectByUserName(userParam.getUsername()) != null) {
+			return new ResponseModel.Builder().error("该帐号已经存在").status(HttpStatus.BAD_REQUEST).build();
+		}
 		/**
 		 * 用户的账号和全名不能为空
 		 */
-		if (user.getUsername() == null || user.getFullName() == null) {
+		if (user.getUsername() == null || user.getFullName() == null || user.getEmail() == null) {
 			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("用户名和全名都不能为空").build();
 		}
 		user.setCreateTime(new Date());
 
+		// 帐号唯一性校验
 		Integer userCount = userMapper.selectCountByUserName(user.getUsername());
 		if (!userCount.equals(0)) {
 			return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("用户名已经被使用").build();
 		}
 
+		// 处理密码
 		user = dealPassword(user, null);
-
+		// 新建用户
 		userMapper.insertSelective(user);
+		//
+		if (userParam.getSetPassword() == 1) {
+
+			UUID uuid = UUID.randomUUID();
+
+			UsernameAndUuidModel usernameAndUuidModel = new UsernameAndUuidModel();
+			usernameAndUuidModel.setKey(uuid.toString());
+			usernameAndUuidModel.setDate(new Date());
+
+			ResetPasswordTmp.resetMap.put(userParam.getUsername(), usernameAndUuidModel);
+			MailSenderUtil.sendMail(mailSender, mailFrom, userParam.getEmail(), "天润统一登录系统，重置密码邀请",
+					getMailContent(userParam.getUsername(), uuid.toString()));
+		}
 
 		user = userMapper.selectByPrimaryKey(user.getId());
 
@@ -255,9 +296,9 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			}
 
 		}
-		
+
 		userMapper.updateByPrimaryKeySelective(user);
-		
+
 		UserParam userParam = new UserParam();
 		userParam.setId(user.getId());
 		Page<UserModel> page = selectByParams(userParam);
@@ -266,4 +307,80 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		return new ResponseModel.Builder().msg("更新成功").result(page.getPageData().get(0)).build();
 	}
 
+	/**
+	 * 生成邮件内容
+	 * 
+	 * @param username
+	 * @param key
+	 * @return
+	 */
+	private String getMailContent(String username, String key) {
+		// 邮件格式为：
+		// 您重置密码的链接为：http://auth.tinetcloud.com/api/password/password_modify?username=lizy&key=7c3668d8-6ad4-4230-9d2a-634d5a79ae61
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("您好,").append(username).append("先生/女士：").append("<br/>")
+				.append("天润同意登录系统邀请您设置密码,请访问此链接，输入您的新密码(该链接有效时长为3天)：<br/>").append("<a href=\"")
+				.append(changePasswordAddress).append("/password_modify").append("?username=").append(username)
+				.append("&key=").append(key).append("&changeKey=").append(1).append("\">").append(changePasswordAddress)
+				.append("/password_modify").append("?username=").append(username).append("&key=").append(key)
+				.append("&changeKey=").append(1).append("</a>").append("<br/>");
+
+		return stringBuffer.toString();
+	}
+
+	/**
+	 * 更新用户密码的实现方法
+	 * 
+	 * @param passwordParam
+	 *            密码和确认密码
+	 * @param map
+	 *            存储用户标识的key
+	 * @param username
+	 *            帐号
+	 * @param key
+	 *            标识
+	 * @param effictiveTime
+	 *            有效时长
+	 * @return
+	 */
+	@Override
+	public ResponseModel modifyPassword(PasswordParam passwordParam, Map<String, UsernameAndUuidModel> map,
+			String username, String key, Integer effictiveTime) {
+
+		if (passwordParam.getPassword() == null || passwordParam.getRepassword() == null) {
+			return new ResponseModel.Builder().error("密码和确认密码都不能为空").status(HttpStatus.BAD_REQUEST).build();
+		} else if (!passwordParam.getPassword().equals(passwordParam.getRepassword())) {
+			return new ResponseModel.Builder().error("密码和确认密码不同").status(HttpStatus.FORBIDDEN).build();
+		}
+		if (username == null) {
+			return new ResponseModel.Builder().error("请求错误").status(HttpStatus.FORBIDDEN).build();
+		}
+
+		UsernameAndUuidModel userNameAndUuidModel = map.get(username);
+
+		if (userNameAndUuidModel == null || !userNameAndUuidModel.getKey().equals(key)) {
+			return new ResponseModel.Builder().error("请求错误").status(HttpStatus.BAD_REQUEST).build();
+		}
+
+		Date nowDate = new Date();
+		long dateDiffer = nowDate.getTime() - userNameAndUuidModel.getDate().getTime();
+		// 确认不超时
+		if (dateDiffer > 60000 * effictiveTime) {
+			map.remove(username);
+			return new ResponseModel.Builder().error("链接已失效").status(HttpStatus.BAD_REQUEST).build();
+		}
+		// 根据用户名查询用户
+		User user = this.selectByUserName(username);
+
+		if (user == null) {
+			return new ResponseModel.Builder().error("用户名错误").status(HttpStatus.BAD_REQUEST).build();
+		}
+		user.setPassword(passwordParam.getPassword());
+
+		user = this.updatePasswordByUsername(user);
+
+		map.remove(username);
+
+		return new ResponseModel.Builder().msg("操作成功").result(user).build();
+	}
 }

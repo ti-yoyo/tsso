@@ -164,7 +164,7 @@ public class TssoConfig {
 		filterChainDefinitionMap.put("/api/password/forget_password", "anon");
 		filterChainDefinitionMap.put("/api/password/change_password", "anon");
 		filterChainDefinitionMap.put("/password_find", "anon");
-		filterChainDefinitionMap.put("/password_modify", "anon");
+		filterChainDefinitionMap.put("/password_reset", "anon");
 
 		// 所有url都需要验证
 		filterChainDefinitionMap.put("/", "authc");

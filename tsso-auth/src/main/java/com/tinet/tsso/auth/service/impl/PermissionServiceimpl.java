@@ -61,7 +61,6 @@ public class PermissionServiceimpl extends BaseServiceImp<Permission, Integer> i
 	 */
 	@Override
 	public ResponseModel addPermission(Permission permission) {
-		
 
 		Integer permissionCount = permissionMapper.selectByPermissionKey(permission.getKey());
 
@@ -97,18 +96,23 @@ public class PermissionServiceimpl extends BaseServiceImp<Permission, Integer> i
 		 */
 		if (permission.getKey() != null) {
 			Permission tempPermission = permissionMapper.selectByPrimaryKey(permission.getId());
-			if(!tempPermission.getKey() .equals(permission.getKey())) {
+			if (!tempPermission.getKey().equals(permission.getKey())) {
 				Integer permissionCount = permissionMapper.selectByPermissionKey(permission.getKey());
 				if (!permissionCount.equals(0)) {
 					return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该权限key已经被使用").build();
 				}
 			}
 		}
-		
+
 		permissionMapper.updateByPrimaryKeySelective(permission);
 
-		return new ResponseModel.Builder().msg("更新成功").result(permissionMapper.selectByPrimaryKey(permission.getId()))
-				.build();
+		PermissionModel PermissionModel = new PermissionModel();
+		permission = permissionMapper.selectByPrimaryKey(permission.getId());
+		BeanUtils.copyProperties(permission, PermissionModel);
+		PermissionModel.setApplicationKey(permission.getApplication().getKey());
+		PermissionModel.setApplicationName(permission.getApplication().getName());
+
+		return new ResponseModel.Builder().msg("更新成功").result(PermissionModel).build();
 	}
 
 }

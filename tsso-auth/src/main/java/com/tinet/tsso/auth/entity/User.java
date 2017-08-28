@@ -2,6 +2,8 @@ package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 用户的entity
  * 
@@ -27,6 +29,7 @@ public class User {
 
 	private Date createTime;//用户的创建时间
 
+	@JsonIgnore
 	private Department department;//用户所在部门
 
 	public Integer getId() {

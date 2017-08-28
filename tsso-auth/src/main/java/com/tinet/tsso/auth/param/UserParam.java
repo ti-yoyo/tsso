@@ -29,6 +29,8 @@ public class UserParam {
 
 	private Integer roleId;// 角色id
 
+	private Integer setPassword;// 0不发送设置密码链接，1发送设置密码的链接
+
 	public Integer getStart() {
 		return start;
 	}
@@ -109,4 +111,14 @@ public class UserParam {
 		this.status = status;
 	}
 
+	public Integer getSetPassword() {
+		return setPassword;
+	}
+
+	public void setSetPassword(Integer setPassword) {
+		this.setPassword = setPassword;
+	}
+
+
+	
 }
