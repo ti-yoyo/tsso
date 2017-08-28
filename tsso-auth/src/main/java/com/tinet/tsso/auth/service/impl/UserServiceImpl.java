@@ -244,7 +244,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * @param salt
 	 * @return
 	 */
-	
+
 	private String encodePassword(String userPassword, String salt) {
 		// 创建用户加密的对象
 		PasswordHash passwordHash = new PasswordHash();
@@ -342,7 +342,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	}
 
 	/**
-	 * 更新用户密码的实现方法
+	 * 设置和重置用户密码的实现方法
 	 * 
 	 * @param passwordParam
 	 *            密码和确认密码
@@ -401,31 +401,33 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 修改密码
 	 */
 	@Override
-	public ResponseModel updateUserPassword(PasswordChangeParam passwordChangeParam,String username) {
+	public ResponseModel updateUserPassword(PasswordChangeParam passwordChangeParam, String username) {
 		// 参数都不能为空
 		if (username == null || passwordChangeParam.getPassword() == null
 				|| passwordChangeParam.getNewPassword() == null || passwordChangeParam.getReNewPassword() == null) {
 			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).build();
 		}
-		//新密码和确认密码一致
+		// 新密码和确认密码一致
 		if (!passwordChangeParam.getNewPassword().equals(passwordChangeParam.getReNewPassword())) {
 			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("新密码和确认密码不一致！").build();
 		}
-		
+
 		User user = this.selectByUserName(username);
 		if (user == null) {
 			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("账户不存在！").build();
 		}
-		
-		String  encodePassword = this.encodePassword(passwordChangeParam.getPassword(), user.getPasswordSalt());
-		
-		if(!user.getPassword().equals(encodePassword)) {
+
+		// 密码匹配
+		String encodePassword = this.encodePassword(passwordChangeParam.getPassword(), user.getPasswordSalt());
+		if (!user.getPassword().equals(encodePassword)) {
 			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("密码错误").build();
 		}
-		user.setPassword(encodePassword);
-		
+
+		String encodeNewPassword = this.encodePassword(passwordChangeParam.getNewPassword(), user.getPasswordSalt());
+		user.setPassword(encodeNewPassword);
+
 		userMapper.updatePasswordByUsername(user);
-		
-		return new ResponseModel.Builder().result(passwordChangeParam.getPassword()).msg("密码修改成功").build();
+
+		return new ResponseModel.Builder().msg("密码修改成功").build();
 	}
 }

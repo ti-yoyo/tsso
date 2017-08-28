@@ -161,6 +161,7 @@ public class TssoConfig {
 		filterChainDefinitionMap.put("/login", "anon");
 		// 修改密码的链接不需要权限控制
 
+		
 		filterChainDefinitionMap.put("/api/password/forget_password", "anon");
 		filterChainDefinitionMap.put("/api/password/reset_password", "anon");
 		filterChainDefinitionMap.put("/api/password/set_password", "anon");
