@@ -565,7 +565,6 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__("../../../../axios/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constant_service__ = __webpack_require__("../../../../../src/app/core/services/constant.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConnectionService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -578,11 +577,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var ConnectionService = (function () {
     function ConnectionService() {
         this.instance = __WEBPACK_IMPORTED_MODULE_1_axios___default.a.create({
-            baseURL: __WEBPACK_IMPORTED_MODULE_2__constant_service__["a" /* ConstantService */].HOST,
+            //baseURL:ConstantService.HOST,
             withCredentials: true,
             headers: {
                 'Content-Type': 'application/json',
