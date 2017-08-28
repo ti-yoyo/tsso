@@ -11,6 +11,7 @@ public class PasswordParam {
 	private String password;//密码
 	
 	private String repassword;//确认密码
+	
 
 	public String getPassword() {
 		return password;

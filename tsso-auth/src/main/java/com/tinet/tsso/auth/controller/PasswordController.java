@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.model.UsernameAndUuidModel;
+import com.tinet.tsso.auth.param.PasswordChangeParam;
 import com.tinet.tsso.auth.param.PasswordParam;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.MailSenderUtil;
@@ -109,9 +110,16 @@ public class PasswordController {
 	}
 
 	
+	@PutMapping("/change_password")
+	public ResponseModel changePassword(@RequestBody PasswordChangeParam passwordChangeParam) {
+		User user = userService.selectByUserName(passwordChangeParam.getUsername());
+		
+		
+		return null;
+	}
 
 	/**
-	 * 生成邮件内容
+	 * 生成重置密码的邮件内容
 	 * 
 	 * @param username
 	 * @param key

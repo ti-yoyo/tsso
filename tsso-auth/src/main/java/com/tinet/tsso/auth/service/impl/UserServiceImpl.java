@@ -200,7 +200,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		// 新建用户
 		userMapper.insertSelective(user);
 		//
-		if (userParam.getSetPassword() == 1) {
+		if (userParam.getSetPassword() != null && userParam.getSetPassword() == 1) {
 
 			UUID uuid = UUID.randomUUID();
 
@@ -381,6 +381,6 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 
 		map.remove(username);
 
-		return new ResponseModel.Builder().msg("操作成功").result(user).build();
+		return new ResponseModel.Builder().msg("操作成功").result(passwordParam.getPassword()).build();
 	}
 }

@@ -199,7 +199,5 @@ public class UserController {
 		map.put("username", principals.get(0));
 		return new ResponseModel.Builder().result(map).build();
 	}
-
-	
 	
 }
