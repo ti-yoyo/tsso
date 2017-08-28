@@ -7,6 +7,7 @@ import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.model.UsernameAndUuidModel;
+import com.tinet.tsso.auth.param.PasswordChangeParam;
 import com.tinet.tsso.auth.param.PasswordParam;
 import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.util.Page;
@@ -91,7 +92,16 @@ public interface UserService extends BaseService<User, Integer> {
 	 * @param effictiveTime
 	 * @return
 	 */
-	ResponseModel modifyPassword(PasswordParam passwordParam, Map<String, UsernameAndUuidModel> userModelMap,
+	ResponseModel setPassword(PasswordParam passwordParam, Map<String, UsernameAndUuidModel> userModelMap,
 			String username, String key, Integer effictiveTime);
+
+	/**
+	 * 更新用户的密码
+	 * 
+	 * @param passwordChangeParam
+	 * @param username 
+	 * @return
+	 */
+	ResponseModel updateUserPassword(PasswordChangeParam passwordChangeParam, String username);
 
 }

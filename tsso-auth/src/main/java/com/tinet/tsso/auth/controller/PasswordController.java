@@ -93,7 +93,7 @@ public class PasswordController {
 	 */
 	@PutMapping("/reset_password")
 	public ResponseModel resetPassWord(@RequestBody PasswordParam passwordParam, String username, String key) {
-		return userService.modifyPassword(passwordParam, userModelMap, username, key, effictiveTime);
+		return userService.setPassword(passwordParam, userModelMap, username, key, effictiveTime);
 	}
 
 	/**
@@ -106,16 +106,14 @@ public class PasswordController {
 	 */
 	@PostMapping("/set_password")
 	public ResponseModel setPassWord(@RequestBody PasswordParam passwordParam, String username, String key) {
-		return userService.modifyPassword(passwordParam, ResetPasswordTmp.getResetMap(), username, key, effictiveTime);
+		return userService.setPassword(passwordParam, ResetPasswordTmp.getResetMap(), username, key, effictiveTime);
 	}
 
 	
 	@PutMapping("/change_password")
-	public ResponseModel changePassword(@RequestBody PasswordChangeParam passwordChangeParam) {
-		User user = userService.selectByUserName(passwordChangeParam.getUsername());
+	public ResponseModel changePassword(@RequestBody PasswordChangeParam passwordChangeParam,String username) {
 		
-		
-		return null;
+		return userService.updateUserPassword(passwordChangeParam, username);
 	}
 
 	/**

@@ -25,6 +25,7 @@ import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.model.UsernameAndUuidModel;
+import com.tinet.tsso.auth.param.PasswordChangeParam;
 import com.tinet.tsso.auth.param.PasswordParam;
 import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.UserService;
@@ -228,7 +229,23 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * @param user
 	 */
 	private User dealPassword(User user, String salt) {
+		// 密码进行加密
+		String encodePassword = this.encodePassword(user.getPassword(), salt);
 
+		user.setPassword(encodePassword);
+		user.setPasswordSalt(salt);
+		return user;
+	}
+
+	/**
+	 * 加密方法
+	 * 
+	 * @param userPassword
+	 * @param salt
+	 * @return
+	 */
+	
+	private String encodePassword(String userPassword, String salt) {
 		// 创建用户加密的对象
 		PasswordHash passwordHash = new PasswordHash();
 		passwordHash.setAlgorithmName("SHA-256");
@@ -238,13 +255,9 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			String uuidString = UUID.randomUUID().toString();
 			salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
 		}
+		String encodePassword = passwordHash.toHex(userPassword == null ? "" : userPassword, salt);
 
-		// 密码进行加密
-		String encodePassword = passwordHash.toHex(user.getPassword() == null ? "" : user.getPassword(), salt);
-
-		user.setPassword(encodePassword);
-		user.setPasswordSalt(salt);
-		return user;
+		return encodePassword;
 	}
 
 	/**
@@ -344,7 +357,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * @return
 	 */
 	@Override
-	public ResponseModel modifyPassword(PasswordParam passwordParam, Map<String, UsernameAndUuidModel> map,
+	public ResponseModel setPassword(PasswordParam passwordParam, Map<String, UsernameAndUuidModel> map,
 			String username, String key, Integer effictiveTime) {
 
 		if (passwordParam.getPassword() == null || passwordParam.getRepassword() == null) {
@@ -382,5 +395,37 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		map.remove(username);
 
 		return new ResponseModel.Builder().msg("操作成功").result(passwordParam.getPassword()).build();
+	}
+
+	/**
+	 * 修改密码
+	 */
+	@Override
+	public ResponseModel updateUserPassword(PasswordChangeParam passwordChangeParam,String username) {
+		// 参数都不能为空
+		if (username == null || passwordChangeParam.getPassword() == null
+				|| passwordChangeParam.getNewPassword() == null || passwordChangeParam.getReNewPassword() == null) {
+			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).build();
+		}
+		//新密码和确认密码一致
+		if (!passwordChangeParam.getNewPassword().equals(passwordChangeParam.getReNewPassword())) {
+			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("新密码和确认密码不一致！").build();
+		}
+		
+		User user = this.selectByUserName(username);
+		if (user == null) {
+			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("账户不存在！").build();
+		}
+		
+		String  encodePassword = this.encodePassword(passwordChangeParam.getPassword(), user.getPasswordSalt());
+		
+		if(!user.getPassword().equals(encodePassword)) {
+			return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("密码错误").build();
+		}
+		user.setPassword(encodePassword);
+		
+		userMapper.updatePasswordByUsername(user);
+		
+		return new ResponseModel.Builder().result(passwordChangeParam.getPassword()).msg("密码修改成功").build();
 	}
 }
