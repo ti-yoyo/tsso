@@ -4674,6 +4674,7 @@ var SystemSetComponent = (function () {
         this.service = service;
         this.protocolList = __WEBPACK_IMPORTED_MODULE_1__core_services_constant_service__["a" /* ConstantService */].protocolList;
         this.systemEmail = { protocol: 'SMTP', changePassword: 0, TLS: 0 };
+        this.systemEmail = this.service.systemEmail;
     }
     SystemSetComponent.prototype.ngOnInit = function () {
         this.service.getSystemEmail();
