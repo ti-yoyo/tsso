@@ -70,6 +70,12 @@
             <artifactId>shiro-core</artifactId>
             <version>1.3.2</version>
         </dependency>
+
+		<dependency>
+			<groupId>org.apereo.cas</groupId>
+			<artifactId>cas-server-support-audit-jdbc</artifactId>
+			<version>${cas.version}</version>
+		</dependency>
 		
 	</dependencies>
 
