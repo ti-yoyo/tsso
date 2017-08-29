@@ -1,0 +1,29 @@
+{
+  "@class": "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId": "^(https|http)://.*tinetcloud\\.com.*",
+  "name": "TinetCloud",
+  "id": 20000001,
+  "description": "HTTPS and HTTP 协议的 tinetcloud.com域名的所有应用可以登录",
+  "evaluationOrder": 20001,
+  "ignoreAttributes": "true",
+  "logoutType": "BACK_CHANNEL",
+  "attributeReleasePolicy": {
+    "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+    "principalAttributesRepository": {
+      "@class": "org.jasig.cas.authentication.principal.DefaultPrincipalAttributesRepository"
+    },
+    "authorizedToReleaseCredentialPassword": false,
+    "authorizedToReleaseProxyGrantingTicket": false
+  },
+  "proxyPolicy": {
+    "@class": "org.jasig.cas.services.RefuseRegisteredServiceProxyPolicy"
+  },
+  "usernameAttributeProvider": {
+    "@class": "org.jasig.cas.services.DefaultRegisteredServiceUsernameProvider"
+  },
+  "accessStrategy": {
+    "@class": "org.jasig.cas.services.DefaultRegisteredServiceAccessStrategy",
+    "enabled": true,
+    "ssoEnabled": true
+  }
+}
