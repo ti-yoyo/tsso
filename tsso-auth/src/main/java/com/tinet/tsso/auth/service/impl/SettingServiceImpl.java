@@ -19,7 +19,7 @@ import com.tinet.tsso.auth.util.SettingProperties;
  * @author lizy
  */
 @Service
-public class SettingServiceImpl implements SettingService {
+public class SettingServiceImpl extends BaseServiceImp<Setting, Integer>implements SettingService{
 
 	@Autowired
 	private SettingMapper settingMapper;
@@ -43,13 +43,17 @@ public class SettingServiceImpl implements SettingService {
 	public void changeSetting(HashMap<String, String> map) {
 		Map<String, String> tmpMap = SettingProperties.settingMap;
 		for (String key : map.keySet()) {
+			Setting setting = new Setting();
 			if (tmpMap.get(key) != null) {
-				Setting setting = new Setting();
 				if (!tmpMap.get(key).equals(map.get(key))) {
 					setting.setKey(key);
 					setting.setValue(map.get(key));
 					settingMapper.updateValueBykey(setting);
 				}
+			}else {
+				setting.setKey(key);
+				setting.setValue(map.get(key));
+				settingMapper.insertSelective(setting);
 			}
 		}
 		init();

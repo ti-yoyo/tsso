@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -76,10 +77,12 @@ public class UserController {
 	 */
 	@PostMapping
 	public ResponseModel addUser(@RequestBody UserParam userParam) {
+		User user = new User();
+		BeanUtils.copyProperties(userParam, user);
 
 		ResponseModel responseModel = userService.addUser(userParam);
 
-		logActionService.addLogAction("添加用户", userParam.toString(), responseModel.get("status").equals(200) ? 1 : 0);
+		logActionService.addLogAction("添加用户", user.toString(), responseModel.get("status").equals(200) ? 1 : 0);
 
 		return responseModel;
 	}

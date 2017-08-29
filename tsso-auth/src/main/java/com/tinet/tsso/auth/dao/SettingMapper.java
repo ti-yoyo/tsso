@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tinet.tsso.auth.entity.Setting;
 
-public interface SettingMapper {
+public interface SettingMapper extends BaseMapper<Setting, Integer> {
 
 	/**
 	 * @return
