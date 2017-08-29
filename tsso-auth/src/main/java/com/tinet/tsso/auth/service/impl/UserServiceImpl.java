@@ -229,6 +229,10 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * @param user
 	 */
 	private User dealPassword(User user, String salt) {
+		if (salt == null) {
+			String uuidString = UUID.randomUUID().toString();
+			salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
+		}
 		// 密码进行加密
 		String encodePassword = this.encodePassword(user.getPassword(), salt);
 
@@ -251,10 +255,6 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		passwordHash.setAlgorithmName("SHA-256");
 		passwordHash.setHashIterations(6);
 		// 截取uuid的最后10位作为密码的盐
-		if (salt == null) {
-			String uuidString = UUID.randomUUID().toString();
-			salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
-		}
 		String encodePassword = passwordHash.toHex(userPassword == null ? "" : userPassword, salt);
 
 		return encodePassword;
@@ -333,10 +333,10 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("您好,").append(username).append("先生/女士：").append("<br/>")
 				.append("天润同意登录系统邀请您设置密码,请访问此链接，输入您的新密码(该链接有效时长为3天)：<br/>").append("<a href=\"")
-				.append(changePasswordAddress).append("/password_modify").append("?username=").append(username)
-				.append("&key=").append(key).append("&changeKey=").append(1).append("\">").append(changePasswordAddress)
-				.append("/password_modify").append("?username=").append(username).append("&key=").append(key)
-				.append("&changeKey=").append(1).append("</a>").append("<br/>");
+				.append(changePasswordAddress).append("/password_change").append("?username=").append(username)
+				.append("&key=").append(key).append("\">").append(changePasswordAddress)
+				.append("/password_change").append("?username=").append(username).append("&key=").append(key)
+				.append("</a>").append("<br/>");
 
 		return stringBuffer.toString();
 	}

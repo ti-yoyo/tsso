@@ -20,6 +20,7 @@ import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.model.UsernameAndUuidModel;
 import com.tinet.tsso.auth.param.PasswordChangeParam;
 import com.tinet.tsso.auth.param.PasswordParam;
+import com.tinet.tsso.auth.service.LogActionService;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.MailSenderUtil;
 import com.tinet.tsso.auth.util.ResetPasswordTmp;
@@ -42,6 +43,9 @@ public class PasswordController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+
+	@Autowired
+	private LogActionService logActionService;
 
 	@Value("${mail.from.address}")
 	private String mailFrom;
@@ -73,8 +77,14 @@ public class PasswordController {
 		forgetPasswordModel.setDate(new Date());
 		userModelMap.put(userModel.getUsername(), forgetPasswordModel);
 
-		MailSenderUtil.sendMail(mailSender, mailFrom, u.getEmail(), "TSSO天润单点登录系统密码重置链接",
-				this.getMailContent(u.getUsername(), key));
+		try {
+			MailSenderUtil.sendMail(mailSender, mailFrom, u.getEmail(), "TSSO天润单点登录系统密码重置链接",
+					this.getMailContent(u.getUsername(), key));
+		} catch (Exception e) {
+			logActionService.addLogAction(u.getUsername(), "申请忘记密码", u.getUsername(), 0);
+			e.printStackTrace();
+		}
+		logActionService.addLogAction(u.getUsername(), "申请忘记密码", u.getUsername(), 1);
 		return new ResponseModel.Builder().msg("新的密码已经生成，请到邮箱查看").result(userModel.getUsername()).build();
 
 	}
@@ -92,7 +102,12 @@ public class PasswordController {
 	 */
 	@PutMapping("/reset_password")
 	public ResponseModel resetPassWord(@RequestBody PasswordParam passwordParam, String username, String key) {
-		return userService.setPassword(passwordParam, userModelMap, username, key, effictiveTime);
+
+		ResponseModel responseModel = userService.setPassword(passwordParam, userModelMap, username, key,
+				effictiveTime);
+		logActionService.addLogAction(username, "重置密码", username, responseModel.equals(200)?1:0);
+		
+		return responseModel;
 	}
 
 	/**
@@ -105,7 +120,11 @@ public class PasswordController {
 	 */
 	@PostMapping("/set_password")
 	public ResponseModel setPassWord(@RequestBody PasswordParam passwordParam, String username, String key) {
-		return userService.setPassword(passwordParam, ResetPasswordTmp.getResetMap(), username, key, effictiveTime);
+		ResponseModel responseModel = userService.setPassword(passwordParam, ResetPasswordTmp.getResetMap(), username,
+				key, effictiveTime);
+		logActionService.addLogAction(username, "设置密码", username, responseModel.equals(200)?1:0);
+		
+		return responseModel;
 	}
 
 	/**
@@ -117,8 +136,10 @@ public class PasswordController {
 	 */
 	@PutMapping("/change_password")
 	public ResponseModel changePassword(@RequestBody PasswordChangeParam passwordChangeParam, String username) {
-
-		return userService.updateUserPassword(passwordChangeParam, username);
+		
+		ResponseModel responseModel =userService.updateUserPassword(passwordChangeParam, username);
+				logActionService.addLogAction(username, "修改密码", username, responseModel.equals(200)?1:0);
+		return responseModel;
 	}
 
 	/**

@@ -102,7 +102,6 @@ public class UserController {
 		User user = userService.get(userId);
 		user.setPassword("****");
 		user.setPasswordSalt("****");
-		List<Role> roleOldList = roleService.selectRoleByUserId(userId);
 
 		if (userId == null) {
 			return new ResponseModel.Builder().error("用户Id不能为空").build();
@@ -110,7 +109,7 @@ public class UserController {
 		List<Role> roleList = userService.updataUserRoleList(userId, roleIdList);
 
 		logActionService.addLogAction("更新用户角色",
-				"用户:" + user.toString() + "的角色由" + roleOldList.toString() + "更新为" + roleList, 1);
+				"用户:" + user.toString() + "的角色", 1);
 
 		return new ResponseModel.Builder().result(roleList).msg("角色更新成功").build();
 

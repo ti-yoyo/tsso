@@ -101,12 +101,11 @@ public class RoleController {
 	public ResponseModel addUserForRole(@RequestBody UserAndRoleParam userAndRole) {
 
 		User user = userService.get(userAndRole.getUserId());
-		Role role =roleService.get(userAndRole.getRoleId());
 		
 
 		roleService.addUser(userAndRole.getRoleId(), userAndRole.getUserId());
 
-		logActionService.addLogAction("为角色添加用户","角色:"+role.toString()+ "添加用户"+user.toString(), 1);
+		logActionService.addLogAction("为角色添加用户",user.toString(), 1);
 		
 		// 查询指定id的用户
 		UserParam param = new UserParam();
@@ -189,7 +188,7 @@ public class RoleController {
 
 		List<Permission> permissionList = roleService.updatePermissionList(roleId, permissionIdList);
 
-		logActionService.addLogAction("更新角色的权限列表","角色"+role.toString()+"的权限列表更新为"+oldPermissionList.toString()+"更新为"+permissionList , 1);
+		logActionService.addLogAction("更新角色的权限列表",role.toString() , 1);
 		
 		return new ResponseModel.Builder().msg("更新成功").result(permissionList).build();
 	}

@@ -1,10 +1,8 @@
 package com.tinet.tsso.auth.param;
 
-import com.tinet.tsso.auth.util.StringToDate;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.tinet.tsso.auth.util.StringToDate;
 
 /**
  * @author lizy
