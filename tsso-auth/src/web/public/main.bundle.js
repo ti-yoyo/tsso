@@ -1553,9 +1553,6 @@ var AuthListComponent = (function () {
         authConfig.data = Object.assign({}, item);
         authConfig.data.appList = this.appList;
         authConfig.data.index = index;
-        if (this.appList[0] && this.appList[0].id) {
-            authConfig.data.applicationId = this.appList[0].id;
-        }
         this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_auth_dialog__["a" /* AuthDialog */], authConfig);
     };
     return AuthListComponent;
@@ -4900,11 +4897,16 @@ var UserFormDialog = (function () {
     }
     UserFormDialog.prototype.saveUser = function (data) {
         var _this = this;
-        if (!data.id) {
-            var params = Object.assign({}, data);
-            delete params.id;
-            delete params.departmentList;
-            delete params.verify;
+        if (data.id == '') {
+            var params = {
+                username: data.username,
+                password: data.password,
+                fullName: data.fullName,
+                departmentId: data.departmentId,
+                email: data.email,
+                status: data.status,
+                setPassword: data.setPassword == true ? 1 : 0
+            };
             this.service.createUser(params).subscribe(function (res) {
                 if (res.data.status == 200) {
                     _this.data.getUserList(0);
@@ -4918,7 +4920,6 @@ var UserFormDialog = (function () {
                 departmentId: data.departmentId,
                 email: data.email,
                 status: data.status,
-                setPassword: data.setPassword == true ? 1 : 0
             };
             this.service.editUser(data.id, data.index, params).subscribe(function (res) {
                 if (res.data.status == 200) {
