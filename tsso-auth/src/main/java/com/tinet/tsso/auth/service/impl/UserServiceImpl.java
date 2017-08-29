@@ -200,19 +200,16 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		user = dealPassword(user, null);
 		// 新建用户
 		userMapper.insertSelective(user);
-		//
-		if (userParam.getSetPassword() != null && userParam.getSetPassword() == 1) {
+		
+		//存储用户数据，并发送邮件
+		UUID uuid = UUID.randomUUID();
+		UsernameAndUuidModel usernameAndUuidModel = new UsernameAndUuidModel();
+		usernameAndUuidModel.setKey(uuid.toString());
+		usernameAndUuidModel.setDate(new Date());
 
-			UUID uuid = UUID.randomUUID();
-
-			UsernameAndUuidModel usernameAndUuidModel = new UsernameAndUuidModel();
-			usernameAndUuidModel.setKey(uuid.toString());
-			usernameAndUuidModel.setDate(new Date());
-
-			ResetPasswordTmp.resetMap.put(userParam.getUsername(), usernameAndUuidModel);
-			MailSenderUtil.sendMail(mailSender, mailFrom, userParam.getEmail(), "天润统一登录系统，重置密码邀请",
-					getMailContent(userParam.getUsername(), uuid.toString()));
-		}
+		ResetPasswordTmp.resetMap.put(userParam.getUsername(), usernameAndUuidModel);
+		MailSenderUtil.sendMail(mailSender, mailFrom, userParam.getEmail(), "天润统一登录系统，重置密码邀请",
+				getMailContent(userParam.getUsername(), uuid.toString()));
 
 		user = userMapper.selectByPrimaryKey(user.getId());
 
@@ -234,7 +231,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			salt = uuidString.substring(uuidString.length() - 10, uuidString.length());
 		}
 		// 密码进行加密
-		String encodePassword = this.encodePassword(user.getPassword(), salt);
+		String encodePassword = this.encodePassword(user.getPassword()==null?"":user.getPassword(), salt);
 
 		user.setPassword(encodePassword);
 		user.setPasswordSalt(salt);
