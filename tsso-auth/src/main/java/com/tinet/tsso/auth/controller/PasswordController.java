@@ -50,8 +50,11 @@ public class PasswordController {
 	@Value("${mail.from.address}")
 	private String mailFrom;
 
-	@Value("${mail.passwordRetrieval.effictiveTime}")
-	private Integer effictiveTime;
+	@Value("${mail.passwordReset.effictiveTime}")
+	private Integer resetEffictiveTime;
+	
+	@Value("${mail.setPassword.effictiveTime}")
+	private Integer setPasswordEffictiveTime;
 
 	@Value("${tsso.cas.clientUrl}")
 	private String changePasswordAddress;
@@ -110,7 +113,7 @@ public class PasswordController {
 	public ResponseModel resetPassWord(@RequestBody PasswordParam passwordParam, String username, String key) {
 
 		ResponseModel responseModel = userService.setPassword(passwordParam, userModelMap, username, key,
-				effictiveTime);
+				resetEffictiveTime);
 		logActionService.addLogAction(username, "重置密码", username, responseModel.get("status").equals(200) ? 1 : 0);
 
 		return responseModel;
@@ -127,7 +130,7 @@ public class PasswordController {
 	@PostMapping("/set_password")
 	public ResponseModel setPassWord(@RequestBody PasswordParam passwordParam, String username, String key) {
 		ResponseModel responseModel = userService.setPassword(passwordParam, ResetPasswordTmp.getResetMap(), username,
-				key, effictiveTime);
+				key, setPasswordEffictiveTime);
 		logActionService.addLogAction(username, "设置密码", username, responseModel.get("status").equals(200) ? 1 : 0);
 
 		return responseModel;
