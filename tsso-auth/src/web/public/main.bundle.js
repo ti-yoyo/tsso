@@ -357,6 +357,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_data_service__ = __webpack_require__("../../../../../src/app/core/services/data.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -372,16 +373,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HeaderComponent = (function () {
-    function HeaderComponent(router, connectionService, swalService) {
+    function HeaderComponent(router, connectionService, swalService, dataService) {
         this.router = router;
         this.connectionService = connectionService;
         this.swalService = swalService;
+        this.dataService = dataService;
         this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
+        this.user = this.dataService.user;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         if (!__WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user')) {
-            this.getCurrentUser();
+            this.dataService.getCurrentUser();
         }
     };
     HeaderComponent.prototype.exit = function () {
@@ -393,26 +397,6 @@ var HeaderComponent = (function () {
         });
         window.location.reload();
     };
-    /*
-     *@desc 获取当前用户信息
-     */
-    HeaderComponent.prototype.getCurrentUser = function () {
-        var _this = this;
-        var userPath = '/api/user/user_info';
-        this.connectionService.get(userPath)
-            .then(function (res) {
-            if (res.data.status == 200) {
-                __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
-                _this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
-            }
-            else {
-                //window.location.reload();
-            }
-        })
-            .catch(function (err) {
-            //window.location.reload();
-        });
-    };
     return HeaderComponent;
 }());
 HeaderComponent = __decorate([
@@ -421,10 +405,10 @@ HeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/core/header/header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/core/header/header.component.less")],
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */]) === "function" && _d || Object])
 ], HeaderComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=header.component.js.map
 
 /***/ }),
@@ -663,20 +647,6 @@ var ConstantService = (function () {
     return ConstantService;
 }());
 ConstantService.HOST = 'http://auth-test.tinetcloud.com:7777';
-//static user:any = LocalStorage.get('user');
-//static modifyLink = `/password_change?${ConstantService.user.username}`;
-ConstantService.navTabs = [
-    { title: "", icon: '', md_icon: '', link: '', open: false,
-        children: [
-            { name: '应用管理', link: '/index/app', md_icon: 'apps', choosed: false },
-            { name: '用户管理', link: '/index/user', md_icon: 'group_add', choosed: false },
-            { name: '角色管理', link: '/index/role', md_icon: 'assignment_ind', choosed: false },
-            { name: '权限管理', link: '/index/auth', md_icon: 'verified_user', choosed: false },
-            { name: '日志管理', link: '/index/log_manage', md_icon: 'chrome_reader_mode', choosed: false },
-            { name: '修改密码', link: '/password_change', md_icon: 'vpn_key', choosed: false },
-        ]
-    }
-];
 ConstantService.protocolList = [
     { id: 1, name: 'SMTP' },
     { id: 2, name: 'POP' },
@@ -696,6 +666,8 @@ ConstantService = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mobx_angular__ = __webpack_require__("../../../../mobx-angular/dist/mobx-angular.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -708,9 +680,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var DataService = (function () {
-    function DataService() {
+    function DataService(connectionService) {
+        this.connectionService = connectionService;
         this.leftArray = {};
+        this.user = { username: '' };
+        this.modifyLink = "/password_change?username=" + this.user.username;
+        this.navTabs = [
+            { title: "", icon: '', md_icon: '', link: '', open: false,
+                children: [
+                    { name: '应用管理', link: '/index/app', md_icon: 'apps', choosed: false },
+                    { name: '用户管理', link: '/index/user', md_icon: 'group_add', choosed: false },
+                    { name: '角色管理', link: '/index/role', md_icon: 'assignment_ind', choosed: false },
+                    { name: '权限管理', link: '/index/auth', md_icon: 'verified_user', choosed: false },
+                    { name: '日志管理', link: '/index/log_manage', md_icon: 'chrome_reader_mode', choosed: false },
+                    { name: '修改密码', link: this.modifyLink, md_icon: 'vpn_key', choosed: false },
+                ]
+            }
+        ];
     }
     /**
      * @desc 监控左侧菜单收展状态
@@ -722,12 +711,36 @@ var DataService = (function () {
         var leftArr = { mleft: mleft, sleft: sleft };
         Object.assign(this.leftArray, leftArr);
     };
+    /*
+     *@desc 获取当前用户信息
+     */
+    DataService.prototype.getCurrentUser = function () {
+        var _this = this;
+        var userPath = '/api/user/user_info';
+        this.connectionService.get(userPath)
+            .then(function (res) {
+            if (res.data.status == 200) {
+                __WEBPACK_IMPORTED_MODULE_3__localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
+                _this.user = Object.assign({}, res.data.result);
+            }
+            else {
+                //window.location.reload();
+            }
+        })
+            .catch(function (err) {
+            //window.location.reload();
+        });
+    };
     return DataService;
 }());
 __decorate([
     __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
     __metadata("design:type", Object)
 ], DataService.prototype, "leftArray", void 0);
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
+    __metadata("design:type", Object)
+], DataService.prototype, "user", void 0);
 __decorate([
     __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["c" /* action */],
     __metadata("design:type", Function),
@@ -736,9 +749,10 @@ __decorate([
 ], DataService.prototype, "changeLeft", null);
 DataService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__connection_service__["a" /* ConnectionService */]) === "function" && _a || Object])
 ], DataService);
 
+var _a;
 //# sourceMappingURL=data.service.js.map
 
 /***/ }),
@@ -844,7 +858,7 @@ SwalService = __decorate([
 /***/ "../../../../../src/app/core/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\r\n    <div class=\"sideNavBar\">\r\n        <div class=\"side-menu-container\">\r\n            <div class=\"side-inner\">\r\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\r\n                    <md-icon class=\"md-24\">menu</md-icon>\r\n                </div>\r\n                <div>\r\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\r\n                        <!--<div class=\"sidebar-title\" (click)=\"openMenu(i)\">-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">-->\r\n                               <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<span>{{navTab.title}}</span>-->\r\n                        <!--</div>-->\r\n                        <ul>\r\n                            <li *ngFor=\"let item of navTab.children\">\r\n                                <a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\r\n                                    <div>\r\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                    </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\r\n    <div class=\"sideNavBar\">\r\n        <div class=\"side-menu-container\">\r\n            <div class=\"side-inner\">\r\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\r\n                    <md-icon class=\"md-24\">menu</md-icon>\r\n                </div>\r\n                <div>\r\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\r\n                        <!--<div class=\"sidebar-title\" (click)=\"openMenu(i)\">-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">-->\r\n                               <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<span>{{navTab.title}}</span>-->\r\n                        <!--</div>-->\r\n                        <ul>\r\n                            <li *ngFor=\"let item of navTab.children\">\r\n                              <a *ngIf=\"item.link.indexOf('password_change') > -1\"  (click)=\"goTo(item)\" routerLinkActive=\"active\">\r\n                              <!--<a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">-->\r\n                                    <div>\r\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                    </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                                </a>\r\n                              <!--<a *ngIf=\"item.link.indexOf('password_change') == -1\" (click)=\"goTo(item)\" routerLinkActive=\"active\">-->\r\n                                <a *ngIf=\"item.link.indexOf('password_change') == -1\" routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\r\n                                <div>\r\n                                  <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                           [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                  <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                              </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -871,8 +885,8 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_constant_service__ = __webpack_require__("../../../../../src/app/core/services/constant.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_data_service__ = __webpack_require__("../../../../../src/app/core/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/core/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SideComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -887,11 +901,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SideComponent = (function () {
-    function SideComponent(dataService) {
+    function SideComponent(dataService, router) {
         this.dataService = dataService;
+        this.router = router;
         this.setOpenSideValue = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.sideOpened = true;
-        this.navTabs = __WEBPACK_IMPORTED_MODULE_1__services_constant_service__["a" /* ConstantService */].navTabs;
+        this.navTabs = this.dataService.navTabs;
     }
     SideComponent.prototype.ngOnInit = function () {
         this.dataService.changeLeft(180);
@@ -943,6 +958,15 @@ var SideComponent = (function () {
             });
         });
     };
+    SideComponent.prototype.goTo = function (item) {
+        console.log(item);
+        if (item.link.indexOf('password_change') > -1) {
+            window.location.href = item.link;
+        }
+        else {
+            this.router.navigate([item.link]);
+        }
+    };
     return SideComponent;
 }());
 __decorate([
@@ -955,10 +979,10 @@ SideComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/core/sidebar/sidebar.component.html"),
         styles: [__webpack_require__("../../../../../src/app/core/sidebar/sidebar.component.less")],
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object])
 ], SideComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=sidebar.component.js.map
 
 /***/ }),
@@ -3053,11 +3077,12 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_sweetalert2__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordModifyComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3077,28 +3102,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var PasswordModifyComponent = (function () {
-    function PasswordModifyComponent(service, swal, router) {
+    function PasswordModifyComponent(service, swal, router, connectionService) {
         this.service = service;
         this.swal = swal;
         this.router = router;
+        this.connectionService = connectionService;
         this.user = {};
     }
     PasswordModifyComponent.prototype.modify = function (form) {
         var _this = this;
-        //let find = window.location.href;
-        //let key=this.service.getUrlParam(find,'key');
-        //let username = this.service.getUrlParam(find,'username');
-        var user = __WEBPACK_IMPORTED_MODULE_2__core_services_localstorage_service__["a" /* LocalStorage */].get('user');
+        var find = window.location.href;
+        var key = this.service.getUrlParam(find, 'key');
+        var username = this.service.getUrlParam(find, 'username');
+        var user = { username: '' };
+        if (username && username.length > 0) {
+            user.username = username;
+        }
         this.service.modifyPass(user, form).subscribe(function (res) {
             if (res.data.status == 200) {
-                __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
+                __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default()({
                     title: '密码修改成功，点击确定跳转至登录页面',
                     type: 'success',
                     showCancelButton: false,
                     confirmButtonText: '确定',
                 }).then(function () {
-                    _this.router.navigate(['/index']);
+                    __WEBPACK_IMPORTED_MODULE_3__core_services_localstorage_service__["a" /* LocalStorage */].remove('user');
+                    var path = '/logout';
+                    _this.connectionService.get(path).then(function (res) {
+                    }).catch(function (error) {
+                        //console.log(error)
+                    });
+                    var referrer = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                    window.location.href = referrer;
                 }, function (dismiss) {
                     // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
                     if (dismiss === 'cancel') {
@@ -3125,10 +3162,10 @@ PasswordModifyComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.less")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _d || Object])
 ], PasswordModifyComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=password-modify.component.js.map
 
 /***/ }),
@@ -3425,9 +3462,6 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordService; });
-/**
- * Created by kosei on 2017/8/18.
- */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3437,6 +3471,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/**
+ * Created by kosei on 2017/8/18.
+ */
 
 
 
@@ -3475,7 +3512,7 @@ var PasswordService = (function () {
      */
     PasswordService.prototype.setPass = function (user, params) {
         var path = '/api/password/set_password?username=' + user.username + '&key=' + user.key;
-        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
+        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         return passObservable;
     };
     /**
