@@ -17,20 +17,22 @@ import java.util.List;
 @Service
 public class LogLoginServiceImpl implements LogLoginService {
 
-    @Override
+	@Autowired
+	private LogLoginMapper logLoginMapper;
 
-    public Page<LogLogin> selectByParam(LogLoginParam logLoginParam) {
-        if(logLoginParam.getStart()==null){
-            logLoginParam.setStart(0);
-        }
-        if(logLoginParam.getLimit()==null){
-            logLoginParam.setLimit(10);
-        }
-        List<LogLogin> logLoginList = logLoginMapper.selectByParam(logLoginParam);
-        Integer logLoginCount = logLoginMapper.selectCountByParam(logLoginParam);
-        return new Page<LogLogin>(logLoginCount,logLoginList);
-    }
-
-    @Autowired
-    private LogLoginMapper logLoginMapper;
+	/**
+	 * 按照参数查询登录日志
+	 */
+	@Override
+	public Page<LogLogin> selectByParam(LogLoginParam logLoginParam) {
+		if (logLoginParam.getStart() == null) {
+			logLoginParam.setStart(0);
+		}
+		if (logLoginParam.getLimit() == null) {
+			logLoginParam.setLimit(10);
+		}
+		List<LogLogin> logLoginList = logLoginMapper.selectByParam(logLoginParam);
+		Integer logLoginCount = logLoginMapper.selectCountByParam(logLoginParam);
+		return new Page<LogLogin>(logLoginCount, logLoginList);
+	}
 }

@@ -111,7 +111,7 @@ public class PasswordController {
 
 		ResponseModel responseModel = userService.setPassword(passwordParam, userModelMap, username, key,
 				effictiveTime);
-		logActionService.addLogAction(username, "重置密码", username, responseModel.equals(200) ? 1 : 0);
+		logActionService.addLogAction(username, "重置密码", username, responseModel.get("status").equals(200) ? 1 : 0);
 
 		return responseModel;
 	}
@@ -128,7 +128,7 @@ public class PasswordController {
 	public ResponseModel setPassWord(@RequestBody PasswordParam passwordParam, String username, String key) {
 		ResponseModel responseModel = userService.setPassword(passwordParam, ResetPasswordTmp.getResetMap(), username,
 				key, effictiveTime);
-		logActionService.addLogAction(username, "设置密码", username, responseModel.equals(200) ? 1 : 0);
+		logActionService.addLogAction(username, "设置密码", username, responseModel.get("status").equals(200) ? 1 : 0);
 
 		return responseModel;
 	}
@@ -144,7 +144,7 @@ public class PasswordController {
 	public ResponseModel changePassword(@RequestBody PasswordChangeParam passwordChangeParam, String username) {
 
 		ResponseModel responseModel = userService.updateUserPassword(passwordChangeParam, username);
-		logActionService.addLogAction(username, "修改密码", username, responseModel.equals(200) ? 1 : 0);
+		logActionService.addLogAction(username, "修改密码", username, responseModel.get("status").equals(200) ? 1 : 0);
 		return responseModel;
 	}
 
