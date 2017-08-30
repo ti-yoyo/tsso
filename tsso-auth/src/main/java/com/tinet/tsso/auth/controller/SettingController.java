@@ -52,9 +52,9 @@ public class SettingController {
 	public ResponseModel updateSetting(@RequestBody HashMap<String, String> map) {
 
 		settingService.changeSetting(map);
-		
-		logActionService.addLogAction("更新系统设置", "设置:" + SettingProperties.settingMap.toString() + "更新为" + map.toString(),
-				1);
+
+		logActionService.addLogAction("更新系统设置",
+				"设置:" + SettingProperties.settingMap.toString() + "更新为" + map.toString(), 1);
 		return new ResponseModel.Builder().result(SettingProperties.settingMap).build();
 
 	}

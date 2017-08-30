@@ -20,21 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/log_login")
 public class LogLoginController {
 
-    @Autowired
-    private LogLoginService logLoginService;
+	@Autowired
+	private LogLoginService logLoginService;
 
-    /**
-     * 登陆日志的查询方法
-     *
-     * @param logLoginParam
-     * @return
-     */
-    @GetMapping
-    public ResponseModel getLogAction(LogLoginParam logLoginParam) {
+	/**
+	 * 登陆日志的查询方法
+	 *
+	 * @param logLoginParam
+	 * @return
+	 */
+	@GetMapping
+	public ResponseModel getLogAction(LogLoginParam logLoginParam) {
 
-        Page<LogLogin> page = logLoginService.selectByParam(logLoginParam);
+		Page<LogLogin> page = logLoginService.selectByParam(logLoginParam);
 
-        return new ResponseModel.Builder().msg("查询成功").result(page).build();
-    }
+		return new ResponseModel.Builder().msg("查询成功").result(page).build();
+	}
 
 }

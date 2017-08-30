@@ -52,7 +52,7 @@ public class PasswordController {
 
 	@Value("${mail.passwordReset.effictiveTime}")
 	private Integer resetEffictiveTime;
-	
+
 	@Value("${mail.setPassword.effictiveTime}")
 	private Integer setPasswordEffictiveTime;
 

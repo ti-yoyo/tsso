@@ -25,13 +25,14 @@ public class DepartmentController {
 
 	/**
 	 * 查询所有的部门
+	 * 
 	 * @return
 	 */
 	@GetMapping
 	public ResponseModel searchAll() {
 
 		Page<Department> page = deaprtmentService.searchAll();
-		
+
 		return new ResponseModel.Builder().page(page).msg("查询成功").build();
 	}
 

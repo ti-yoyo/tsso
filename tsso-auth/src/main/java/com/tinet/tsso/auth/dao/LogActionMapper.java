@@ -13,19 +13,19 @@ import java.util.List;
  */
 public interface LogActionMapper extends BaseMapper<LogAction, Integer> {
 
-    /**
-     * 按照参数查询操作日志
-     *
-     * @param logActionParam
-     * @return
-     */
-    List<LogAction> selectByParam(LogActionParam logActionParam);
+	/**
+	 * 按照参数查询操作日志
+	 *
+	 * @param logActionParam
+	 * @return
+	 */
+	List<LogAction> selectByParam(LogActionParam logActionParam);
 
-    /**
-     * 查询操作日志的数量
-     *
-     * @param logActionParam
-     * @return
-     */
-    Integer selectCountByParam(LogActionParam logActionParam);
+	/**
+	 * 查询操作日志的数量
+	 *
+	 * @param logActionParam
+	 * @return
+	 */
+	Integer selectCountByParam(LogActionParam logActionParam);
 }

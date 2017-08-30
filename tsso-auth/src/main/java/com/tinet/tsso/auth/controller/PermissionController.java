@@ -70,15 +70,14 @@ public class PermissionController {
 	 */
 	@PostMapping
 	public ResponseModel addPermission(@RequestBody PermissionParam permissionParam) {
-		
+
 		Permission permission = new Permission();
 		BeanUtils.copyProperties(permissionParam, permission);
 		permission.setCreateTime(new Date());
 
 		ResponseModel responseModel = permissionService.addPermission(permission);
 
-		logActionService.addLogAction("添加权限" ,permission.toString(),
-				responseModel.get("status").equals(200) ? 1 : 0);
+		logActionService.addLogAction("添加权限", permission.toString(), responseModel.get("status").equals(200) ? 1 : 0);
 
 		return responseModel;
 	}
@@ -154,8 +153,8 @@ public class PermissionController {
 		BeanUtils.copyProperties(permissionParam, permission);
 		permission.setId(id);
 
-		logActionService.addLogAction("更新权限",tmpPermission.toString()+"更新为"+ permissionService.get(id), 1);
-		
+		logActionService.addLogAction("更新权限", tmpPermission.toString() + "更新为" + permissionService.get(id), 1);
+
 		return permissionService.updatePermission(permission);
 	}
 

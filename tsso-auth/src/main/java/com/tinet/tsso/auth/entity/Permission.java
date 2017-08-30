@@ -18,7 +18,7 @@ public class Permission {
 	private Integer applicationId; // 所属应用id
 
 	private Date createTime;// 创建时间
-	
+
 	private Application application;
 
 	public Integer getId() {
@@ -74,5 +74,5 @@ public class Permission {
 		return "Permission [id=" + id + ", key=" + key + ", name=" + name + ", applicationId=" + applicationId
 				+ ", createTime=" + createTime + "]";
 	}
-	
+
 }

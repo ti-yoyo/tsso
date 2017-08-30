@@ -82,6 +82,7 @@ public interface RoleMapper extends BaseMapper<Role, Integer> {
 
 	/**
 	 * 根据权限的标识查询
+	 * 
 	 * @param key
 	 * @return
 	 */

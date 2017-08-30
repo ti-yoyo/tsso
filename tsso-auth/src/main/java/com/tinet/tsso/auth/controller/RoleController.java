@@ -46,7 +46,7 @@ public class RoleController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private PermissionService permissionService;
 
@@ -101,12 +101,11 @@ public class RoleController {
 	public ResponseModel addUserForRole(@RequestBody UserAndRoleParam userAndRole) {
 
 		User user = userService.get(userAndRole.getUserId());
-		
 
 		roleService.addUser(userAndRole.getRoleId(), userAndRole.getUserId());
 
-		logActionService.addLogAction("为角色添加用户",user.toString(), 1);
-		
+		logActionService.addLogAction("为角色添加用户", user.toString(), 1);
+
 		// 查询指定id的用户
 		UserParam param = new UserParam();
 		param.setId(userAndRole.getUserId());
@@ -153,7 +152,7 @@ public class RoleController {
 		Integer userCount = roleService.selectUserCount(roleId);
 
 		if (!userCount.equals(0)) {
-			
+
 			logActionService.addLogAction("删除角色", role.toString(), 0);
 
 			return new ResponseModel.Builder().error("删除失败,该角色被用户使用中").status(HttpStatus.FORBIDDEN).build();
@@ -161,7 +160,7 @@ public class RoleController {
 
 		roleService.deletePermissionByRoleId(roleId);
 		roleService.delete(roleId);
-		
+
 		logActionService.addLogAction("删除角色", role.toString(), 1);
 		return new ResponseModel.Builder().msg("删除成功").build();
 
@@ -180,7 +179,7 @@ public class RoleController {
 	public ResponseModel updatePermissionForRole(@PathVariable("id") Integer roleId,
 			@RequestBody List<Integer> permissionIdList) {
 		Role role = roleService.get(roleId);
-		
+
 		List<Permission> oldPermissionList = new ArrayList<>();
 		for (int i = 0; i < permissionIdList.size(); i++) {
 			oldPermissionList.add(permissionService.get(permissionIdList.get(i)));
@@ -188,8 +187,8 @@ public class RoleController {
 
 		List<Permission> permissionList = roleService.updatePermissionList(roleId, permissionIdList);
 
-		logActionService.addLogAction("更新角色的权限列表",role.toString() , 1);
-		
+		logActionService.addLogAction("更新角色的权限列表", role.toString(), 1);
+
 		return new ResponseModel.Builder().msg("更新成功").result(permissionList).build();
 	}
 
@@ -202,14 +201,14 @@ public class RoleController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseModel updateRole(@PathVariable("id") Integer id, @RequestBody RoleParam roleParam) {
-		
+
 		Role tmpRole = roleService.get(id);
-				
+
 		Role role = new Role();
 		BeanUtils.copyProperties(roleParam, role);
 		role.setId(id);
-		
-		logActionService.addLogAction("更新角色",tmpRole+"更新为"+ roleService.get(id), 1);
+
+		logActionService.addLogAction("更新角色", tmpRole + "更新为" + roleService.get(id), 1);
 		return roleService.updateRole(role);
 	}
 

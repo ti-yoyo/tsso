@@ -3,60 +3,60 @@ package com.tinet.tsso.auth.entity;
 import java.util.Date;
 
 public class Role {
-    private Integer id;//角色id
+	private Integer id;// 角色id
 
-    private String key;//角色标识
+	private String key;// 角色标识
 
-    private String name;//角色名
+	private String name;// 角色名
 
-    private Integer status;//角色状态
+	private Integer status;// 角色状态
 
-    private Date createTime;//角色的创建时间
-    
-    public Integer getId() {
-        return id;
-    }
+	private Date createTime;// 角色的创建时间
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getKey() {
-        return key;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
-    }
+	public String getKey() {
+		return key;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setKey(String key) {
+		this.key = key == null ? null : key.trim();
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", createTime="
 				+ createTime + "]";
 	}
-    
+
 }

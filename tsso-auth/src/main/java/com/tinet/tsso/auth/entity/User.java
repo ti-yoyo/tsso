@@ -11,26 +11,26 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author lizy
  */
 public class User {
-	private Integer id;//用户的id
+	private Integer id;// 用户的id
 
-	private String username;//用户账号
+	private String username;// 用户账号
 
-	private String password;//用户密码
+	private String password;// 用户密码
 
-	private String passwordSalt;//密码的盐
+	private String passwordSalt;// 密码的盐
 
-	private String fullName;//用户的全名
+	private String fullName;// 用户的全名
 
-	private Integer departmentId;//用户 的部门id
+	private Integer departmentId;// 用户 的部门id
 
-	private String email;//用户的邮箱
+	private String email;// 用户的邮箱
 
-	private Integer status;//用户的状态
+	private Integer status;// 用户的状态
 
-	private Date createTime;//用户的创建时间
+	private Date createTime;// 用户的创建时间
 
 	@JsonIgnore
-	private Department department;//用户所在部门
+	private Department department;// 用户所在部门
 
 	public Integer getId() {
 		return id;

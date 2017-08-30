@@ -108,8 +108,7 @@ public class UserController {
 		}
 		List<Role> roleList = userService.updataUserRoleList(userId, roleIdList);
 
-		logActionService.addLogAction("更新用户角色",
-				"用户:" + user.toString() + "的角色", 1);
+		logActionService.addLogAction("更新用户角色", "用户:" + user.toString() + "的角色", 1);
 
 		return new ResponseModel.Builder().result(roleList).msg("角色更新成功").build();
 
@@ -153,23 +152,22 @@ public class UserController {
 	@PutMapping("/{id}")
 	public ResponseModel updateUser(@PathVariable Integer id, @RequestBody User user) {
 
-		
 		User oldUser = userService.get(id);
 		if (id == null) {
 			return new ResponseModel.Builder().error("id不能为空").build();
 		}
 
 		user.setId(id);
-		ResponseModel responseModel=userService.updateUser(user);
-		
-		User updateUser=userService.get(id);
-		
-		if(responseModel.get("status").equals(200)) {
-			logActionService.addLogAction("更新用户","用户:"+oldUser.toString()+"更新为"+updateUser.toString(),1);
-		}else {
-			logActionService.addLogAction("更新用户","用户:"+oldUser.toString()+"更新为"+user.toString(),0);
+		ResponseModel responseModel = userService.updateUser(user);
+
+		User updateUser = userService.get(id);
+
+		if (responseModel.get("status").equals(200)) {
+			logActionService.addLogAction("更新用户", "用户:" + oldUser.toString() + "更新为" + updateUser.toString(), 1);
+		} else {
+			logActionService.addLogAction("更新用户", "用户:" + oldUser.toString() + "更新为" + user.toString(), 0);
 		}
-		
+
 		return responseModel;
 	}
 
@@ -201,5 +199,5 @@ public class UserController {
 		map.put("username", principals.get(0));
 		return new ResponseModel.Builder().result(map).build();
 	}
-	
+
 }

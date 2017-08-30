@@ -20,21 +20,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/log_action")
 public class LogActionController {
 
-    @Autowired
-    private LogActionService logActionService;
+	@Autowired
+	private LogActionService logActionService;
 
-    /**
-     *
-     * 查询操作日志的方法
-     * @param logActionParam
-     * @return
-     */
-    @GetMapping
-    public ResponseModel getLogAction(LogActionParam logActionParam) {
+	/**
+	 *
+	 * 查询操作日志的方法
+	 * 
+	 * @param logActionParam
+	 * @return
+	 */
+	@GetMapping
+	public ResponseModel getLogAction(LogActionParam logActionParam) {
 
-        Page<LogAction> page = logActionService.selectByParam(logActionParam);
+		Page<LogAction> page = logActionService.selectByParam(logActionParam);
 
-        return new ResponseModel.Builder().msg("查询成功").result(page).build();
-    }
+		return new ResponseModel.Builder().msg("查询成功").result(page).build();
+	}
 
 }
