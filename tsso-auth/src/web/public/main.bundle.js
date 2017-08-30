@@ -685,7 +685,6 @@ var DataService = (function () {
         this.connectionService = connectionService;
         this.leftArray = {};
         this.user = { username: '' };
-        this.modifyLink = "/password_change?username=" + this.user.username;
         this.navTabs = [
             { title: "", icon: '', md_icon: '', link: '', open: false,
                 children: [
@@ -694,7 +693,7 @@ var DataService = (function () {
                     { name: '角色管理', link: '/index/role', md_icon: 'assignment_ind', choosed: false },
                     { name: '权限管理', link: '/index/auth', md_icon: 'verified_user', choosed: false },
                     { name: '日志管理', link: '/index/log_manage', md_icon: 'chrome_reader_mode', choosed: false },
-                    { name: '修改密码', link: this.modifyLink, md_icon: 'vpn_key', choosed: false },
+                    { name: '修改密码', link: '/password_change', md_icon: 'vpn_key', choosed: false },
                 ]
             }
         ];
@@ -719,7 +718,7 @@ var DataService = (function () {
             .then(function (res) {
             if (res.data.status == 200) {
                 __WEBPACK_IMPORTED_MODULE_3__localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
-                _this.user = Object.assign({}, res.data.result);
+                Object.assign(_this.user, res.data.result);
             }
             else {
                 //window.location.reload();
@@ -856,7 +855,7 @@ SwalService = __decorate([
 /***/ "../../../../../src/app/core/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\r\n    <div class=\"sideNavBar\">\r\n        <div class=\"side-menu-container\">\r\n            <div class=\"side-inner\">\r\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\r\n                    <md-icon class=\"md-24\">menu</md-icon>\r\n                </div>\r\n                <div>\r\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\r\n                        <!--<div class=\"sidebar-title\" (click)=\"openMenu(i)\">-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">-->\r\n                               <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<span>{{navTab.title}}</span>-->\r\n                        <!--</div>-->\r\n                        <ul>\r\n                            <li *ngFor=\"let item of navTab.children\">\r\n                              <a *ngIf=\"item.link.indexOf('password_change') > -1\"  (click)=\"goTo(item)\" routerLinkActive=\"active\">\r\n                              <!--<a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">-->\r\n                                    <div>\r\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                    </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                                </a>\r\n                              <!--<a *ngIf=\"item.link.indexOf('password_change') == -1\" (click)=\"goTo(item)\" routerLinkActive=\"active\">-->\r\n                                <a *ngIf=\"item.link.indexOf('password_change') == -1\" routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\r\n                                <div>\r\n                                  <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                           [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                  <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                              </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\r\n    <div class=\"sideNavBar\">\r\n        <div class=\"side-menu-container\">\r\n            <div class=\"side-inner\">\r\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\r\n                    <md-icon class=\"md-24\">menu</md-icon>\r\n                </div>\r\n                <div>\r\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\r\n                        <!--<div class=\"sidebar-title\" (click)=\"openMenu(i)\">-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">-->\r\n                               <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<span>{{navTab.title}}</span>-->\r\n                        <!--</div>-->\r\n                        <ul>\r\n                            <li *ngFor=\"let item of navTab.children\">\r\n                              <a *ngIf=\"item.link.indexOf('password_change') > -1\"  (click)=\"goTo()\" routerLinkActive=\"active\">\r\n                              <!--<a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">-->\r\n                                    <div>\r\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                    </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                                </a>\r\n                              <!--<a *ngIf=\"item.link.indexOf('password_change') == -1\" (click)=\"goTo(item)\" routerLinkActive=\"active\">-->\r\n                                <a *ngIf=\"item.link.indexOf('password_change') == -1\" routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\r\n                                <div>\r\n                                  <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                           [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                  <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                              </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -905,6 +904,7 @@ var SideComponent = (function () {
         this.setOpenSideValue = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.sideOpened = true;
         this.navTabs = this.dataService.navTabs;
+        this.user = this.dataService.user;
     }
     SideComponent.prototype.ngOnInit = function () {
         this.dataService.changeLeft(180);
@@ -956,14 +956,8 @@ var SideComponent = (function () {
             });
         });
     };
-    SideComponent.prototype.goTo = function (item) {
-        console.log(item);
-        if (item.link.indexOf('password_change') > -1) {
-            window.location.href = item.link;
-        }
-        else {
-            this.router.navigate([item.link]);
-        }
+    SideComponent.prototype.goTo = function () {
+        window.location.href = "/password_change?username=" + this.user.username;
     };
     return SideComponent;
 }());
@@ -3415,7 +3409,8 @@ var PasswordSetComponent = (function () {
                     showCancelButton: false,
                     confirmButtonText: '确定',
                 }).then(function () {
-                    _this.router.navigate(['/index']);
+                    var referrer = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                    window.location.href = referrer;
                 }, function (dismiss) {
                     // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
                     if (dismiss === 'cancel') {
