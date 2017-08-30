@@ -384,9 +384,7 @@ var HeaderComponent = (function () {
         this.user = this.dataService.user;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        if (!__WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user')) {
-            this.dataService.getCurrentUser();
-        }
+        this.dataService.getCurrentUser();
     };
     HeaderComponent.prototype.exit = function () {
         __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].remove('user');
