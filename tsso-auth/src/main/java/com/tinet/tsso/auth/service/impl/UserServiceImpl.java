@@ -77,10 +77,8 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 添加用户
 	 */
 	@Override
-	public ResponseModel addUser(UserParam userParam) {
-		User user = new User();
-		BeanUtils.copyProperties(userParam, user);
-		if (this.selectByUserName(userParam.getUsername()) != null) {
+	public ResponseModel addUser(User user) {
+		if (this.selectByUserName(user.getUsername()) != null) {
 			return new ResponseModel.Builder().error("该帐号已经存在").status(HttpStatus.BAD_REQUEST).build();
 		}
 		/**
@@ -108,9 +106,9 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		usernameAndUuidModel.setKey(uuid.toString());
 		usernameAndUuidModel.setDate(new Date());
 
-		ResetPasswordTmp.resetMap.put(userParam.getUsername(), usernameAndUuidModel);
-		MailSenderUtil.sendMail(mailSender, mailFrom, userParam.getEmail(), "天润统一登录系统，重置密码邀请",
-				getMailContent(userParam.getUsername(), uuid.toString()));
+		ResetPasswordTmp.resetMap.put(user.getUsername(), usernameAndUuidModel);
+		MailSenderUtil.sendMail(mailSender, mailFrom, user.getEmail(), "天润统一登录系统，重置密码邀请",
+				getMailContent(user.getUsername(), uuid.toString()));
 
 		user = userMapper.selectByPrimaryKey(user.getId());
 

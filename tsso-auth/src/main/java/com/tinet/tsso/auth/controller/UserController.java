@@ -80,7 +80,7 @@ public class UserController {
 		User user = new User();
 		BeanUtils.copyProperties(userParam, user);
 
-		ResponseModel responseModel = userService.addUser(userParam);
+		ResponseModel responseModel = userService.addUser(user);
 
 		logActionService.addLogAction("添加用户", user.toString(), responseModel.get("status").equals(200) ? 1 : 0);
 

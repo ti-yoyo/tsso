@@ -58,7 +58,7 @@ public interface UserService extends BaseService<User, Integer> {
 	 * @param user
 	 * @return
 	 */
-	ResponseModel addUser(UserParam userParam);
+	ResponseModel addUser(User user);
 
 	/**
 	 * 按照用户名查询用户
@@ -99,7 +99,7 @@ public interface UserService extends BaseService<User, Integer> {
 	 * 更新用户的密码
 	 * 
 	 * @param passwordChangeParam
-	 * @param username 
+	 * @param username
 	 * @return
 	 */
 	ResponseModel updateUserPassword(PasswordChangeParam passwordChangeParam, String username);
