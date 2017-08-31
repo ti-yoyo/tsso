@@ -1,6 +1,7 @@
 package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,7 +31,7 @@ public class User {
 	private Date createTime;// 用户的创建时间
 
 	@JsonIgnore
-	private Department department;// 用户所在部门
+	private List<Department> departmentList;// 用户所在部门
 
 	public Integer getId() {
 		return id;
@@ -103,13 +104,14 @@ public class User {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-
-	public Department getDepartment() {
-		return department;
+	
+	
+	public List<Department> getDepartmentList() {
+		return departmentList;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setDepartmentList(List<Department> departmentList) {
+		this.departmentList = departmentList;
 	}
 
 	@Override

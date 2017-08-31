@@ -8,19 +8,22 @@
 		<result column="password_salt" property="passwordSalt"
 			jdbcType="VARCHAR" />
 		<result column="full_name" property="fullName" jdbcType="VARCHAR" />
-		<result column="department_id" property="departmentId"
-			jdbcType="INTEGER" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<association property="department" javaType="com.tinet.tsso.auth.entity.Department">   
-            <id column="department_id" property="id"/>
-            <result column="department_name" property="name" />
-        </association>
+		<collection column="department_ids" property="departmentList"
+			ofType="com.tinet.tsso.auth.entity.Department" select="selectDepartments">
+		</collection>
 	</resultMap>
+	<resultMap type="com.tinet.tsso.auth.entity.Department" id="DepartmentResultMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
 	<sql id="Base_Column_List">
 		"user".id, username, password, password_salt, full_name,
-		department_id, email,
+		department_ids, email,
 		status, "user".create_time
 	</sql>
 	<sql id="byParams">
@@ -41,7 +44,8 @@
 			from
 			"role",user_role
 			where "role".id= user_role.role_id
-			and "role".id=#{roleId,jdbcType=INTEGER}
+			and
+			"role".id=#{roleId,jdbcType=INTEGER}
 			)
 		</if>
 	</sql>
@@ -199,9 +203,7 @@
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		,department.name as department_name
-		from "user"left join department on
-		"user".department_id=department.id
+		from "user"
 		where 1=1
 		<include refid="byParams" />
 		order by "user".username asc
@@ -228,35 +230,49 @@
 	</select>
 	<select id="selectByPermissionId" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />,department.name as department_name
+		select
+		<include refid="Base_Column_List" />
+		,department.name as department_name
 		from "user" left join department
-		on "user".department_id = department.id
+		on
+		"user".department_id = department.id
 		where "user"."id" IN
-							(
-								select DISTINCT(user_role.user_id)
-								from role_permission LEFT JOIN user_role
-								on role_permission.role_id =user_role.role_id
-								where role_permission.permission_id= #{permissionId,jdbcType=INTEGER}
-							)
+		(
+		select DISTINCT(user_role.user_id)
+		from role_permission LEFT JOIN user_role
+		on role_permission.role_id =user_role.role_id
+		where role_permission.permission_id= #{permissionId,jdbcType=INTEGER}
+		)
 		order by "user".create_time desc
-		
+
 	</select>
-	
-	<select id="selectCountByUserName" parameterType="java.lang.String" resultType= "java.lang.Integer">
+
+	<select id="selectCountByUserName" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
 		select count(*)
 		from "user"
-		where username = #{username,jdbcType=VARCHAR}
+		where username =
+		#{username,jdbcType=VARCHAR}
 	</select>
-	
-	<select id="selectByUsername" parameterType="java.lang.String" resultMap= "BaseResultMap">
-		select <include refid="Base_Column_List" />
+
+	<select id="selectByUsername" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
 		from "user"
 		where username = #{username,jdbcType=VARCHAR}
 	</select>
-	<update id="updatePasswordByUsername" parameterType ="com.tinet.tsso.auth.entity.User">
-		update "user"
+	<update id="updatePasswordByUsername" parameterType="com.tinet.tsso.auth.entity.User">
+		update
+		"user"
 		set password = #{password,jdbcType=VARCHAR}
-		where username = #{username,jdbcType=VARCHAR}
+		where username =
+		#{username,jdbcType=VARCHAR}
 	</update>
-	
+	<select id="selectDepartments" parameterType="java.lang.String" resultMap="DepartmentResultMap">
+		select id ,name
+		from department
+		where id =
+		any(#{department_ids,jdbcType=VARCHAR}::int[])
+	</select>
 </mapper>

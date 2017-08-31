@@ -137,23 +137,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		// 符合条件的User列表
 		List<User> userList = userMapper.selectByParams(params);
 
-		List<UserModel> pageData = new ArrayList<UserModel>();
-
-		// 符合条件的角色查询
-		for (int i = 0; i < userList.size(); i++) {
-			UserModel userModel = new UserModel();
-			BeanUtils.copyProperties(userList.get(i), userModel);
-
-			if (userList.get(i).getDepartment() != null) {
-				userModel.setDepartmentName(userList.get(i).getDepartment().getName());
-			}
-
-			List<Role> roleList = roleMapper.getRoleByUser(userList.get(i));
-			userModel.setRoleList(roleList);
-
-			pageData.add(userModel);
-		}
-		return new Page<UserModel>(totalSize, pageData);
+		return new Page<UserModel>(totalSize, null);
 	}
 
 	/**
@@ -171,7 +155,6 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			BeanUtils.copyProperties(user, userModel);
 
 			userModel.setDepartmentId(user.getDepartmentId());
-			userModel.setDepartmentName(user.getDepartment().getName());
 
 			userModelList.add(userModel);
 		}
