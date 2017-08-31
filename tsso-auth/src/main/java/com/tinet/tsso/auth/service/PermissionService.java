@@ -39,4 +39,11 @@ public interface PermissionService extends BaseService<Permission, Integer> {
 	 */
 	ResponseModel updatePermission(Permission permission);
 
+	/**
+	 * 删除指定权限，并删除角色权限的关联
+	 * 
+	 * @param id
+	 */
+	void deletePermissionById(Integer id);
+
 }

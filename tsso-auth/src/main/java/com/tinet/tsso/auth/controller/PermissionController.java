@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -122,15 +121,8 @@ public class PermissionController {
 
 		Permission permission = permissionService.get(id);
 
-		List<Role> roleList = roleService.selectByPermissionId(id);
-		if (roleList.size() != 0) {
-
-			logActionService.addLogAction("删除权限", permission.toString(), 0);
-
-			return new ResponseModel(HttpStatus.FORBIDDEN, "该权限被角色使用中不能删除");
-		}
-
-		permissionService.delete(id);
+		
+		permissionService.deletePermissionById(id);
 
 		logActionService.addLogAction("删除权限", permission.toString(), 1);
 

@@ -17,6 +17,7 @@ import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.RoleModel;
 import com.tinet.tsso.auth.param.RoleParam;
+import com.tinet.tsso.auth.param.UserAndRoleParam;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;
@@ -114,7 +115,7 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	@Override
 	@Transactional
 	public void deletePermissionByRoleId(Integer roleId) {
-		roleMapper.deletePermissionByRoleId(roleId);
+		roleMapper.deletePermissionForRoleId(roleId);
 	}
 
 	/**
@@ -135,7 +136,7 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 	@Transactional
 	public List<Permission> updatePermissionList(Integer roleId, List<Integer> permissionIdList) {
 
-		roleMapper.deletePermissionByRoleId(roleId);
+		roleMapper.deletePermissionForRoleId(roleId);
 
 		List<Permission> permissionList = new ArrayList<>();
 		for (int i = 0; i < permissionIdList.size(); i++) {
@@ -185,15 +186,8 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 		if (role.getKey() != null) {
 			Role tmpRole = roleMapper.selectByPrimaryKey(role.getId());
 			if (!tmpRole.getKey().equals(role.getKey())) {// 如果key做出了更改
-				
-				RoleParam roleParam = new RoleParam();
-				roleParam.setKey(role.getKey());
-				Integer roleCount = roleMapper.selectCountByParams(roleParam);
-				if (roleCount != 0) {
-					return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该角色标识已经被使用").build();
-				}
+				return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("角色标识不可修改").build();
 			}
-
 		}
 		roleMapper.updateByPrimaryKeySelective(role);
 		RoleParam roleParam = new RoleParam();
@@ -212,5 +206,24 @@ public class RoleServiceImpl extends BaseServiceImp<Role, Integer> implements Ro
 		user.setId(userId);
 		List<Role> roleList = roleMapper.getRoleByUser(user);
 		return roleList;
+	}
+
+	/**
+	 * 删除指定角色
+	 */
+	@Transactional
+	@Override
+	public void deleteRole(Integer roleId) {
+		roleMapper.deletePermissionForRoleId(roleId);
+		roleMapper.deleteUserForRoleId(roleId);
+		roleMapper.deleteByPrimaryKey(roleId);
+	}
+
+	/**
+	 *删除用户的指定角色
+	 */
+	@Override
+	public void deleteOneUserForRole(UserAndRoleParam userAndRoleParam) {
+		roleMapper.deleteOneUserForRole(userAndRoleParam);
 	}
 }
