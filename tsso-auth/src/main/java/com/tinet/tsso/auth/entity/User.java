@@ -24,12 +24,17 @@ public class User {
 
 	private String email;// 用户的邮箱
 
+	private String mobile;// 用户的手机号
+
 	private Integer status;// 用户的状态
+	
 
 	private Date createTime;// 用户的创建时间
 
+	private Integer parentId;// 所属直销经理
+
 	private List<Department> departmentList;// 用户所在部门
-	
+
 	private List<Role> roleList;
 
 	public Integer getId() {
@@ -73,14 +78,6 @@ public class User {
 	}
 
 
-	public List<Integer> getDepartmentIds() {
-		return departmentIds;
-	}
-
-	public void setDepartmentIds(List<Integer> departmentIds) {
-		this.departmentIds = departmentIds;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -104,8 +101,7 @@ public class User {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
-	
+
 	public List<Department> getDepartmentList() {
 		return departmentList;
 	}
@@ -113,7 +109,7 @@ public class User {
 	public void setDepartmentList(List<Department> departmentList) {
 		this.departmentList = departmentList;
 	}
-	
+
 	public List<Role> getRoleList() {
 		return roleList;
 	}
@@ -122,11 +118,29 @@ public class User {
 		this.roleList = roleList;
 	}
 
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt=" + passwordSalt
-				+ ", fullName=" + fullName + ", departmentIds=" + departmentIds + ", email=" + email + ", status="
-				+ status + ", createTime=" + createTime + "]";
+				+ ", fullName=" + fullName + ", departmentIds=" + departmentIds + ", email=" + email + ", mobile="
+				+ mobile + ", status=" + status + ", createTime=" + createTime + ", parentId=" + parentId + "]";
 	}
 
 }

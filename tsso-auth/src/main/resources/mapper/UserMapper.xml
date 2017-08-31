@@ -9,12 +9,16 @@
 			jdbcType="VARCHAR" />
 		<result column="full_name" property="fullName" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="departmentIds" property="departmentIds" propertyType="java.lang.Integer"/>
+		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<collection column="department_ids" property="departmentList"
 			ofType="com.tinet.tsso.auth.entity.Department" select="selectDepartments">
 		</collection>
 	</resultMap>
+	
 	<resultMap type="com.tinet.tsso.auth.entity.Department" id="DepartmentResultMap">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
@@ -23,7 +27,7 @@
 
 	<sql id="Base_Column_List">
 		"user".id, username, password, password_salt, full_name,
-		department_ids, email,
+		department_ids, email,mobile,parent_id
 		status, "user".create_time
 	</sql>
 	<sql id="byParams">
@@ -232,10 +236,7 @@
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		,department.name as department_name
-		from "user" left join department
-		on
-		"user".department_id = department.id
+		from "user"
 		where "user"."id" IN
 		(
 		select DISTINCT(user_role.user_id)

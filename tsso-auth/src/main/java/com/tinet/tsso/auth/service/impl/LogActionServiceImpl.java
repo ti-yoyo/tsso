@@ -33,10 +33,10 @@ public class LogActionServiceImpl extends BaseServiceImp<LogAction, Integer> imp
 
 	@Override
 	public void addLogAction(String operateDesc, String operateObject, Integer result) {
-		// 获取用户信息
+/*		// 获取用户信息
 		Subject subject = SecurityUtils.getSubject();
 		List<Object> principals = subject.getPrincipals().asList();
-		addLogAction(principals.get(0).toString(), operateDesc, operateObject, result);
+		addLogAction(principals.get(0).toString(), operateDesc, operateObject, result);*/
 
 	}
 

@@ -3,28 +3,33 @@ package com.tinet.tsso.auth.model;
 import java.util.Date;
 import java.util.List;
 
+import com.tinet.tsso.auth.entity.Department;
 import com.tinet.tsso.auth.entity.Role;
 
 public class UserModel {
-	private Integer id;// 用户id
+	private Integer id;// 用户的id
 
-	private String username;// 用户名
+	private String username;// 用户账号
 
 	private String password;// 用户密码
 
-	private String fullName;// 用户全名
+	private String fullName;// 用户的全名
 
-	private Integer departmentId;// 部门id
+	private List<Integer> departmentIds;// 用户 的部门id
 
-	private String email;// 邮箱
+	private String email;// 用户的邮箱
+	
+	private String mobile;// 用户的手机号
 
-	private Integer status;// 用户状态
+	private Integer status;// 用户的状态
 
 	private Date createTime;// 用户的创建时间
+	
+	private Integer parentId;// 所属直销经理
 
-	private String departmentName;// 部门名
+	private List<Department> departmentList;// 用户所在部门
 
-	private List<Role> roleList;// 用户拥有的角色列表
+	private List<Role> roleList;
 
 	public Integer getId() {
 		return id;
@@ -58,13 +63,6 @@ public class UserModel {
 		this.fullName = fullName == null ? null : fullName.trim();
 	}
 
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
 
 	public String getEmail() {
 		return email;
@@ -98,12 +96,36 @@ public class UserModel {
 		this.roleList = roleList;
 	}
 
-	public String getDepartmentName() {
-		return departmentName;
+	public List<Integer> getDepartmentIds() {
+		return departmentIds;
 	}
 
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
+	public void setDepartmentIds(List<Integer> departmentIds) {
+		this.departmentIds = departmentIds;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	public List<Department> getDepartmentList() {
+		return departmentList;
+	}
+
+	public void setDepartmentList(List<Department> departmentList) {
+		this.departmentList = departmentList;
 	}
 
 }
