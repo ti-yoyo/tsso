@@ -123,7 +123,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 按照参数查询用户
 	 */
 	@Override
-	public Page<UserModel> selectByParams(UserParam params) {
+	public Page<User> selectByParams(UserParam params) {
 
 		if (params.getLimit() == null) {
 			params.setLimit(10);
@@ -136,12 +136,17 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		Integer totalSize = userMapper.selectCountByParams(params);
 		// 符合条件的User列表
 		List<User> userList = userMapper.selectByParams(params);
+		
+		for (int i = 0; i < userList.size(); i++) {
+			List<Role> roleList = roleMapper.getRoleByUser(userList.get(i));
+			userList.get(i).setRoleList(roleList);
+		}
 
-		return new Page<UserModel>(totalSize, null);
+		return new Page<User>(totalSize, userList);
 	}
 
 	/**
-	 * 查询指定权限额用户列表
+	 * 查询指定权限的用户列表
 	 */
 	@Override
 	public List<UserModel> selectByPermissionId(Integer permissionId) {
@@ -153,8 +158,6 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			User user = userList.get(i);
 			UserModel userModel = new UserModel();
 			BeanUtils.copyProperties(user, userModel);
-
-			userModel.setDepartmentId(user.getDepartmentId());
 
 			userModelList.add(userModel);
 		}
@@ -298,8 +301,9 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 
 		UserParam userParam = new UserParam();
 		userParam.setId(user.getId());
-		Page<UserModel> page = selectByParams(userParam);
+		Page<User> page = selectByParams(userParam);
 		page.getPageData().get(0).setPassword("****");
+		page.getPageData().get(0).setPasswordSalt("****");
 
 		return new ResponseModel.Builder().msg("更新成功").result(page.getPageData().get(0)).build();
 	}
@@ -396,7 +400,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		// 您重置密码的链接为：http://auth.tinetcloud.com/api/password/password_modify?username=lizy&key=7c3668d8-6ad4-4230-9d2a-634d5a79ae61
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("您好,").append(fullName).append("先生/女士：").append("<br/>")
-				.append("天润同意登录系统邀请您设置密码,您的账户名为：").append(username).append("请访问以下链接，输入您的新密码(该链接有效时长为7天)：<br/>").append("<a href=\"")
+				.append("天润统一登录系统邀请您设置密码,您的账户名为：").append(username).append("请访问以下链接，输入您的新密码(该链接有效时长为7天)：<br/>").append("<a href=\"")
 				.append(changePasswordAddress).append("/password_set").append("?username=").append(username)
 				.append("&key=").append(key).append("\">").append(changePasswordAddress).append("/password_set")
 				.append("?username=").append(username).append("&key=").append(key).append("</a>").append("<br/>");

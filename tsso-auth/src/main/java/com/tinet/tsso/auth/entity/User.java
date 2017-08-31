@@ -3,8 +3,6 @@ package com.tinet.tsso.auth.entity;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * 用户的entity
  * 
@@ -22,7 +20,7 @@ public class User {
 
 	private String fullName;// 用户的全名
 
-	private Integer departmentId;// 用户 的部门id
+	private List<Integer> departmentIds;// 用户 的部门id
 
 	private String email;// 用户的邮箱
 
@@ -30,8 +28,9 @@ public class User {
 
 	private Date createTime;// 用户的创建时间
 
-	@JsonIgnore
 	private List<Department> departmentList;// 用户所在部门
+	
+	private List<Role> roleList;
 
 	public Integer getId() {
 		return id;
@@ -73,12 +72,13 @@ public class User {
 		this.fullName = fullName == null ? null : fullName.trim();
 	}
 
-	public Integer getDepartmentId() {
-		return departmentId;
+
+	public List<Integer> getDepartmentIds() {
+		return departmentIds;
 	}
 
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
+	public void setDepartmentIds(List<Integer> departmentIds) {
+		this.departmentIds = departmentIds;
 	}
 
 	public String getEmail() {
@@ -113,11 +113,19 @@ public class User {
 	public void setDepartmentList(List<Department> departmentList) {
 		this.departmentList = departmentList;
 	}
+	
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt=" + passwordSalt
-				+ ", fullName=" + fullName + ", departmentId=" + departmentId + ", email=" + email + ", status="
+				+ ", fullName=" + fullName + ", departmentIds=" + departmentIds + ", email=" + email + ", status="
 				+ status + ", createTime=" + createTime + "]";
 	}
 

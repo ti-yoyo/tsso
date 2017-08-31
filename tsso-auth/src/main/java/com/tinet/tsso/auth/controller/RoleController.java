@@ -108,7 +108,7 @@ public class RoleController {
 		// 查询指定id的用户
 		UserParam param = new UserParam();
 		param.setId(userAndRole.getUserId());
-		Page<UserModel> page = userService.selectByParams(param);
+		Page<User> page = userService.selectByParams(param);
 
 		if (page.getPageData() == null) {
 			return new ResponseModel.Builder().error("该用户不存在").build();

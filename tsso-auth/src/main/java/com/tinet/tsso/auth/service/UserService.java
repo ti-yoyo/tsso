@@ -27,7 +27,7 @@ public interface UserService extends BaseService<User, Integer> {
 	 *            查询参数
 	 * @return 用户查询的分页数据
 	 */
-	Page<UserModel> selectByParams(UserParam params);
+	Page<User> selectByParams(UserParam params);
 
 	/**
 	 * @param userId

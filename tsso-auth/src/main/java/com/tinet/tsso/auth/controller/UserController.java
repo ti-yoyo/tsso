@@ -56,12 +56,13 @@ public class UserController {
 	@GetMapping
 	public ResponseModel searchByParams(UserParam params) {
 
-		Page<UserModel> userPage = userService.selectByParams(params);
+		Page<User> userPage = userService.selectByParams(params);
 
 		// 去除返回数据的用户密码和盐等敏感信息
-		List<UserModel> userList = userPage.getPageData();
+		List<User> userList = userPage.getPageData();
 		for (int i = 0; i < userList.size(); i++) {
 			userList.get(i).setPassword(null);
+			userList.get(i).setPasswordSalt(null);
 		}
 		userPage.setPageData(userList);
 
@@ -186,10 +187,11 @@ public class UserController {
 		// 查询该角色完整信息
 		UserParam param = new UserParam();
 		param.setId(id);
-		Page<UserModel> page = userService.selectByParams(param);
+		Page<User> page = userService.selectByParams(param);
 
 		for (int i = 0; i < page.getPageData().size(); i++) {
 			page.getPageData().get(i).setPassword(null);
+			page.getPageData().get(i).setPasswordSalt(null);
 		}
 		return new ResponseModel.Builder().result(page.getPageData().get(0)).build();
 	}
