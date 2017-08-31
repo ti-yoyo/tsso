@@ -4013,7 +4013,7 @@ var ManageUserComponent = (function () {
             __WEBPACK_IMPORTED_MODULE_5__core_services_localstorage_service__["a" /* LocalStorage */].set('roleUser', _this.search);
             _this.service.retriveRoleUser(_this.search);
         };
-        //this.roleUserList = this.service.roleUserList;
+        this.roleUserList = this.service.roleUserList;
         this.allRoles = this.service.allRoles;
     }
     ManageUserComponent.prototype.ngOnInit = function () {
