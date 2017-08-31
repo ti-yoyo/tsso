@@ -208,17 +208,20 @@ public class RoleController {
 	 * @param roleParam
 	 * @return
 	 */
-	@PutMapping("/{roleId}/user/{userId}")
+	@DeleteMapping("/{roleId}/user/{userId}")
 	public ResponseModel deleteUserForRole(@PathVariable Integer roleId, @PathVariable Integer userId) {
 
 		Role role = roleService.get(roleId);
 		User user = userService.get(userId);
-
+		
 		UserAndRoleParam userAndRoleParam = new UserAndRoleParam();
 
 		userAndRoleParam.setRoleId(roleId);
 		userAndRoleParam.setUserId(userId);
 		roleService.deleteOneUserForRole(userAndRoleParam);
+		
+		user.setPassword("****");
+		user.setPasswordSalt("****");
 		logActionService.addLogAction("删除角色的指定用户", "角色" + role.toString() + "删除了用户" + user.toString(), 1);
 		
 		return new ResponseModel.Builder().msg("删除成功").build();
