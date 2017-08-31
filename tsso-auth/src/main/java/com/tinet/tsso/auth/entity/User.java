@@ -20,7 +20,7 @@ public class User {
 
 	private String fullName;// 用户的全名
 
-	private List<Integer> departmentIds;// 用户 的部门id
+	private Integer[] departmentIds;// 用户 的部门id
 
 	private String email;// 用户的邮箱
 
@@ -134,7 +134,14 @@ public class User {
 		this.parentId = parentId;
 	}
 
-	
+
+	public Integer[] getDepartmentIds() {
+		return departmentIds;
+	}
+
+	public void setDepartmentIds(Integer[] departmentIds) {
+		this.departmentIds = departmentIds;
+	}
 
 	@Override
 	public String toString() {
