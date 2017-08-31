@@ -413,7 +413,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		// 您重置密码的链接为：http://auth.tinetcloud.com/api/password/password_modify?username=lizy&key=7c3668d8-6ad4-4230-9d2a-634d5a79ae61
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("您好,").append(fullName).append("先生/女士：").append("<br/>")
-				.append("天润同意登录系统邀请您设置密码,您的账户名为：").append(username).append("请访问以下链接，输入您的新密码(该链接有效时长为7天)：<br/>").append("<a href=\"")
+				.append("天润统一登录系统邀请您设置密码,您的账户名为：").append(username).append("请访问以下链接，输入您的新密码(该链接有效时长为7天)：<br/>").append("<a href=\"")
 				.append(changePasswordAddress).append("/password_set").append("?username=").append(username)
 				.append("&key=").append(key).append("\">").append(changePasswordAddress).append("/password_set")
 				.append("?username=").append(username).append("&key=").append(key).append("</a>").append("<br/>");
