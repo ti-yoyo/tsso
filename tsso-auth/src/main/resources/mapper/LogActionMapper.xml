@@ -148,6 +148,7 @@
     from log_action
     where 1=1
     <include refid="byParams"/>
+    order by operate_time desc
     <if test="start != null and limit != null">
       offset #{start, jdbcType=INTEGER} limit #{limit,
 			jdbcType=INTEGER}

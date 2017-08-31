@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -149,17 +148,7 @@ public class RoleController {
 
 		Role role = roleService.get(roleId);
 
-		Integer userCount = roleService.selectUserCount(roleId);
-
-		if (!userCount.equals(0)) {
-
-			logActionService.addLogAction("删除角色", role.toString(), 0);
-
-			return new ResponseModel.Builder().error("删除失败,该角色被用户使用中").status(HttpStatus.FORBIDDEN).build();
-		}
-
-		roleService.deletePermissionByRoleId(roleId);
-		roleService.delete(roleId);
+		roleService.deleteRole(roleId);
 
 		logActionService.addLogAction("删除角色", role.toString(), 1);
 		return new ResponseModel.Builder().msg("删除成功").build();
@@ -210,6 +199,32 @@ public class RoleController {
 
 		logActionService.addLogAction("更新角色", tmpRole + "更新为" + roleService.get(id), 1);
 		return roleService.updateRole(role);
+	}
+
+	/**
+	 * 更新角色
+	 * 
+	 * @param id
+	 * @param roleParam
+	 * @return
+	 */
+	@DeleteMapping("/{roleId}/user/{userId}")
+	public ResponseModel deleteUserForRole(@PathVariable Integer roleId, @PathVariable Integer userId) {
+
+		Role role = roleService.get(roleId);
+		User user = userService.get(userId);
+		
+		UserAndRoleParam userAndRoleParam = new UserAndRoleParam();
+
+		userAndRoleParam.setRoleId(roleId);
+		userAndRoleParam.setUserId(userId);
+		roleService.deleteOneUserForRole(userAndRoleParam);
+		
+		user.setPassword("****");
+		user.setPasswordSalt("****");
+		logActionService.addLogAction("删除角色的指定用户", "角色" + role.toString() + "删除了用户" + user.toString(), 1);
+		
+		return new ResponseModel.Builder().msg("删除成功").build();
 	}
 
 }

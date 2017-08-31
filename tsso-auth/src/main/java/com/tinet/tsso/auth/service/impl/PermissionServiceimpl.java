@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tinet.tsso.auth.dao.PermissionMapper;
 import com.tinet.tsso.auth.entity.Permission;
@@ -96,10 +97,7 @@ public class PermissionServiceimpl extends BaseServiceImp<Permission, Integer> i
 		if (permission.getKey() != null) {
 			Permission tempPermission = permissionMapper.selectByPrimaryKey(permission.getId());
 			if (!tempPermission.getKey().equals(permission.getKey())) {
-				Integer permissionCount = permissionMapper.selectByPermissionKey(permission.getKey());
-				if (!permissionCount.equals(0)) {
-					return new ResponseModel.Builder().status(HttpStatus.FORBIDDEN).error("该权限key已经被使用").build();
-				}
+				return new ResponseModel.Builder().status(HttpStatus.BAD_REQUEST).error("权限标识不可修改").build();
 			}
 		}
 
@@ -112,6 +110,17 @@ public class PermissionServiceimpl extends BaseServiceImp<Permission, Integer> i
 		PermissionModel.setApplicationName(permission.getApplication().getName());
 
 		return new ResponseModel.Builder().msg("更新成功").result(PermissionModel).build();
+	}
+
+	/**
+	 * 删除指定权限，并删除角色权限关联
+	 */
+	@Transactional
+	@Override
+	public void deletePermissionById(Integer permissionId) {
+
+		permissionMapper.deleteRoleForPermission(permissionId);
+		permissionMapper.deleteByPrimaryKey(permissionId);
 	}
 
 }

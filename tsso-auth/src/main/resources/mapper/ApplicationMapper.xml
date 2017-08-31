@@ -100,7 +100,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from application
-		order by application.create_time desc
+		order by application.key asc
 	</select>
   
   	<select id="selectCountByApplicationKey" parameterType="java.lang.String" resultType= "java.lang.Integer">

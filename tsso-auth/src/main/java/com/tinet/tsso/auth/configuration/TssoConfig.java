@@ -175,7 +175,7 @@ public class TssoConfig {
 		filterChainDefinitionMap.put("/", "authc");
 		filterChainDefinitionMap.put("/index/**", "authc");
 		//
-		filterChainDefinitionMap.put("/api/**", "roles[auth_admin]");
+		filterChainDefinitionMap.put("/api/**", "roles[tsso_admin]");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
