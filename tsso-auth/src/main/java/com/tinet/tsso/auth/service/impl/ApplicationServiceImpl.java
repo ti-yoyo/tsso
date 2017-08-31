@@ -29,6 +29,7 @@ public class ApplicationServiceImpl extends BaseServiceImp<Application, Integer>
 
 	@Autowired
 	private PermissionMapper permissionMapper;
+	
 
 	/**
 	 * 查询应用的分页信息

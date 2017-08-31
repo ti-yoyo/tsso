@@ -22,6 +22,7 @@ import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.UserParam;
+import com.tinet.tsso.auth.service.LogActionService;
 import com.tinet.tsso.auth.service.RoleService;
 import com.tinet.tsso.auth.service.UserService;
 import com.tinet.tsso.auth.util.Page;
@@ -42,6 +43,9 @@ public class UserController {
 
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private LogActionService logActionService;
 
 	/**
 	 * 用户查询：包含用户的角色信息等
@@ -73,10 +77,17 @@ public class UserController {
 	 */
 	@PostMapping
 	public ResponseModel addUser(@RequestBody UserParam userParam) {
-
 		User user = new User();
 		BeanUtils.copyProperties(userParam, user);
-		return userService.addUser(user);
+
+		ResponseModel responseModel = userService.addUser(user);
+		
+		user.setPassword("****");
+		user.setPasswordSalt("****");
+
+		logActionService.addLogAction("添加用户", user.toString(), responseModel.get("status").equals(200) ? 1 : 0);
+
+		return responseModel;
 	}
 
 	/**
@@ -91,10 +102,16 @@ public class UserController {
 	@PutMapping("/{userId}/role")
 	public ResponseModel updateUserRole(@PathVariable Integer userId, @RequestBody List<Integer> roleIdList) {
 
+		User user = userService.get(userId);
+		user.setPassword("****");
+		user.setPasswordSalt("****");
+
 		if (userId == null) {
-			new ResponseModel.Builder().error("用户Id不能为空").build();
+			return new ResponseModel.Builder().error("用户Id不能为空").build();
 		}
 		List<Role> roleList = userService.updataUserRoleList(userId, roleIdList);
+
+		logActionService.addLogAction("更新用户角色", "用户:" + user.toString() + "的角色", 1);
 
 		return new ResponseModel.Builder().result(roleList).msg("角色更新成功").build();
 
@@ -110,16 +127,19 @@ public class UserController {
 		// 防止用户自杀
 		Subject subject = SecurityUtils.getSubject();
 		List<Object> principals = subject.getPrincipals().asList();
-		
+
 		User u = userService.selectByUserName(principals.get(0).toString());
+		u.setPassword("****");
+		u.setPasswordSalt("****");
 		if (u == null || (u.getId() == id)) {
+			logActionService.addLogAction("删除用户", "用户:" + u.toString() + "删除自己", 0);
 			return new ResponseModel.Builder().error("您不能删除自己").status(HttpStatus.BAD_REQUEST).build();
 		}
 		// 删除该用户拥有的角色
 		roleService.deleteRoleByUserId(id);
 		// 删除用户
 		userService.delete(id);
-
+		logActionService.addLogAction("删除用户", u.toString(), 1);
 		return new ResponseModel.Builder().msg("删除成功").build();
 	}
 
@@ -135,22 +155,23 @@ public class UserController {
 	@PutMapping("/{id}")
 	public ResponseModel updateUser(@PathVariable Integer id, @RequestBody User user) {
 
+		User oldUser = userService.get(id);
 		if (id == null) {
 			return new ResponseModel.Builder().error("id不能为空").build();
 		}
 
-		// 防止用户自杀
-		Subject subject = SecurityUtils.getSubject();
-		List<Object> principals = subject.getPrincipals().asList();
-		User u = userService.selectByUserName(principals.get(0).toString());
-		if (u == null || (u.getId() == id && user.getStatus() != 1)) {
-			return new ResponseModel.Builder().error("您不能将自己停用").status(HttpStatus.BAD_REQUEST).build();
+		user.setId(id);
+		ResponseModel responseModel = userService.updateUser(user);
+
+		User updateUser = userService.get(id);
+
+		if (responseModel.get("status").equals(200)) {
+			logActionService.addLogAction("更新用户", "用户:" + oldUser.toString() + "更新为" + updateUser.toString(), 1);
+		} else {
+			logActionService.addLogAction("更新用户", "用户:" + oldUser.toString() + "更新为" + user.toString(), 0);
 		}
 
-		user.setId(id);
-		userService.update(user);
-
-		return this.getOneUserByUserId(id);
+		return responseModel;
 	}
 
 	/**

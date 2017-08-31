@@ -31,8 +31,16 @@ public interface PermissionMapper extends BaseMapper<Permission, Integer> {
 
 	/**
 	 * 查询该权限标识的数量
+	 * 
 	 * @param key
 	 * @return
 	 */
 	Integer selectByPermissionKey(String key);
+
+	/**
+	 * 删除某个权限的全部角色
+	 * 
+	 * @param permissionId
+	 */
+	void deleteRoleForPermission(Integer permissionId);
 }

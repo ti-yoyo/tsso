@@ -151,7 +151,7 @@
 		from "role"
 		where 1=1
 		<include refid="byParams" />
-		order by "role".create_time desc
+		order by "role".key asc
 		<if test="start != null and limit != null">
 			offset #{start, jdbcType=INTEGER} limit #{limit,
 			jdbcType=INTEGER}
@@ -172,8 +172,12 @@
 		(#{userId,jdbcType=INTEGER},#{id,jdbcType=INTEGER})
 	</insert>
 
-	<delete id="deletePermissionByRoleId" parameterType="java.lang.Integer">
+	<delete id="deletePermissionForRoleId" parameterType="java.lang.Integer">
 		delete from role_permission
+		where role_id = #{roleId,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteUserForRoleId" parameterType="java.lang.Integer">
+		delete from user_role
 		where role_id = #{roleId,jdbcType=INTEGER}
 	</delete>
 	<insert id="addPermissionForRole" parameterType="com.tinet.tsso.auth.param.RoleParam">
@@ -196,4 +200,8 @@
 		where key = #{key,jdbcType=VARCHAR}
 	</select>
 	
+	<delete id="deleteOneUserForRole" parameterType="com.tinet.tsso.auth.param.UserAndRoleParam">
+		delete from user_role
+		where role_id = #{roleId,jdbcType=INTEGER} and user_id = #{userId,jdbcType=INTEGER}
+	</delete>
 </mapper>

@@ -1,4 +1,4 @@
-webpackJsonp([1],{
+webpackJsonp([0],{
 
 /***/ "../../../../../src async recursive":
 /***/ (function(module, exports) {
@@ -26,12 +26,10 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_manage_auth_manage_auth_manage_component__ = __webpack_require__("../../../../../src/app/login-manage/auth-manage/auth-manage.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_manage_log_manage_login_log_login_log_component__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/login-log/login-log.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_manage_log_manage_operation_log_operation_log_component__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/operation-log/operation-log.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__login_manage_password_manage_password_find_password_find_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-find/password-find.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_manage_role_manage_role_manage_component__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/role-manage.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_manage_system_set_system_set_component__ = __webpack_require__("../../../../../src/app/login-manage/system-set/system-set.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__login_manage_user_manage_user_manage_component__ = __webpack_require__("../../../../../src/app/login-manage/user-manage/user-manage.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__login_manage_role_manage_manage_user_component__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/manage-user.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__login_manage_log_manage_log_manage_component__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/log-manage.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__login_manage_role_manage_role_manage_component__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/role-manage.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_manage_user_manage_user_manage_component__ = __webpack_require__("../../../../../src/app/login-manage/user-manage/user-manage.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_manage_role_manage_manage_user_component__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/manage-user.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__login_manage_log_manage_log_manage_component__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/log-manage.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -55,40 +53,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
-
 var routes = [
     {
-        path: '', redirectTo: '/index/tsso-auth/app', pathMatch: 'full'
+        path: '', redirectTo: '/index/app', pathMatch: 'full'
     },
     {
         path: 'index', component: __WEBPACK_IMPORTED_MODULE_2__core_index_component__["a" /* IndexComponent */],
         canActivate: [__WEBPACK_IMPORTED_MODULE_3__core_services_auth_guard_service__["a" /* AuthGuard */]],
         children: [
-            { path: '', redirectTo: 'tsso-auth', pathMatch: 'full' },
-            { path: 'tsso-auth', component: __WEBPACK_IMPORTED_MODULE_4__login_manage_app_home_component__["a" /* AppHomeComponent */],
+            { path: '', redirectTo: 'app', pathMatch: 'full' },
+            { path: 'app', component: __WEBPACK_IMPORTED_MODULE_5__login_manage_app_manage_app_manage_component__["a" /* AppManageComponent */] },
+            { path: 'user', component: __WEBPACK_IMPORTED_MODULE_10__login_manage_user_manage_user_manage_component__["a" /* UserManageComponent */] },
+            { path: 'auth', component: __WEBPACK_IMPORTED_MODULE_6__login_manage_auth_manage_auth_manage_component__["a" /* AuthManageComponent */] },
+            { path: 'role', component: __WEBPACK_IMPORTED_MODULE_4__login_manage_app_home_component__["a" /* AppHomeComponent */],
                 children: [
-                    { path: '', redirectTo: 'app', pathMatch: 'full' },
-                    { path: 'app', component: __WEBPACK_IMPORTED_MODULE_5__login_manage_app_manage_app_manage_component__["a" /* AppManageComponent */] },
-                    { path: 'user', component: __WEBPACK_IMPORTED_MODULE_12__login_manage_user_manage_user_manage_component__["a" /* UserManageComponent */] },
-                    { path: 'auth', component: __WEBPACK_IMPORTED_MODULE_6__login_manage_auth_manage_auth_manage_component__["a" /* AuthManageComponent */] },
-                    { path: 'role', component: __WEBPACK_IMPORTED_MODULE_4__login_manage_app_home_component__["a" /* AppHomeComponent */],
-                        children: [
-                            { path: '', redirectTo: 'list', pathMatch: 'full' },
-                            { path: 'list', component: __WEBPACK_IMPORTED_MODULE_10__login_manage_role_manage_role_manage_component__["a" /* RoleManageComponent */] },
-                            { path: 'user_manage/:roleId', component: __WEBPACK_IMPORTED_MODULE_13__login_manage_role_manage_manage_user_component__["a" /* ManageUserComponent */] },
-                        ]
-                    },
-                    { path: 'log_manage', component: __WEBPACK_IMPORTED_MODULE_14__login_manage_log_manage_log_manage_component__["a" /* LogManageComponent */],
-                        children: [
-                            { path: '', redirectTo: 'login_log', pathMatch: 'full' },
-                            { path: 'login_log', component: __WEBPACK_IMPORTED_MODULE_7__login_manage_log_manage_login_log_login_log_component__["a" /* LoginLogComponent */] },
-                            { path: 'operation_log', component: __WEBPACK_IMPORTED_MODULE_8__login_manage_log_manage_operation_log_operation_log_component__["a" /* OperationLogComponent */] },
-                        ]
-                    },
-                    { path: 'password_find', component: __WEBPACK_IMPORTED_MODULE_9__login_manage_password_manage_password_find_password_find_component__["a" /* PasswordFindComponent */] },
-                    //{path:'password_modify',component:PasswordModifyComponent},
-                    { path: 'system_set', component: __WEBPACK_IMPORTED_MODULE_11__login_manage_system_set_system_set_component__["a" /* SystemSetComponent */] }
+                    { path: '', redirectTo: 'list', pathMatch: 'full' },
+                    { path: 'list', component: __WEBPACK_IMPORTED_MODULE_9__login_manage_role_manage_role_manage_component__["a" /* RoleManageComponent */] },
+                    { path: 'user_manage/:roleId', component: __WEBPACK_IMPORTED_MODULE_11__login_manage_role_manage_manage_user_component__["a" /* ManageUserComponent */] },
+                ]
+            },
+            { path: 'log_manage', component: __WEBPACK_IMPORTED_MODULE_12__login_manage_log_manage_log_manage_component__["a" /* LogManageComponent */],
+                children: [
+                    { path: '', redirectTo: 'operation_log', pathMatch: 'full' },
+                    { path: 'operation_log', component: __WEBPACK_IMPORTED_MODULE_8__login_manage_log_manage_operation_log_operation_log_component__["a" /* OperationLogComponent */] },
+                    { path: 'login_log', component: __WEBPACK_IMPORTED_MODULE_7__login_manage_log_manage_login_log_login_log_component__["a" /* LoginLogComponent */] },
                 ]
             },
         ]
@@ -338,7 +326,7 @@ CoreModule = __decorate([
 /***/ "../../../../../src/app/core/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <span class=\"organ-name\">TSSO用户中心</span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\" *ngIf=\"user && user.username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div id=\"header\" class=\"fixed-top\">\r\n  <div class=\"head-content\">\r\n    <img class=\"logo-header\" src=\"../../../assets/images/logo_header.svg\">\r\n    <img class=\"\" style=\"height:28px;margin-bottom: 5px;margin-left: 4px;\" src=\"../../../assets/images/auth_logo.svg\">\r\n    <span class=\"organ-name\"></span>\r\n    <span class=\"demo-fill-remaining\"></span>\r\n    <div class=\"right-buttons\">\r\n      <span class=\"username\" *ngIf=\"user && user.username\">{{user?.username}}</span>\r\n      <button md-icon-button (click)=\"exit()\" [mdTooltip]=\"'退出'\" style=\"width:57px;\">\r\n        <md-icon class=\"md-24\">exit_to_app</md-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -350,7 +338,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/*\n * Common header classes & IDs\n * Do not remove this\n */\n/*\n * CSS Transform - Scale and Rotate\n */\n/*\n * Pop-in Hover effects\n */\n/*\n * Scale 3d\n */\n/*\n * Material Colors\n */\n/* Bootstrap Branding */\n/*\n * Colors\n */\n/*\n * Blocks\n */\n/*\n * Font Icon Family\n */\n#header {\n  z-index: 999;\n}\n#header .head-content {\n  height: 50px;\n  padding: 0 10px;\n  line-height: 50px;\n  background: #373d41;\n}\n#header .organ-name {\n  color: #fff;\n  font-size: 1.7rem;\n  margin: 0 10px;\n  text-shadow: 1px 1px rgba(0, 0, 0, 0.1);\n}\n#header .organ-menu-button {\n  padding: 0 50px;\n}\n#header .logo-header {\n  width: 24px;\n  height: 24px;\n  margin-bottom: 7px;\n}\n#header .right-buttons {\n  float: right;\n}\n#header .right-buttons button {\n  margin-left: 10px;\n}\n#header .right-buttons button:focus {\n  outline: none;\n}\n/*\n * Material Background Colors\n */\n.bgm-blue {\n  background-color: #2196f3 !important;\n}\n.bgm-sky {\n  background-color: #2196f3 !important;\n}\n.bgm-purple {\n  background-color: #9c27b0 !important;\n}\n.bgm-theme1 {\n  background-color: #9c27b0 !important;\n}\n.bgm-sea {\n  background-color: #00bcd4 !important;\n}\n.bgm-cyan {\n  background-color: #00bcd4 !important;\n}\n.c-cyan {\n  color: #00bcd4 !important;\n}\n.bgm-teal {\n  background-color: #009688 !important;\n}\n.bgm-theme2 {\n  background-color: #009688 !important;\n}\n.bgm-default {\n  background-color: #26303B !important;\n}\n.c-default {\n  color: #26303B !important;\n}\n.bgm-orange {\n  background-color: #ff9800 !important;\n}\n.bgm-theme3 {\n  background-color: #ff9800 !important;\n}\n.skin-switch {\n  padding: 10px 0 0 0;\n  text-align: center;\n}\n.logo {\n  height: 30px !important;\n  line-height: 30px;\n  font-size: 3rem !important;\n  margin-right: 15px;\n}\n.ss-skin {\n  width: 16px;\n  height: 16px;\n  border-radius: 50%;\n  cursor: pointer;\n  display: inline-block;\n  margin: 2px 5px;\n}\n.ss-skin:hover {\n  -webkit-opacity: 0.8;\n  -khtml-opacity: 0.8;\n  -moz-opacity: 0.8;\n  opacity: 0.8;\n  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);\n  filter: alpha(opacity=80);\n}\n.status {\n  float: right;\n  font-size: 1.2rem;\n  margin-left: 30px;\n  color: #ff9800;\n}\n.dropdown-toggle::after {\n  border: none;\n  margin: 0;\n}\n.dropdown-menu {\n  left: 70px;\n  top: 50px;\n  min-width: 12rem;\n  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);\n  border: none;\n  border-radius: 0;\n}\n.dropdown-item.active,\n.dropdown-item:active {\n  background-color: #eee;\n  color: #000;\n}\n.divider {\n  height: 1px;\n  margin: 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n.demo-fill-remaining {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n.username {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px;\n  font-size: 1.4rem;\n  color: #fff;\n}\n.right-buttons .mat-icon {\n  color: #fff;\n  font-size: 1.9rem;\n}\n.tsw-inner {\n  position: relative;\n  padding: 15px;\n  max-width: 700px;\n  display: block;\n  margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, "/*\n * Common header classes & IDs\n * Do not remove this\n */\n/*\n * CSS Transform - Scale and Rotate\n */\n/*\n * Pop-in Hover effects\n */\n/*\n * Scale 3d\n */\n/*\n * Material Colors\n */\n/* Bootstrap Branding */\n/*\n * Colors\n */\n/*\n * Blocks\n */\n/*\n * Font Icon Family\n */\n#header {\n  z-index: 999;\n}\n#header .head-content {\n  height: 50px;\n  padding: 0 10px;\n  line-height: 50px;\n  background: #373d41;\n}\n#header .organ-name {\n  color: #fff;\n  font-size: 1.7rem;\n  margin: 0 10px;\n  text-shadow: 1px 1px rgba(0, 0, 0, 0.1);\n}\n#header .organ-menu-button {\n  padding: 0 50px;\n}\n#header .logo-header {\n  width: 30px;\n  margin-bottom: 7px;\n}\n#header .right-buttons {\n  float: right;\n}\n#header .right-buttons button {\n  margin-left: 10px;\n}\n#header .right-buttons button:focus {\n  outline: none;\n}\n/*\n * Material Background Colors\n */\n.bgm-blue {\n  background-color: #2196f3 !important;\n}\n.bgm-sky {\n  background-color: #2196f3 !important;\n}\n.bgm-purple {\n  background-color: #9c27b0 !important;\n}\n.bgm-theme1 {\n  background-color: #9c27b0 !important;\n}\n.bgm-sea {\n  background-color: #00bcd4 !important;\n}\n.bgm-cyan {\n  background-color: #00bcd4 !important;\n}\n.c-cyan {\n  color: #00bcd4 !important;\n}\n.bgm-teal {\n  background-color: #009688 !important;\n}\n.bgm-theme2 {\n  background-color: #009688 !important;\n}\n.bgm-default {\n  background-color: #26303B !important;\n}\n.c-default {\n  color: #26303B !important;\n}\n.bgm-orange {\n  background-color: #ff9800 !important;\n}\n.bgm-theme3 {\n  background-color: #ff9800 !important;\n}\n.skin-switch {\n  padding: 10px 0 0 0;\n  text-align: center;\n}\n.logo {\n  height: 30px !important;\n  line-height: 30px;\n  font-size: 3rem !important;\n  margin-right: 15px;\n}\n.ss-skin {\n  width: 16px;\n  height: 16px;\n  border-radius: 50%;\n  cursor: pointer;\n  display: inline-block;\n  margin: 2px 5px;\n}\n.ss-skin:hover {\n  -webkit-opacity: 0.8;\n  -khtml-opacity: 0.8;\n  -moz-opacity: 0.8;\n  opacity: 0.8;\n  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);\n  filter: alpha(opacity=80);\n}\n.status {\n  float: right;\n  font-size: 1.2rem;\n  margin-left: 30px;\n  color: #ff9800;\n}\n.dropdown-toggle::after {\n  border: none;\n  margin: 0;\n}\n.dropdown-menu {\n  left: 70px;\n  top: 50px;\n  min-width: 12rem;\n  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);\n  border: none;\n  border-radius: 0;\n}\n.dropdown-item.active,\n.dropdown-item:active {\n  background-color: #eee;\n  color: #000;\n}\n.divider {\n  height: 1px;\n  margin: 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n.demo-fill-remaining {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n.username {\n  display: inline-block;\n  height: 40px;\n  line-height: 40px;\n  font-size: 1.4rem;\n  color: #fff;\n}\n.right-buttons .mat-icon {\n  color: #fff;\n  font-size: 1.9rem;\n}\n.tsw-inner {\n  position: relative;\n  padding: 15px;\n  max-width: 700px;\n  display: block;\n  margin: 0 auto;\n}\n", ""]);
 
 // exports
 
@@ -369,6 +357,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_data_service__ = __webpack_require__("../../../../../src/app/core/services/data.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -384,17 +373,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HeaderComponent = (function () {
-    function HeaderComponent(router, connectionService, swalService) {
+    function HeaderComponent(router, connectionService, swalService, dataService) {
         this.router = router;
         this.connectionService = connectionService;
         this.swalService = swalService;
+        this.dataService = dataService;
         this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
+        this.user = this.dataService.user;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        if (!__WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user')) {
-            this.getCurrentUser();
-        }
+        this.dataService.getCurrentUser();
     };
     HeaderComponent.prototype.exit = function () {
         __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].remove('user');
@@ -405,26 +395,6 @@ var HeaderComponent = (function () {
         });
         window.location.reload();
     };
-    /*
-     *@desc 获取当前用户信息
-     */
-    HeaderComponent.prototype.getCurrentUser = function () {
-        var _this = this;
-        var userPath = '/api/user/user_info';
-        this.connectionService.get(userPath)
-            .then(function (res) {
-            if (res.data.status == 200) {
-                __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
-                _this.user = __WEBPACK_IMPORTED_MODULE_3__services_localstorage_service__["a" /* LocalStorage */].get('user');
-            }
-            else {
-                window.location.reload();
-            }
-        })
-            .catch(function (err) {
-            window.location.reload();
-        });
-    };
     return HeaderComponent;
 }());
 HeaderComponent = __decorate([
@@ -433,10 +403,10 @@ HeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/core/header/header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/core/header/header.component.less")],
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_connection_service__["a" /* ConnectionService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_swal_service__["a" /* SwalService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_data_service__["a" /* DataService */]) === "function" && _d || Object])
 ], HeaderComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=header.component.js.map
 
 /***/ }),
@@ -674,16 +644,11 @@ var ConstantService = (function () {
     }
     return ConstantService;
 }());
-ConstantService.HOST = 'http://auth.tinetcloud.com:7777';
-ConstantService.navTabs = [
-    { title: "用户中心", icon: '', md_icon: '', link: 'tsso-auth', open: false,
-        children: [
-            { name: '应用管理', link: '/index/tsso-auth/app', md_icon: 'apps', choosed: false },
-            { name: '用户管理', link: '/index/tsso-auth/user', md_icon: 'group_add', choosed: false },
-            { name: '角色管理', link: '/index/tsso-auth/role', md_icon: 'assignment_ind', choosed: false },
-            { name: '权限管理', link: '/index/tsso-auth/auth', md_icon: 'verified_user', choosed: false },
-        ]
-    }
+ConstantService.HOST = 'http://auth-test.tinetcloud.com:7777';
+ConstantService.protocolList = [
+    { id: 1, name: 'SMTP' },
+    { id: 2, name: 'POP' },
+    { id: 3, name: 'IMAP' },
 ];
 ConstantService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
@@ -699,6 +664,8 @@ ConstantService = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mobx_angular__ = __webpack_require__("../../../../mobx-angular/dist/mobx-angular.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -711,9 +678,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var DataService = (function () {
-    function DataService() {
+    function DataService(connectionService) {
+        this.connectionService = connectionService;
         this.leftArray = {};
+        this.user = { username: '' };
+        this.navTabs = [
+            { title: "", icon: '', md_icon: '', link: '', open: false,
+                children: [
+                    { name: '应用管理', link: '/index/app', md_icon: 'apps', choosed: false },
+                    { name: '用户管理', link: '/index/user', md_icon: 'group_add', choosed: false },
+                    { name: '角色管理', link: '/index/role', md_icon: 'assignment_ind', choosed: false },
+                    { name: '权限管理', link: '/index/auth', md_icon: 'verified_user', choosed: false },
+                    { name: '日志管理', link: '/index/log_manage', md_icon: 'chrome_reader_mode', choosed: false },
+                    { name: '修改密码', link: '/password_change', md_icon: 'vpn_key', choosed: false },
+                ]
+            }
+        ];
     }
     /**
      * @desc 监控左侧菜单收展状态
@@ -725,12 +708,42 @@ var DataService = (function () {
         var leftArr = { mleft: mleft, sleft: sleft };
         Object.assign(this.leftArray, leftArr);
     };
+    /*
+     *@desc 获取当前用户信息
+     */
+    DataService.prototype.getCurrentUser = function () {
+        var _this = this;
+        var userPath = '/api/user/user_info';
+        this.connectionService.get(userPath)
+            .then(function (res) {
+            if (res.data.status == 200) {
+                __WEBPACK_IMPORTED_MODULE_3__localstorage_service__["a" /* LocalStorage */].set('user', res.data.result);
+                Object.assign(_this.user, res.data.result);
+            }
+            else {
+                if (!__WEBPACK_IMPORTED_MODULE_3__localstorage_service__["a" /* LocalStorage */].get('load')) {
+                    __WEBPACK_IMPORTED_MODULE_3__localstorage_service__["a" /* LocalStorage */].set('load', true);
+                    window.location.reload();
+                }
+            }
+        })
+            .catch(function (err) {
+            if (!__WEBPACK_IMPORTED_MODULE_3__localstorage_service__["a" /* LocalStorage */].get('load')) {
+                __WEBPACK_IMPORTED_MODULE_3__localstorage_service__["a" /* LocalStorage */].set('load', true);
+                window.location.reload();
+            }
+        });
+    };
     return DataService;
 }());
 __decorate([
     __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
     __metadata("design:type", Object)
 ], DataService.prototype, "leftArray", void 0);
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
+    __metadata("design:type", Object)
+], DataService.prototype, "user", void 0);
 __decorate([
     __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["c" /* action */],
     __metadata("design:type", Function),
@@ -739,9 +752,10 @@ __decorate([
 ], DataService.prototype, "changeLeft", null);
 DataService = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__connection_service__["a" /* ConnectionService */]) === "function" && _a || Object])
 ], DataService);
 
+var _a;
 //# sourceMappingURL=data.service.js.map
 
 /***/ }),
@@ -847,7 +861,7 @@ SwalService = __decorate([
 /***/ "../../../../../src/app/core/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\n    <div class=\"sideNavBar\">\n        <div class=\"side-menu-container\">\n            <div class=\"side-inner\">\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\n                    <md-icon class=\"md-24\">menu</md-icon>\n                </div>\n                <div>\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\n                        <!--<div class=\"sidebar-title\" (click)=\"openMenu(i)\">-->\n                            <!--<md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">-->\n                                <!--chevron_right-->\n                            <!--</md-icon>-->\n                            <!--<md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">-->\n                               <!--expand_more-->\n                            <!--</md-icon>-->\n                            <!--<md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\n                                <!--chevron_right-->\n                            <!--</md-icon>-->\n                            <!--<md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\n                                <!--expand_more-->\n                            <!--</md-icon>-->\n                            <!--<span>{{navTab.title}}</span>-->\n                        <!--</div>-->\n                        <ul>\n                            <li *ngFor=\"let item of navTab.children\">\n                                <a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\n                                    <div>\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\n                                    </div>\n                                    <span class=\"menu-title\">\n                                        {{item.name}}\n                                    </span>\n                                </a>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<div class=\"sideNavBar_full\" [ngClass]=\"{sideNavBar_fold: sideOpened==false}\">\r\n    <div class=\"sideNavBar\">\r\n        <div class=\"side-menu-container\">\r\n            <div class=\"side-inner\">\r\n                <div class=\"sidebar-fold\" (click)=\"foldSide()\">\r\n                    <md-icon class=\"md-24\">menu</md-icon>\r\n                </div>\r\n                <div>\r\n                    <div *ngFor=\"let navTab of navTabs;let i=index;\">\r\n                        <!--<div class=\"sidebar-title\" (click)=\"openMenu(i)\">-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && !navTab.open\" class=\"md-24\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"sideOpened && navTab.open\" class=\"md-24\">-->\r\n                               <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && !navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--chevron_right-->\r\n                            <!--</md-icon>-->\r\n                            <!--<md-icon *ngIf=\"!sideOpened && navTab.open\" class=\"md-24\" [mdTooltip]=\"navTab.title\"-->\r\n                                     <!--[mdTooltipPosition]=\"'right'\">-->\r\n                                <!--expand_more-->\r\n                            <!--</md-icon>-->\r\n                            <!--<span>{{navTab.title}}</span>-->\r\n                        <!--</div>-->\r\n                        <ul>\r\n                            <li *ngFor=\"let item of navTab.children\">\r\n                              <a *ngIf=\"item.link.indexOf('password_change') > -1\"  (click)=\"goTo()\" routerLinkActive=\"active\">\r\n                              <!--<a routerLink=\"{{item.link}}\" routerLinkActive=\"active\">-->\r\n                                    <div>\r\n                                        <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                                 [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                        <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                    </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                                </a>\r\n                              <!--<a *ngIf=\"item.link.indexOf('password_change') == -1\" (click)=\"goTo(item)\" routerLinkActive=\"active\">-->\r\n                                <a *ngIf=\"item.link.indexOf('password_change') == -1\" routerLink=\"{{item.link}}\" routerLinkActive=\"active\">\r\n                                <div>\r\n                                  <md-icon *ngIf=\"!sideOpened\"  class=\"md-24\" [mdTooltip]=\"item.name\"\r\n                                           [mdTooltipPosition]=\"'right'\">{{item.md_icon}}</md-icon>\r\n                                  <md-icon *ngIf=\"sideOpened\" class=\"md-24\">{{item.md_icon}}</md-icon>\r\n                                </div>\r\n                                    <span class=\"menu-title\">\r\n                                        {{item.name}}\r\n                                    </span>\r\n                              </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -874,8 +888,8 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_constant_service__ = __webpack_require__("../../../../../src/app/core/services/constant.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_data_service__ = __webpack_require__("../../../../../src/app/core/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/core/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SideComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -890,15 +904,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SideComponent = (function () {
-    function SideComponent(dataService) {
+    function SideComponent(dataService, router) {
         this.dataService = dataService;
+        this.router = router;
         this.setOpenSideValue = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.sideOpened = true;
-        this.navTabs = __WEBPACK_IMPORTED_MODULE_1__services_constant_service__["a" /* ConstantService */].navTabs;
+        this.navTabs = this.dataService.navTabs;
+        this.user = this.dataService.user;
     }
     SideComponent.prototype.ngOnInit = function () {
         this.dataService.changeLeft(180);
-        this.initMenu();
+        //this.initMenu()
     };
     SideComponent.prototype.initMenu = function () {
         var href = window.location.href;
@@ -946,6 +962,9 @@ var SideComponent = (function () {
             });
         });
     };
+    SideComponent.prototype.goTo = function () {
+        window.location.href = "/password_change?username=" + this.user.username;
+    };
     return SideComponent;
 }());
 __decorate([
@@ -958,10 +977,10 @@ SideComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/core/sidebar/sidebar.component.html"),
         styles: [__webpack_require__("../../../../../src/app/core/sidebar/sidebar.component.less")],
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object])
 ], SideComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=sidebar.component.js.map
 
 /***/ }),
@@ -1010,7 +1029,7 @@ var _a;
 /***/ "../../../../../src/app/login-manage/app-manage/app-manage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>应用管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addApp()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"list-style main\" style=\"margin-top:10px;\">\r\n      <div class=\"card-shadow\">\r\n        <table class=\"table text-center \">\r\n          <thead>\r\n          <tr>\r\n            <td>序号</td>\r\n            <td>应用标识</td>\r\n            <td>应用名称</td>\r\n            <td>应用状态</td>\r\n            <td>创建时间</td>\r\n            <td style=\"width:60px;\">操作</td>\r\n          </tr>\r\n          </thead>\r\n          <tbody>\r\n          <tr  *ngFor=\"let item of appList;let index = index\" class=\"excel\">\r\n            <td style=\"width:50px;;font-weight:700\">{{index+search.start+1}}</td>\r\n            <td>{{item?.key}}</td>\r\n            <td>{{item?.name}}</td>\r\n            <td>\r\n              <span *ngIf=\"item.status == 0\">禁用</span>\r\n              <span *ngIf=\"item.status == 1\">启用</span>\r\n            </td>\r\n            <td>{{item.createTime|timeformat}}</td>\r\n            <td class=\"opt\">\r\n              <button style=\"margin-right:0px;\" (click)=\"removeApp(item,index)\">删除</button>\r\n            </td>\r\n          </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <div class=\"bottom-page\">\r\n      <div style=\"display:inline-block;\">\r\n        共 {{pageConfig.totalItems}} 条记录\r\n      </div>\r\n      <div style=\"float: right\">\r\n        <div class=\"skip\">\r\n          每页\r\n          <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n            {{search.limit}}\r\n          </button>\r\n\r\n          <md-menu #menu=\"mdMenu\">\r\n            <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                    [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n              {{skip}}\r\n            </button>\r\n          </md-menu>\r\n          条\r\n        </div>\r\n        <div class=\"pagination\">\r\n          <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                          [(page)]=\"search.currentPage\"\r\n                          [boundaryLinks]=\"true\"\r\n                          [directionLinks]=\"true\"\r\n                          [maxSize]=\"5\"\r\n                          [pageSize]=\"search.limit\"\r\n                          [ellipses]=\"false\"\r\n                          [size]=\"'sm'\"\r\n                          (pageChange)=\"getAppList()\"></ngb-pagination>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>应用管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addApp()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"list-style main\" style=\"margin-top:10px;\">\r\n      <div class=\"card-shadow\">\r\n        <table class=\"table text-center \">\r\n          <thead>\r\n          <tr>\r\n            <td>序号</td>\r\n            <td>应用标识</td>\r\n            <td>应用名称</td>\r\n            <td>应用状态</td>\r\n            <td>创建时间</td>\r\n            <td style=\"width:92px;\">操作</td>\r\n          </tr>\r\n          </thead>\r\n          <tbody>\r\n          <tr  *ngFor=\"let item of appList;let index = index\" class=\"excel\">\r\n            <td style=\"width:50px;;font-weight:700\">{{index+search.start+1}}</td>\r\n            <td>{{item?.key}}</td>\r\n            <td>{{item?.name}}</td>\r\n            <td>\r\n              <span *ngIf=\"item.status == 0\">禁用</span>\r\n              <span *ngIf=\"item.status == 1\">启用</span>\r\n            </td>\r\n            <td>{{item.createTime|timeformat}}</td>\r\n            <td class=\"opt\">\r\n              <button (click)=\"editApp(item,index)\">编辑</button>\r\n              <button (click)=\"removeApp(item,index)\">删除</button>\r\n            </td>\r\n          </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </div>\r\n    <div class=\"bottom-page\">\r\n      <div style=\"display:inline-block;\">\r\n        共 {{pageConfig.totalItems}} 条记录\r\n      </div>\r\n      <div style=\"float: right\">\r\n        <div class=\"skip\">\r\n          每页\r\n          <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n            {{search.limit}}\r\n          </button>\r\n\r\n          <md-menu #menu=\"mdMenu\">\r\n            <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                    [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n              {{skip}}\r\n            </button>\r\n          </md-menu>\r\n          条\r\n        </div>\r\n        <div class=\"pagination\">\r\n          <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                          [(page)]=\"search.currentPage\"\r\n                          [boundaryLinks]=\"true\"\r\n                          [directionLinks]=\"true\"\r\n                          [maxSize]=\"5\"\r\n                          [pageSize]=\"search.limit\"\r\n                          [ellipses]=\"false\"\r\n                          [size]=\"'sm'\"\r\n                          (pageChange)=\"getAppList()\"></ngb-pagination>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1115,13 +1134,34 @@ var AppManageComponent = (function () {
     AppManageComponent.prototype.addApp = function () {
         var _this = this;
         var appConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_app_dialog__["a" /* AppDialog */].appConfig;
+        appConfig.data.id = '';
         this.appDialog = this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_app_dialog__["a" /* AppDialog */], appConfig);
         this.appDialog.afterClosed().subscribe(function (result) {
             if (result) {
                 if (result != 'cancel') {
+                    delete result.id;
                     _this.service.createApp(result).subscribe(function (res) {
                         if (res.data.status === 200) {
                             _this.getAppList();
+                        }
+                    });
+                }
+            }
+            __WEBPACK_IMPORTED_MODULE_4__dialogs_app_dialog__["a" /* AppDialog */].appConfig.data = {};
+        });
+    };
+    AppManageComponent.prototype.editApp = function (item, index) {
+        var _this = this;
+        var appConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_app_dialog__["a" /* AppDialog */].appConfig;
+        appConfig.data = Object.assign({}, item);
+        this.appDialog = this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_app_dialog__["a" /* AppDialog */], appConfig);
+        this.appDialog.afterClosed().subscribe(function (result) {
+            if (result) {
+                if (result != 'cancel') {
+                    var params = { key: result.key, name: result.name, status: result.status };
+                    _this.service.editApp(item.id, params).subscribe(function (res) {
+                        if (res.data.status === 200) {
+                            _this.appList.splice(index, 1, res.data.result);
                         }
                     });
                 }
@@ -1304,6 +1344,24 @@ var AppManageService = (function () {
         return appObservable;
     };
     /**
+     * @desc 修改应用
+     * @param params - 添加的应用参数
+     */
+    AppManageService.prototype.editApp = function (id, params) {
+        var _this = this;
+        var path = '/api/application/' + id;
+        var appObservable = __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
+        appObservable.subscribe(function (res) {
+            if (res.data.status != 200) {
+                var message = res.data.error || '该应用修改失败，请稍后重试！';
+                _this.swal.hint('error', message);
+            }
+        }, function (error) {
+            _this.swal.hint('error', '该应用修改失败，请重试！');
+        });
+        return appObservable;
+    };
+    /**
      * @desc 删除应用
      * @param id - 删除的应用id
      * @param index - 被删除的应用在应用列表中的索引
@@ -1342,7 +1400,7 @@ var _a, _b, _c;
 /***/ "../../../../../src/app/login-manage/app-manage/dialogs/app.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"appform\">\r\n  <form #app=\"ngForm\" id=\"app\">\r\n  <div class=\"header-title\">创建新应用</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            应用标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            应用标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            应用名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            应用名称识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">停用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveApp(data)\" [disabled]=\"!app.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"appform\">\r\n  <form #app=\"ngForm\" id=\"app\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新应用</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑应用</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            应用标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            应用标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            应用名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            应用名称识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>应用状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">禁用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveApp(data)\" [disabled]=\"!app.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1354,7 +1412,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".appform {\n  overflow: hidden;\n}\n.appform .header-title {\n  font-size: 18px;\n}\n.appform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.appform .user-container .info-block {\n  margin-top: 30px;\n}\n.appform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.appform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.appform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.appform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.appform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.appform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.appform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
+exports.push([module.i, ".appform {\n  overflow: hidden;\n}\n.appform .header-title {\n  font-size: 18px;\n  margin-bottom: 30px;\n}\n.appform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.appform .user-container .info-block {\n  height: 58px;\n}\n.appform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.appform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.appform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.appform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.appform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.appform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.appform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
 
 // exports
 
@@ -1394,7 +1452,9 @@ var AppDialog = (function () {
         this.data = data;
     }
     AppDialog.prototype.ngOnInit = function () {
-        this.data.status = 1;
+        if (this.data.id == '') {
+            this.data.status = 1;
+        }
     };
     AppDialog.prototype.saveApp = function (data) {
         //console.log(data);
@@ -1424,7 +1484,7 @@ var _a;
 /***/ "../../../../../src/app/login-manage/auth-manage/auth-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\">\r\n    <table class=\"table text-center \">\r\n      <thead>\r\n      <tr>\r\n        <td>序号</td>\r\n        <td>权限标识</td>\r\n        <td>权限名称</td>\r\n        <td>所属应用</td>\r\n        <td style=\"width:178px;\">操作</td>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr  *ngFor=\"let item of authList;let index = index\" class=\"excel\">\r\n        <td style=\"width:50px;font-weight:700;\">{{index+offset+1}}</td>\r\n        <td>{{item?.key}}</td>\r\n        <td>{{item?.name}}</td>\r\n        <td>{{item?.applicationName}}</td>\r\n        <td class=\"opt\">\r\n          <button (click)=\"look(item)\">查看角色与用户</button>\r\n          <button (click)=\"removeAuth(item,index)\">删除</button>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\">\r\n    <table class=\"table text-center \">\r\n      <thead>\r\n      <tr>\r\n        <td>序号</td>\r\n        <td>权限标识</td>\r\n        <td>权限名称</td>\r\n        <td>所属应用</td>\r\n        <td>创建时间</td>\r\n        <td style=\"width:190px;\">操作</td>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr  *ngFor=\"let item of authList;let index = index\" class=\"excel\">\r\n        <td style=\"width:50px;font-weight:700;\">{{index+offset+1}}</td>\r\n        <td>{{item?.key}}</td>\r\n        <td>{{item?.name}}</td>\r\n        <td>{{item?.applicationName}}</td>\r\n        <td>{{item?.createTime|timeformat}}</td>\r\n        <td class=\"opt\">\r\n          <button (click)=\"look(item)\">查看角色与用户</button>\r\n          <button (click)=\"editAuth(item,index)\">编辑</button>\r\n          <button (click)=\"removeAuth(item,index)\">删除</button>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1436,8 +1496,9 @@ module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth_manage_service__ = __webpack_require__("../../../../../src/app/login-manage/auth-manage/auth-manage.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dialogs_look_role_user_dialog__ = __webpack_require__("../../../../../src/app/login-manage/auth-manage/dialogs/look-role-user.dialog.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dialogs_auth_dialog__ = __webpack_require__("../../../../../src/app/login-manage/auth-manage/dialogs/auth.dialog.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1451,6 +1512,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 /**
  * Created by kosei on 2017/8/7.
  */
+
 
 
 
@@ -1470,7 +1532,7 @@ var AuthListComponent = (function () {
      */
     AuthListComponent.prototype.removeAuth = function (item, index) {
         var _this = this;
-        __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()({
+        __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
             title: '您确定删除该权限吗?',
             type: 'warning',
             showCancelButton: true,
@@ -1503,6 +1565,16 @@ var AuthListComponent = (function () {
             };
             _this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_look_role_user_dialog__["a" /* LookRoleUserDialog */], lookConfig);
         });
+    };
+    /**
+     * @desc 编辑用户权限
+     */
+    AuthListComponent.prototype.editAuth = function (item, index) {
+        var authConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_auth_dialog__["a" /* AuthDialog */].authConfig;
+        authConfig.data = Object.assign({}, item);
+        authConfig.data.appList = this.appList;
+        authConfig.data.index = index;
+        this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_auth_dialog__["a" /* AuthDialog */], authConfig);
     };
     return AuthListComponent;
 }());
@@ -1646,7 +1718,7 @@ var AuthManageComponent = (function () {
     };
     AuthManageComponent.prototype.addAuth = function () {
         var authConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_auth_dialog__["a" /* AuthDialog */].authConfig;
-        authConfig.data = { key: '', name: '', appList: this.appList, getAuthList: this.getAuthList };
+        authConfig.data = { id: '', key: '', name: '', appList: this.appList, getAuthList: this.getAuthList };
         if (this.appList[0] && this.appList[0].id) {
             authConfig.data.applicationId = this.appList[0].id;
         }
@@ -1693,6 +1765,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__auth_list_component__ = __webpack_require__("../../../../../src/app/login-manage/auth-manage/auth-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dialogs_look_role_user_dialog__ = __webpack_require__("../../../../../src/app/login-manage/auth-manage/dialogs/look-role-user.dialog.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthManageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1703,6 +1776,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 /**
  * Created by kosei on 2017/8/1.
  */
+
 
 
 
@@ -1726,6 +1800,7 @@ AuthManageModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["k" /* CommonModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_11__shared_shared_module__["a" /* SharedModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */]
         ],
         declarations: [
@@ -1831,6 +1906,24 @@ var AuthManageService = (function () {
         return authObservable;
     };
     /**
+     * @desc 编辑权限
+     * @param params - 权限信息
+     */
+    AuthManageService.prototype.editAuth = function (id, params) {
+        var _this = this;
+        var path = '/api/permission/' + id;
+        var authObservable = __WEBPACK_IMPORTED_MODULE_5_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
+        authObservable.subscribe(function (res) {
+            if (res.data.status != 200) {
+                var message = res.data.error || '权限修改失败，请稍后重试！';
+                _this.swal.hint('error', message);
+            }
+        }, function (error) {
+            _this.swal.hint('error', '权限修改失败，请重试！');
+        });
+        return authObservable;
+    };
+    /**
      * @desc 删除权限
      * @param id - 被删除的权限id
      * @param index - 被删除的权限在权限列表中的索引
@@ -1904,7 +1997,7 @@ var _a, _b, _c;
 /***/ "../../../../../src/app/login-manage/auth-manage/dialogs/auth.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userform\">\r\n  <form #auth=\"ngForm\" id=\"auth\">\r\n  <div class=\"header-title\">新增权限</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>所属应用：\r\n        </label>\r\n        <md-select name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.applicationId\" class=\"select-font catalog-select\">\r\n          <md-option *ngFor=\"let item of data.appList\" [value]=\"item.id\">\r\n            <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>权限标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"authMark\"\r\n               #authMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"authMark.errors && (authMark.dirty || authMark.touched)\">\r\n          <div *ngIf=\"authMark.errors.required\" class=\"help alert alert-danger\">\r\n            权限标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!authMark.errors.required && authMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            权限标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>权限名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"authName\"\r\n               #authName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"authName.errors && (authName.dirty || authName.touched)\">\r\n          <div *ngIf=\"authName.errors.required\" class=\"help alert alert-danger\">\r\n            权限名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!authName.errors.required && authName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            权限名称至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveAuth(data)\" [disabled]=\"!auth.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"userform\">\r\n  <form #auth=\"ngForm\" id=\"auth\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">新增权限</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑权限</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>所属应用：\r\n        </label>\r\n        <md-select name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.applicationId\" class=\"select-font catalog-select\">\r\n          <md-option *ngFor=\"let item of data.appList\" [value]=\"item.id\">\r\n            <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>权限标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"authMark\"\r\n               #authMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               [readonly]=\"data.edit\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"authMark.errors && (authMark.dirty || authMark.touched)\">\r\n          <div *ngIf=\"authMark.errors.required\" class=\"help alert alert-danger\">\r\n            权限标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!authMark.errors.required && authMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            权限标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>权限名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"authName\"\r\n               #authName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"authName.errors && (authName.dirty || authName.touched)\">\r\n          <div *ngIf=\"authName.errors.required\" class=\"help alert alert-danger\">\r\n            权限名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!authName.errors.required && authName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            权限名称至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveAuth(data)\" [disabled]=\"!auth.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1916,7 +2009,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".userform {\n  overflow: hidden;\n}\n.userform .header-title {\n  font-size: 18px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  margin-top: 30px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
+exports.push([module.i, ".userform {\n  overflow: hidden;\n}\n.userform .header-title {\n  font-size: 18px;\n  margin-bottom: 30px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  height: 58px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
 
 // exports
 
@@ -1957,23 +2050,44 @@ var AuthDialog = (function () {
         this.dialogRef = dialogRef;
         this.data = data;
         this.service = service;
+        this.authList = this.service.authList;
     }
+    AuthDialog.prototype.ngOnInit = function () {
+        if (this.data.id == '') {
+            this.data.edit = false;
+        }
+        else {
+            this.data.edit = true;
+        }
+    };
     AuthDialog.prototype.saveAuth = function (data) {
         var _this = this;
         var params = Object.assign({}, data);
         delete params.getAuthList;
-        this.service.createAuth(params).subscribe(function (res) {
-            if (res.data.status == 200) {
-                _this.data.getAuthList(0);
-            }
-        });
+        delete params.id;
+        if (data.id != '') {
+            this.service.editAuth(data.id, params).subscribe(function (res) {
+                if (res.data.status == 200) {
+                    _this.authList.splice(data.index, 1, res.data.result);
+                }
+            });
+        }
+        else {
+            this.service.createAuth(params).subscribe(function (res) {
+                if (res.data.status == 200) {
+                    _this.data.getAuthList(0);
+                }
+            });
+        }
         this.dialogRef.close(data);
     };
     return AuthDialog;
 }());
 AuthDialog.authConfig = {
     width: '600px',
-    data: {}
+    data: {
+        id: ''
+    }
 };
 AuthDialog = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -2041,8 +2155,8 @@ LookRoleUserDialog.lookConfig = {
 LookRoleUserDialog = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'look-form',
-        template: "\n    <div class=\"main-form\">\n      <md-icon class=\"close\" (click)=\"dialogRef.close('close')\">close</md-icon>\n      <div class=\"content\" style=\"margin-top:10px;\">\n         <h1>\u62E5\u6709\u201C{{data.name}}({{data.key}})\u201D\u6743\u9650\u7684\u89D2\u8272</h1>\n         <ul>\n           <li *ngFor=\"let item of authRoleList\">\n             <span *ngIf=\"item && item.id\">{{item.name}}({{item.key}})</span>\n           </li>\n         </ul>\n      </div>\n      <div class=\"content\" style=\"margin-top:20px;margin-bottom:10px;\">\n         <h1>\u62E5\u6709\u201C{{data.name}}({{data.key}})\u201D\u6743\u9650\u7684\u7528\u6237</h1>\n         <ul>\n           <li  *ngFor=\"let item of authUserList\">\n             <span  *ngIf=\"item && item.id\">\n             <em *ngIf=\"item.departmentName\">{{item?.departmentName}}-</em>{{item.fullName}}<em *ngIf=\"item.username\">({{item.username}})</em>\n             </span>\n           </li>\n         </ul>\n      </div>\n    </div>\n  ",
-        styles: ["\n    .main-form{\n      position:relative;\n    }\n    .close{\n      position:absolute;\n      right:-18px;\n      top:-28px;\n    }\n    .content h1{\n      font-size:20px;\n      font-weight:700;\n      margin-bottom:10px;\n    }\n    .content ul{\n      list-style:none;\n      padding:0;\n      margin:0;\n    }\n    .content ul li{\n      height:25px;\n      line-height:25px;\n      font-size:13px;\n    }\n    .content ul li em{\n      font-style:normal;\n      font-weight:500;\n    }\n  "]
+        template: "\n    <div class=\"main-form\">\n      <div class=\"look-title\">\u67E5\u770B\u89D2\u8272\u548C\u7528\u6237</div>\n      <div class=\"content\" style=\"margin-top:10px;\">\n         <h1>\u62E5\u6709\u201C{{data.name}}({{data.key}})\u201D\u6743\u9650\u7684\u89D2\u8272</h1>\n         <ul>\n           <li *ngFor=\"let item of authRoleList\">\n             <span *ngIf=\"item && item.id\">{{item.name}}({{item.key}})</span>\n           </li>\n         </ul>\n      </div>\n      <div class=\"content\" style=\"margin-top:20px;margin-bottom:10px;\">\n         <h1>\u62E5\u6709\u201C{{data.name}}({{data.key}})\u201D\u6743\u9650\u7684\u7528\u6237</h1>\n         <ul>\n           <li  *ngFor=\"let item of authUserList\">\n             <span  *ngIf=\"item && item.id\">\n             <em *ngIf=\"item.departmentName\">{{item?.departmentName}}-</em>{{item.fullName}}<em *ngIf=\"item.username\">({{item.username}})</em>\n             </span>\n           </li>\n         </ul>\n      </div>\n      <div style=\"clear:both;text-align:center;margin-top:24px;\">\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">\u5173\u95ED</button>\n      </div>\n\n    </div>\n  ",
+        styles: ["\n    .main-form{\n      position:relative;\n    }\n    .look-title{\n      height:30px;\n      line-height:30px;\n      font-weight:700;\n      text-align: center;\n      font-size:18px;\n      margin-bottom:14px;\n    }\n    .close{\n      position:absolute;\n      right:-18px;\n      top:-28px;\n    }\n    .content h1{\n      font-size:17px;\n      font-weight:700;\n      margin-bottom:10px;\n    }\n    .content ul{\n      list-style:none;\n      padding:0;\n      margin:0;\n    }\n    .content ul li{\n      height:25px;\n      line-height:25px;\n      font-size:12px;\n      color:#888;\n    }\n    .content ul li em{\n      font-style:normal;\n      font-weight:500;\n    }\n     .cancel{\n      color:#fff;\n      font-size:13px;\n      line-height:30px;\n      background:#1194F6;\n      min-width:120px !important;\n    }\n    .cancel:focus{\n      outline:none;\n    }\n  "]
     }),
     __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MD_DIALOG_DATA */])),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialogRef */]) === "function" && _a || Object, Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__auth_manage_service__["a" /* AuthManageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__auth_manage_service__["a" /* AuthManageService */]) === "function" && _b || Object])
@@ -2077,8 +2191,7 @@ var LogManageComponent = (function () {
     function LogManageComponent() {
         this.title = '日志管理';
         this.menu = [
-            { id: 1, name: '登录日志', choosed: true, link: '/index/tsso-auth/log_manage/login_log' },
-            { id: 2, name: '操作日志', choosed: false, link: '/index/tsso-auth/log_manage/operation_log' }
+            { id: 1, name: '操作日志', choosed: false, link: '/index/log_manage/operation_log' },
         ];
         this.isShow = true;
     }
@@ -2125,6 +2238,8 @@ LogManageComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng2_daterangepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_ng2_daterangepicker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__login_log_login_log_component__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/login-log/login-log.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__operation_log_operation_log_component__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/operation-log/operation-log.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__log_manage_service__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/log-manage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__operation_log_log_detail_dialog__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/operation-log/log-detail.dialog.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogManageModule; });
 /**
  * Created by kosei on 2017/8/7.
@@ -2139,6 +2254,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -2172,11 +2289,14 @@ LogManageModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_9__login_log_login_log_component__["a" /* LoginLogComponent */],
             __WEBPACK_IMPORTED_MODULE_6__log_manage_component__["a" /* LogManageComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__operation_log_operation_log_component__["a" /* OperationLogComponent */]
+            __WEBPACK_IMPORTED_MODULE_10__operation_log_operation_log_component__["a" /* OperationLogComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__operation_log_log_detail_dialog__["a" /* LogDetailDialog */]
         ],
-        entryComponents: [],
+        entryComponents: [
+            __WEBPACK_IMPORTED_MODULE_12__operation_log_log_detail_dialog__["a" /* LogDetailDialog */]
+        ],
         exports: [],
-        providers: []
+        providers: [__WEBPACK_IMPORTED_MODULE_11__log_manage_service__["a" /* LogManageService */]]
     })
 ], LogManageModule);
 
@@ -2184,10 +2304,82 @@ LogManageModule = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/login-manage/log-manage/log-manage.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mobx_angular__ = __webpack_require__("../../../../mobx-angular/dist/mobx-angular.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogManageService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by kosei on 2017/8/18.
+ */
+
+
+
+
+var LogManageService = (function () {
+    function LogManageService(connectionService) {
+        this.connectionService = connectionService;
+        this.loginLogList = [];
+        this.operaLogList = [];
+    }
+    LogManageService.prototype.retriveLoginLog = function (params) {
+        var _this = this;
+        var path = '/api/log_login';
+        var logObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
+        logObservable.subscribe(function (res) {
+            _this.loginLogList.length = 0;
+            _this.loginLogList.push.apply(_this.loginLogList, res.data.result.pageData);
+        });
+        return logObservable;
+    };
+    LogManageService.prototype.retriveOperationLog = function (params) {
+        var _this = this;
+        var path = '/api/log_action';
+        var logObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.get(path, { params: params }));
+        logObservable.subscribe(function (res) {
+            _this.operaLogList.length = 0;
+            _this.operaLogList.push.apply(_this.operaLogList, res.data.result.pageData);
+        });
+        return logObservable;
+    };
+    return LogManageService;
+}());
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
+    __metadata("design:type", Object)
+], LogManageService.prototype, "loginLogList", void 0);
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
+    __metadata("design:type", Object)
+], LogManageService.prototype, "operaLogList", void 0);
+LogManageService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _a || Object])
+], LogManageService);
+
+var _a;
+//# sourceMappingURL=log-manage.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/login-manage/log-manage/login-log/login-log.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login\">\r\n  <div class=\"row\" style=\"height:100%;margin-right:0px;\">\r\n    <div class=\"col-sm-12\">\r\n      <div class=\"login-container\">\r\n        <div class=\"manage-head\">\r\n          <h5>登录日志</h5>\r\n        </div>\r\n        <div class=\"search-info\">\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">账号:</div>\r\n            <input placeholder=\"请输入账号\" class=\"search-input\" name=\"userName\" #userName=\"ngModel\" (keyup)=\"searchByKey($event)\" [(ngModel)]=\"search.userName\"/>\r\n          </div>\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">姓名:</div>\r\n            <input placeholder=\"请输入姓名\" class=\"search-input\" name=\"fullName\" #fullName=\"ngModel\" (keyup)=\"searchByKey($event)\" [(ngModel)]=\"search.fullName\"/>\r\n          </div>\r\n          <div class=\"opt-button\">\r\n            <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"getLoginLog()\">查询</button>\r\n          </div>\r\n        </div>\r\n        <div class=\"list-style main\" style=\"margin-top:10px;\">\r\n          <div class=\"card-shadow\">\r\n            <table class=\"table text-center \">\r\n              <thead>\r\n              <tr>\r\n                <td>序号</td>\r\n                <td>登录时间</td>\r\n                <td>用户</td>\r\n                <td>应用</td>\r\n                <td>IP</td>\r\n              </tr>\r\n              </thead>\r\n              <tbody>\r\n              <tr  *ngFor=\"let item of appList;let index = index\" class=\"excel\">\r\n                <td style=\"width:50px;;font-weight:700\">{{index+search.start+1}}</td>\r\n                <td>{{item?.key}}</td>\r\n                <td>{{item?.name}}</td>\r\n                <td>\r\n                  <span *ngIf=\"item.status == 0\">禁用</span>\r\n                  <span *ngIf=\"item.status == 1\">启用</span>\r\n                </td>\r\n                <td>{{item.createTime}}</td>\r\n              </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n        <div class=\"bottom-page\">\r\n          <div style=\"display:inline-block;\">\r\n            共 {{pageConfig.totalItems}} 条记录\r\n          </div>\r\n          <div style=\"float: right\">\r\n            <div class=\"skip\">\r\n              每页\r\n              <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n                {{search.limit}}\r\n              </button>\r\n\r\n              <md-menu #menu=\"mdMenu\">\r\n                <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                        [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n                  {{skip}}\r\n                </button>\r\n              </md-menu>\r\n              条\r\n            </div>\r\n            <div class=\"pagination\">\r\n              <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                              [(page)]=\"search.currentPage\"\r\n                              [boundaryLinks]=\"true\"\r\n                              [directionLinks]=\"true\"\r\n                              [maxSize]=\"5\"\r\n                              [pageSize]=\"search.limit\"\r\n                              [ellipses]=\"false\"\r\n                              [size]=\"'sm'\"\r\n                              (pageChange)=\"getAppList()\"></ngb-pagination>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"login\">\r\n  <div class=\"row\" style=\"height:100%;margin-right:0px;\">\r\n    <div class=\"col-sm-12\">\r\n      <div class=\"login-container\">\r\n        <div class=\"manage-head\">\r\n          <h5>登录日志</h5>\r\n        </div>\r\n        <div class=\"search-info\">\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">登录时间段:</div>\r\n            <md-input-container style=\"width:240px;position:relative;top:6px;\">\r\n              <input mdInput type=\"text\" name=\"daterangeInput\" daterangepicker (selected)=\"selectedDate($event)\" />\r\n            </md-input-container>\r\n          </div>\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">帐号:</div>\r\n            <input placeholder=\"请输入帐号\" class=\"search-input\" name=\"username\" #username=\"ngModel\" (keyup)=\"searchByKey($event)\" [(ngModel)]=\"search.username\"/>\r\n          </div>\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">姓名:</div>\r\n            <input placeholder=\"请输入姓名\" class=\"search-input\" name=\"fullName\" #fullName=\"ngModel\" (keyup)=\"searchByKey($event)\" [(ngModel)]=\"search.fullName\"/>\r\n          </div>\r\n          <div class=\"opt-button\">\r\n            <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"getLoginLog()\">查询</button>\r\n          </div>\r\n        </div>\r\n        <div class=\"list-style main\" style=\"margin-top:10px;\">\r\n          <div class=\"card-shadow\">\r\n            <table class=\"table text-center \">\r\n              <thead>\r\n              <tr>\r\n                <td>序号</td>\r\n                <td>登录时间</td>\r\n                <td>用户</td>\r\n                <td>应用</td>\r\n                <td>IP</td>\r\n                <td>登录结果</td>\r\n              </tr>\r\n              </thead>\r\n              <tbody>\r\n              <tr  *ngFor=\"let item of loginLogList;let index = index\" class=\"excel\">\r\n                <td style=\"width:50px;;font-weight:700\">{{index+search.start+1}}</td>\r\n                <td>{{item?.createTime|timeformat}}</td>\r\n                <td>{{item?.fullName}}<span *ngIf=\"item.username\">({{item?.username}})</span></td>\r\n                <td>{{item?.fullName}}<span *ngIf=\"item.username\">({{item?.userame}})</span></td>\r\n                <td>{{item?.applicationName}}</td>\r\n                <td>{{item?.loginIp}}</td>\r\n                <td>\r\n                  <span *ngIf=\"item.result == 1\">成功</span>\r\n                  <span *ngIf=\"item.result == 0\">失败</span>\r\n                </td>\r\n              </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n        <div class=\"bottom-page\">\r\n          <div style=\"display:inline-block;\">\r\n            共 {{pageConfig.totalItems}} 条记录\r\n          </div>\r\n          <div style=\"float: right\">\r\n            <div class=\"skip\">\r\n              每页\r\n              <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n                {{search.limit}}\r\n              </button>\r\n\r\n              <md-menu #menu=\"mdMenu\">\r\n                <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                        [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n                  {{skip}}\r\n                </button>\r\n              </md-menu>\r\n              条\r\n            </div>\r\n            <div class=\"pagination\">\r\n              <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                              [(page)]=\"search.currentPage\"\r\n                              [boundaryLinks]=\"true\"\r\n                              [directionLinks]=\"true\"\r\n                              [maxSize]=\"5\"\r\n                              [pageSize]=\"search.limit\"\r\n                              [ellipses]=\"false\"\r\n                              [size]=\"'sm'\"\r\n                              (pageChange)=\"getLoginLog()\"></ngb-pagination>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2214,6 +2406,12 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__ = __webpack_require__("../../../../ng2-daterangepicker/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__log_manage_service__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/log-manage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__("../../../../moment/moment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginLogComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2221,28 +2419,96 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 /**
  * Created by kosei on 2017/8/1.
  */
 
+
+
+
+
 var LoginLogComponent = (function () {
-    function LoginLogComponent() {
+    function LoginLogComponent(service, daterangepickerOptions) {
+        this.service = service;
+        this.daterangepickerOptions = daterangepickerOptions;
         this.pageConfig = {
             totalItems: 0,
             skips: [10, 20, 50, 100],
         };
-        this.appList = [];
+        this.loginLogList = [];
         this.search = {
             currentPage: 1,
             start: 0,
             limit: 10,
+            startTime: __WEBPACK_IMPORTED_MODULE_4_moment__({ hour: 0, minute: 0 }).format('YYYY-MM-DD HH:mm'),
+            endTime: __WEBPACK_IMPORTED_MODULE_4_moment__({ hour: 23, minute: 59 }).format('YYYY-MM-DD HH:mm')
         };
+        this.daterangepickerOptions.settings = {
+            timePicker: true,
+            timePicker24Hour: true,
+            locale: {
+                format: 'YYYY-MM-DD HH:mm',
+                applyLabel: '确定',
+                cancelLabel: '取消',
+                daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+                monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            },
+            startDate: this.search.startTime,
+            endDate: this.search.endTime,
+            autoUpdateInput: true
+        };
+        this.loginLogList = this.service.loginLogList;
     }
     LoginLogComponent.prototype.ngOnInit = function () {
+        if (__WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].get('loginParams')) {
+            this.search = __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].get('loginParams');
+            this.daterangepickerOptions.settings.startDate = this.search.startTime;
+            this.daterangepickerOptions.settings.endDate = this.search.endTime;
+            this.getLoginLog();
+        }
+        else {
+            this.getLoginLog();
+        }
     };
     LoginLogComponent.prototype.ngOnDestroy = function () {
+        __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].remove('loginParams');
     };
-    LoginLogComponent.prototype.getLoginLog = function () { };
+    LoginLogComponent.prototype.getLoginLog = function () {
+        var _this = this;
+        this.search.start = this.search.limit * (this.search.currentPage - 1);
+        __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('loginParams', this.search);
+        if (this.search.userName) {
+            this.search.userName = this.search.userName.replace(/\s/g, "");
+        }
+        if (this.search.fullName) {
+            this.search.fullName = this.search.fullName.replace(/\s/g, "");
+        }
+        var query = Object.assign({}, this.search);
+        for (var key in query) {
+            if (query[key] != 0 && !query[key]) {
+                delete query[key];
+            }
+        }
+        delete query.currentPage;
+        this.service.retriveLoginLog(query).subscribe(function (res) {
+            if (res.data.result) {
+                _this.pageConfig.totalItems = res.data.result.totalSize;
+            }
+        }, function (error) {
+            //console.log(error);
+        });
+    };
+    /**
+     * @desc 选择开始和结束通话时间
+     * @param value - 选择时间段后传入的值
+     */
+    LoginLogComponent.prototype.selectedDate = function (value) {
+        this.search.startTime = value.start.format('YYYY-MM-DD HH:mm');
+        this.search.endTime = value.end.format('YYYY-MM-DD HH:mm');
+    };
     /**
      * @desc 选择关键词分类后查询该分类下的关键字
      * @param group - 关键词分类的id
@@ -2253,24 +2519,101 @@ var LoginLogComponent = (function () {
             this.getLoginLog();
         }
     };
+    LoginLogComponent.prototype.changeLimit = function (skip) {
+        this.search.currentPage = 1;
+        this.search.limit = skip;
+        this.getLoginLog();
+    };
     return LoginLogComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangePickerComponent"]),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangePickerComponent"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangePickerComponent"]) === "function" && _a || Object)
+], LoginLogComponent.prototype, "picker", void 0);
 LoginLogComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'login-log',
         template: __webpack_require__("../../../../../src/app/login-manage/log-manage/login-log/login-log.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login-manage/log-manage/login-log/login-log.component.less")]
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__log_manage_service__["a" /* LogManageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__log_manage_service__["a" /* LogManageService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangepickerConfig"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangepickerConfig"]) === "function" && _c || Object])
 ], LoginLogComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=login-log.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/log-manage/operation-log/log-detail.dialog.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__log_manage_service__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/log-manage.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogDetailDialog; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+/**
+ * Created by kosei on 2017/8/29.
+ */
+
+
+
+var LogDetailDialog = (function () {
+    function LogDetailDialog(dialogRef, data, service) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.service = service;
+        this.authUserList = [];
+        this.authRoleList = [];
+    }
+    LogDetailDialog.prototype.ngOnInit = function () {
+        if (typeof window !== 'undefined') {
+            var body = document.querySelector('div.main-form');
+            console.log(body.scrollTop);
+            body.scrollTop = 0;
+            //body.animate({"scrollTop":"0px"},0);
+        }
+    };
+    LogDetailDialog.prototype.saveRole = function (data) {
+        this.dialogRef.close();
+    };
+    return LogDetailDialog;
+}());
+LogDetailDialog.lookConfig = {
+    width: '600px',
+    data: {}
+};
+LogDetailDialog = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'look-form',
+        template: "\n    <div class=\"main-form\">\n      <div class=\"look-title\">\u67E5\u770B\u64CD\u4F5C\u8BE6\u60C5</div>\n      <div class=\"content\" style=\"margin-top:10px;\">\n         <h1>\u64CD\u4F5C\u7C7B\u578B</h1>\n         <span>{{data.operateDesc}}</span>\n\n      </div>\n      <div class=\"content\" style=\"margin-top:20px;margin-bottom:10px;\">\n         <h1>\u64CD\u4F5C\u5BF9\u8C61</h1>\n         <p>{{data.operateObject}}</p>\n      </div>\n      <div style=\"clear:both;text-align:center;margin-top:24px;\">\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">\u5173\u95ED</button>\n      </div>\n\n    </div>\n  ",
+        styles: ["\n    .main-form{\n      position:relative;\n    }\n    .look-title{\n      height:30px;\n      line-height:30px;\n      font-weight:700;\n      text-align: center;\n      font-size:18px;\n      margin-bottom:14px;\n    }\n    .close{\n      position:absolute;\n      right:-18px;\n      top:-28px;\n    }\n    .content h1{\n      font-size:17px;\n      font-weight:700;\n      margin-bottom:10px;\n    }\n    .content ul{\n      list-style:none;\n      padding:0;\n      margin:0;\n    }\n    .content ul li{\n      height:25px;\n      line-height:25px;\n      font-size:12px;\n      color:#888;\n    }\n    .content ul li em{\n      font-style:normal;\n      font-weight:500;\n    }\n     .cancel{\n      color:#fff;\n      font-size:13px;\n      line-height:30px;\n      background:#1194F6;\n      min-width:120px !important;\n    }\n    .cancel:focus{\n      outline:none;\n    }\n  "]
+    }),
+    __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MD_DIALOG_DATA */])),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialogRef */]) === "function" && _a || Object, Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__log_manage_service__["a" /* LogManageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__log_manage_service__["a" /* LogManageService */]) === "function" && _b || Object])
+], LogDetailDialog);
+
+var _a, _b;
+//# sourceMappingURL=log-detail.dialog.js.map
 
 /***/ }),
 
 /***/ "../../../../../src/app/login-manage/log-manage/operation-log/operation-log.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"operation\">\r\n  <div class=\"row\" style=\"height:100%;margin-right:0px;\">\r\n    <div class=\"col-sm-12\">\r\n      <div class=\"opt-container\">\r\n        <div class=\"manage-head\">\r\n          <h5>操作日志</h5>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"operation\">\r\n  <div class=\"row\" style=\"height:100%;margin-right:0px;\">\r\n    <div class=\"col-sm-12\">\r\n      <div class=\"opt-container\">\r\n        <div class=\"manage-head\">\r\n          <h5>操作日志</h5>\r\n        </div>\r\n        <div class=\"search-info\">\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">登录时间段:</div>\r\n            <md-input-container style=\"width:240px;position:relative;top:6px;\">\r\n              <input mdInput type=\"text\" name=\"daterangeInput\" daterangepicker (selected)=\"selectedDate($event)\" />\r\n            </md-input-container>\r\n          </div>\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">帐号:</div>\r\n            <input placeholder=\"请输入帐号\" class=\"search-input\" name=\"username\" #username=\"ngModel\" (keyup)=\"searchByKey($event)\" [(ngModel)]=\"search.username\"/>\r\n          </div>\r\n          <div class=\"search-block\">\r\n            <div class=\"search_label\">姓名:</div>\r\n            <input placeholder=\"请输入姓名\" class=\"search-input\" name=\"fullName\" #fullName=\"ngModel\" (keyup)=\"searchByKey($event)\" [(ngModel)]=\"search.fullName\"/>\r\n          </div>\r\n          <div class=\"opt-button\">\r\n            <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"getOperationLog()\">查询</button>\r\n          </div>\r\n        </div>\r\n        <div class=\"list-style main\" style=\"margin-top:10px;\">\r\n          <div class=\"card-shadow\">\r\n            <table class=\"table text-center \">\r\n              <thead>\r\n              <tr>\r\n                <td>序号</td>\r\n                <td>操作时间</td>\r\n                <td>操作人</td>\r\n                <td>操作类型</td>\r\n                <td>操作对象</td>\r\n                <td>操作结果</td>\r\n              </tr>\r\n              </thead>\r\n              <tbody>\r\n              <tr  *ngFor=\"let item of operaLogList;let index = index\" class=\"excel\">\r\n                <td style=\"width:50px;;font-weight:700\">{{index+search.start+1}}</td>\r\n                <td>{{item?.operateTime|timeformat}}</td>\r\n                <td>{{item?.username}}</td>\r\n                <td>{{item?.operateDesc}}</td>\r\n                <td *ngIf=\"item.operateObject && item.operateObject.length > 30\">\r\n                  {{item.operateObject.substring(0,30)}}...\r\n                  <span class=\"more\" (click)=\"lookMore(item)\">查看更多</span>\r\n                </td>\r\n                <td *ngIf=\"item.operateObject && item.operateObject.length <= 30\">\r\n                  {{item.operateObject}}\r\n                </td>\r\n                <td>\r\n                  <span *ngIf=\"item.result == 1\">成功</span>\r\n                  <span *ngIf=\"item.result == 0\">失败</span>\r\n                </td>\r\n              </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n        <div class=\"bottom-page\">\r\n          <div style=\"display:inline-block;\">\r\n            共 {{pageConfig.totalItems}} 条记录\r\n          </div>\r\n          <div style=\"float: right\">\r\n            <div class=\"skip\">\r\n              每页\r\n              <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n                {{search.limit}}\r\n              </button>\r\n\r\n              <md-menu #menu=\"mdMenu\">\r\n                <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                        [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n                  {{skip}}\r\n                </button>\r\n              </md-menu>\r\n              条\r\n            </div>\r\n            <div class=\"pagination\">\r\n              <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                              [(page)]=\"search.currentPage\"\r\n                              [boundaryLinks]=\"true\"\r\n                              [directionLinks]=\"true\"\r\n                              [maxSize]=\"5\"\r\n                              [pageSize]=\"search.limit\"\r\n                              [ellipses]=\"false\"\r\n                              [size]=\"'sm'\"\r\n                              (pageChange)=\"getOperationLog()\"></ngb-pagination>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2282,7 +2625,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".operation .skip {\n  display: inline-block !important;\n  margin-right: 8px;\n  vertical-align: 13px;\n}\n.operation .opt-container .opt-button {\n  float: right;\n  margin-top: 10px;\n  margin-bottom: 10px;\n}\n.operation .opt-container .opt-button .search-button {\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 28px;\n  min-width: 57px !important;\n}\n.operation .opt-container .opt-button .search-button[disabled] {\n  opacity: .6;\n}\n.operation .opt-container .more {\n  cursor: pointer;\n  color: #1194F6;\n}\n", ""]);
 
 // exports
 
@@ -2297,6 +2640,14 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__ = __webpack_require__("../../../../ng2-daterangepicker/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__log_manage_service__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/log-manage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__log_detail_dialog__ = __webpack_require__("../../../../../src/app/login-manage/log-manage/operation-log/log-detail.dialog.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__("../../../../moment/moment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_moment__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OperationLogComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2304,23 +2655,139 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 /**
  * Created by kosei on 2017/8/1.
  */
 
+
+
+
+
+
+
 var OperationLogComponent = (function () {
-    function OperationLogComponent() {
+    function OperationLogComponent(service, daterangepickerOptions, _dialog) {
+        this.service = service;
+        this.daterangepickerOptions = daterangepickerOptions;
+        this._dialog = _dialog;
+        this.pageConfig = {
+            totalItems: 0,
+            skips: [10, 20, 50, 100],
+        };
+        this.operaLogList = [];
+        this.search = {
+            currentPage: 1,
+            start: 0,
+            limit: 10,
+            startTime: __WEBPACK_IMPORTED_MODULE_6_moment__({ hour: 0, minute: 0 }).format('YYYY-MM-DD HH:mm'),
+            endTime: __WEBPACK_IMPORTED_MODULE_6_moment__({ hour: 23, minute: 59 }).format('YYYY-MM-DD HH:mm')
+        };
+        this.daterangepickerOptions.settings = {
+            timePicker: true,
+            timePicker24Hour: true,
+            locale: {
+                format: 'YYYY-MM-DD HH:mm',
+                applyLabel: '确定',
+                cancelLabel: '取消',
+                daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+                monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            },
+            startDate: this.search.startTime,
+            endDate: this.search.endTime,
+            autoUpdateInput: true
+        };
+        this.operaLogList = this.service.operaLogList;
     }
+    OperationLogComponent.prototype.ngOnInit = function () {
+        if (__WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].get('loginParams')) {
+            this.search = __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].get('loginParams');
+            this.daterangepickerOptions.settings.startDate = this.search.startTime;
+            this.daterangepickerOptions.settings.endDate = this.search.endTime;
+            this.getOperationLog();
+        }
+        else {
+            this.getOperationLog();
+        }
+    };
+    OperationLogComponent.prototype.ngOnDestroy = function () {
+        __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].remove('loginParams');
+    };
+    OperationLogComponent.prototype.getOperationLog = function () {
+        var _this = this;
+        this.search.start = this.search.limit * (this.search.currentPage - 1);
+        __WEBPACK_IMPORTED_MODULE_1__core_services_localstorage_service__["a" /* LocalStorage */].set('loginParams', this.search);
+        if (this.search.userName) {
+            this.search.userName = this.search.userName.replace(/\s/g, "");
+        }
+        if (this.search.fullName) {
+            this.search.fullName = this.search.fullName.replace(/\s/g, "");
+        }
+        var query = Object.assign({}, this.search);
+        for (var key in query) {
+            if (query[key] != 0 && !query[key]) {
+                delete query[key];
+            }
+        }
+        delete query.currentPage;
+        this.service.retriveOperationLog(query).subscribe(function (res) {
+            if (res.data.result) {
+                _this.pageConfig.totalItems = res.data.result.totalSize;
+            }
+        }, function (error) {
+            //console.log(error);
+        });
+    };
+    /**
+     * @desc 选择开始和结束通话时间
+     * @param value - 选择时间段后传入的值
+     */
+    OperationLogComponent.prototype.selectedDate = function (value) {
+        this.search.startTime = value.start.format('YYYY-MM-DD HH:mm');
+        this.search.endTime = value.end.format('YYYY-MM-DD HH:mm');
+    };
+    /**
+     * @desc 选择关键词分类后查询该分类下的关键字
+     * @param group - 关键词分类的id
+     */
+    OperationLogComponent.prototype.searchByKey = function (event) {
+        var keyCode = event ? event.keyCode : event.which;
+        if (keyCode === 13) {
+            this.getOperationLog();
+        }
+    };
+    OperationLogComponent.prototype.changeLimit = function (skip) {
+        this.search.currentPage = 1;
+        this.search.limit = skip;
+        this.getOperationLog();
+    };
+    /**
+     * @desc 查看操作详情
+     * @param item - 被查看的操作对象
+     */
+    OperationLogComponent.prototype.lookMore = function (item) {
+        var config = __WEBPACK_IMPORTED_MODULE_5__log_detail_dialog__["a" /* LogDetailDialog */].lookConfig;
+        config.data = Object.assign({}, item);
+        this._dialog.open(__WEBPACK_IMPORTED_MODULE_5__log_detail_dialog__["a" /* LogDetailDialog */], config);
+    };
     return OperationLogComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangePickerComponent"]),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangePickerComponent"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangePickerComponent"]) === "function" && _a || Object)
+], OperationLogComponent.prototype, "picker", void 0);
 OperationLogComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'operation-log',
         template: __webpack_require__("../../../../../src/app/login-manage/log-manage/operation-log/operation-log.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login-manage/log-manage/operation-log/operation-log.component.less")]
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__log_manage_service__["a" /* LogManageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__log_manage_service__["a" /* LogManageService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangepickerConfig"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_daterangepicker__["DaterangepickerConfig"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__angular_material__["a" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_material__["a" /* MdDialog */]) === "function" && _d || Object])
 ], OperationLogComponent);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=operation-log.component.js.map
 
 /***/ }),
@@ -2526,7 +2993,9 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__password_find_password_find_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-find/password-find.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__password_modify_password_modify_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__password_set_password_set_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-set/password-set.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__password_reset_password_reset_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-reset/password-reset.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__password_modify_password_modify_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordManageModule; });
 /**
  * Created by kosei on 2017/8/7.
@@ -2541,6 +3010,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -2569,7 +3040,9 @@ PasswordManageModule = __decorate([
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__password_find_password_find_component__["a" /* PasswordFindComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__password_modify_password_modify_component__["a" /* PasswordModifyComponent */]
+            __WEBPACK_IMPORTED_MODULE_9__password_reset_password_reset_component__["a" /* PasswordResetComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__password_set_password_set_component__["a" /* PasswordSetComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__password_modify_password_modify_component__["a" /* PasswordModifyComponent */]
         ],
         entryComponents: [],
         exports: [],
@@ -2584,7 +3057,7 @@ PasswordManageModule = __decorate([
 /***/ "../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">TSSO用户中心</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"modify(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"password\"\r\n                   [(ngModel)]=\"user.password\"\r\n                   #password=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n          <md-input-container class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>verified_user</md-icon>\r\n            <input class=\"code-input\" mdInput\r\n                   type=\"text\"\r\n                   placeholder=\"确认密码\"\r\n                   required\r\n                   name=\"repassword\"\r\n                   #repassword=\"ngModel\"\r\n                   [(ngModel)]=\"user.repassword\"\r\n                   type=\"password\"\r\n                   (blur)=\"againBlured = true\"\r\n                   (focus)=\"againBlured = false\"\r\n            >\r\n          </md-input-container>\r\n          <div *ngIf=\"(repassword.dirty || repassword.touched) && againBlured&& !repassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            修改密码\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">修改密码</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"modify(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <div style=\"height:84px;\">\r\n            <md-input-container [floatPlaceholder]=\"'never'\" class=\"sign-input pass-input\">\r\n              <md-icon mdPrefix>lock_outline</md-icon>\r\n              <input mdInput\r\n                     placeholder=\"当前密码\"\r\n                     required\r\n                     name=\"password\"\r\n                     [(ngModel)]=\"user.password\"\r\n                     #password=\"ngModel\"\r\n                     (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                     type=\"password\"\r\n              >\r\n            </md-input-container>\r\n            <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n              <div style=\"margin-top:-12px;\" *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n                当前密码为必填项\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div style=\"height:100px;\">\r\n          <md-input-container [floatPlaceholder]=\"'never'\" class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"newPassword\"\r\n                   [(ngModel)]=\"user.newPassword\"\r\n                   #newPassword=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n            <md-hint class=\"mt-1 c-5e5e5e\">*密码至少8位至多50位，且必须包含大小写字母和数字</md-hint>\r\n          </md-input-container>\r\n          <div *ngIf=\"newPassword.errors && (newPassword.dirty || newPassword.touched)\">\r\n            <div style=\"margin-top:4px;\" *ngIf=\"newPassword.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div style=\"margin-top:4px;\" *ngIf=\"(!newPassword.errors.required && newPassword.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码格式不正确，请重新设置密码\r\n            </div>\r\n          </div>\r\n          </div>\r\n          <div style=\"height:100px;\">\r\n            <md-input-container [floatPlaceholder]=\"'never'\" class=\"sign-input pass-input\">\r\n              <md-icon mdPrefix>verified_user</md-icon>\r\n              <input class=\"code-input\" mdInput\r\n                     type=\"text\"\r\n                     placeholder=\"确认密码\"\r\n                     required\r\n                     name=\"confirmPassword\"\r\n                     #confirmPassword=\"ngModel\"\r\n                     [(ngModel)]=\"user.confirmPassword\"\r\n                     type=\"password\"\r\n                     (blur)=\"againBlured = true\"\r\n                     (focus)=\"againBlured = false\"\r\n              >\r\n            </md-input-container>\r\n            <div *ngIf=\"(confirmPassword.dirty || confirmPassword.touched) && againBlured&& !confirmPassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n              您的密码输入不一致，请重新输入！\r\n            </div>\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            修改密码\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2612,10 +3085,12 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_sweetalert2__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordModifyComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2634,34 +3109,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var PasswordModifyComponent = (function () {
-    function PasswordModifyComponent(service, swal, router) {
+    function PasswordModifyComponent(service, swal, router, connectionService) {
         this.service = service;
         this.swal = swal;
         this.router = router;
+        this.connectionService = connectionService;
         this.user = {};
     }
     PasswordModifyComponent.prototype.modify = function (form) {
         var _this = this;
         var find = window.location.href;
-        var key = this.getUrlParam(find, 'key');
-        var username = this.getUrlParam(find, 'username');
-        var user = {};
-        if (key && key.length > 0) {
-            user.key = key;
-        }
+        var key = this.service.getUrlParam(find, 'key');
+        var username = this.service.getUrlParam(find, 'username');
+        var user = { username: '' };
         if (username && username.length > 0) {
             user.username = username;
         }
         this.service.modifyPass(user, form).subscribe(function (res) {
             if (res.data.status == 200) {
-                __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()({
+                __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default()({
                     title: '密码修改成功，点击确定跳转至登录页面',
                     type: 'success',
                     showCancelButton: false,
                     confirmButtonText: '确定',
                 }).then(function () {
-                    _this.router.navigate(['/index']);
+                    __WEBPACK_IMPORTED_MODULE_3__core_services_localstorage_service__["a" /* LocalStorage */].remove('user');
+                    var path = '/logout';
+                    _this.connectionService.get(path).then(function (res) {
+                    }).catch(function (error) {
+                        //console.log(error)
+                    });
+                    var referrer = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                    window.location.href = referrer;
                 }, function (dismiss) {
                     // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
                     if (dismiss === 'cancel') {
@@ -2678,9 +3160,376 @@ var PasswordModifyComponent = (function () {
         });
     };
     PasswordModifyComponent.prototype.verifyResult = function () {
+        return this.user.newPassword && this.user.confirmPassword && this.user.newPassword == this.user.confirmPassword;
+    };
+    return PasswordModifyComponent;
+}());
+PasswordModifyComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'password-modify',
+        template: __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.less")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _d || Object])
+], PasswordModifyComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=password-modify.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password-reset/password-reset.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">重置密码</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"modify(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <div style=\"height:100px;\">\r\n          <md-input-container [floatPlaceholder]=\"'never'\" class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"password\"\r\n                   [(ngModel)]=\"user.password\"\r\n                   #password=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n            <md-hint class=\"mt-1 c-5e5e5e\">*密码至少8位至多50位，且必须包含大小写字母和数字</md-hint>\r\n          </md-input-container>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div style=\"margin-top:4px;\" *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div style=\"margin-top:4px;\" *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码格式不正确，请重新设置密码\r\n            </div>\r\n          </div>\r\n          </div>\r\n          <div style=\"height:100px;\">\r\n            <md-input-container [floatPlaceholder]=\"'never'\" class=\"sign-input pass-input\">\r\n              <md-icon mdPrefix>verified_user</md-icon>\r\n              <input class=\"code-input\" mdInput\r\n                     type=\"text\"\r\n                     placeholder=\"确认密码\"\r\n                     required\r\n                     name=\"repassword\"\r\n                     #repassword=\"ngModel\"\r\n                     [(ngModel)]=\"user.repassword\"\r\n                     type=\"password\"\r\n                     (blur)=\"againBlured = true\"\r\n                     (focus)=\"againBlured = false\"\r\n              >\r\n            </md-input-container>\r\n            <div *ngIf=\"(repassword.dirty || repassword.touched) && againBlured&& !repassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n              您的密码输入不一致，请重新输入！\r\n            </div>\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            重置密码\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password-reset/password-reset.component.less":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".login {\n  height: 100%;\n  background: #fff;\n  min-height: 600px;\n}\n.login .login-clothes {\n  position: relative;\n  /*脱离文档流*/\n  top: 50%;\n  /*偏移*/\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n  display: block;\n}\n.login .login-body {\n  background: #fff;\n  margin: 0 auto;\n  min-width: 340px;\n  max-width: 500px;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n}\n.login .login-body .login-head {\n  text-align: center;\n  height: 60px;\n  line-height: 80px;\n}\n.login .login-body .login-head .logo-svg {\n  width: 80px;\n  height: 95px;\n  margin-top: 20px;\n}\n.login .login-body .login-head .cloud {\n  font-size: 30px;\n}\n.login .login-body .login-head > img {\n  width: 95px;\n  margin-top: 20px;\n}\n.login .login-body .login-head .head-title {\n  display: block;\n  text-align: center;\n  font-size: 20px;\n  color: #0D3349;\n  margin-top: 10px;\n}\n.login .login-body .login-center {\n  padding: 20px 26px;\n}\n.login .login-body .login-center > form .sign-input {\n  font-size: 16px !important;\n  width: 100%;\n}\n.login .login-body .login-center > form .sign-input input {\n  padding: 3px 0px 0px;\n}\n.login .login-body .login-center > form .sign-input .code-input {\n  position: relative;\n}\n.login .login-body .login-center > form .sign-input .code {\n  position: absolute;\n  right: 0px;\n  bottom: 0px;\n  cursor: pointer;\n}\n.login .login-body .login-center > form md-icon {\n  font-size: 23px !important;\n  margin-top: -3px;\n  margin-right: 5px;\n}\n.login .login-body .login-center > form .help {\n  margin-top: -10px;\n  text-align: left;\n}\n.login .login-body .login-center > form .forget {\n  font-size: 14px;\n  text-decoration: none;\n  display: block;\n  color: #1194F6;\n}\n.login .login-body .login-center > form .login-button {\n  cursor: pointer;\n  background: #1194F6;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  color: #fff;\n  font-size: 15px;\n  min-width: 300px !important;\n}\n.login .login-body .login-center > form .login-button:disabled {\n  color: #333;\n  background: #ccc;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password-reset/password-reset.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordResetComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by kosei on 2017/8/1.
+ */
+
+
+
+
+
+var PasswordResetComponent = (function () {
+    function PasswordResetComponent(service, swal, router) {
+        this.service = service;
+        this.swal = swal;
+        this.router = router;
+        this.user = {};
+    }
+    PasswordResetComponent.prototype.modify = function (form) {
+        var _this = this;
+        var find = window.location.href;
+        var key = this.service.getUrlParam(find, 'key');
+        var username = this.service.getUrlParam(find, 'username');
+        var user = {};
+        if (key && key.length > 0) {
+            user.key = key;
+        }
+        if (username && username.length > 0) {
+            user.username = username;
+        }
+        this.service.resetPass(user, form).subscribe(function (res) {
+            if (res.data.status == 200) {
+                __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()({
+                    title: '密码重置成功，点击确定跳转至登录页面',
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: '确定',
+                }).then(function () {
+                    _this.router.navigate(['/index']);
+                }, function (dismiss) {
+                    // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                    if (dismiss === 'cancel') {
+                    }
+                });
+            }
+            else {
+                var msg = res.data.error || '密码重置失败，请稍后重试！';
+                _this.swal.hint('error', msg);
+            }
+        }, function (error) {
+            var msg = '密码重置失败，请稍后重试！';
+            _this.swal.hint('error', msg);
+        });
+    };
+    PasswordResetComponent.prototype.verifyResult = function () {
         return this.user.password && this.user.repassword && this.user.password == this.user.repassword;
     };
-    PasswordModifyComponent.prototype.getUrlParam = function (sUrl, sKey) {
+    return PasswordResetComponent;
+}());
+PasswordResetComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'password-reset',
+        template: __webpack_require__("../../../../../src/app/login-manage/password-manage/password-reset/password-reset.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/login-manage/password-manage/password-reset/password-reset.component.less")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
+], PasswordResetComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=password-reset.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password-routing.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_find_password_find_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-find/password-find.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__password_set_password_set_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-set/password-set.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__password_reset_password_reset_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-reset/password-reset.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__password_modify_password_modify_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientAuthRoutingModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+/**
+ * Created by kosei on 2017/8/18.
+ */
+
+
+
+
+
+
+var clientRoutes = [
+    { path: 'password_reset', component: __WEBPACK_IMPORTED_MODULE_4__password_reset_password_reset_component__["a" /* PasswordResetComponent */] },
+    { path: 'password_set', component: __WEBPACK_IMPORTED_MODULE_3__password_set_password_set_component__["a" /* PasswordSetComponent */] },
+    { path: 'password_find', component: __WEBPACK_IMPORTED_MODULE_2__password_find_password_find_component__["a" /* PasswordFindComponent */] },
+    { path: 'password_change', component: __WEBPACK_IMPORTED_MODULE_5__password_modify_password_modify_component__["a" /* PasswordModifyComponent */] }
+];
+var ClientAuthRoutingModule = (function () {
+    function ClientAuthRoutingModule() {
+    }
+    return ClientAuthRoutingModule;
+}());
+ClientAuthRoutingModule = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forChild(clientRoutes)
+        ],
+        exports: [
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]
+        ]
+    })
+], ClientAuthRoutingModule);
+
+//# sourceMappingURL=password-routing.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password-set/password-set.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"login main\">\r\n  <div class=\"login-clothes\">\r\n    <div class=\"login-body\">\r\n      <div class=\"login-head\">\r\n        <span class=\"head-title\">设置密码</span>\r\n      </div>\r\n      <div class=\"login-center\">\r\n        <form #form=\"ngForm\" (ngSubmit)=\"setPassword(form.value)\" role=\"form\" style=\"text-align:center;\">\r\n          <div style=\"height:100px;\">\r\n          <md-input-container [floatPlaceholder]=\"'never'\" class=\"sign-input pass-input\">\r\n            <md-icon mdPrefix>lock_outline</md-icon>\r\n            <input mdInput\r\n                   placeholder=\"密码\"\r\n                   required\r\n                   name=\"password\"\r\n                   [(ngModel)]=\"user.password\"\r\n                   #password=\"ngModel\"\r\n                   (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                   type=\"password\"\r\n                   pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n            >\r\n            <md-hint class=\"mt-1 c-5e5e5e\">*密码至少8位至多50位，且必须包含大小写字母和数字</md-hint>\r\n          </md-input-container>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div style=\"margin-top:4px;\" *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div style=\"margin-top:4px;\" *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码格式不正确，请重新设置密码\r\n            </div>\r\n          </div>\r\n          </div>\r\n          <div style=\"height:100px;\">\r\n            <md-input-container [floatPlaceholder]=\"'never'\" class=\"sign-input pass-input\">\r\n              <md-icon mdPrefix>verified_user</md-icon>\r\n              <input class=\"code-input\" mdInput\r\n                     type=\"text\"\r\n                     placeholder=\"确认密码\"\r\n                     required\r\n                     name=\"repassword\"\r\n                     #repassword=\"ngModel\"\r\n                     [(ngModel)]=\"user.repassword\"\r\n                     type=\"password\"\r\n                     (blur)=\"againBlured = true\"\r\n                     (focus)=\"againBlured = false\"\r\n              >\r\n            </md-input-container>\r\n            <div *ngIf=\"(repassword.dirty || repassword.touched) && againBlured&& !repassword.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n              您的密码输入不一致，请重新输入！\r\n            </div>\r\n          </div>\r\n          <button md-button type=\"submit\" [disabled]=\"!form.form.valid || !verifyResult()\" class=\"login-button\">\r\n            设置密码\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!--</md-card>-->\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password-set/password-set.component.less":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".login {\n  height: 100%;\n  background: #fff;\n  min-height: 600px;\n}\n.login .login-clothes {\n  position: relative;\n  /*脱离文档流*/\n  top: 50%;\n  /*偏移*/\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n  display: block;\n}\n.login .login-body {\n  background: #fff;\n  margin: 0 auto;\n  min-width: 340px;\n  max-width: 500px;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n}\n.login .login-body .login-head {\n  text-align: center;\n  height: 60px;\n  line-height: 80px;\n}\n.login .login-body .login-head .logo-svg {\n  width: 80px;\n  height: 95px;\n  margin-top: 20px;\n}\n.login .login-body .login-head .cloud {\n  font-size: 30px;\n}\n.login .login-body .login-head > img {\n  width: 95px;\n  margin-top: 20px;\n}\n.login .login-body .login-head .head-title {\n  display: block;\n  text-align: center;\n  font-size: 20px;\n  color: #0D3349;\n  margin-top: 10px;\n}\n.login .login-body .login-center {\n  padding: 20px 26px;\n}\n.login .login-body .login-center > form .sign-input {\n  font-size: 16px !important;\n  width: 100%;\n}\n.login .login-body .login-center > form .sign-input input {\n  padding: 3px 0px 0px;\n}\n.login .login-body .login-center > form .sign-input .code-input {\n  position: relative;\n}\n.login .login-body .login-center > form .sign-input .code {\n  position: absolute;\n  right: 0px;\n  bottom: 0px;\n  cursor: pointer;\n}\n.login .login-body .login-center > form md-icon {\n  font-size: 23px !important;\n  margin-top: -3px;\n  margin-right: 5px;\n}\n.login .login-body .login-center > form .help {\n  margin-top: -10px;\n  text-align: left;\n}\n.login .login-body .login-center > form .forget {\n  font-size: 14px;\n  text-decoration: none;\n  display: block;\n  color: #1194F6;\n}\n.login .login-body .login-center > form .login-button {\n  cursor: pointer;\n  background: #1194F6;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  color: #fff;\n  font-size: 15px;\n  min-width: 300px !important;\n}\n.login .login-body .login-center > form .login-button:disabled {\n  color: #333;\n  background: #ccc;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password-set/password-set.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_service__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__ = __webpack_require__("../../../../../src/app/core/services/swal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordSetComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by kosei on 2017/8/1.
+ */
+
+
+
+
+
+var PasswordSetComponent = (function () {
+    function PasswordSetComponent(service, swal, router) {
+        this.service = service;
+        this.swal = swal;
+        this.router = router;
+        this.user = {};
+    }
+    PasswordSetComponent.prototype.setPassword = function (form) {
+        var _this = this;
+        var find = window.location.href;
+        var key = this.service.getUrlParam(find, 'key');
+        var username = this.service.getUrlParam(find, 'username');
+        var user = {};
+        if (key && key.length > 0) {
+            user.key = key;
+        }
+        if (username && username.length > 0) {
+            user.username = username;
+        }
+        this.service.setPass(user, form).subscribe(function (res) {
+            if (res.data.status == 200) {
+                __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()({
+                    title: '密码设置成功，点击确定跳转至登录页面',
+                    type: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: '确定',
+                }).then(function () {
+                    var referrer = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+                    window.location.href = referrer;
+                }, function (dismiss) {
+                    // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                    if (dismiss === 'cancel') {
+                    }
+                });
+            }
+            else {
+                var msg = res.data.error || '密码设置失败，请稍后重试！';
+                _this.swal.hint('error', msg);
+            }
+        }, function (error) {
+            var msg = '密码设置失败，请稍后重试！';
+            _this.swal.hint('error', msg);
+        });
+    };
+    PasswordSetComponent.prototype.verifyResult = function () {
+        return this.user.password && this.user.repassword && this.user.password == this.user.repassword;
+    };
+    return PasswordSetComponent;
+}());
+PasswordSetComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'password-set',
+        template: __webpack_require__("../../../../../src/app/login-manage/password-manage/password-set/password-set.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/login-manage/password-manage/password-set/password-set.component.less")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
+], PasswordSetComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=password-set.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/login-manage/password-manage/password.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by kosei on 2017/8/18.
+ */
+
+
+
+
+var PasswordService = (function () {
+    function PasswordService(connectionService, router) {
+        this.connectionService = connectionService;
+        this.router = router;
+    }
+    /**
+     * @desc 招呼密码
+     */
+    PasswordService.prototype.findPass = function (params) {
+        var path = '/api/password/forget_password';
+        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
+        return passObservable;
+    };
+    /**
+     * @desc 重置密码
+     */
+    PasswordService.prototype.resetPass = function (user, params) {
+        var path = '/api/password/reset_password?username=' + user.username + '&key=' + user.key;
+        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
+        return passObservable;
+    };
+    /**
+     * @desc 修改密码
+     */
+    PasswordService.prototype.modifyPass = function (user, params) {
+        var path = '/api/password/change_password?username=' + user.username;
+        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
+        return passObservable;
+    };
+    /**
+     * @desc 设置密码
+     */
+    PasswordService.prototype.setPass = function (user, params) {
+        var path = '/api/password/set_password?username=' + user.username + '&key=' + user.key;
+        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
+        return passObservable;
+    };
+    /**
+     * @desc 获取链接中对应参数
+     * @param sUrl - 链接
+     * @param sKey - 需要获取的参数
+     */
+    PasswordService.prototype.getUrlParam = function (sUrl, sKey) {
         var param = sUrl.split('#')[0].split('?')[1];
         if (param) {
             if (sKey) {
@@ -2724,109 +3573,6 @@ var PasswordModifyComponent = (function () {
             return '';
         }
     };
-    return PasswordModifyComponent;
-}());
-PasswordModifyComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'password-modify',
-        template: __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.less")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__password_service__["a" /* PasswordService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_swal_service__["a" /* SwalService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
-], PasswordModifyComponent);
-
-var _a, _b, _c;
-//# sourceMappingURL=password-modify.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/login-manage/password-manage/password-routing.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__password_modify_password_modify_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-modify/password-modify.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__password_find_password_find_component__ = __webpack_require__("../../../../../src/app/login-manage/password-manage/password-find/password-find.component.ts");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientAuthRoutingModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-/**
- * Created by kosei on 2017/8/18.
- */
-
-
-
-
-var clientRoutes = [
-    { path: 'password_modify', component: __WEBPACK_IMPORTED_MODULE_2__password_modify_password_modify_component__["a" /* PasswordModifyComponent */] },
-    { path: 'password_find', component: __WEBPACK_IMPORTED_MODULE_3__password_find_password_find_component__["a" /* PasswordFindComponent */] }
-];
-var ClientAuthRoutingModule = (function () {
-    function ClientAuthRoutingModule() {
-    }
-    return ClientAuthRoutingModule;
-}());
-ClientAuthRoutingModule = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forChild(clientRoutes)
-        ],
-        exports: [
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]
-        ]
-    })
-], ClientAuthRoutingModule);
-
-//# sourceMappingURL=password-routing.module.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/login-manage/password-manage/password.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs__ = __webpack_require__("../../../../rxjs/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordService; });
-/**
- * Created by kosei on 2017/8/18.
- */
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var PasswordService = (function () {
-    function PasswordService(connectionService, router) {
-        this.connectionService = connectionService;
-        this.router = router;
-    }
-    PasswordService.prototype.findPass = function (params) {
-        var path = '/api/password/forget_password';
-        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
-        return passObservable;
-    };
-    PasswordService.prototype.modifyPass = function (user, params) {
-        var path = '/api/password/change_password?username=' + user.username + '&key=' + user.key;
-        var passObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
-        return passObservable;
-    };
     return PasswordService;
 }());
 PasswordService = __decorate([
@@ -2842,7 +3588,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/role-manage/dialogs/add-member.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"member\">\r\n  <div class=\"add-member\">\r\n    <md-icon class=\"close\" (click)=\"dialogRef.close('cancel')\">close</md-icon>\r\n    <md-icon class=\"add-icon\">group</md-icon>\r\n    <span class=\"add-span\">Add members to {{data.currentRole?.name}}</span>\r\n    <div class=\"input-contain\">\r\n      <md-icon class=\"input-icon\">person</md-icon>\r\n      <input class=\"member-input\" type=\"text\" name=\"member\" #member=\"ngModel\" [(ngModel)]=\"addUser.username\" (keyup)=\"filterMember($event)\" (click)=\"changChoose()\"/>\r\n    </div>\r\n    <div *ngIf=\"choose\" style=\"position:fixed;top:50%;z-index:1\">\r\n      <div class=\"user-content\">\r\n        <ul>\r\n          <li *ngFor=\"let item of showUsers\" (click)=\"chooseUser(item)\">\r\n            <!--<img  [src]=\"item.headImg\" />-->\r\n            <div class=\"instruct\">\r\n              <span class=\"user-name\" [style.color]=\"item.roleStatus==1 ? '#888':'#333'\">{{item.username}}</span>\r\n              <span class=\"join\" *ngIf=\"item.roleStatus == 1\">Already a member of this role</span>\r\n              <span class=\"unjoin\" *ngIf=\"item.roleStatus == 0\">Not a member of this role</span>\r\n            </div>\r\n            <md-icon *ngIf=\"item.roleStatus == 0\" class=\"add-user\">add</md-icon>\r\n            <md-icon *ngIf=\"item.roleStatus == 1\" class=\"add-user\" style=\"color:#ddd\">check</md-icon>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <button md-button class=\"sure\" (click)=\"addMember()\">确定</button>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"member\">\r\n  <div class=\"add-member\">\r\n    <md-icon class=\"close\" (click)=\"dialogRef.close('cancel')\">close</md-icon>\r\n    <md-icon class=\"add-icon\">group</md-icon>\r\n    <span class=\"add-span\">为{{data.currentRole?.name}}角色添加成员</span>\r\n    <div class=\"input-contain\">\r\n      <md-icon class=\"input-icon\">person</md-icon>\r\n      <input class=\"member-input\" type=\"text\" name=\"member\" #member=\"ngModel\" [(ngModel)]=\"addUser.username\" (keyup)=\"filterMember($event)\" (click)=\"changChoose()\"/>\r\n    </div>\r\n    <div *ngIf=\"choose\" style=\"position:fixed;top:50%;z-index:1\">\r\n      <div class=\"user-content\">\r\n        <ul>\r\n          <li *ngFor=\"let item of showUsers\" (click)=\"chooseUser(item)\">\r\n            <!--<img  [src]=\"item.headImg\" />-->\r\n            <div class=\"instruct\">\r\n              <span class=\"user-name\" [style.color]=\"item.roleStatus==1 ? '#888':'#333'\">{{item.username}}</span>\r\n              <span class=\"join\" *ngIf=\"item.roleStatus == 1\">已经拥有该角色</span>\r\n              <span class=\"unjoin\" *ngIf=\"item.roleStatus == 0\">不是该角色的成员</span>\r\n            </div>\r\n            <md-icon *ngIf=\"item.roleStatus == 0\" class=\"add-user\">add</md-icon>\r\n            <md-icon *ngIf=\"item.roleStatus == 1\" class=\"add-user\" style=\"color:#ddd\">check</md-icon>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <button md-button class=\"sure\" (click)=\"addMember()\">确定</button>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3075,7 +3821,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/role-manage/dialogs/role.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userform\">\r\n  <form #role=\"ngForm\" id=\"role\">\r\n  <div class=\"header-title\">创建新角色</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            角色标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            角色标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            角色名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            角色名称至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">停用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveRole(data)\" [disabled]=\"!role.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"userform\">\r\n  <form #role=\"ngForm\" id=\"role\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新角色</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑角色</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色标识：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleMark\"\r\n               #roleMark=\"ngModel\"\r\n               [(ngModel)]=\"data.key\"\r\n               type=\"text\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               [readonly]=\"data.edit\"\r\n               (blur)=\"markBlured = true\" (focus)=\"markBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleMark.errors && (roleMark.dirty || roleMark.touched)\">\r\n          <div *ngIf=\"roleMark.errors.required\" class=\"help alert alert-danger\">\r\n            角色标识为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleMark.errors.required && roleMark.errors.pattern && markBlured)\" class=\"help alert alert-danger\">\r\n            角色标识至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色名称：\r\n        </label>\r\n        <input class=\"block-input\" style=\"margin-left:10px;\"\r\n               name=\"roleName\"\r\n               #roleName=\"ngModel\"\r\n               [(ngModel)]=\"data.name\"\r\n               placeholder=\"\"\r\n               pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n               (blur)=\"nameBlured = true\" (focus)=\"nameBlured = false\"\r\n               required>\r\n        <div *ngIf=\"roleName.errors && (roleName.dirty || roleName.touched)\">\r\n          <div *ngIf=\"roleName.errors.required\" class=\"help alert alert-danger\">\r\n            角色名称为必填项\r\n          </div>\r\n          <div *ngIf=\"(!roleName.errors.required && roleName.errors.pattern && nameBlured)\" class=\"help alert alert-danger\">\r\n            角色名称至多50位\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"info-block\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\">\r\n          <span style=\"color:red;\">* </span>角色状态：\r\n        </label>\r\n        <md-radio-group name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n          <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n          <md-radio-button [color]=\"'primary'\" value=\"0\">禁用</md-radio-button>\r\n        </md-radio-group>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n      <div class=\"block-item\">\r\n        <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n        </label>\r\n        <button md-button class=\"save\" (click)=\"saveRole(data)\" [disabled]=\"!role.form.valid || !data.key || !data.name\">保存</button>\r\n        <button md-button class=\"cancel\" (click)=\"closeDialog()\">取消</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -3087,7 +3833,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".userform {\n  overflow: hidden;\n}\n.userform .header-title {\n  font-size: 18px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  margin-top: 30px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
+exports.push([module.i, ".userform {\n  overflow: hidden;\n}\n.userform .header-title {\n  font-size: 18px;\n  margin-bottom: 30px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  height: 58px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
 
 // exports
 
@@ -3128,24 +3874,47 @@ var RoleDialog = (function () {
         this.dialogRef = dialogRef;
         this.data = data;
         this.service = service;
+        this.roleList = this.service.roleList;
     }
     RoleDialog.prototype.ngOnInit = function () {
-        this.data.status = 1;
+        if (this.data.id == '') {
+            this.data.status = 1;
+            this.data.edit = false;
+        }
+        else {
+            this.data.edit = true;
+        }
     };
     RoleDialog.prototype.saveRole = function (data) {
         var _this = this;
-        this.service.createRole(data).subscribe(function (res) {
-            if (res.data.status == 200) {
-                _this.data.getRoleList(0);
-            }
-        });
+        var params = Object.assign({}, data);
+        if (data.id != '') {
+            var dataParam = { key: params.key, name: params.name, status: parseInt(params.status) };
+            this.service.editRole(data.id, dataParam).subscribe(function (res) {
+                if (res.data.status == 200) {
+                    _this.roleList.splice(data.index, 1, res.data.result);
+                }
+            });
+        }
+        else {
+            delete params.id;
+            this.service.createRole(params).subscribe(function (res) {
+                if (res.data.status == 200) {
+                    _this.data.getRoleList(0);
+                }
+            });
+        }
         this.dialogRef.close();
+    };
+    RoleDialog.prototype.closeDialog = function () {
+        this.data = { id: '' };
+        this.dialogRef.close('cancel');
     };
     return RoleDialog;
 }());
 RoleDialog.roleConfig = {
     width: '600px',
-    data: {}
+    data: { id: '' }
 };
 RoleDialog = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -3165,7 +3934,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/role-manage/manage-user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>用户管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addUser()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">用户名:</div>\r\n        <input (keyup)=\"searchByName($event)\" placeholder=\"请输入用户名回车查询\" class=\"search-input\" name=\"fullName\" #fullName=\"ngModel\" [(ngModel)]=\"search.fullName\"/>\r\n        <md-icon class=\"search-bar\" (click)=\"getUserList()\">search</md-icon>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"back()\">返回</button>\r\n      </div>\r\n    </div>\r\n    <div class=\"content\">\r\n      <ul>\r\n        <li class=\"content-head\">\r\n          <!--<div class=\"checkbox-item\">-->\r\n            <!--<md-checkbox [(ngModel)]=\"checkAll\"-->\r\n                         <!--[name]=\"'basic_checkbox'\"-->\r\n                         <!--[color]=\"'primary'\"-->\r\n                         <!--[checked]=\"allSelect()\"-->\r\n                         <!--(change)=\"setAllSelect($event.checked)\"-->\r\n                         <!--[indeterminate]=\"someSelect()\"-->\r\n                         <!--[align]=\"'start'\">-->\r\n            <!--</md-checkbox>-->\r\n          <!--</div>-->\r\n          <md-icon class=\"md-person\">person</md-icon>\r\n          <span>{{roleUserList.length}}</span>\r\n          <div class=\"select-80px role-select\">\r\n            <md-select (change)=\"getUserList()\" style=\"float:right\" name=\"role\" #role=\"ngModel\" [(ngModel)]=\"search.roleId\" class=\"catalog-select\">\r\n              <md-option *ngFor=\"let item of allRoles\" [value]=\"item.id\">\r\n                <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n              </md-option>\r\n            </md-select>\r\n          </div>\r\n        </li>\r\n        <li *ngFor=\"let item of roleUserList\" class=\"user-list\">\r\n          <!--<div class=\"checkbox-item\">-->\r\n            <!--<md-checkbox name=\"cb\" value=\"basic_checkbox\"-->\r\n                         <!--[color]=\"'primary'\"-->\r\n                         <!--[(ngModel)]=\"item.selected\"-->\r\n                         <!--(change)=\"selectOneItem(item,$event.checked)\">-->\r\n            <!--</md-checkbox>-->\r\n          <!--</div>-->\r\n          <div class=\"user-info\">\r\n            <!--<img style=\"margin-right:10px;\" [src]=\"item.headImg\" />-->\r\n            <span style=\"margin-right:10px;\">{{item.username}}</span>\r\n            <span style=\"margin-right:10px;\">{{item.fullName}}</span>\r\n          </div>\r\n\r\n\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>用户管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addUser()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">帐号:</div>\r\n        <input (keyup)=\"searchByName($event)\" placeholder=\"请输入帐号回车查询\" class=\"search-input\" name=\"username\" #username=\"ngModel\" [(ngModel)]=\"search.username\"/>\r\n        <md-icon class=\"search-bar\" (click)=\"getUserList()\">search</md-icon>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <!--<button *ngIf=\"selectedItems && selectedItems.length > 0\" md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"removeRoleUser()\">批量删除</button>-->\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"back()\">返回</button>\r\n      </div>\r\n    </div>\r\n    <div class=\"content\">\r\n      <ul>\r\n        <li class=\"content-head\">\r\n          <!--<div class=\"checkbox-item\">-->\r\n            <!--<md-checkbox [(ngModel)]=\"checkAll\"-->\r\n                         <!--[name]=\"'basic_checkbox'\"-->\r\n                         <!--[color]=\"'primary'\"-->\r\n                         <!--[checked]=\"allSelect()\"-->\r\n                         <!--(change)=\"setAllSelect($event.checked)\"-->\r\n                         <!--[indeterminate]=\"someSelect()\"-->\r\n                         <!--[align]=\"'start'\">-->\r\n            <!--</md-checkbox>-->\r\n          <!--</div>-->\r\n          <md-icon class=\"md-person\">person</md-icon>\r\n          <span>{{roleUserList.length}}</span>\r\n          <div class=\"select-120px role-select\">\r\n            <md-select (change)=\"getUserList()\" style=\"float:right\" name=\"role\" #role=\"ngModel\" [(ngModel)]=\"search.roleId\" class=\"catalog-select\">\r\n              <md-option *ngFor=\"let item of allRoles\" [value]=\"item.id\">\r\n                <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n              </md-option>\r\n            </md-select>\r\n          </div>\r\n          <!--<md-icon class=\"remove\" (click)=\"removeRoleUser()\">delete</md-icon>-->\r\n        </li>\r\n        <li *ngFor=\"let item of roleUserList;let index = index\" class=\"user-list\">\r\n          <!--<div class=\"checkbox-item\">-->\r\n            <!--<md-checkbox name=\"cb\" value=\"basic_checkbox\"-->\r\n                         <!--[color]=\"'primary'\"-->\r\n                         <!--[(ngModel)]=\"item.selected\"-->\r\n                         <!--(change)=\"selectOneItem(item,$event.checked)\">-->\r\n            <!--</md-checkbox>-->\r\n          <!--</div>-->\r\n          <div class=\"user-info\">\r\n            <!--<img style=\"margin-right:10px;\" [src]=\"item.headImg\" />-->\r\n            <span style=\"margin-right:10px;\">{{item.username}}</span>\r\n            <span style=\"margin-right:10px;\">{{item.fullName}}</span>\r\n            <md-icon class=\"remove\" (click)=\"removeRoleUser(item,index)\">delete</md-icon>\r\n          </div>\r\n\r\n\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3177,7 +3946,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".users .user-container .search-block {\n  position: relative;\n}\n.users .user-container .search-block .search-input {\n  width: 200px;\n}\n.users .user-container .search-block .search-bar {\n  font-size: 20px;\n  position: absolute;\n  cursor: pointer;\n  right: 0px;\n  bottom: 12px;\n  color: #000;\n}\n.users .user-container .opt-button {\n  float: right;\n  margin-top: 6px;\n}\n.users .user-container .opt-button .search-button {\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 28px;\n  min-width: 57px !important;\n}\n.users .user-container .content > ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.users .user-container .content > ul > li {\n  padding-left: 15px;\n}\n.users .user-container .content > ul > li .checkbox-item {\n  display: inline-block;\n  margin-right: 10px;\n}\n.users .user-container .content > ul > li .md-person {\n  font-size: 20px;\n  position: relative;\n  top: 4px;\n}\n.users .user-container .content > ul > li .user-info {\n  display: inline-block;\n}\n.users .user-container .content > ul .content-head {\n  height: 50px;\n  line-height: 50px;\n  background: #f6f8fa;\n  border-top-left-radius: 4px;\n  border-top-right-radius: 4px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n}\n.users .user-container .content > ul .content-head .role-select {\n  float: right;\n  margin-top: 6px;\n  margin-right: 10px;\n}\n.users .user-container .content > ul .user-list {\n  height: 50px;\n  line-height: 50px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  border-top: none;\n}\n", ""]);
+exports.push([module.i, ".users .user-container .search-block {\n  position: relative;\n}\n.users .user-container .search-block .search-input {\n  width: 200px;\n}\n.users .user-container .search-block .search-bar {\n  font-size: 20px;\n  position: absolute;\n  cursor: pointer;\n  right: 0px;\n  bottom: 12px;\n  color: #000;\n}\n.users .user-container .opt-button {\n  float: right;\n  margin-top: 6px;\n}\n.users .user-container .opt-button .search-button {\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 28px;\n  min-width: 57px !important;\n}\n.users .user-container .content > ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.users .user-container .content > ul > li {\n  padding-left: 15px;\n}\n.users .user-container .content > ul > li .checkbox-item {\n  display: inline-block;\n  margin-right: 10px;\n}\n.users .user-container .content > ul > li .md-person {\n  font-size: 20px;\n  position: relative;\n  top: 4px;\n}\n.users .user-container .content > ul > li .user-info {\n  display: inline-block;\n  width: 100%;\n}\n.users .user-container .content > ul .content-head {\n  height: 50px;\n  line-height: 50px;\n  background: #f6f8fa;\n  border-top-left-radius: 4px;\n  border-top-right-radius: 4px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n}\n.users .user-container .content > ul .content-head .role-select {\n  position: relative;\n  display: inline-block;\n  top: 10px;\n  margin-left: 20px;\n}\n.users .user-container .content > ul .user-list {\n  height: 50px;\n  line-height: 50px;\n  border: 1px solid rgba(27, 31, 35, 0.15);\n  border-top: none;\n}\n.users .user-container .content > ul .user-list .remove {\n  float: right;\n  margin-right: 10px;\n  margin-top: 13px;\n  color: #666;\n  cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -3197,6 +3966,8 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_services_localstorage_service__ = __webpack_require__("../../../../../src/app/core/services/localstorage.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_sweetalert2__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ManageUserComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3216,6 +3987,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ManageUserComponent = (function () {
     function ManageUserComponent(service, _dialog, router, activeRoute) {
         var _this = this;
@@ -3224,6 +3996,7 @@ var ManageUserComponent = (function () {
         this.router = router;
         this.activeRoute = activeRoute;
         this.search = { start: 0, limit: 999999 };
+        this.roleUserList = [];
         this.selectedItems = [];
         this.checkAll = false;
         this.allRoles = [];
@@ -3231,10 +4004,10 @@ var ManageUserComponent = (function () {
          * @desc 查询用户列表
          */
         this.getUserList = function () {
-            if (_this.search.fullName) {
-                var fullName = _this.search.fullName.replace(/\s/g, "");
-                if (fullName.length == 0) {
-                    delete _this.search.fullName;
+            if (_this.search.username) {
+                var username = _this.search.username.replace(/\s/g, "");
+                if (username.length == 0) {
+                    delete _this.search.username;
                 }
             }
             __WEBPACK_IMPORTED_MODULE_5__core_services_localstorage_service__["a" /* LocalStorage */].set('roleUser', _this.search);
@@ -3301,7 +4074,7 @@ var ManageUserComponent = (function () {
         this._dialog.open(__WEBPACK_IMPORTED_MODULE_2__dialogs_add_member_dialog__["a" /* AddMemberDialog */], memberConfig);
     };
     ManageUserComponent.prototype.back = function () {
-        this.router.navigate(['/index/tsso-auth/role']);
+        this.router.navigate(['/index/role']);
     };
     /**
      * @desc 根据用户名查询用户
@@ -3311,6 +4084,29 @@ var ManageUserComponent = (function () {
         if (keyCode === 13) {
             this.getUserList();
         }
+    };
+    /**
+     * @desc 删除用户
+     */
+    ManageUserComponent.prototype.removeRoleUser = function (item, index) {
+        var _this = this;
+        __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default()({
+            title: '您确定删除该用户吗?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '是的, 删除!',
+            cancelButtonText: '不, 再想想'
+        }).then(function () {
+            _this.service.removeRoleMember(_this.search.roleId, item.id, index).subscribe(function (res) {
+                if (res.data.status == 200) {
+                    _this.roleUserList.splice(index, 1);
+                }
+            });
+        }, function (dismiss) {
+            // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+            if (dismiss === 'cancel') {
+            }
+        });
     };
     return ManageUserComponent;
 }());
@@ -3331,7 +4127,7 @@ var _a, _b, _c, _d;
 /***/ "../../../../../src/app/login-manage/role-manage/role-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\">\r\n    <table class=\"table text-center \">\r\n      <thead>\r\n      <tr>\r\n        <td>序号</td>\r\n        <td>角色标识</td>\r\n        <td>角色名称</td>\r\n        <td>用户数</td>\r\n        <td>状态</td>\r\n        <td style=\"width:215px;\">操作</td>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr  *ngFor=\"let item of roleList;let index = index\" class=\"excel\">\r\n        <td style=\"width:50px;font-weight:700\">{{index+offset+1}}</td>\r\n        <td>{{item?.key}}</td>\r\n        <td>{{item?.name}}</td>\r\n        <td>{{item?.userCount}}</td>\r\n        <td>\r\n          <span *ngIf=\"item.status == 1\">启用</span>\r\n          <span *ngIf=\"item.status == 0\">禁用</span>\r\n        </td>\r\n        <td class=\"opt\">\r\n          <button (click)=\"editRole(item)\">用户管理</button>\r\n          <button (click)=\"manageAuth(item)\">权限管理</button>\r\n          <button (click)=\"removeRole(item,index)\">删除</button>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\">\r\n    <table class=\"table text-center \">\r\n      <thead>\r\n      <tr>\r\n        <td>序号</td>\r\n        <td>角色标识</td>\r\n        <td>角色名称</td>\r\n        <td>用户数</td>\r\n        <td>状态</td>\r\n        <td>创建时间</td>\r\n        <td style=\"width:215px;\">操作</td>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr  *ngFor=\"let item of roleList;let index = index\" class=\"excel\">\r\n        <td style=\"width:50px;font-weight:700\">{{index+offset+1}}</td>\r\n        <td>{{item?.key}}</td>\r\n        <td>{{item?.name}}</td>\r\n        <td>{{item?.userCount}}</td>\r\n        <td>\r\n          <span *ngIf=\"item.status == 1\">启用</span>\r\n          <span *ngIf=\"item.status == 0\">禁用</span>\r\n        </td>\r\n        <td>{{item?.createTime|timeformat}}</td>\r\n        <td class=\"opt\">\r\n          <button (click)=\"editRole(item)\">用户管理</button>\r\n          <button (click)=\"manageAuth(item)\">权限管理</button>\r\n          <button (click)=\"editRoleItem(item,index)\">编辑</button>\r\n          <button (click)=\"removeRole(item,index)\">删除</button>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3342,10 +4138,11 @@ module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__role_manage_service__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/role-manage.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dialogs_role_manage_dialog__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/dialogs/role-manage.dialog.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/dialogs/role.dialog.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dialogs_role_manage_dialog__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/dialogs/role-manage.dialog.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_sweetalert2__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoleListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3359,6 +4156,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 /**
  * Created by kosei on 2017/8/1.
  */
+
 
 
 
@@ -3379,7 +4177,7 @@ var RoleListComponent = (function () {
      */
     RoleListComponent.prototype.removeRole = function (item, index) {
         var _this = this;
-        __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
+        __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default()({
             title: '您确定删除该角色吗?',
             type: 'warning',
             showCancelButton: true,
@@ -3398,11 +4196,18 @@ var RoleListComponent = (function () {
         });
     };
     /**
-     * @desc 编辑用户角色
-     * @param item - 用户信息
+     * @desc 编辑角色用户
+     * @param item - 角色信息
      */
     RoleListComponent.prototype.editRole = function (item) {
-        this.router.navigate(['/index/tsso-auth/role/user_manage', item.id]);
+        this.router.navigate(['/index/role/user_manage', item.id]);
+    };
+    RoleListComponent.prototype.editRoleItem = function (item, index) {
+        var roleConfig = __WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */].roleConfig;
+        roleConfig.data = { id: '' };
+        roleConfig.data = Object.assign({}, item);
+        roleConfig.data.index = index;
+        this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */], roleConfig);
     };
     /**
      *@desc 角色的权限管理
@@ -3416,9 +4221,9 @@ var RoleListComponent = (function () {
             roleId: item.id
         };
         this.service.retriveRoleAuth(params).subscribe(function (res) {
-            var roleConfig = __WEBPACK_IMPORTED_MODULE_3__dialogs_role_manage_dialog__["a" /* RoleManageDialog */].roleConfig;
+            var roleConfig = __WEBPACK_IMPORTED_MODULE_4__dialogs_role_manage_dialog__["a" /* RoleManageDialog */].roleConfig;
             roleConfig.data.id = item.id;
-            _this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_role_manage_dialog__["a" /* RoleManageDialog */], roleConfig);
+            _this._dialog.open(__WEBPACK_IMPORTED_MODULE_4__dialogs_role_manage_dialog__["a" /* RoleManageDialog */], roleConfig);
         });
     };
     return RoleListComponent;
@@ -3437,7 +4242,7 @@ RoleListComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login-manage/role-manage/role-list.component.html"),
         styles: [""]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__role_manage_service__["a" /* RoleManageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__role_manage_service__["a" /* RoleManageService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MdDialog */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__role_manage_service__["a" /* RoleManageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__role_manage_service__["a" /* RoleManageService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["a" /* MdDialog */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], RoleListComponent);
 
 var _a, _b, _c;
@@ -3566,6 +4371,7 @@ var RoleManageComponent = (function () {
      */
     RoleManageComponent.prototype.addRole = function () {
         var roleConfig = __WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */].roleConfig;
+        roleConfig.data = { id: '' };
         roleConfig.data.getRoleList = this.getRoleList;
         this._dialog.open(__WEBPACK_IMPORTED_MODULE_3__dialogs_role_dialog__["a" /* RoleDialog */], roleConfig);
     };
@@ -3612,6 +4418,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__manage_user_component__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/manage-user.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__dialogs_add_member_dialog__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/dialogs/add-member.dialog.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__dialogs_role_manage_dialog__ = __webpack_require__("../../../../../src/app/login-manage/role-manage/dialogs/role-manage.dialog.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoleManageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3638,6 +4445,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var RoleManageModule = (function () {
     function RoleManageModule() {
     }
@@ -3650,7 +4458,8 @@ RoleManageModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MaterialModule */],
             __WEBPACK_IMPORTED_MODULE_5__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */]
+            __WEBPACK_IMPORTED_MODULE_13__shared_shared_module__["a" /* SharedModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */],
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_6__role_manage_component__["a" /* RoleManageComponent */],
@@ -3769,6 +4578,24 @@ var RoleManageService = (function () {
         return roleObservable;
     };
     /**
+     * @desc 修改角色
+     * @param params - 角色信息
+     */
+    RoleManageService.prototype.editRole = function (id, params) {
+        var _this = this;
+        var path = '/api/role/' + id;
+        var roleObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.put(path, params));
+        roleObservable.subscribe(function (res) {
+            if (res.data.status != 200) {
+                var message = res.data.error || '角色修改失败，请稍后重试！';
+                _this.swal.hint('error', message);
+            }
+        }, function (error) {
+            _this.swal.hint('error', '角色修改失败，请重试！');
+        });
+        return roleObservable;
+    };
+    /**
      * @desc 删除角色
      * @param id - 被删除的角色id
      * @param index - 被删除的角色在角色列表中的索引
@@ -3820,11 +4647,25 @@ var RoleManageService = (function () {
         var memberObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.post(path, params));
         memberObservable.subscribe(function (res) {
             if (res.data.status != 200) {
-                var message = res.data.error || '该应用添加失败，请稍后重试！';
+                var message = res.data.error || '该用户添加失败，请稍后重试！';
                 _this.swal.hint('error', message);
             }
         }, function (error) {
-            _this.swal.hint('error', '该应用添加失败，请重试！');
+            _this.swal.hint('error', '该用户添加失败，请重试！');
+        });
+        return memberObservable;
+    };
+    RoleManageService.prototype.removeRoleMember = function (roleId, userId, index) {
+        var _this = this;
+        var path = "/api/role/" + roleId + "/user/" + userId;
+        var memberObservable = __WEBPACK_IMPORTED_MODULE_3_rxjs__["Observable"].fromPromise(this.connectionService.delete(path));
+        memberObservable.subscribe(function (res) {
+            if (res.data.status != 200) {
+                var message = res.data.error || '该用户删除失败，请稍后重试！';
+                _this.swal.hint('error', message);
+            }
+        }, function (error) {
+            _this.swal.hint('error', '该用户删除失败，请重试！');
         });
         return memberObservable;
     };
@@ -3941,7 +4782,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/system-set/system-set.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>系统设置</div>\r\n"
+module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>邮件服务器设置</h5>\r\n    </div>\r\n    <div class=\"userform\">\r\n      <form #user=\"ngForm\" id=\"user\">\r\n        <div style=\"font-size:14px;position:relative;left:25px;top:10px;\">在当前页面更新SMTP邮件服务器。这个服务器用于向用户发送邮件</div>\r\n        <div class=\"col-sm-12 user-container\">\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                <span style=\"color:red;\">* </span>名称：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"serviceName\"\r\n                     #serviceName=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.serviceName\"\r\n                     type=\"text\"\r\n                     placeholder=\"\"\r\n                     pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                     required>\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">服务器名称</md-hint>\r\n              <div *ngIf=\"serviceName.errors && (serviceName.dirty || serviceName.touched)\">\r\n                <div *ngIf=\"serviceName.errors.required\" class=\"help alert alert-danger\">\r\n                  服务器名称为必填项\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                描述：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"serviceDesc\"\r\n                     #serviceDesc=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.serviceDesc\"\r\n                     type=\"text\"\r\n                     placeholder=\"\"\r\n                     required>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                <span style=\"color:red;\">* </span>发信地址：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"sendAddress\"\r\n                     #sendAddress=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.sendAddress\"\r\n                     placeholder=\"\"\r\n                     type=\"email\"\r\n                     pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                     (blur)=\"emailBlured = true\" (focus)=\"emailBlured = false\"\r\n                     required>\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">发送邮件的邮箱地址</md-hint>\r\n              <div *ngIf=\"sendAddress.errors && (sendAddress.dirty || sendAddress.touched)\">\r\n                <div *ngIf=\"sendAddress.errors.required\" class=\"help alert alert-danger\">\r\n                  邮件为必填项\r\n                </div>\r\n                <div *ngIf=\"(!sendAddress.errors.required && sendAddress.errors.pattern && emailBlured)\" class=\"help alert alert-danger\">\r\n                  邮箱格式错误，请重新输入\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                <span style=\"color:red;\">* </span>邮件前缀：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"emailPrefix\"\r\n                     #emailPrefix=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.emailPrefix\"\r\n                     (blur)=\"prefixBlured = true\" (focus)=\"prefixBlured = false\"\r\n                     type=\"text\"\r\n                     placeholder=\"\"\r\n                     pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                     required>\r\n              <div *ngIf=\"emailPrefix.errors && (emailPrefix.dirty || emailPrefix.touched)\">\r\n                <div *ngIf=\"emailPrefix.errors.required\" class=\"help alert alert-danger\">\r\n                  邮件前缀为必填项\r\n                </div>\r\n              </div>\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">电子邮件的主题前缀</md-hint>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"detail\">服务器详细信息</div>\r\n        <div style=\"margin-left:25px;font-size:13px;\">\r\n          输入您的SMTP服务器的主机名称或使用一个javax.mail.session对象的JNDI定位\r\n        </div>\r\n        <div class=\"intro\">SMTP服务器</div>\r\n        <div class=\"col-sm-12 user-container\">\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                协议：\r\n              </label>\r\n              <md-select style=\"margin-left:10px;\" name=\"protocol\" #protocol=\"ngModel\" [(ngModel)]=\"systemEmail.protocol\" class=\"depart-select catalog-select\">\r\n                <md-option *ngFor=\"let item of protocolList\" [value]=\"item.name\">\r\n                  <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n                </md-option>\r\n              </md-select>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                <span style=\"color:red;\">* </span>服务器名称：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"smtpService\"\r\n                     #smtpService=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.smtpService\"\r\n                     type=\"text\"\r\n                     placeholder=\"\"\r\n                     pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                     required>\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">SMTP邮件服务器名称</md-hint>\r\n              <div *ngIf=\"smtpService.errors && (smtpService.dirty || smtpService.touched)\">\r\n                <div *ngIf=\"smtpService.errors.required\" class=\"help alert alert-danger\">\r\n                  服务器名称为必填项\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                SMTP端口：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"smtpPort\"\r\n                     #smtpPort=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.smtpPort\"\r\n                     type=\"number\"\r\n                     placeholder=\"\"\r\n                     >\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">可选-SMTP端口。留空使用默认端口（默认：25）</md-hint>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                超时：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"overtime\"\r\n                     #overtime=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.overtime\"\r\n                     type=\"number\"\r\n                     placeholder=\"\"\r\n                     >\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">超时毫秒数 - 0或负值表示无限超时（默认：1000ms）</md-hint>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                TLS:\r\n              </label>\r\n              <md-checkbox style=\"margin-left:10px;position:relative;top:7px;\"\r\n                           name=\"cb\" [value]=\"systemEmail.tls\"\r\n                           [color]=\"'primary'\"\r\n                           [(ngModel)]=\"systemEmail.tls\">\r\n              </md-checkbox>\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">可选 - 邮件服务器使用TLS安全协议\r\n              </md-hint>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                帐号：\r\n              </label>\r\n              <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                     name=\"account\"\r\n                     #account=\"ngModel\"\r\n                     [(ngModel)]=\"systemEmail.account\"\r\n                     placeholder=\"\"\r\n                     type=\"email\"\r\n                     pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                     (blur)=\"accountBlured = true\" (focus)=\"accountBlured = false\"\r\n                     >\r\n              <md-hint class=\"mt-1 c-5e5e5e md-hint-style\">可选-如果你使用SMTP验证发送邮件，请输入用户名</md-hint>\r\n              <div *ngIf=\"account.errors && (account.dirty || account.touched)\">\r\n                <div *ngIf=\"(!account.errors.required && account.errors.pattern && accountBlured)\" class=\"help alert alert-danger\">\r\n                  帐号格式错误，请重新输入\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\">\r\n            <div class=\"block-item\">\r\n              <label class=\"block-label\">\r\n                修改密码\r\n              </label>\r\n              <md-checkbox style=\"margin-left:10px;position:relative;top:7px;\"\r\n                           name=\"cb\"\r\n                           [value]=\"systemEmail.changePass\"\r\n                           [color]=\"'primary'\"\r\n                           [(ngModel)]=\"systemEmail.changePass\">\r\n              </md-checkbox>\r\n\r\n            </div>\r\n          </div>\r\n          <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n            <div class=\"block-item\">\r\n              <button style=\"margin-left:10px;\" md-button class=\"save\" (click)=\"saveEmail()\" [disabled]=\"!user.form.valid\">修改</button>\r\n              <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3953,7 +4794,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".userform {\n  overflow: hidden;\n  margin-top: 20px;\n}\n.userform .md-hint-style {\n  display: block;\n  margin-left: 156px;\n}\n.userform .header-title {\n  font-size: 18px;\n}\n.userform .detail {\n  font-size: 15px;\n  font-weight: 700;\n  margin-left: 25px;\n  margin-top: 25px;\n}\n.userform .intro {\n  margin-top: 30px;\n  margin-left: 25px;\n  font-size: 15px;\n  font-weight: 700;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n  margin-left: 10%;\n  margin-right: 10%;\n}\n.userform .user-container .info-block {\n  margin-top: 30px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
 
 // exports
 
@@ -3968,6 +4809,8 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_services_constant_service__ = __webpack_require__("../../../../../src/app/core/services/constant.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__system_set_service__ = __webpack_require__("../../../../../src/app/login-manage/system-set/system-set.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SystemSetComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3975,13 +4818,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 /**
  * Created by kosei on 2017/8/1.
  */
 
+
+
 var SystemSetComponent = (function () {
-    function SystemSetComponent() {
+    function SystemSetComponent(service) {
+        this.service = service;
+        this.protocolList = __WEBPACK_IMPORTED_MODULE_1__core_services_constant_service__["a" /* ConstantService */].protocolList;
+        this.systemEmail = { protocol: 'SMTP', changePass: false, tls: false };
+        this.systemEmail = this.service.systemEmail;
     }
+    SystemSetComponent.prototype.ngOnInit = function () {
+        this.service.getSystemEmail();
+    };
+    SystemSetComponent.prototype.selectItem = function (item, checked) {
+        if (checked) {
+            item = 1;
+        }
+        else {
+            item = 0;
+        }
+    };
+    SystemSetComponent.prototype.saveEmail = function () {
+        var query = Object.assign({}, this.systemEmail);
+        //for(var key in query){
+        //  if(query[key] === true){
+        //    query[key] = 1;
+        //  }else if(query[key] === false){
+        //    query[key] = 0;
+        //  }
+        //}
+        query.changePassword = this.systemEmail.changePass == 1 ? true : false;
+        query.TLS = this.systemEmail.tls == 1 ? true : false;
+        if (!query.smtpPort) {
+            query.smtpPort = 25;
+        }
+        if (query.overtime != 0 || !query.overtime) {
+            query.overtime = 1000;
+        }
+        delete query.changePass;
+        delete query.tls;
+        this.service.editSystemEmail(query);
+    };
     return SystemSetComponent;
 }());
 SystemSetComponent = __decorate([
@@ -3989,9 +4873,11 @@ SystemSetComponent = __decorate([
         selector: 'system-set',
         template: __webpack_require__("../../../../../src/app/login-manage/system-set/system-set.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login-manage/system-set/system-set.component.less")]
-    })
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__system_set_service__["a" /* SystemSetService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__system_set_service__["a" /* SystemSetService */]) === "function" && _a || Object])
 ], SystemSetComponent);
 
+var _a;
 //# sourceMappingURL=system-set.component.js.map
 
 /***/ }),
@@ -4005,6 +4891,8 @@ SystemSetComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__system_set_component__ = __webpack_require__("../../../../../src/app/login-manage/system-set/system-set.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__system_set_service__ = __webpack_require__("../../../../../src/app/login-manage/system-set/system-set.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SystemSetModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4023,6 +4911,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var SystemSetModule = (function () {
     function SystemSetModule() {
     }
@@ -4033,14 +4923,15 @@ SystemSetModule = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["k" /* CommonModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */]
+            __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MaterialModule */]
         ],
         declarations: [
             __WEBPACK_IMPORTED_MODULE_4__system_set_component__["a" /* SystemSetComponent */]
         ],
         entryComponents: [],
         exports: [],
-        providers: []
+        providers: [__WEBPACK_IMPORTED_MODULE_6__system_set_service__["a" /* SystemSetService */]]
     })
 ], SystemSetModule);
 
@@ -4048,10 +4939,89 @@ SystemSetModule = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/login-manage/system-set/system-set.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mobx_angular__ = __webpack_require__("../../../../mobx-angular/dist/mobx-angular.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__ = __webpack_require__("../../../../../src/app/core/services/connection.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SystemSetService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Created by kosei on 2017/8/18.
+ */
+
+
+
+var SystemSetService = (function () {
+    function SystemSetService(connectionService) {
+        this.connectionService = connectionService;
+        this.systemEmail = { "serviceDesc": "hello",
+            "protocol": "SMTP",
+            "smtpPort": "25",
+            "overtime": "10000",
+            "TLS": "1",
+            "serviceName": "service@ti-net.com.cn",
+            "smtpService": "service@ti-net.com.cn",
+            "emailPrefix": "【JIRA】",
+            "account": "jumpServer@ti-net.com.cn",
+            "sendAddress": "service@ti-net.com",
+            "changePassword": "0" };
+        this.operaLogList = [];
+    }
+    SystemSetService.prototype.getSystemEmail = function () {
+        var _this = this;
+        var path = '/api/setting';
+        this.connectionService.get(path).then(function (res) {
+            if (res.data.status == 200) {
+                Object.assign(_this.systemEmail, res.data.result);
+                _this.systemEmail.changePass = _this.systemEmail.changePassword == 1 ? true : false;
+                _this.systemEmail.tls = _this.systemEmail.TLS == 1 ? true : false;
+            }
+        }).catch(function (error) { });
+    };
+    SystemSetService.prototype.editSystemEmail = function (params) {
+        var _this = this;
+        var path = '/api/setting';
+        this.connectionService.put(path, params).then(function (res) {
+            if (res.data.status == 200) {
+                Object.assign(_this.systemEmail, res.data.result);
+            }
+        }).catch(function (error) { });
+    };
+    return SystemSetService;
+}());
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
+    __metadata("design:type", Object)
+], SystemSetService.prototype, "systemEmail", void 0);
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_1_mobx_angular__["b" /* observable */],
+    __metadata("design:type", Object)
+], SystemSetService.prototype, "operaLogList", void 0);
+SystemSetService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_connection_service__["a" /* ConnectionService */]) === "function" && _a || Object])
+], SystemSetService);
+
+var _a;
+//# sourceMappingURL=system-set.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/login-manage/user-manage/dialogs/user-form.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userform\">\r\n  <form #user=\"ngForm\" id=\"user\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新用户</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑用户</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>部门：\r\n          </label>\r\n          <md-select style=\"margin-left:10px;\" name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.departmentId\" class=\"depart-select catalog-select\">\r\n            <md-option *ngFor=\"let item of data.departmentList\" [value]=\"item.id\">\r\n              <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n            </md-option>\r\n          </md-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>账号：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"username\"\r\n                 #username=\"ngModel\"\r\n                 [(ngModel)]=\"data.username\"\r\n                 (blur)=\"userBlured = true\" (focus)=\"userBlured = false\"\r\n                 type=\"text\"\r\n                 placeholder=\"\"\r\n                 pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                 required>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              账号为必填项\r\n            </div>\r\n            <div *ngIf=\"(!username.errors.required && username.errors.pattern && userBlured)\" class=\"help alert alert-danger\">\r\n              账号至多50位\r\n            </div>\r\n          </div>\r\n\r\n          <!--<div *ngIf=\"!(username.pristine || username.valid || !username.touched)\" >-->\r\n            <!--<div class=\"help alert alert-danger\">-->\r\n              <!--账号为必填项-->\r\n            <!--</div>-->\r\n          <!--</div>-->\r\n          <!--<div class=\"help alert alert-danger\" *ngIf=\"data.username?.length > 50\">-->\r\n            <!--账号不能超过50字-->\r\n          <!--</div>-->\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div  *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>密码：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"password\"\r\n                 #password=\"ngModel\"\r\n                 [(ngModel)]=\"data.password\"\r\n                 placeholder=\"\"\r\n                 (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                 type=\"password\"\r\n                 pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n                 required>\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"password.errors.required\" class=\"help alert alert-danger\">\r\n              密码为必填项\r\n            </div>\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码至少8位至多50位，且必须包含大小写字母和数字\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>确认：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"verify\"\r\n                 #verify=\"ngModel\"\r\n                 [(ngModel)]=\"data.verify\"\r\n                 placeholder=\"\"\r\n                 type=\"password\"\r\n                 (blur)=\"againBlured = true\"\r\n                 (focus)=\"againBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"(verify.dirty || verify.touched) && againBlured&& !verify.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>全名：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"fullName\"\r\n                 #fullName=\"ngModel\"\r\n                 [(ngModel)]=\"data.fullName\"\r\n                 placeholder=\"\"\r\n                 required>\r\n          <div *ngIf=\"!(fullName.pristine || fullName.valid || !fullName.touched)\" >\r\n            <div class=\"help alert alert-danger\">\r\n              全名为必填项\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>邮件：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"email\"\r\n                 #email=\"ngModel\"\r\n                 [(ngModel)]=\"data.email\"\r\n                 placeholder=\"\"\r\n                 type=\"email\"\r\n                 pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                 (blur)=\"emailBlured = true\" (focus)=\"emailBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"email.errors && (email.dirty || email.touched)\">\r\n            <div *ngIf=\"email.errors.required\" class=\"help alert alert-danger\">\r\n              邮件为必填项\r\n            </div>\r\n            <div *ngIf=\"(!email.errors.required && email.errors.pattern && emailBlured)\" class=\"help alert alert-danger\">\r\n              邮箱格式错误，请重新输入\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>用户状态：\r\n          </label>\r\n          <md-radio-group style=\"margin-left:10px;\" name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n            <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n            <md-radio-button [color]=\"'primary'\" value=\"0\">停用</md-radio-button>\r\n          </md-radio-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\" style=\"margin-top: 0;margin-bottom: 20px;\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n          </label>\r\n          <button *ngIf=\"data.id == ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid || !verifyResult()\">创建</button>\r\n          <button *ngIf=\"data.id != ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid\">修改</button>\r\n          <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"userform\">\r\n  <form #user=\"ngForm\" id=\"user\">\r\n    <div *ngIf=\"data.id == ''\" class=\"header-title\">创建新用户</div>\r\n    <div *ngIf=\"data.id != ''\" class=\"header-title\">编辑用户</div>\r\n    <div class=\"col-sm-12 user-container\">\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>部门：\r\n          </label>\r\n          <md-select style=\"margin-left:10px;\" name=\"application\" #application=\"ngModel\" [(ngModel)]=\"data.departmentId\" class=\"depart-select catalog-select\">\r\n            <md-option *ngFor=\"let item of data.departmentList\" [value]=\"item.id\">\r\n              <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n            </md-option>\r\n          </md-select>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>帐号：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"username\"\r\n                 #username=\"ngModel\"\r\n                 [(ngModel)]=\"data.username\"\r\n                 (blur)=\"userBlured = true\" (focus)=\"userBlured = false\"\r\n                 type=\"text\"\r\n                 placeholder=\"\"\r\n                 pattern = \"^[a-zA-Z\\d\\S]{1,50}\"\r\n                 required>\r\n          <div *ngIf=\"username.errors && (username.dirty || username.touched)\">\r\n            <div *ngIf=\"username.errors.required\" class=\"help alert alert-danger\">\r\n              帐号为必填项\r\n            </div>\r\n            <div *ngIf=\"(!username.errors.required && username.errors.pattern && userBlured)\" class=\"help alert alert-danger\">\r\n              帐号至多50位\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"data.id == ''\" class=\"info-block\" style=\"height:75px;\">\r\n        <div  *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            密码：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"password\"\r\n                 #password=\"ngModel\"\r\n                 [(ngModel)]=\"data.password\"\r\n                 placeholder=\"\"\r\n                 (blur)=\"passBlured = true\" (focus)=\"passBlured = false\"\r\n                 type=\"password\"\r\n                 pattern = \"^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d\\S]{8,50}\"\r\n                 >\r\n          <md-hint style=\"display:block;margin-left:155px;\" class=\"mt-1 c-5e5e5e\">*密码至少8位至多50位，且必须包含大小写字母和数字</md-hint>\r\n\r\n          <div *ngIf=\"password.errors && (password.dirty || password.touched)\">\r\n            <div *ngIf=\"(!password.errors.required && password.errors.pattern && passBlured)\" class=\"help alert alert-danger\">\r\n              密码格式不正确，请重新设置密码\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"data.id == ''\" class=\"info-block\">\r\n        <div *ngIf=\"data.id == ''\" class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            确认：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"verify\"\r\n                 #verify=\"ngModel\"\r\n                 [(ngModel)]=\"data.verify\"\r\n                 placeholder=\"\"\r\n                 type=\"password\"\r\n                 (blur)=\"againBlured = true\"\r\n                 (focus)=\"againBlured = false\"\r\n                 >\r\n          <div *ngIf=\"(verify.dirty || verify.touched) && againBlured&& !verify.pristine && !verifyResult()\" class=\"help alert alert-danger\">\r\n            您的密码输入不一致，请重新输入！\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>全名：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"fullName\"\r\n                 #fullName=\"ngModel\"\r\n                 [(ngModel)]=\"data.fullName\"\r\n                 placeholder=\"\"\r\n                 required>\r\n          <div *ngIf=\"!(fullName.pristine || fullName.valid || !fullName.touched)\" >\r\n            <div class=\"help alert alert-danger\">\r\n              全名为必填项\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>邮箱：\r\n          </label>\r\n          <input class=\"block-input\" style=\"margin-left:10px;\"\r\n                 name=\"email\"\r\n                 #email=\"ngModel\"\r\n                 [(ngModel)]=\"data.email\"\r\n                 placeholder=\"\"\r\n                 type=\"email\"\r\n                 pattern=\"^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$\"\r\n                 (blur)=\"emailBlured = true\" (focus)=\"emailBlured = false\"\r\n                 required>\r\n          <div *ngIf=\"email.errors && (email.dirty || email.touched)\">\r\n            <div *ngIf=\"email.errors.required\" class=\"help alert alert-danger\">\r\n              邮箱为必填项\r\n            </div>\r\n            <div *ngIf=\"(!email.errors.required && email.errors.pattern && emailBlured)\" class=\"help alert alert-danger\">\r\n              邮箱格式错误，请重新输入\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\">\r\n            <span style=\"color:red;\">* </span>状态：\r\n          </label>\r\n          <md-radio-group style=\"margin-left:10px;\" name=\"status\" #status=\"ngModel\" [(ngModel)]=\"data.status\">\r\n            <md-radio-button [color]=\"'primary'\" value=\"1\" style=\"margin-top:4px;margin-right:10px;\">启用</md-radio-button>\r\n            <md-radio-button [color]=\"'primary'\" value=\"0\">禁用</md-radio-button>\r\n          </md-radio-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"info-block\" style=\"margin-top: 0;\">\r\n        <div class=\"block-item\">\r\n          <label class=\"block-label\" style=\"margin-right: 10px;\">\r\n          </label>\r\n          <button *ngIf=\"data.id == ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid || !verifyResult()\">创建</button>\r\n          <button *ngIf=\"data.id != ''\" md-button class=\"save\" (click)=\"saveUser(data)\" [disabled]=\"!user.form.valid\">修改</button>\r\n          <button md-button class=\"cancel\" (click)=\"dialogRef.close('cancel')\">取消</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -4063,7 +5033,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".userform {\n  overflow: auto;\n  max-height: calc(50%) !important;\n}\n.userform .header-title {\n  font-size: 18px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  margin-top: 30px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
+exports.push([module.i, ".userform {\n  overflow: auto;\n}\n.userform .header-title {\n  font-size: 18px;\n  margin-bottom: 30px;\n}\n.userform .user-container {\n  height: 100%;\n  padding: 0;\n  margin-bottom: 5px;\n}\n.userform .user-container .info-block {\n  height: 58px;\n}\n.userform .user-container .info-block .block-item .block-label {\n  float: left;\n  width: 145px;\n  text-align: right;\n  font-size: 14px;\n  position: relative;\n  top: 4px;\n}\n.userform .user-container .info-block .block-input {\n  width: 55%;\n  height: 28px;\n  line-height: 30px;\n  border: none;\n  font-weight: normal;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.userform .user-container .info-block .block-input:focus {\n  outline: none;\n}\n.userform .user-container .help {\n  padding: 1.5rem 0 0 13rem;\n}\n.userform .user-container .save {\n  margin-top: 20px;\n  background: #1194F6;\n  color: #fff;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .cancel {\n  color: #333;\n  font-size: 13px;\n  line-height: 30px;\n  min-width: 80px !important;\n}\n.userform .user-container .save[disabled] {\n  background: #ccc;\n  color: #333;\n}\n", ""]);
 
 // exports
 
@@ -4107,11 +5077,15 @@ var UserFormDialog = (function () {
     }
     UserFormDialog.prototype.saveUser = function (data) {
         var _this = this;
-        if (!data.id) {
-            var params = Object.assign({}, data);
-            delete params.id;
-            delete params.departmentList;
-            delete params.verify;
+        if (data.id == '') {
+            var params = {
+                username: data.username,
+                password: data.password,
+                fullName: data.fullName,
+                departmentId: data.departmentId,
+                email: data.email,
+                status: data.status,
+            };
             this.service.createUser(params).subscribe(function (res) {
                 if (res.data.status == 200) {
                     _this.data.getUserList(0);
@@ -4124,7 +5098,7 @@ var UserFormDialog = (function () {
                 fullName: data.fullName,
                 departmentId: data.departmentId,
                 email: data.email,
-                status: data.status
+                status: data.status,
             };
             this.service.editUser(data.id, data.index, params).subscribe(function (res) {
                 if (res.data.status == 200) {
@@ -4135,7 +5109,7 @@ var UserFormDialog = (function () {
         this.dialogRef.close();
     };
     UserFormDialog.prototype.verifyResult = function () {
-        return this.data.password && this.data.verify && this.data.password == this.data.verify;
+        return !this.data.password || this.data.password && this.data.verify && this.data.password == this.data.verify;
     };
     return UserFormDialog;
 }());
@@ -4161,7 +5135,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/user-manage/dialogs/user-role.dialog.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"userform\">\r\n  <div class=\"header-title\">编辑用户角色</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"row\" style=\"margin-top:30px;\">\r\n      <div class=\"col-sm-6\">\r\n        <div class=\"left-area\">\r\n          <span>可用的角色</span>\r\n          <div class=\"role-choose\">\r\n            <ul>\r\n              <li *ngFor=\"let item of usedRoleList\" (click)=\"chooseItem(item)\" [ngClass]=\"{active:item.choosed==true}\">\r\n                <span>{{item.name}}</span>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <button md-button class=\"option-button\" (click)=\"joinGroup()\">加入选定组</button>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-sm-6\">\r\n        <div class=\"right-area\">\r\n          <span>当前拥有的角色</span>\r\n          <div class=\"role-choose\">\r\n            <ul>\r\n              <li *ngFor=\"let item of userRoleList\" (click)=\"chooseItem(item)\" [ngClass]=\"{active:item.choosed==false}\">\r\n                <span>{{item.name}}</span>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <button md-button class=\"option-button\" (click)=\"removeGroup()\">从选定组移除</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div>\r\n      <button md-button class=\"cancel-button\" style=\"float:right\" (click)=\"back()\">关闭</button>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"userform\">\r\n  <div class=\"header-title\">编辑用户角色</div>\r\n  <div class=\"col-sm-12 user-container\">\r\n    <div class=\"row\" style=\"margin-top:30px;\">\r\n      <div class=\"col-sm-6\">\r\n        <div class=\"left-area\">\r\n          <span>可用的角色</span>\r\n          <div class=\"role-choose\">\r\n            <ul>\r\n              <li *ngFor=\"let item of usedRoleList\" (click)=\"chooseItem(item)\" [ngClass]=\"{active:item.choosed==true}\">\r\n                <span>{{item.name}}</span>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <button md-button class=\"option-button\" (click)=\"joinGroup()\">加入选定角色</button>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-sm-6\">\r\n        <div class=\"right-area\">\r\n          <span>当前拥有的角色</span>\r\n          <div class=\"role-choose\">\r\n            <ul>\r\n              <li *ngFor=\"let item of userRoleList\" (click)=\"chooseItem(item)\" [ngClass]=\"{active:item.choosed==false}\">\r\n                <span>{{item.name}}</span>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <button md-button class=\"option-button\" (click)=\"removeGroup()\">移除选定角色</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div>\r\n      <button md-button class=\"cancel-button\" style=\"float:right\" (click)=\"back()\">关闭</button>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4285,7 +5259,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/user-manage/user-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\">\r\n    <table class=\"table text-center \">\r\n      <thead>\r\n      <tr>\r\n        <td>序号</td>\r\n        <td>账号</td>\r\n        <td>姓名</td>\r\n        <td>角色</td>\r\n        <td>邮箱</td>\r\n        <td>部门</td>\r\n        <td>状态</td>\r\n        <td style=\"width:190px;\">操作</td>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr  *ngFor=\"let item of userList;let index = index\" class=\"excel\">\r\n        <td style=\"width:50px;font-weight:700;\">{{index+offset+1}}</td>\r\n        <td>{{item?.username}}</td>\r\n        <td>{{item?.fullName}}</td>\r\n        <td style=\"text-align:left;\">\r\n          <ul style=\"margin:0;padding:0;list-style: none\">\r\n            <li *ngFor=\"let role of item.roleList\">\r\n              <span><em style=\"font-size:14px;font-weight:700;font-style:normal;margin-right:4px;\">·</em>{{role.name}}</span>\r\n            </li>\r\n          </ul>\r\n        </td>\r\n        <td>{{item?.email}}</td>\r\n        <td>{{item?.departmentName}}</td>\r\n        <td>\r\n          <span *ngIf=\"item.status == 1\">启用</span>\r\n          <span *ngIf=\"item.status == 0\">禁用</span>\r\n        </td>\r\n        <td class=\"opt\">\r\n          <button (click)=\"editRole(item)\">角色管理</button>\r\n          <button (click)=\"editUser(item,index)\">编辑</button>\r\n          <button (click)=\"removeUser(item,index)\">删除</button>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"list-style main\">\r\n  <div class=\"card-shadow\">\r\n    <table class=\"table text-center \">\r\n      <thead>\r\n      <tr>\r\n        <td>序号</td>\r\n        <td>帐号</td>\r\n        <td>全名</td>\r\n        <td>邮箱</td>\r\n        <td>部门</td>\r\n        <td>角色</td>\r\n        <td>状态</td>\r\n        <td>创建时间</td>\r\n        <td style=\"width:155px;\">操作</td>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr  *ngFor=\"let item of userList;let index = index\" class=\"excel\">\r\n        <td style=\"width:50px;font-weight:700;\">{{index+offset+1}}</td>\r\n        <td>{{item?.username}}</td>\r\n        <td>{{item?.fullName}}</td>\r\n        <td>{{item?.email}}</td>\r\n        <td>{{item?.departmentName}}</td>\r\n        <td style=\"text-align:left;\">\r\n          <ul style=\"margin:0;padding:0;list-style: none\">\r\n            <li *ngFor=\"let role of item.roleList\">\r\n              <span><em style=\"font-size:14px;font-weight:700;font-style:normal;margin-right:4px;\">·</em>{{role.name}}</span>\r\n            </li>\r\n          </ul>\r\n        </td>\r\n        <td>\r\n          <span *ngIf=\"item.status == 1\">启用</span>\r\n          <span *ngIf=\"item.status == 0\">禁用</span>\r\n        </td>\r\n        <td>{{item?.createTime|timeformat}}</td>\r\n        <td class=\"opt\">\r\n          <button (click)=\"editRole(item)\">角色管理</button>\r\n          <button (click)=\"editUser(item,index)\">编辑</button>\r\n          <button (click)=\"removeUser(item,index)\">删除</button>\r\n        </td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4407,7 +5381,7 @@ var _a, _b;
 /***/ "../../../../../src/app/login-manage/user-manage/user-manage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>用户管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addUser()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">账号:</div>\r\n        <input placeholder=\"请输入用户账号\" class=\"search-input\" name=\"account\" (keyup)=\"searchByKey($event)\" #account=\"ngModel\" [(ngModel)]=\"search.username\"/>\r\n      </div>\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">姓名:</div>\r\n        <input placeholder=\"请输入用户姓名\" class=\"search-input\" name=\"userName\" (keyup)=\"searchByKey($event)\" #userName=\"ngModel\" [(ngModel)]=\"search.fullName\"/>\r\n      </div>\r\n      <div class=\"search-block select-80px\">\r\n        <div class=\"search_label\">角色:</div>\r\n        <md-select (change)=\"getUserList()\" name=\"role\" #role=\"ngModel\" [(ngModel)]=\"search.roleId\" class=\"catalog-select\">\r\n          <md-option [value]=\"'all'\">\r\n            <span style=\"font-size: 12px;\">全部</span>\r\n          </md-option>\r\n          <md-option *ngFor=\"let item of roleList\" [value]=\"item.id\">\r\n            <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"getUserList()\">查询</button>\r\n      </div>\r\n    </div>\r\n    <user-list [getUserList]=\"getUserList\"  [offset]=\"search.start\"></user-list>\r\n    <div class=\"bottom-page\">\r\n      <div style=\"display:inline-block;\">\r\n        共 {{pageConfig.totalItems}} 条记录\r\n      </div>\r\n      <div style=\"float: right\">\r\n        <div class=\"skip\">\r\n          每页\r\n          <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n            {{search.limit}}\r\n          </button>\r\n\r\n          <md-menu #menu=\"mdMenu\">\r\n            <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                    [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n              {{skip}}\r\n            </button>\r\n          </md-menu>\r\n          条\r\n        </div>\r\n        <div class=\"pagination\">\r\n          <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                          [(page)]=\"search.currentPage\"\r\n                          [boundaryLinks]=\"true\"\r\n                          [directionLinks]=\"true\"\r\n                          [maxSize]=\"5\"\r\n                          [pageSize]=\"search.limit\"\r\n                          [ellipses]=\"false\"\r\n                          [size]=\"'sm'\"\r\n                          (pageChange)=\"getUserList()\"></ngb-pagination>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"users col-sm-12\">\r\n  <div class=\"user-container\">\r\n    <div class=\"manage-head\">\r\n      <h5>用户管理</h5>\r\n      <div class=\"addKey\">\r\n        <button md-icon-button class=\"add add-button\" (click)=\"addUser()\">\r\n          <md-icon class=\"inner-icon\">add</md-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"search-info\">\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">帐号:</div>\r\n        <input placeholder=\"请输入用户帐号\" class=\"search-input\" name=\"account\" (keyup)=\"searchByKey($event)\" #account=\"ngModel\" [(ngModel)]=\"search.username\"/>\r\n      </div>\r\n      <div class=\"search-block\">\r\n        <div class=\"search_label\">全名:</div>\r\n        <input placeholder=\"请输入用户全名\" class=\"search-input\" name=\"userName\" (keyup)=\"searchByKey($event)\" #userName=\"ngModel\" [(ngModel)]=\"search.fullName\"/>\r\n      </div>\r\n      <div class=\"search-block select-80px\">\r\n        <div class=\"search_label\">角色:</div>\r\n        <md-select (change)=\"getUserList()\" name=\"role\" #role=\"ngModel\" [(ngModel)]=\"search.roleId\" class=\"catalog-select\">\r\n          <md-option [value]=\"'all'\">\r\n            <span style=\"font-size: 12px;\">全部</span>\r\n          </md-option>\r\n          <md-option *ngFor=\"let item of roleList\" [value]=\"item.id\">\r\n            <span style=\"font-size: 12px;\">{{item.name}}</span>\r\n          </md-option>\r\n        </md-select>\r\n      </div>\r\n      <div class=\"opt-button\">\r\n        <button md-button class=\"search-button\" style=\"margin-right:5px;\" (click)=\"getUserList()\">查询</button>\r\n      </div>\r\n    </div>\r\n    <user-list [getUserList]=\"getUserList\"  [offset]=\"search.start\"></user-list>\r\n    <div class=\"bottom-page\">\r\n      <div style=\"display:inline-block;\">\r\n        共 {{pageConfig.totalItems}} 条记录\r\n      </div>\r\n      <div style=\"float: right\">\r\n        <div class=\"skip\">\r\n          每页\r\n          <button class=\"pageLimit\" md-raised-button [mdMenuTriggerFor]=\"menu\" aria-label=\"Open basic menu\">\r\n            {{search.limit}}\r\n          </button>\r\n\r\n          <md-menu #menu=\"mdMenu\">\r\n            <button md-menu-item *ngFor=\"let skip of pageConfig.skips\"\r\n                    [disabled]=\"skip == search.limit\" (click)=\"changeLimit(skip)\">\r\n              {{skip}}\r\n            </button>\r\n          </md-menu>\r\n          条\r\n        </div>\r\n        <div class=\"pagination\">\r\n          <ngb-pagination [collectionSize]=\"pageConfig.totalItems\"\r\n                          [(page)]=\"search.currentPage\"\r\n                          [boundaryLinks]=\"true\"\r\n                          [directionLinks]=\"true\"\r\n                          [maxSize]=\"5\"\r\n                          [pageSize]=\"search.limit\"\r\n                          [ellipses]=\"false\"\r\n                          [size]=\"'sm'\"\r\n                          (pageChange)=\"getUserList()\"></ngb-pagination>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4578,6 +5552,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__user_manage_service__ = __webpack_require__("../../../../../src/app/login-manage/user-manage/user-manage.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dialogs_user_form_dialog__ = __webpack_require__("../../../../../src/app/login-manage/user-manage/dialogs/user-form.dialog.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dialogs_user_role_dialog__ = __webpack_require__("../../../../../src/app/login-manage/user-manage/dialogs/user-role.dialog.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserManageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4602,6 +5577,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var UserManageModule = (function () {
     function UserManageModule() {
     }
@@ -4614,6 +5590,7 @@ UserManageModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MaterialModule */],
             __WEBPACK_IMPORTED_MODULE_5__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */],
+            __WEBPACK_IMPORTED_MODULE_11__shared_shared_module__["a" /* SharedModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */],
         ],
         declarations: [

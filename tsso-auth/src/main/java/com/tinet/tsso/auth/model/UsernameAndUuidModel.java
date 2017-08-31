@@ -9,7 +9,7 @@ import java.util.Date;
  * @date 2017-08-18
  * @author lizy
  */
-public class ForgetPasswordModel {
+public class UsernameAndUuidModel {
 
 	 private String key;//找回密码的标识
 	 

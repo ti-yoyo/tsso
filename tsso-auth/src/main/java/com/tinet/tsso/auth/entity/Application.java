@@ -9,15 +9,15 @@ import java.util.Date;
  * @author lizy
  */
 public class Application {
-	private Integer id;//应用的id
+	private Integer id;// 应用的id
 
-	private String key;//应用标识
+	private String key;// 应用标识
 
-	private String name;//应用名
+	private String name;// 应用名
 
-	private Integer status;//应用状态
+	private Integer status;// 应用状态
 
-	private Date createTime;//应用的创建时间
+	private Date createTime;// 应用的创建时间
 
 	public Integer getId() {
 		return id;
@@ -58,4 +58,11 @@ public class Application {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+
+	@Override
+	public String toString() {
+		return "Application [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", createTime="
+				+ createTime + "]";
+	}
+
 }

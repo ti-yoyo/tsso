@@ -5,6 +5,7 @@ import java.util.List;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.param.RoleParam;
+import com.tinet.tsso.auth.param.UserAndRoleParam;
 
 /**
  * 角色的mapper
@@ -64,7 +65,7 @@ public interface RoleMapper extends BaseMapper<Role, Integer> {
 	 * 
 	 * @param roleId
 	 */
-	void deletePermissionByRoleId(Integer roleId);
+	void deletePermissionForRoleId(Integer roleId);
 
 	/**
 	 * 为指定角色id添加角色
@@ -82,9 +83,24 @@ public interface RoleMapper extends BaseMapper<Role, Integer> {
 
 	/**
 	 * 根据权限的标识查询
+	 * 
 	 * @param key
 	 * @return
 	 */
 	Integer selectCountByRoleKey(String key);
+
+	/**
+	 * 删除角色所拥有的指定角色
+	 * 
+	 * @param roleId
+	 */
+	void deleteUserForRoleId(Integer roleId);
+
+	/**
+	 * 删除某个角色的一个用户
+	 * 
+	 * @param userAndRoleParam
+	 */
+	void deleteOneUserForRole(UserAndRoleParam userAndRoleParam);
 
 }

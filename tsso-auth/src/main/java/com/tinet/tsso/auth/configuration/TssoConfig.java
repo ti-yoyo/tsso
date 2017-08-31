@@ -144,7 +144,7 @@ public class TssoConfig {
 		shiroFilterFactoryBean.setLoginUrl(loginUrl);
 
 		// 登录成功后要跳转的连接
-		shiroFilterFactoryBean.setSuccessUrl("/index.html");
+		//shiroFilterFactoryBean.setSuccessUrl("/index.html");
 
 		// 添加casFilter到shiroFilter中
 		Map<String, Filter> filters = new HashMap<>();
@@ -161,16 +161,21 @@ public class TssoConfig {
 		filterChainDefinitionMap.put("/login", "anon");
 		// 修改密码的链接不需要权限控制
 
+		
 		filterChainDefinitionMap.put("/api/password/forget_password", "anon");
+		filterChainDefinitionMap.put("/api/password/reset_password", "anon");
+		filterChainDefinitionMap.put("/api/password/set_password", "anon");
 		filterChainDefinitionMap.put("/api/password/change_password", "anon");
 		filterChainDefinitionMap.put("/password_find", "anon");
-		filterChainDefinitionMap.put("/password_modify", "anon");
+		filterChainDefinitionMap.put("/password_reset", "anon");
+		filterChainDefinitionMap.put("/password_set", "anon");
+		filterChainDefinitionMap.put("/password_change", "anon");
 
 		// 所有url都需要验证
 		filterChainDefinitionMap.put("/", "authc");
 		filterChainDefinitionMap.put("/index/**", "authc");
 		//
-		filterChainDefinitionMap.put("/api/**", "roles[auth_admin]");
+		filterChainDefinitionMap.put("/api/**", "roles[tsso_admin]");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
@@ -251,8 +256,8 @@ public class TssoConfig {
 	public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
 		SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
 		Properties properties = new Properties();
-		//properties.put("org.apache.shiro.authz.AuthorizationException", "/403");
-		properties.put("org.apache.shiro.authz.AuthorizationException", "redirect:http//www.baidu.com");
+		properties.put("org.apache.shiro.authz.AuthorizationException", "/403");
+		//properties.put("org.apache.shiro.authz.AuthorizationException", "redirect:http//www.baidu.com");
 		simpleMappingExceptionResolver.setExceptionMappings(properties);
 		return simpleMappingExceptionResolver;
 	}

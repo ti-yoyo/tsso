@@ -1,17 +1,29 @@
 package com.tinet.tsso.auth.dao;
 
 import com.tinet.tsso.auth.entity.LogLogin;
+import com.tinet.tsso.auth.param.LogLoginParam;
 
+import java.util.List;
+
+/**
+ * @author lizy
+ * @date 2017-8-25
+ */
 public interface LogLoginMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(LogLogin record);
+	/**
+	 * 根据参数查询登录日志
+	 *
+	 * @param logLoginParam
+	 * @return
+	 */
+	List<LogLogin> selectByParam(LogLoginParam logLoginParam);
 
-    int insertSelective(LogLogin record);
-
-    LogLogin selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(LogLogin record);
-
-    int updateByPrimaryKey(LogLogin record);
+	/**
+	 * 根据参数查询登录日志的数量
+	 *
+	 * @param logLoginParam
+	 * @return
+	 */
+	Integer selectCountByParam(LogLoginParam logLoginParam);
 }

@@ -6,6 +6,7 @@ import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.model.RoleModel;
 import com.tinet.tsso.auth.param.RoleParam;
+import com.tinet.tsso.auth.param.UserAndRoleParam;
 import com.tinet.tsso.auth.util.Page;
 import com.tinet.tsso.auth.util.ResponseModel;
 
@@ -90,5 +91,34 @@ public interface RoleService extends BaseService<Role, Integer> {
 	 * @return
 	 */
 	ResponseModel createRole(Role role);
+
+	/**
+	 * 更新角色
+	 * 
+	 * @param role
+	 * @return
+	 */
+	ResponseModel updateRole(Role role);
+
+	/**
+	 * 根据用户id查询角色信息
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	List<Role> selectRoleByUserId(Integer userId);
+
+	/**
+	 * 删除指定角色
+	 * 
+	 * @param roleId
+	 */
+	void deleteRole(Integer roleId);
+
+	/**
+	 * 删除角色
+	 * @param userAndRoleParam
+	 */
+	void deleteOneUserForRole(UserAndRoleParam userAndRoleParam);
 
 }

@@ -12,9 +12,9 @@ public class PermissionModel {
 	private Integer applicationId; // 所属应用id
 
 	private Date createTime;// 创建时间
-	
+
 	private String applicationKey;
-	
+
 	private String applicationName;
 
 	public Integer getId() {

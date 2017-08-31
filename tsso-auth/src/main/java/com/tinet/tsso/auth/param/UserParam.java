@@ -109,4 +109,6 @@ public class UserParam {
 		this.status = status;
 	}
 
+
+	
 }

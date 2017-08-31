@@ -13,7 +13,7 @@ import com.tinet.tsso.auth.util.ResponseModel;
  * @author lizy
  */
 
-public interface PermissionService extends BaseService<Permission, Integer>{
+public interface PermissionService extends BaseService<Permission, Integer> {
 
 	/**
 	 * 通过权限参数查询权限信息
@@ -24,10 +24,26 @@ public interface PermissionService extends BaseService<Permission, Integer>{
 	Page<PermissionModel> selectByparam(PermissionParam permissionParam);
 
 	/**
-	 *添加应用
-	 * @param permissionParam
+	 * 添加应用
+	 * 
+	 * @param permission
 	 * @return
 	 */
-	ResponseModel addPermission(PermissionParam permissionParam);
+	ResponseModel addPermission(Permission permission);
+
+	/**
+	 * 更新权限
+	 * 
+	 * @param permission
+	 * @return
+	 */
+	ResponseModel updatePermission(Permission permission);
+
+	/**
+	 * 删除指定权限，并删除角色权限的关联
+	 * 
+	 * @param id
+	 */
+	void deletePermissionById(Integer id);
 
 }
