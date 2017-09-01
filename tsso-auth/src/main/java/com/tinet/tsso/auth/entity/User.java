@@ -3,6 +3,8 @@ package com.tinet.tsso.auth.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.tinet.tsso.auth.model.Supervisor;
+
 /**
  * 用户的entity
  * 
@@ -28,10 +30,11 @@ public class User {
 
 	private Integer status;// 用户的状态
 	
-
 	private Date createTime;// 用户的创建时间
 
-	private Integer parentId;// 所属直销经理
+	private Integer parentId;// 直属经理id
+	
+	private Supervisor supervisor;//直属经理
 
 	private List<Department> departmentList;// 用户所在部门
 
@@ -141,6 +144,15 @@ public class User {
 
 	public void setDepartmentIds(Integer[] departmentIds) {
 		this.departmentIds = departmentIds;
+	}
+
+
+	public Supervisor getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Supervisor supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	@Override

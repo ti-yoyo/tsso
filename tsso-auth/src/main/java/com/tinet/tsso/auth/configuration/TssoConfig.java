@@ -32,7 +32,7 @@ import com.tinet.tsso.shiro.CasSubjectFactory;
  * @author 李政
  * @date 2017年8月3日
  */
-//@Configuration
+@Configuration
 public class TssoConfig {
 
 	// CasServerUrlPrefix

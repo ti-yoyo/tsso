@@ -13,7 +13,6 @@ public class UserParam {
 
 	private String password;// 用户密码
 
-	private Integer departmentId;// 部门id
 
 	private String email;// 邮箱
 
@@ -28,6 +27,12 @@ public class UserParam {
 	private String fullName;// 全名
 
 	private Integer roleId;// 角色id
+	
+	private Integer[] departmentIds;// 用户 的部门id
+	
+	private String mobile;// 用户的手机号
+	
+	private Integer parentId;// 所属直销经理
 
 	public Integer getStart() {
 		return start;
@@ -85,13 +90,6 @@ public class UserParam {
 		this.password = password;
 	}
 
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
 
 	public String getEmail() {
 		return email;
@@ -109,6 +107,28 @@ public class UserParam {
 		this.status = status;
 	}
 
+	public Integer[] getDepartmentIds() {
+		return departmentIds;
+	}
 
+	public void setDepartmentIds(Integer[] departmentIds) {
+		this.departmentIds = departmentIds;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 	
 }
