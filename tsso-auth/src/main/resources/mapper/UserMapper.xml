@@ -294,13 +294,6 @@
 		where username =
 		#{username,jdbcType=VARCHAR}
 	</update>
-	<select id="selectDepartments" parameterType="java.lang.String"
-		resultMap="DepartmentResultMap">
-		select id ,name
-		from department
-		where id =
-		any(#{department_ids,jdbcType=VARCHAR}::int[])
-	</select>
 	<select id="selectSupervisor" resultMap="SupervisorResultMap">
 		select
 		id,username,full_name
