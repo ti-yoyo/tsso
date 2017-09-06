@@ -188,8 +188,11 @@
 			<if test="mobile != null">
 				mobile = #{mobile,jdbcType=VARCHAR},
 			</if>
-			<if test="parentId != null">
-				parent_id=#{parentId,jdbcType=INTEGER},
+			<if test="parentId != null and parentId != 0">
+				parent_id = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null and parentId == 0">
+				parent_id = null,
 			</if>
 			<if test="departmentIds != null">
 				department_ids=#{departmentIds,jdbcType=INTEGER,typeHandler=com.tinet.tsso.auth.util.ArrayTypeHandler},

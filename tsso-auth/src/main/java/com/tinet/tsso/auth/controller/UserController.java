@@ -156,6 +156,8 @@ public class UserController {
 	public ResponseModel updateUser(@PathVariable Integer id, @RequestBody User user) {
 
 		User oldUser = userService.get(id);
+		oldUser.setPassword("****");
+		oldUser.setPasswordSalt("****");
 		if (id == null) {
 			return new ResponseModel.Builder().error("id不能为空").build();
 		}
@@ -164,7 +166,8 @@ public class UserController {
 		ResponseModel responseModel = userService.updateUser(user);
 
 		User updateUser = userService.get(id);
-
+		updateUser.setPassword("****");
+		updateUser.setPasswordSalt("****");
 		if (responseModel.get("status").equals(200)) {
 			logActionService.addLogAction("更新用户", "用户:" + oldUser.toString() + "更新为" + updateUser.toString(), 1);
 		} else {
