@@ -17,6 +17,8 @@ public class Application {
 
 	private Integer status;// 应用状态
 
+	private String domainName;// 应用的域名
+
 	private Date createTime;// 应用的创建时间
 
 	public Integer getId() {
@@ -59,10 +61,18 @@ public class Application {
 		this.createTime = createTime;
 	}
 
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", createTime="
-				+ createTime + "]";
+		return "Application [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", domainName="
+				+ domainName + ", createTime=" + createTime + "]";
 	}
 
 }

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
-import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.UserParam;
 import com.tinet.tsso.auth.service.LogActionService;
 import com.tinet.tsso.auth.service.RoleService;

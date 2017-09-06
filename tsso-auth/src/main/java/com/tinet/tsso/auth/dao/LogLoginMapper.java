@@ -1,6 +1,6 @@
 package com.tinet.tsso.auth.dao;
 
-import com.tinet.tsso.auth.entity.LogLogin;
+import com.tinet.tsso.auth.model.LogLoginModel;
 import com.tinet.tsso.auth.param.LogLoginParam;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface LogLoginMapper {
 	 * @param logLoginParam
 	 * @return
 	 */
-	List<LogLogin> selectByParam(LogLoginParam logLoginParam);
+	List<LogLoginModel> selectByParam(LogLoginParam logLoginParam);
 
 	/**
 	 * 根据参数查询登录日志的数量

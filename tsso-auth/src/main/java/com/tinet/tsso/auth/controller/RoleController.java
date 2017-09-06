@@ -19,7 +19,6 @@ import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.RoleModel;
-import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.param.UserAndRoleParam;
 import com.tinet.tsso.auth.param.UserParam;
