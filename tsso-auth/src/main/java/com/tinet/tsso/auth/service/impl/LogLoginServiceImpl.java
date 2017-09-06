@@ -38,7 +38,7 @@ public class LogLoginServiceImpl implements LogLoginService{
 			logLoginModel.setCreateTime(comAuditTrail.getAudDate());
 			logLoginModel.setId(comAuditTrail.getId().intValue());
 			logLoginModel.setLoginIp(comAuditTrail.getAudClientIp());
-			logLoginModel.setResult(comAuditTrail.getAudAction().equals("AUTHENTICATION_SUCCESS")?1:0);
+			logLoginModel.setResult(comAuditTrail.getAudAction().equals("SERVICE_TICKET_CREATED")?1:0);
 			logLoginModel.setUserId(comAuditTrail.getUser().getId());
 			logLoginModel.setUsername(comAuditTrail.getAudUser());
 			logLoginModel.setFullName(comAuditTrail.getUser().getFullName());

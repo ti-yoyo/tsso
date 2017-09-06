@@ -31,8 +31,8 @@
 			#{fullName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="startTime != null and endTime != null">
-			and aud_date BETWEEN #{startTime,jdbcType=DATE} AND
-			#{endTime,jdbcType=DATE}
+			and aud_date BETWEEN  to_timestamp(#{startTime,jdbcType=VARCHAR}||':00', 'yyyy-mm-dd hh24:mi:ss') AND
+			to_timestamp(#{endTime,jdbcType=VARCHAR}||':59', 'yyyy-mm-dd hh24:mi:ss')
 		</if>
 	</sql>
 	<sql id="Base_Column_List">
