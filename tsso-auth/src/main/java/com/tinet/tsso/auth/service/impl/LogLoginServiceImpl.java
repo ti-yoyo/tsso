@@ -20,25 +20,28 @@ import com.tinet.tsso.auth.util.Page;
  * @author lizy
  */
 @Service
-public class LogLoginServiceImpl implements LogLoginService{
+public class LogLoginServiceImpl implements LogLoginService {
 
 	@Autowired
 	private ComAuditTrailMapper comAuditTrailMapper;
-	
+
 	@Override
 	public Page<LogLoginModel> selectByParam(LogLoginParam logLoginParam) {
 		Integer count = comAuditTrailMapper.selectCountByParam(logLoginParam);
 		List<ComAuditTrail> LoginAngLogoutList = comAuditTrailMapper.selectByParam(logLoginParam);
-		List<LogLoginModel> pageData =new ArrayList<LogLoginModel>();
-		for (ComAuditTrail comAuditTrail:LoginAngLogoutList) {
-			LogLoginModel logLoginModel =new LogLoginModel();
-			logLoginModel.setApplicationId(comAuditTrail.getApplication().getId());
-			logLoginModel.setApplicationKey(comAuditTrail.getApplication().getKey());
-			logLoginModel.setApplicationName(comAuditTrail.getApplication().getName());
+		List<LogLoginModel> pageData = new ArrayList<LogLoginModel>();
+		for (ComAuditTrail comAuditTrail : LoginAngLogoutList) {
+			LogLoginModel logLoginModel = new LogLoginModel();
+			if (comAuditTrail.getApplication() != null) {
+				logLoginModel.setApplicationId(comAuditTrail.getApplication().getId());
+				logLoginModel.setApplicationKey(comAuditTrail.getApplication().getKey());
+				logLoginModel.setApplicationName(comAuditTrail.getApplication().getName());
+			}
+
 			logLoginModel.setCreateTime(comAuditTrail.getAudDate());
 			logLoginModel.setId(comAuditTrail.getId().intValue());
 			logLoginModel.setLoginIp(comAuditTrail.getAudClientIp());
-			logLoginModel.setResult(comAuditTrail.getAudAction().equals("SERVICE_TICKET_CREATED")?1:0);
+			logLoginModel.setResult(comAuditTrail.getAudAction().equals("SERVICE_TICKET_CREATED") ? 1 : 0);
 			logLoginModel.setUserId(comAuditTrail.getUser().getId());
 			logLoginModel.setUsername(comAuditTrail.getAudUser());
 			logLoginModel.setFullName(comAuditTrail.getUser().getFullName());
