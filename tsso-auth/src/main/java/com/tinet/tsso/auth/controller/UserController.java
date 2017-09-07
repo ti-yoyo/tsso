@@ -81,7 +81,7 @@ public class UserController {
 		BeanUtils.copyProperties(userParam, user);
 
 		ResponseModel responseModel = userService.addUser(user);
-		
+
 		user.setPassword("****");
 		user.setPasswordSalt("****");
 

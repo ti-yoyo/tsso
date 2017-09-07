@@ -11,6 +11,9 @@ public class DateFormatUtil {
 
 	public static String dataFormat(Date date) {
 		
+		if(date==null) {
+			return null;
+		}
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		return formatter.format(date);
