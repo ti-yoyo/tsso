@@ -1,9 +1,12 @@
 package com.tinet.tsso.auth.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import com.tinet.tsso.auth.model.Supervisor;
+import com.tinet.tsso.auth.util.DateFormatUtil;
 
 /**
  * 用户的entity
@@ -157,9 +160,10 @@ public class User {
 
 	@Override
 	public String toString() {
+		
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt=" + passwordSalt
-				+ ", fullName=" + fullName + ", departmentIds=" + departmentIds.toString() + ", email=" + email + ", mobile="
-				+ mobile + ", status=" + status + ", createTime=" + createTime + ", parentId=" + parentId + "]";
+				+ ", fullName=" + fullName + ", departmentIds=" + Arrays.toString(departmentIds) + ", email=" + email + ", mobile="
+				+ mobile + ", status=" + status + ", createTime=" + DateFormatUtil.dataFormat(createTime) + ", parentId=" + parentId + "]";
 	}
 
 }

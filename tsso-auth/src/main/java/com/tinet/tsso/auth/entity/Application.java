@@ -2,6 +2,8 @@ package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
 
+import com.tinet.tsso.auth.util.DateFormatUtil;
+
 /**
  * 应用的实体类
  * 
@@ -72,7 +74,7 @@ public class Application {
 	@Override
 	public String toString() {
 		return "Application [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", domainName="
-				+ domainName + ", createTime=" + createTime + "]";
+				+ domainName + ", createTime=" +  DateFormatUtil.dataFormat(createTime) + "]";
 	}
 
 }

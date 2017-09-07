@@ -24,8 +24,9 @@
 		</rollingPolicy>
 	</appender>
 
-
-	<logger name="com.tinet.tsso.auth" level="debug">
+	<logger name="org.jasig.cas.client" level="ERROR" />
+	
+	<logger name="com.tinet.tsso.auth" level="ERROR">
 		<appender-ref ref="Console" />
 	</logger>   
 	
