@@ -6,7 +6,7 @@
   "description": "HTTPS and HTTP 协议的 tinetcloud.com域名的所有应用可以登录",
   "evaluationOrder": 20001,
   "ignoreAttributes": "true",
-  "logoutType": "BACK_CHANNEL",
+
   "attributeReleasePolicy": {
     "@class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
     "principalAttributesRepository": {
