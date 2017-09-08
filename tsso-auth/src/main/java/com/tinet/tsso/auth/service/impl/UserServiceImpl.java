@@ -123,7 +123,7 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 	 * 按照参数查询用户
 	 */
 	@Override
-	public Page<UserModel> selectByParams(UserParam params) {
+	public Page<User> selectByParams(UserParam params) {
 
 		if (params.getLimit() == null) {
 			params.setLimit(10);
@@ -136,28 +136,17 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 		Integer totalSize = userMapper.selectCountByParams(params);
 		// 符合条件的User列表
 		List<User> userList = userMapper.selectByParams(params);
-
-		List<UserModel> pageData = new ArrayList<UserModel>();
-
-		// 符合条件的角色查询
+		
 		for (int i = 0; i < userList.size(); i++) {
-			UserModel userModel = new UserModel();
-			BeanUtils.copyProperties(userList.get(i), userModel);
-
-			if (userList.get(i).getDepartment() != null) {
-				userModel.setDepartmentName(userList.get(i).getDepartment().getName());
-			}
-
 			List<Role> roleList = roleMapper.getRoleByUser(userList.get(i));
-			userModel.setRoleList(roleList);
-
-			pageData.add(userModel);
+			userList.get(i).setRoleList(roleList);
 		}
-		return new Page<UserModel>(totalSize, pageData);
+
+		return new Page<User>(totalSize, userList);
 	}
 
 	/**
-	 * 查询指定权限额用户列表
+	 * 查询指定权限的用户列表
 	 */
 	@Override
 	public List<UserModel> selectByPermissionId(Integer permissionId) {
@@ -169,9 +158,6 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 			User user = userList.get(i);
 			UserModel userModel = new UserModel();
 			BeanUtils.copyProperties(user, userModel);
-
-			userModel.setDepartmentId(user.getDepartmentId());
-			userModel.setDepartmentName(user.getDepartment().getName());
 
 			userModelList.add(userModel);
 		}
@@ -315,8 +301,9 @@ public class UserServiceImpl extends BaseServiceImp<User, Integer> implements Us
 
 		UserParam userParam = new UserParam();
 		userParam.setId(user.getId());
-		Page<UserModel> page = selectByParams(userParam);
+		Page<User> page = selectByParams(userParam);
 		page.getPageData().get(0).setPassword("****");
+		page.getPageData().get(0).setPasswordSalt("****");
 
 		return new ResponseModel.Builder().msg("更新成功").result(page.getPageData().get(0)).build();
 	}

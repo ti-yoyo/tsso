@@ -1,6 +1,6 @@
 package com.tinet.tsso.auth.controller;
 
-import com.tinet.tsso.auth.entity.LogLogin;
+import com.tinet.tsso.auth.model.LogLoginModel;
 import com.tinet.tsso.auth.param.LogLoginParam;
 import com.tinet.tsso.auth.service.LogLoginService;
 import com.tinet.tsso.auth.util.Page;
@@ -31,8 +31,14 @@ public class LogLoginController {
 	 */
 	@GetMapping
 	public ResponseModel getLogAction(LogLoginParam logLoginParam) {
+		if(logLoginParam.getStart()==null) {
+			logLoginParam.setStart(0);
+		}
+		if(logLoginParam.getLimit()==null) {
+			logLoginParam.setLimit(10);
+		}
 
-		Page<LogLogin> page = logLoginService.selectByParam(logLoginParam);
+		Page<LogLoginModel> page = logLoginService.selectByParam(logLoginParam);
 
 		return new ResponseModel.Builder().msg("查询成功").result(page).build();
 	}

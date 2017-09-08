@@ -1,8 +1,12 @@
 package com.tinet.tsso.auth.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tinet.tsso.auth.model.Supervisor;
+import com.tinet.tsso.auth.util.DateFormatUtil;
 
 /**
  * 用户的entity
@@ -21,16 +25,23 @@ public class User {
 
 	private String fullName;// 用户的全名
 
-	private Integer departmentId;// 用户 的部门id
+	private Integer[] departmentIds;// 用户 的部门id
 
 	private String email;// 用户的邮箱
 
-	private Integer status;// 用户的状态
+	private String mobile;// 用户的手机号
 
+	private Integer status;// 用户的状态
+	
 	private Date createTime;// 用户的创建时间
 
-	@JsonIgnore
-	private Department department;// 用户所在部门
+	private Integer parentId;// 直属经理id
+	
+	private Supervisor supervisor;//直属经理
+
+	private List<Department> departmentList;// 用户所在部门
+
+	private List<Role> roleList;
 
 	public Integer getId() {
 		return id;
@@ -72,13 +83,6 @@ public class User {
 		this.fullName = fullName == null ? null : fullName.trim();
 	}
 
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
 
 	public String getEmail() {
 		return email;
@@ -104,19 +108,62 @@ public class User {
 		this.createTime = createTime;
 	}
 
-	public Department getDepartment() {
-		return department;
+	public List<Department> getDepartmentList() {
+		return departmentList;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setDepartmentList(List<Department> departmentList) {
+		this.departmentList = departmentList;
+	}
+
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+
+	public Integer[] getDepartmentIds() {
+		return departmentIds;
+	}
+
+	public void setDepartmentIds(Integer[] departmentIds) {
+		this.departmentIds = departmentIds;
+	}
+
+
+	public Supervisor getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Supervisor supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	@Override
 	public String toString() {
+		
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt=" + passwordSalt
-				+ ", fullName=" + fullName + ", departmentId=" + departmentId + ", email=" + email + ", status="
-				+ status + ", createTime=" + createTime + "]";
+				+ ", fullName=" + fullName + ", departmentIds=" + Arrays.toString(departmentIds) + ", email=" + email + ", mobile="
+				+ mobile + ", status=" + status + ", createTime=" + DateFormatUtil.dataFormat(createTime) + ", parentId=" + parentId + "]";
 	}
 
 }

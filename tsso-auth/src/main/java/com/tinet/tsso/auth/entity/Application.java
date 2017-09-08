@@ -2,6 +2,8 @@ package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
 
+import com.tinet.tsso.auth.util.DateFormatUtil;
+
 /**
  * 应用的实体类
  * 
@@ -16,6 +18,8 @@ public class Application {
 	private String name;// 应用名
 
 	private Integer status;// 应用状态
+
+	private String domainName;// 应用的域名
 
 	private Date createTime;// 应用的创建时间
 
@@ -59,10 +63,18 @@ public class Application {
 		this.createTime = createTime;
 	}
 
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", createTime="
-				+ createTime + "]";
+		return "Application [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", domainName="
+				+ domainName + ", createTime=" +  DateFormatUtil.dataFormat(createTime) + "]";
 	}
 
 }

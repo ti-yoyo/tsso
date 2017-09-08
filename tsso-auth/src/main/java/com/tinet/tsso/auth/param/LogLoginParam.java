@@ -11,7 +11,7 @@ import com.tinet.tsso.auth.util.StringToDate;
 public class LogLoginParam {
 
 
-    private String userName;//操作人帐号
+    private String username;//操作人帐号
     private String fullName;//全名
 
     private String startTime;//起始时间
@@ -20,15 +20,16 @@ public class LogLoginParam {
     private Integer start;//分页的起始位置
     private Integer limit;//分页大小
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    public String getUsername() {
+		return username;
+	}
 
-    public String getFullName() {
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getFullName() {
         return fullName;
     }
 
@@ -36,29 +37,21 @@ public class LogLoginParam {
         this.fullName = fullName;
     }
 
-    public Date getStartTime() {
-        if(startTime == null){
-            return null;
-        }
-        else{
-            return StringToDate.dealStringToDate(startTime);
-        }
-    }
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
-        if(endTime == null){
-            return null;
-        }
-        else{
-            return StringToDate.dealStringToDate(endTime);
-        }
-    }
 
-    public void setEndTime(String endTime) {
+    public String getStartTime() {
+		return startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

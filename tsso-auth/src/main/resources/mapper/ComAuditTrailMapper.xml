@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tinet.tsso.auth.dao.ComAuditTrailMapper">
+	<resultMap id="BaseResultMap" type="com.tinet.tsso.auth.entity.ComAuditTrail">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="aud_action" property="audAction" jdbcType="VARCHAR" />
+		<result column="applic_cd" property="applicCd" jdbcType="VARCHAR" />
+		<result column="aud_client_ip" property="audClientIp" jdbcType="VARCHAR" />
+		<result column="aud_date" property="audDate" jdbcType="TIMESTAMP" />
+		<result column="aud_resource" property="audResource" jdbcType="VARCHAR" />
+		<result column="aud_server_ip" property="audServerIp" jdbcType="VARCHAR" />
+		<result column="aud_user" property="audUser" jdbcType="VARCHAR" />
+		<association property="user" javaType="com.tinet.tsso.auth.entity.User">
+			<result column="user_id" property="id" jdbcType="INTEGER" />
+			<result column="full_name" property="fullName" jdbcType="VARCHAR" />
+		</association>
+		<association property="application" column="aud_resource" select="selectApplication"></association>
+	</resultMap>
+	<resultMap id="ApplicationMap" type="com.tinet.tsso.auth.entity.Application">
+			<result column="id" property="id" jdbcType="INTEGER" />
+			<result column="key" property="key" jdbcType="VARCHAR" />
+			<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="byParams">
+		<if test="username != null">
+			and username LIKE CONCAT('%',
+			#{username,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="fullName != null">
+			and full_name LIKE CONCAT('%',
+			#{fullName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="startTime != null and endTime != null">
+			and aud_date BETWEEN  to_timestamp(#{startTime,jdbcType=VARCHAR}||':00', 'yyyy-mm-dd hh24:mi:ss') AND
+			to_timestamp(#{endTime,jdbcType=VARCHAR}||':59', 'yyyy-mm-dd hh24:mi:ss')
+		</if>
+	</sql>
+	<sql id="Base_Column_List">
+		com_audit_trail.id, aud_action, applic_cd, aud_client_ip,
+		aud_date, aud_resource,
+		aud_server_ip,
+		aud_user
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from com_audit_trail
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		com_audit_trail
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.tinet.tsso.auth.entity.ComAuditTrail">
+		insert into com_audit_trail
+		(id, aud_action, applic_cd,
+		aud_client_ip, aud_date, aud_resource,
+		aud_server_ip, aud_user)
+		values (#{id,jdbcType=BIGINT},
+		#{audAction,jdbcType=VARCHAR},
+		#{applicCd,jdbcType=VARCHAR},
+		#{audClientIp,jdbcType=VARCHAR}, #{audDate,jdbcType=TIMESTAMP},
+		#{audResource,jdbcType=VARCHAR},
+		#{audServerIp,jdbcType=VARCHAR},
+		#{audUser,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.tinet.tsso.auth.entity.ComAuditTrail">
+		insert into com_audit_trail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="audAction != null">
+				aud_action,
+			</if>
+			<if test="applicCd != null">
+				applic_cd,
+			</if>
+			<if test="audClientIp != null">
+				aud_client_ip,
+			</if>
+			<if test="audDate != null">
+				aud_date,
+			</if>
+			<if test="audResource != null">
+				aud_resource,
+			</if>
+			<if test="audServerIp != null">
+				aud_server_ip,
+			</if>
+			<if test="audUser != null">
+				aud_user,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="audAction != null">
+				#{audAction,jdbcType=VARCHAR},
+			</if>
+			<if test="applicCd != null">
+				#{applicCd,jdbcType=VARCHAR},
+			</if>
+			<if test="audClientIp != null">
+				#{audClientIp,jdbcType=VARCHAR},
+			</if>
+			<if test="audDate != null">
+				#{audDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="audResource != null">
+				#{audResource,jdbcType=VARCHAR},
+			</if>
+			<if test="audServerIp != null">
+				#{audServerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="audUser != null">
+				#{audUser,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.tinet.tsso.auth.entity.ComAuditTrail">
+		update com_audit_trail
+		<set>
+			<if test="audAction != null">
+				aud_action = #{audAction,jdbcType=VARCHAR},
+			</if>
+			<if test="applicCd != null">
+				applic_cd = #{applicCd,jdbcType=VARCHAR},
+			</if>
+			<if test="audClientIp != null">
+				aud_client_ip = #{audClientIp,jdbcType=VARCHAR},
+			</if>
+			<if test="audDate != null">
+				aud_date = #{audDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="audResource != null">
+				aud_resource = #{audResource,jdbcType=VARCHAR},
+			</if>
+			<if test="audServerIp != null">
+				aud_server_ip = #{audServerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="audUser != null">
+				aud_user = #{audUser,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.tinet.tsso.auth.entity.ComAuditTrail">
+		update
+		com_audit_trail
+		set aud_action = #{audAction,jdbcType=VARCHAR},
+		applic_cd = #{applicCd,jdbcType=VARCHAR},
+		aud_client_ip =
+		#{audClientIp,jdbcType=VARCHAR},
+		aud_date =
+		#{audDate,jdbcType=TIMESTAMP},
+		aud_resource =
+		#{audResource,jdbcType=VARCHAR},
+		aud_server_ip =
+		#{audServerIp,jdbcType=VARCHAR},
+		aud_user = #{audUser,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="selectCountByParam" parameterType="com.tinet.tsso.auth.param.LogLoginParam"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		from com_audit_trail left join "user" on aud_user
+		="user".username
+		where 1=1
+		and
+		(aud_action='SERVICE_TICKET_CREATED' or
+		aud_action='AUTHENTICATION_FAILTURE')
+		<include refid="byParams" />
+	</select>
+	<select id="selectByParam" parameterType="com.tinet.tsso.auth.param.LogLoginParam"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		,"user".id as user_id,full_name
+		from com_audit_trail left join "user" on aud_user
+		="user".username 
+		where 1=1
+		and
+		(aud_action='SERVICE_TICKET_CREATED' or
+		aud_action='AUTHENTICATION_FAILTURE')
+		<include refid="byParams" />
+		<if test="start != null and limit != null">
+			offset #{start, jdbcType=INTEGER} limit #{limit,
+			jdbcType=INTEGER}
+		</if>
+	</select>
+	<select id="selectApplication" resultMap="ApplicationMap">
+		select id,key,name
+		from application
+		where
+		domain_name IS NOT NULL and
+		#{aud_resource,jdbcType=VARCHAR} LIKE '%'||domain_name||'%'
+	</select>
+</mapper>

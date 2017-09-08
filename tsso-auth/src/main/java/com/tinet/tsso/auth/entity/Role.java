@@ -2,6 +2,8 @@ package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
 
+import com.tinet.tsso.auth.util.DateFormatUtil;
+
 public class Role {
 	private Integer id;// 角色id
 
@@ -56,7 +58,7 @@ public class Role {
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", key=" + key + ", name=" + name + ", status=" + status + ", createTime="
-				+ createTime + "]";
+				+  DateFormatUtil.dataFormat(createTime) + "]";
 	}
 
 }

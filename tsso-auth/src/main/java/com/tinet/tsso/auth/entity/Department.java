@@ -2,12 +2,16 @@ package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * 部门实体类
  * 
  * @date 2017-08-14
  * @author lizy
  */
+@JsonInclude(Include.NON_NULL)
 public class Department {
 	private Integer id;// 部门的id
 

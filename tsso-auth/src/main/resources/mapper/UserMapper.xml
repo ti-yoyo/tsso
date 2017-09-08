@@ -8,19 +8,31 @@
 		<result column="password_salt" property="passwordSalt"
 			jdbcType="VARCHAR" />
 		<result column="full_name" property="fullName" jdbcType="VARCHAR" />
-		<result column="department_id" property="departmentId"
-			jdbcType="INTEGER" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="department_ids" property="departmentIds"
+			typeHandler="com.tinet.tsso.auth.util.ArrayTypeHandler" />
+		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<association property="department" javaType="com.tinet.tsso.auth.entity.Department">   
-            <id column="department_id" property="id"/>
-            <result column="department_name" property="name" />
-        </association>
+		<association column="parent_id" property="supervisor"
+			select="selectSupervisor"></association>
+		<collection column="department_ids" property="departmentList"
+			ofType="com.tinet.tsso.auth.entity.Department">
+			<id column="department_id" property="id" jdbcType="INTEGER" />
+			<result column="department_name" property="name" jdbcType="VARCHAR" />
+		</collection>
 	</resultMap>
+
+	<resultMap type="com.tinet.tsso.auth.model.Supervisor" id="SupervisorResultMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="full_name" property="fullName" jdbcType="VARCHAR" />
+	</resultMap>
+
 	<sql id="Base_Column_List">
 		"user".id, username, password, password_salt, full_name,
-		department_id, email,
+		department_ids, email,mobile,parent_id,
 		status, "user".create_time
 	</sql>
 	<sql id="byParams">
@@ -41,7 +53,8 @@
 			from
 			"role",user_role
 			where "role".id= user_role.role_id
-			and "role".id=#{roleId,jdbcType=INTEGER}
+			and
+			"role".id=#{roleId,jdbcType=INTEGER}
 			)
 		</if>
 	</sql>
@@ -49,9 +62,7 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		, department.name as department_name
-		from "user" left join department
-		on "user".department_id = department.id
+		from "user"
 		where "user".id =
 		#{id,jdbcType=INTEGER}
 	</select>
@@ -95,9 +106,6 @@
 			<if test="fullName != null">
 				full_name,
 			</if>
-			<if test="departmentId != null">
-				department_id,
-			</if>
 			<if test="email != null">
 				email,
 			</if>
@@ -106,6 +114,15 @@
 			</if>
 			<if test="createTime != null">
 				create_time,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="departmentIds != null">
+				department_ids,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -124,9 +141,6 @@
 			<if test="fullName != null">
 				#{fullName,jdbcType=VARCHAR},
 			</if>
-			<if test="departmentId != null">
-				#{departmentId,jdbcType=INTEGER},
-			</if>
 			<if test="email != null">
 				#{email,jdbcType=VARCHAR},
 			</if>
@@ -135,6 +149,15 @@
 			</if>
 			<if test="createTime != null">
 				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="departmentIds != null">
+				#{departmentIds,jdbcType=INTEGER,jdbcType=INTEGER,typeHandler=com.tinet.tsso.auth.util.ArrayTypeHandler},
 			</if>
 		</trim>
 	</insert>
@@ -153,9 +176,6 @@
 			<if test="fullName != null">
 				full_name = #{fullName,jdbcType=VARCHAR},
 			</if>
-			<if test="departmentId != null">
-				department_id = #{departmentId,jdbcType=INTEGER},
-			</if>
 			<if test="email != null">
 				email = #{email,jdbcType=VARCHAR},
 			</if>
@@ -164,6 +184,18 @@
 			</if>
 			<if test="createTime != null">
 				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null and parentId != 0">
+				parent_id = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null and parentId == 0">
+				parent_id = null,
+			</if>
+			<if test="departmentIds != null">
+				department_ids=#{departmentIds,jdbcType=INTEGER,typeHandler=com.tinet.tsso.auth.util.ArrayTypeHandler},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
@@ -198,12 +230,11 @@
 	<select id="selectByParams" parameterType="com.tinet.tsso.auth.param.UserParam"
 		resultMap="BaseResultMap">
 		select
-		<include refid="Base_Column_List" />
-		,department.name as department_name
-		from "user"left join department on
-		"user".department_id=department.id
+		<include refid="Base_Column_List" />,department.id as department_id,department.name as department_name
+		from "user",department
 		where 1=1
 		<include refid="byParams" />
+		and department.id = any("user".department_ids)
 		order by "user".username asc
 		<if test="start != null and limit != null and limit > 0">
 			offset #{start, jdbcType=INTEGER} limit #{limit,
@@ -228,35 +259,48 @@
 	</select>
 	<select id="selectByPermissionId" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />,department.name as department_name
-		from "user" left join department
-		on "user".department_id = department.id
+		select
+		<include refid="Base_Column_List" />
+		from "user"
 		where "user"."id" IN
-							(
-								select DISTINCT(user_role.user_id)
-								from role_permission LEFT JOIN user_role
-								on role_permission.role_id =user_role.role_id
-								where role_permission.permission_id= #{permissionId,jdbcType=INTEGER}
-							)
+		(
+		select DISTINCT(user_role.user_id)
+		from role_permission LEFT JOIN user_role
+		on role_permission.role_id
+		=user_role.role_id
+		where role_permission.permission_id=
+		#{permissionId,jdbcType=INTEGER}
+		)
 		order by "user".create_time desc
-		
+
 	</select>
-	
-	<select id="selectCountByUserName" parameterType="java.lang.String" resultType= "java.lang.Integer">
+
+	<select id="selectCountByUserName" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
 		select count(*)
 		from "user"
-		where username = #{username,jdbcType=VARCHAR}
+		where username =
+		#{username,jdbcType=VARCHAR}
 	</select>
-	
-	<select id="selectByUsername" parameterType="java.lang.String" resultMap= "BaseResultMap">
-		select <include refid="Base_Column_List" />
+
+	<select id="selectByUsername" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
 		from "user"
 		where username = #{username,jdbcType=VARCHAR}
 	</select>
-	<update id="updatePasswordByUsername" parameterType ="com.tinet.tsso.auth.entity.User">
-		update "user"
+	<update id="updatePasswordByUsername" parameterType="com.tinet.tsso.auth.entity.User">
+		update
+		"user"
 		set password = #{password,jdbcType=VARCHAR}
-		where username = #{username,jdbcType=VARCHAR}
+		where username =
+		#{username,jdbcType=VARCHAR}
 	</update>
-	
+	<select id="selectSupervisor" resultMap="SupervisorResultMap">
+		select
+		id,username,full_name
+		from "user"
+		where id= #{parentId,jdbcType=INTEGER}
+	</select>
 </mapper>

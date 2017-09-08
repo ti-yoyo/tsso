@@ -19,7 +19,6 @@ import com.tinet.tsso.auth.entity.Permission;
 import com.tinet.tsso.auth.entity.Role;
 import com.tinet.tsso.auth.entity.User;
 import com.tinet.tsso.auth.model.RoleModel;
-import com.tinet.tsso.auth.model.UserModel;
 import com.tinet.tsso.auth.param.RoleParam;
 import com.tinet.tsso.auth.param.UserAndRoleParam;
 import com.tinet.tsso.auth.param.UserParam;
@@ -108,7 +107,7 @@ public class RoleController {
 		// 查询指定id的用户
 		UserParam param = new UserParam();
 		param.setId(userAndRole.getUserId());
-		Page<UserModel> page = userService.selectByParams(param);
+		Page<User> page = userService.selectByParams(param);
 
 		if (page.getPageData() == null) {
 			return new ResponseModel.Builder().error("该用户不存在").build();

@@ -2,6 +2,8 @@ package com.tinet.tsso.auth.entity;
 
 import java.util.Date;
 
+import com.tinet.tsso.auth.util.DateFormatUtil;
+
 /**
  * 权限类
  * 
@@ -72,7 +74,7 @@ public class Permission {
 	@Override
 	public String toString() {
 		return "Permission [id=" + id + ", key=" + key + ", name=" + name + ", applicationId=" + applicationId
-				+ ", createTime=" + createTime + "]";
+				+ ", createTime=" + DateFormatUtil.dataFormat(createTime) + "]";
 	}
 
 }
